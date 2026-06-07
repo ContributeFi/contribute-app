@@ -42,6 +42,7 @@ import ComingSoonPage from "./pages/quest/ComingSoonPage";
 import { SocketFiProvider } from "@socketfi/react";
 import { setSocketfiSession } from "./store/socketfiAuthSlice";
 import { useWallet } from "./hooks/useWallet";
+import SigninWithPasskey from "./pages/get-started/SigninWithPasskey";
 
 const FEATURES = {
   tasks: false,
@@ -204,7 +205,7 @@ const router = createBrowserRouter([
     path: "auth",
     Component: AuthLayout,
     children: [
-      { index: true, Component: SigninWithTwitter },
+      { index: true, Component: SigninWithPasskey },
       { path: "auth", Component: GetStarted },
       { path: "verify-email", Component: VerifyEmail },
       { path: "username", Component: Username },

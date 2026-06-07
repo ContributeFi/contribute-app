@@ -70,7 +70,7 @@ export default function WalletKitModal() {
   //           username: null,
   //           authMethod: "WALLET",
   //         });
-  //         navigate("/get-started/username");
+  //         //navigate("/get-started/username");
   //       } else if (!content.bio && !content.lastLogin) {
   //         login({
   //           token,
@@ -80,7 +80,7 @@ export default function WalletKitModal() {
   //           username: content.username,
   //           authMethod: "WALLET",
   //         });
-  //         navigate("/get-started/account-configuration");
+  //         //navigate("/get-started/account-configuration");
   //       } else {
   //         login({
   //           token,

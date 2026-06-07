@@ -77,7 +77,7 @@ function WalletCreatedSuccess() {
 
         <Button
           className="h-11 w-full rounded-xl bg-[#2F0FD1] text-sm font-medium text-white shadow-sm transition hover:bg-[#2409B8]"
-          onClick={() => navigate("/get-started/account-configuration")}
+          // onClick={() => navigate("/get-started/account-configuration")}
         >
           Continue
           <ArrowRight className="h-4 w-4" />

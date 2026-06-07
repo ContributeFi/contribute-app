@@ -43,7 +43,7 @@ const ACCOUNTS_TO_LINK = [
   },
 ];
 
-function AccountConfiguration() {
+function AccountSocialConnection() {
   const { login, token, username } = useAuth();
   const navigate = useNavigate();
 
@@ -671,4 +671,4 @@ function AccountConfiguration() {
   );
 }
 
-export default AccountConfiguration;
+export default AccountSocialConnection;

@@ -33,7 +33,7 @@ function CreateWallet() {
         });
 
         toast.success("Wallet created successfully");
-        navigate("/get-started/wallet-created-success", { replace: true });
+        //navigate("/get-started/wallet-created-success", { replace: true });
       } else {
         toast.error("Something went wrong");
       }
@@ -45,7 +45,7 @@ function CreateWallet() {
 
   useEffect(() => {
     if (!username) {
-      navigate("/get-started/username", { replace: true });
+      //navigate("/get-started/username", { replace: true });
       return;
     }
 

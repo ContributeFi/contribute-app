@@ -81,7 +81,7 @@ function Burst() {
   const handleChangeBurstView = useCallback(
     (view) => {
       if (!isAuthenticated && (view === "created" || view === "participated")) {
-        navigate("/get-started");
+        //navigate("/get-started");
         return;
       }
 
@@ -93,7 +93,7 @@ function Burst() {
 
   const handleCreateBurst = useCallback(() => {
     if (!isAuthenticated) {
-      navigate("/get-started");
+      //navigate("/get-started");
       return;
     }
 

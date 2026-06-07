@@ -34,6 +34,7 @@ import ConnectWalletModal from "@/pages/get-started/ConnectWalletModal";
 import WalletKitModal from "../WalletKitModal";
 import { setSocketfiSession } from "@/store/socketfiAuthSlice";
 import { useDispatch } from "react-redux";
+import SigninWithPasskeyModal from "@/pages/get-started/SigninWithPasskeyModal";
 
 function getInitials(name = "") {
   return name
@@ -487,6 +488,7 @@ function DashboardLayout() {
         <Outlet />
         <ConnectWalletModal />
         <WalletKitModal />
+        <SigninWithPasskeyModal />
       </DashboardContainer>
 
       <ProfileDrawer

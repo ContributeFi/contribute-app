@@ -5,7 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { DASHBOARD_NAV_LINKS } from "@/lib/constants";
 
 function DashboardNavigation({ setSheetIsOpen, platform = "desktop" }) {
-  const { logout, isAuthenticated, user } = useAuth();
+  const { logout, isAuthenticated, user, setPasskeyModalIsOpen } = useAuth();
   const location = useLocation();
 
   const restrictedTitles = useMemo(
@@ -112,16 +112,15 @@ function DashboardNavigation({ setSheetIsOpen, platform = "desktop" }) {
             <span>Log Out</span>
           </Link>
         ) : (
-          <Link
-            to="/auth"
-            onClick={handleClose}
+          <button
+            onClick={() => setPasskeyModalIsOpen(true)}
             className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-[#667085] transition hover:bg-[#F8FAFC] hover:text-[#2F0FD1]"
           >
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[#F8FAFC]">
               <GoSignOut className="text-[18px]" />
             </span>
             <span>Login</span>
-          </Link>
+          </button>
         )}
       </div>
     </aside>

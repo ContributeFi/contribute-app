@@ -15,11 +15,11 @@ function BindEmail() {
   const { login, token, email, otp, username } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!username) {
-      navigate("/get-started/username", { replace: true });
-    }
-  }, [navigate, username]);
+  // useEffect(() => {
+  //   if (!username) {
+  //     //navigate("/get-started/username", { replace: true });
+  //   }
+  // }, [navigate, username]);
 
   const {
     register,
@@ -42,7 +42,7 @@ function BindEmail() {
           username,
         });
 
-        navigate("/get-started/verify-email", { replace: true });
+        //navigate("/get-started/verify-email", { replace: true });
         toast.success("Verification code sent");
       } else {
         toast.error("Something went wrong");

@@ -35,17 +35,17 @@ function Username() {
 
   useEffect(() => {
     if (!otp && username) {
-      navigate("/get-started/bind-email", { replace: true });
+      //navigate("/get-started/bind-email", { replace: true });
     } else if (!otp) {
-      navigate("/get-started/verify-email", { replace: true });
+      //navigate("/get-started/verify-email", { replace: true });
     }
   }, [navigate, otp, username]);
 
   useEffect(() => {
     if (username && !email) {
-      navigate("/get-started/bind-email", { replace: true });
+      //navigate("/get-started/bind-email", { replace: true });
     } else if (username && email) {
-      navigate("/get-started/create-wallet", { replace: true });
+      //navigate("/get-started/create-wallet", { replace: true });
     }
   }, [navigate, username, email]);
 
@@ -89,7 +89,7 @@ function Username() {
               username: variable.username,
             });
 
-            navigate("/get-started/bind-email", { replace: true });
+            //navigate("/get-started/bind-email", { replace: true });
           } else {
             login({
               token,
@@ -99,7 +99,7 @@ function Username() {
               username: variable.username,
             });
 
-            navigate("/get-started/create-wallet", { replace: true });
+            //navigate("/get-started/create-wallet", { replace: true });
           }
 
           reset();

@@ -15,6 +15,7 @@ export function AuthProvider({ children }) {
   });
 
   const [loading, setLoading] = useState(true);
+  const [passkeyModalIsOpen, setPasskeyModalIsOpen] = useState(false);
 
   // 🔁 Fetch user on load (or token change)
   useEffect(() => {
@@ -76,6 +77,8 @@ export function AuthProvider({ children }) {
         loading,
         login,
         logout,
+        passkeyModalIsOpen,
+        setPasskeyModalIsOpen,
       }}
     >
       {children}

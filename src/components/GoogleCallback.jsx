@@ -32,48 +32,48 @@ function GoogleCallback() {
     retry: false,
   });
 
-  useEffect(() => {
-    if (!data || hasRun.current) return;
+  // useEffect(() => {
+  //   if (!data || hasRun.current) return;
 
-    hasRun.current = true;
+  //   hasRun.current = true;
 
-    const user = data.data.content;
+  //   const user = data.data.content;
 
-    if (!user.username) {
-      login({
-        token,
-        email: user.email,
-        user: null,
-        otp: "123456",
-        username: null,
-        authMethod: "GOOGLE",
-      });
-      navigate("/get-started/username", { replace: true });
-    } else if (!user.bio && !user.lastLogin) {
-      login({
-        token,
-        email: user.email,
-        user: null,
-        otp: null,
-        username: user.username,
-        authMethod: "GOOGLE",
-      });
-      navigate("/get-started/account-configuration", {
-        replace: true,
-      });
-    } else {
-      login({
-        token,
-        email: null,
-        user,
-        otp: null,
-        username: null,
-        authMethod: "GOOGLE",
-      });
-      toast.success("Login successful");
-      navigate("/", { replace: true });
-    }
-  }, [login, data, navigate, token]);
+  //   if (!user.username) {
+  //     login({
+  //       token,
+  //       email: user.email,
+  //       user: null,
+  //       otp: "123456",
+  //       username: null,
+  //       authMethod: "GOOGLE",
+  //     });
+  //     //navigate("/get-started/username", { replace: true });
+  //   } else if (!user.bio && !user.lastLogin) {
+  //     login({
+  //       token,
+  //       email: user.email,
+  //       user: null,
+  //       otp: null,
+  //       username: user.username,
+  //       authMethod: "GOOGLE",
+  //     });
+  //     //navigate("/get-started/account-configuration", {
+  //       replace: true,
+  //     });
+  //   } else {
+  //     login({
+  //       token,
+  //       email: null,
+  //       user,
+  //       otp: null,
+  //       username: null,
+  //       authMethod: "GOOGLE",
+  //     });
+  //     toast.success("Login successful");
+  //     navigate("/", { replace: true });
+  //   }
+  // }, [login, data, navigate, token]);
 
   if (isError) {
     return (

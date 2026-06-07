@@ -41,7 +41,7 @@ api.interceptors.response.use(
       //   currentPath !== "/"
       //     ? `?redirect=${encodeURIComponent(currentPath)}`
       //     : "";
-      window.location.href = `/get-started`;
+      // window.location.href = `/get-started`;
     }
 
     return Promise.reject(error);

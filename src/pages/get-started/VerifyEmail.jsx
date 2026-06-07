@@ -22,34 +22,34 @@ function VerifyEmail() {
   const [secondsLeft, setSecondsLeft] = useState(RESEND_OTP_TIME);
   const [canResend, setCanResend] = useState(false);
 
-  useEffect(() => {
-    if (!email && username) {
-      navigate("/get-started/bind-email", { replace: true });
-    } else if (!email) {
-      navigate("/get-started", { replace: true });
-    }
-  }, [navigate, email, username]);
+  // useEffect(() => {
+  //   if (!email && username) {
+  //     //navigate("/get-started/bind-email", { replace: true });
+  //   } else if (!email) {
+  //     //navigate("/get-started", { replace: true });
+  //   }
+  // }, [navigate, email, username]);
 
-  useEffect(() => {
-    if (otp) {
-      navigate("/get-started/username", { replace: true });
-    }
-  }, [navigate, otp]);
+  // useEffect(() => {
+  //   if (otp) {
+  //     //navigate("/get-started/username", { replace: true });
+  //   }
+  // }, [navigate, otp]);
 
-  useEffect(() => {
-    if (canResend) return;
+  // useEffect(() => {
+  //   if (canResend) return;
 
-    if (secondsLeft <= 0) {
-      setCanResend(true);
-      return;
-    }
+  //   if (secondsLeft <= 0) {
+  //     setCanResend(true);
+  //     return;
+  //   }
 
-    const timer = window.setTimeout(() => {
-      setSecondsLeft((current) => current - 1);
-    }, 1000);
+  //   const timer = window.setTimeout(() => {
+  //     setSecondsLeft((current) => current - 1);
+  //   }, 1000);
 
-    return () => window.clearTimeout(timer);
-  }, [secondsLeft, canResend]);
+  //   return () => window.clearTimeout(timer);
+  // }, [secondsLeft, canResend]);
 
   const {
     register,
@@ -76,7 +76,7 @@ function VerifyEmail() {
               username: null,
             });
 
-            navigate("/get-started/username", { replace: true });
+            //navigate("/get-started/username", { replace: true });
           } else {
             login({
               token,
@@ -86,7 +86,7 @@ function VerifyEmail() {
               username: content.username,
             });
 
-            navigate("/get-started/account-configuration", { replace: true });
+            //navigate("/get-started/account-configuration", { replace: true });
           }
 
           toast.success("Email verified successfully");

@@ -31,7 +31,7 @@ export default function ConnectWalletModal({ open, onClose }) {
   async function handleSocketFiLogin() {
     console.log("this was clicked");
 
-    const res = await socketfi.openAuthPopup();
+    const res = await socketfi.authenticate();
 
     console.log("the async function is", res);
   }
