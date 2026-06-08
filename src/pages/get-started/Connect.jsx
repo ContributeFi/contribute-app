@@ -406,30 +406,30 @@ function Connect() {
   }
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-[520px] items-center justify-center px-4">
+    <div className="mx-auto max-w-[600px] items-start justify-center px-4 py-5 sm:items-center sm:py-6">
       <div className="w-full">
         <div className="text-left">
-          <div className="mb-7 text-center">
-            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#EEF2FF] text-[#2F0FD1] shadow-sm">
+          <div className="mb-5 text-center">
+            <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#EEF2FF] text-[#2F0FD1] shadow-sm">
               <UserCog className="h-5 w-5" />
             </div>
 
-            <h2 className="text-2xl font-semibold tracking-tight text-[#101828] md:text-[28px]">
+            <h2 className="text-2xl font-semibold tracking-tight text-[#101828] md:text-[26px]">
               Set up your profile
             </h2>
 
-            <p className="mt-2 text-sm leading-6 text-[#667085] md:text-base">
+            <p className="mx-auto mt-2 max-w-[430px] text-sm leading-6 text-[#667085]">
               Add your profile details and connect at least one social account
               so projects can verify your contributor identity.
             </p>
           </div>
 
-          <form onSubmit={handleSaveDetails} className="space-y-5">
-            <section className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
-              <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+          <form onSubmit={handleSaveDetails} className="space-y-3">
+            <section className="rounded-2xl border border-[#EAECF0] bg-white p-3.5 shadow-sm">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
                 <Label
                   htmlFor="image"
-                  className="relative mx-auto flex h-20 w-20 shrink-0 cursor-pointer items-center justify-center rounded-2xl border border-[#EAECF0] bg-[#F8FAFC] sm:mx-0"
+                  className="relative mx-auto flex h-16 w-16 shrink-0 cursor-pointer items-center justify-center rounded-2xl border border-[#EAECF0] bg-[#F8FAFC] sm:mx-0"
                 >
                   {imageUrl ? (
                     <img
@@ -438,7 +438,7 @@ function Connect() {
                       className="h-full w-full rounded-2xl object-cover"
                     />
                   ) : (
-                    <FaUserLarge className="text-[32px] text-[#B2B9C7]" />
+                    <FaUserLarge className="text-[26px] text-[#B2B9C7]" />
                   )}
 
                   <Input
@@ -450,23 +450,23 @@ function Connect() {
                     disabled={uploading}
                   />
 
-                  <span className="absolute -right-2 -bottom-2 flex h-8 w-8 items-center justify-center rounded-xl border border-[#EAECF0] bg-white text-[#2F0FD1] shadow-sm">
+                  <span className="absolute -right-2 -bottom-2 flex h-7 w-7 items-center justify-center rounded-xl border border-[#EAECF0] bg-white text-[#2F0FD1] shadow-sm">
                     {uploading ? (
-                      <ImSpinner5 className="animate-spin text-sm" />
+                      <ImSpinner5 className="animate-spin text-xs" />
                     ) : (
-                      <FaPlus className="text-sm" />
+                      <FaPlus className="text-xs" />
                     )}
                   </span>
                 </Label>
 
                 <div className="min-w-0 flex-1">
-                  <Label className="mb-2 block text-sm font-medium text-[#344054]">
+                  <Label className="mb-1.5 block text-sm font-medium text-[#344054]">
                     Short bio
                   </Label>
 
                   <Textarea
-                    className="min-h-[96px] resize-none rounded-xl border border-[#EAECF0] bg-[#F8FAFC] px-4 py-3 text-sm text-[#101828] placeholder:text-[#98A2B3] focus-visible:ring-4 focus-visible:ring-[#EEF2FF]"
-                    placeholder="Briefly tell projects what you do, your skills, and what kind of tasks you prefer."
+                    className="min-h-[72px] resize-none rounded-xl border border-[#EAECF0] bg-[#F8FAFC] px-3.5 py-2.5 text-sm text-[#101828] placeholder:text-[#98A2B3] focus-visible:ring-4 focus-visible:ring-[#EEF2FF]"
+                    placeholder="Tell projects what you do, your skills, and preferred tasks."
                     onChange={(e) => {
                       setBio(e.target.value);
                       setItemInSessionStorage("bio", e.target.value);
@@ -475,16 +475,16 @@ function Connect() {
                     maxLength={240}
                   />
 
-                  <p className="mt-2 text-xs text-[#98A2B3]">
+                  <p className="mt-1.5 text-xs text-[#98A2B3]">
                     {bio.length}/240 characters
                   </p>
                 </div>
               </div>
             </section>
 
-            <section className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
-              <div className="mb-4 flex items-center gap-2">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#EEF2FF] text-[#2F0FD1]">
+            <section className="rounded-2xl border border-[#EAECF0] bg-white p-3.5 shadow-sm">
+              <div className="mb-3 flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#EEF2FF] text-[#2F0FD1]">
                   <Link2 className="h-4 w-4" />
                 </div>
 
@@ -493,12 +493,12 @@ function Connect() {
                     Link social accounts
                   </h3>
                   <p className="text-xs text-[#667085]">
-                    Optional, but recommended for contributor credibility.
+                    Recommended for contributor credibility.
                   </p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                 {ACCOUNTS_TO_LINK.map((account) => {
                   const currentLinkedAccount = linkedAccounts.find(
                     (acc) => acc.provider === account.key,
@@ -510,11 +510,11 @@ function Connect() {
                   return (
                     <div
                       key={account.key}
-                      className="rounded-xl border border-[#EAECF0] bg-[#F8FAFC] px-4 py-3 transition hover:bg-white"
+                      className="rounded-xl border border-[#EAECF0] bg-[#F8FAFC] px-3 py-2.5 transition hover:bg-white"
                     >
                       <div className="flex items-center justify-between gap-3">
-                        <div className="flex min-w-0 items-center gap-3">
-                          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm">
+                        <div className="flex min-w-0 items-center gap-2.5">
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm">
                             {account.icon}
                           </div>
 
@@ -538,9 +538,9 @@ function Connect() {
                           <button
                             type="button"
                             onClick={() => handleLinkAccount(account.key)}
-                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white text-[#2F0FD1] shadow-sm transition hover:bg-[#EEF2FF]"
+                            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white text-[#2F0FD1] shadow-sm transition hover:bg-[#EEF2FF]"
                           >
-                            <FaPlus className="text-sm" />
+                            <FaPlus className="text-xs" />
                           </button>
                         )}
                       </div>
@@ -550,20 +550,22 @@ function Connect() {
               </div>
             </section>
 
-            <Button
-              className="h-11 w-full rounded-xl bg-[#2F0FD1] text-sm font-medium text-white shadow-sm transition hover:bg-[#2409B8] disabled:cursor-not-allowed disabled:bg-[#D0D5DD]"
-              disabled={
-                uploading ||
-                saving ||
-                (!imageUrl &&
-                  bio.trim().length === 0 &&
-                  linkedAccounts.length === 0)
-              }
-              type="submit"
-            >
-              {saving ? "Saving..." : "Continue"}
-              {!saving ? <ArrowRight className="h-4 w-4" /> : null}
-            </Button>
+            <div className="sticky bottom-0 -mx-1 bg-white/95 pt-2 pb-1 backdrop-blur">
+              <Button
+                className="h-11 w-full rounded-xl bg-[#2F0FD1] text-sm font-medium text-white shadow-sm transition hover:bg-[#2409B8] disabled:cursor-not-allowed disabled:bg-[#D0D5DD]"
+                disabled={
+                  uploading ||
+                  saving ||
+                  (!imageUrl &&
+                    bio.trim().length === 0 &&
+                    linkedAccounts.length === 0)
+                }
+                type="submit"
+              >
+                {saving ? "Saving..." : "Continue"}
+                {!saving ? <ArrowRight className="h-4 w-4" /> : null}
+              </Button>
+            </div>
           </form>
         </div>
 
@@ -622,8 +624,8 @@ function Connect() {
               placeholder="123456"
               value={telegramOtp}
               onChange={(e) => {
-                e.target.value = e.target.value.replace(/\D/g, "").slice(0, 6);
-                setTelegramOtp(e.target.value);
+                const value = e.target.value.replace(/\D/g, "").slice(0, 6);
+                setTelegramOtp(value);
               }}
               className="h-11 rounded-xl border-[#EAECF0] bg-white text-center text-lg font-semibold tracking-[0.35em]"
               maxLength={6}
