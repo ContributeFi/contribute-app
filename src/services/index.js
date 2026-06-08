@@ -331,6 +331,10 @@ export const updateBio = (bio) => {
   });
 };
 
+export function completeOnboarding() {
+  return api.patch(`${import.meta.env.VITE_BASE_URL}/api/users/complete-onboarding`);
+}
+
 export function initSignTransaction(data) {
   return api.post(
     `${import.meta.env.VITE_BASE_URL}/quests/init-sign-transaction`,

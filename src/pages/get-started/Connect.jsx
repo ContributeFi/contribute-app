@@ -24,7 +24,12 @@ import {
   removeItemFromSessionStorage,
   setItemInSessionStorage,
 } from "@/lib/utils";
-import { linkedAccount, updateBio, uploadProfilePicture } from "@/services";
+import {
+  linkedAccount,
+  updateBio,
+  uploadProfilePicture,
+  completeOnboarding,
+} from "@/services";
 
 const API_URL = "http://localhost:4000";
 
@@ -377,23 +382,22 @@ function Connect() {
   async function handleSaveDetails(e) {
     e.preventDefault();
 
-    if (!bio.trim()) {
-      finishAccountSetup();
-      return;
-    }
-
     try {
       setSaving(true);
 
-      const res = await updateBio(bio.trim());
+      if (bio.trim()) {
+        const res = await updateBio(bio.trim());
 
-      if (!res?.data?.content?.bio) {
-        toast.error("Failed to save bio");
-        return;
+        if (!res?.data?.content?.bio) {
+          toast.error("Failed to save bio");
+          return;
+        }
+
+        toast.success("Profile updated");
       }
 
-      toast.success("Profile updated");
-      finishAccountSetup({ includeBio: true });
+      await completeOnboarding();
+      finishAccountSetup({ includeBio: !!bio.trim() });
     } catch {
       toast.error("Failed to save bio");
     } finally {
