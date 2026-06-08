@@ -75,7 +75,7 @@ export function createWallet(network) {
 }
 
 export function linkedAccount() {
-  return api.get(`${import.meta.env.VITE_BASE_URL}/users/configured-accounts`);
+  return api.get("/api/users/me");
 }
 
 export function getUser() {
@@ -344,3 +344,5 @@ export function submitTransactionExternal(data) {
     data,
   );
 }
+
+
