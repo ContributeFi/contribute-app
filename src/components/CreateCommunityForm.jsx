@@ -68,26 +68,23 @@ function CreateCommunityForm({
     }
   }, [usernameCheckData]);
 
-  const { mutate: createCommunityMutation, isPending: createCommunityPending } =
-    useMutation({
-      mutationFn: (data) => createCommunity(data),
-      onSuccess: async (data) => {
-        if (data.status === 201) {
-          toast.success("Community created successfully");
-          reset();
-          setOpen(false);
-          queryClient.invalidateQueries(["communities"]);
-        } else {
-          toast.error("Something went wrong");
-        }
-      },
-      onError: (error) => {
-        console.error("Error:", error?.response?.data?.message);
-        toast.error(
-          error?.response?.data?.message || "Failed to create community",
-        );
-      },
-    });
+  const { mutate: createCommunityMutation, isPending: createCommunityPending } = useMutation({
+    mutationFn: (data) => createCommunity(data),
+    onSuccess: async (data) => {
+      if (data.status === 201) {
+        toast.success("Community created successfully");
+        reset();
+        setOpen(false);
+        queryClient.invalidateQueries(["communities"]);
+      } else {
+        toast.error("Something went wrong");
+      }
+    },
+    onError: (error) => {
+      console.error("Error:", error?.response?.data?.message);
+      toast.error(error?.response?.data?.message || "Failed to create community");
+    },
+  });
 
   const onSubmit = (data) => {
     if (usernameAvailable === false) {
@@ -138,15 +135,12 @@ function CreateCommunityForm({
           </DialogTitle>
 
           <DialogDescription className="text-left text-sm leading-6 text-[#667085]">
-            Create a new community space for contributors, builders, and members
-            to connect and collaborate.
+            Create a new community space for contributors, builders, and members to connect and
+            collaborate.
           </DialogDescription>
         </DialogHeader>
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="mt-6 grid gap-5 sm:grid-cols-2"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-6 grid gap-5 sm:grid-cols-2">
           <CustomInput
             label="Community Name"
             placeholder="Enter community name"
@@ -167,17 +161,11 @@ function CreateCommunityForm({
             />
 
             {checkingUsername ? (
-              <p className="mt-2 text-left text-sm text-[#667085]">
-                Checking availability...
-              </p>
+              <p className="mt-2 text-left text-sm text-[#667085]">Checking availability...</p>
             ) : usernameCheckData?.data?.content?.isAvailable === true ? (
-              <p className="mt-2 text-left text-sm text-[#12B76A]">
-                Username available
-              </p>
+              <p className="mt-2 text-left text-sm text-[#12B76A]">Username available</p>
             ) : usernameCheckData?.data?.content?.isAvailable === false ? (
-              <p className="mt-2 text-left text-sm text-[#F04438]">
-                Username taken
-              </p>
+              <p className="mt-2 text-left text-sm text-[#F04438]">Username taken</p>
             ) : null}
           </div>
 
@@ -225,19 +213,13 @@ function CreateCommunityForm({
               {...register("communityDescription")}
             />
             {errors.communityDescription?.message ? (
-              <span className="text-sm text-[#F04438]">
-                {errors.communityDescription.message}
-              </span>
+              <span className="text-sm text-[#F04438]">{errors.communityDescription.message}</span>
             ) : null}
           </Label>
 
           <div className="flex justify-end pt-2 sm:col-span-2">
             <Button
-              disabled={
-                createCommunityPending ||
-                checkingUsername ||
-                usernameAvailable === false
-              }
+              disabled={createCommunityPending || checkingUsername || usernameAvailable === false}
               type="submit"
               className="h-11 rounded-xl bg-[#2F0FD1] px-6 text-sm font-medium text-white hover:bg-[#2409B8]"
             >

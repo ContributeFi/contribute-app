@@ -25,10 +25,7 @@ function TasksCard({ task, tag, layout = "grid" }) {
     }
 
     if (pathLength === 3 && location.pathname.startsWith("/communities")) {
-      navigate(
-        `/${location.pathname.slice(1)}/${encodeURIComponent(task.id)}`,
-        { replace: false },
-      );
+      navigate(`/${location.pathname.slice(1)}/${encodeURIComponent(task.id)}`, { replace: false });
       return;
     }
 
@@ -80,9 +77,7 @@ function TasksCard({ task, tag, layout = "grid" }) {
                   {task.title || task.questTitle}
                 </h3>
 
-                <p className="truncate text-sm text-[#667085]">
-                  by {task.communityName}
-                </p>
+                <p className="truncate text-sm text-[#667085]">by {task.communityName}</p>
               </div>
             </div>
           </div>

@@ -33,9 +33,7 @@ import { hydrateQuestData } from "@/utils";
 function NewBurst() {
   const { newBurst } = useParams();
   const [openTokenSelectorModal, setOpenTokenSelectorModal] = useState(false);
-  const [rewardToken, setRewardToken] = useState(
-    getItemFromLocalStorage("rewardToken") || null,
-  );
+  const [rewardToken, setRewardToken] = useState(getItemFromLocalStorage("rewardToken") || null);
   const [burstData, setBurstData] = useState(() => {
     const stored = getItemFromLocalStorage("burstData");
     return stored ? hydrateQuestData(stored) : null;
@@ -124,8 +122,7 @@ function NewBurst() {
       ...storedBurstData,
       ...data,
       referenceImages: storedImageUrls,
-      tokenContract:
-        storedRewardToken?.contract || storedBurstData?.tokenContract,
+      tokenContract: storedRewardToken?.contract || storedBurstData?.tokenContract,
       symbol: storedRewardToken?.code || storedBurstData?.symbol,
     };
 
@@ -183,10 +180,7 @@ function NewBurst() {
                 Create New Burst
               </p>
 
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="grid gap-5 lg:grid-cols-2"
-              >
+              <form onSubmit={handleSubmit(onSubmit)} className="grid gap-5 lg:grid-cols-2">
                 <CustomInput
                   label="Burst Title"
                   placeholder="Enter Title"
@@ -245,15 +239,9 @@ function NewBurst() {
                     rewardToken && (
                       <div className="flex w-full items-center gap-2 text-sm text-black">
                         <span>
-                          {rewardToken?.contract
-                            ? "Sym:"
-                            : rewardToken?.issuer
-                              ? "Asset:"
-                              : ""}
+                          {rewardToken?.contract ? "Sym:" : rewardToken?.issuer ? "Asset:" : ""}
                         </span>
-                        <span className="truncate font-bold">
-                          {rewardToken?.code}
-                        </span>
+                        <span className="truncate font-bold">{rewardToken?.code}</span>
                       </div>
                     )
                   }
@@ -290,19 +278,14 @@ function NewBurst() {
                     defaultValue="Positive"
                     render={({ field }) => (
                       <div className="grid gap-2">
-                        <p className="text-base font-light text-[#09032A]">
-                          Sentiment Check
-                        </p>
+                        <p className="text-base font-light text-[#09032A]">Sentiment Check</p>
                         <RadioGroup
                           value={field.value}
                           onChange={field.onChange}
                           className="flex w-[100%] flex-col items-start justify-between gap-2 sm:flex-row sm:items-center"
                         >
                           {SENTIMENT_CHECK.map((plan) => (
-                            <Field
-                              key={plan}
-                              className="flex w-[50%] items-center gap-2"
-                            >
+                            <Field key={plan} className="flex w-[50%] items-center gap-2">
                               <Radio
                                 value={plan}
                                 className="group flex size-5 items-center justify-center rounded-full border bg-white data-checked:bg-[#2F0FD1]"
@@ -317,9 +300,7 @@ function NewBurst() {
                         </RadioGroup>
 
                         {errors.rewardMode && (
-                          <span className="text-xs text-red-500">
-                            {errors.rewardMode.message}
-                          </span>
+                          <span className="text-xs text-red-500">{errors.rewardMode.message}</span>
                         )}
                       </div>
                     )}
@@ -367,8 +348,7 @@ function NewBurst() {
                           onUpload={async (file) => {
                             const response = await uploadBurstImage(file);
                             const urls = response?.data?.content || [];
-                            const existingUrls =
-                              getItemFromLocalStorage("burstImageUrls") || [];
+                            const existingUrls = getItemFromLocalStorage("burstImageUrls") || [];
                             const allUrls = [...existingUrls, ...urls];
                             setItemInLocalStorage("burstImageUrls", allUrls);
                             setImagePreviews(allUrls);
@@ -415,50 +395,34 @@ function NewBurst() {
 
               <div className="space-y-[16px]">
                 <div className="flex items-center justify-between gap-4 text-left">
-                  <p className="flex-1 text-[16px] text-[#525866]">
-                    Burst Title
-                  </p>
-                  <p className="flex-2 text-[#050215]">
-                    {burstData?.burstTitle || "-"}
-                  </p>
+                  <p className="flex-1 text-[16px] text-[#525866]">Burst Title</p>
+                  <p className="flex-2 text-[#050215]">{burstData?.burstTitle || "-"}</p>
                 </div>
 
                 <div className="flex items-center justify-between gap-4 text-left">
-                  <p className="flex-1 text-[16px] text-[#48484A]">
-                    Social Media Platform
-                  </p>
+                  <p className="flex-1 text-[16px] text-[#48484A]">Social Media Platform</p>
                   <p className="flex-2">{burstData?.platform || "-"}</p>
                 </div>
 
                 <div className="flex items-center justify-between gap-4 text-left">
-                  <p className="flex-1 text-[16px] text-[#48484A]">
-                    Number of Winners
-                  </p>
-                  <p className="flex-2">
-                    {burstData?.numberOfSelections || "-"}
-                  </p>
+                  <p className="flex-1 text-[16px] text-[#48484A]">Number of Winners</p>
+                  <p className="flex-2">{burstData?.numberOfSelections || "-"}</p>
                 </div>
 
                 <div className="flex items-center justify-between gap-4 text-left">
-                  <p className="flex-1 text-[16px] text-[#48484A]">
-                    Reward Per Winner
-                  </p>
+                  <p className="flex-1 text-[16px] text-[#48484A]">Reward Per Winner</p>
                   <p className="flex-2">
                     {burstData?.tokensForWinner} {burstData?.symbol || "XLM"}
                   </p>
                 </div>
 
                 <div className="flex items-center justify-between gap-4 text-left">
-                  <p className="flex-1 text-[16px] text-[#48484A]">
-                    Conversation Type
-                  </p>
+                  <p className="flex-1 text-[16px] text-[#48484A]">Conversation Type</p>
                   <p className="flex-2">{burstData?.conversation || "-"}</p>
                 </div>
 
                 <div className="flex items-center justify-between gap-4 text-left">
-                  <p className="flex-1 text-[16px] text-[#48484A]">
-                    Reference Images
-                  </p>
+                  <p className="flex-1 text-[16px] text-[#48484A]">Reference Images</p>
                   <div className="flex flex-2 flex-wrap gap-2">
                     {(
                       burstData?.referenceImages ||
@@ -476,9 +440,7 @@ function NewBurst() {
                 </div>
 
                 <div className="flex items-center justify-between gap-4 text-left">
-                  <p className="flex-1 text-[16px] text-[#48484A]">
-                    Sentiment Check
-                  </p>
+                  <p className="flex-1 text-[16px] text-[#48484A]">Sentiment Check</p>
                   <p className="flex-2">{burstData?.sentimentCheck || "-"}</p>
                 </div>
               </div>
@@ -562,9 +524,7 @@ function NewBurst() {
                     )}
                   />
 
-                  <p className="text-[14px] font-[300] text-[#09032A]">
-                    Allow context check by AI
-                  </p>
+                  <p className="text-[14px] font-[300] text-[#09032A]">Allow context check by AI</p>
                 </div>
 
                 {!burstCreated && (
@@ -584,15 +544,12 @@ function NewBurst() {
                           Total Rewards (to be deposited):
                         </p>
                         <p className="text-2xl font-bold text-[#050215]">
-                          {burstData?.tokensForWinner}{" "}
-                          {burstData?.symbol || "XLM"}
+                          {burstData?.tokensForWinner} {burstData?.symbol || "XLM"}
                         </p>
                       </div>
 
                       <div className="flex items-center justify-between gap-2">
-                        <p className="font-[300] text-[#09032A]">
-                          Fees to Charge
-                        </p>
+                        <p className="font-[300] text-[#09032A]">Fees to Charge</p>
                         <p className="text-2xl font-bold text-[#050215]">
                           1.5 {burstData?.symbol || "XLM"}
                         </p>

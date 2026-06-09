@@ -80,9 +80,7 @@ function StickySummary({
       <div className="rounded-2xl border border-[#EAECF0] bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <Sparkles className="h-4 w-4 text-[#2F0FD1]" />
-          <h3 className="text-sm font-semibold text-[#101828]">
-            Quest summary
-          </h3>
+          <h3 className="text-sm font-semibold text-[#101828]">Quest summary</h3>
         </div>
 
         <div className="space-y-3">
@@ -95,9 +93,7 @@ function StickySummary({
           ].map(([label, value]) => (
             <div key={label} className="rounded-xl bg-[#F8FAFC] px-3 py-2">
               <p className="text-[11px] text-[#667085]">{label}</p>
-              <p className="mt-0.5 truncate text-sm font-semibold text-[#101828]">
-                {value}
-              </p>
+              <p className="mt-0.5 truncate text-sm font-semibold text-[#101828]">{value}</p>
             </div>
           ))}
         </div>
@@ -106,9 +102,7 @@ function StickySummary({
       <div className="rounded-2xl border border-[#EAECF0] bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <Info className="h-4 w-4 text-[#2F0FD1]" />
-          <h3 className="text-sm font-semibold text-[#101828]">
-            Eligibility rules
-          </h3>
+          <h3 className="text-sm font-semibold text-[#101828]">Eligibility rules</h3>
         </div>
 
         <div className="space-y-3">
@@ -116,12 +110,8 @@ function StickySummary({
             `Minimum followers: ${minFollowers || 0}`,
             `Minimum following: ${minFollowing || 0}`,
             `Account age: ${minAccountAgeDays || 0} days`,
-            verifiedOnly
-              ? "Verified accounts only"
-              : "Verification not required",
-            allowProtectedAccounts
-              ? "Protected accounts allowed"
-              : "Public accounts recommended",
+            verifiedOnly ? "Verified accounts only" : "Verification not required",
+            allowProtectedAccounts ? "Protected accounts allowed" : "Public accounts recommended",
           ].map((item) => (
             <div
               key={item}
@@ -141,8 +131,8 @@ function StickySummary({
         </div>
 
         <p className="text-sm leading-6 text-[#667085]">
-          Higher-ranked winners must receive an amount greater than or equal to
-          lower-ranked winners. Equal rewards are allowed.
+          Higher-ranked winners must receive an amount greater than or equal to lower-ranked
+          winners. Equal rewards are allowed.
         </p>
       </div>
     </aside>
@@ -240,9 +230,7 @@ export default function CreateXQuestPage() {
 
   function updatePrizeAmount(index, value) {
     setPrizes((current) =>
-      current.map((item, itemIndex) =>
-        itemIndex === index ? { ...item, amount: value } : item,
-      ),
+      current.map((item, itemIndex) => (itemIndex === index ? { ...item, amount: value } : item)),
     );
 
     setPaymentConfirmed(false);
@@ -326,9 +314,7 @@ export default function CreateXQuestPage() {
         selectionType,
         winnerCount: Number(winnerCount),
         maxParticipants:
-          selectionType === "first_come_first_serve"
-            ? Number(maxParticipants)
-            : undefined,
+          selectionType === "first_come_first_serve" ? Number(maxParticipants) : undefined,
         prizes: prizes.map((prize, index) => ({
           rank: index + 1,
           amount: Number(prize.amount),
@@ -360,9 +346,7 @@ export default function CreateXQuestPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${
-            accessToken || localStorage.getItem("accessToken")
-          }`,
+          Authorization: `Bearer ${accessToken || localStorage.getItem("accessToken")}`,
         },
         body: JSON.stringify(buildPayload()),
       });
@@ -375,9 +359,7 @@ export default function CreateXQuestPage() {
 
       navigate(`/twitter-quests/${data.quest._id}`);
     } catch (error) {
-      setError(
-        error instanceof Error ? error.message : "Failed to create quest.",
-      );
+      setError(error instanceof Error ? error.message : "Failed to create quest.");
     } finally {
       setSubmitting(false);
     }
@@ -388,9 +370,7 @@ export default function CreateXQuestPage() {
       <div className="space-y-4 px-3 py-4">
         <button
           type="button"
-          onClick={() =>
-            pageStep === "review" ? setPageStep("form") : navigate(-1)
-          }
+          onClick={() => (pageStep === "review" ? setPageStep("form") : navigate(-1))}
           className="inline-flex h-10 items-center gap-2 rounded-xl border border-[#EAECF0] bg-white px-4 text-sm font-medium text-[#344054] shadow-sm transition hover:bg-[#F9FAFB]"
         >
           <ArrowLeft className="h-4 w-4" />
@@ -409,9 +389,7 @@ export default function CreateXQuestPage() {
               </div>
 
               <h1 className="mt-2 max-w-4xl text-xl font-semibold tracking-tight text-[#101828] sm:text-2xl">
-                {pageStep === "review"
-                  ? "Review and fund X Quest"
-                  : "Create X Quest"}
+                {pageStep === "review" ? "Review and fund X Quest" : "Create X Quest"}
               </h1>
 
               <p className="mt-1 max-w-2xl text-sm text-[#667085]">
@@ -441,9 +419,7 @@ export default function CreateXQuestPage() {
                 className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-3 py-2"
               >
                 <p className="text-[11px] text-[#667085]">{label}</p>
-                <p className="mt-0.5 text-sm font-semibold text-[#101828] capitalize">
-                  {value}
-                </p>
+                <p className="mt-0.5 text-sm font-semibold text-[#101828] capitalize">{value}</p>
               </div>
             ))}
           </div>
@@ -474,10 +450,7 @@ export default function CreateXQuestPage() {
                   ["Winners", winnerCount],
                   ["Asset", asset],
                 ].map(([label, value]) => (
-                  <div
-                    key={label}
-                    className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] p-4"
-                  >
+                  <div key={label} className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] p-4">
                     <p className="text-[11px] text-[#667085]">{label}</p>
                     <p className="mt-1 text-sm font-semibold text-[#101828]">
                       {value || "Not set"}
@@ -487,18 +460,12 @@ export default function CreateXQuestPage() {
               </div>
 
               <div className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] p-4">
-                <h3 className="text-sm font-semibold text-[#101828]">
-                  Description
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-[#667085]">
-                  {description}
-                </p>
+                <h3 className="text-sm font-semibold text-[#101828]">Description</h3>
+                <p className="mt-2 text-sm leading-6 text-[#667085]">{description}</p>
               </div>
 
               <div className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] p-4">
-                <h3 className="text-sm font-semibold text-[#101828]">
-                  Prize breakdown
-                </h3>
+                <h3 className="text-sm font-semibold text-[#101828]">Prize breakdown</h3>
 
                 <div className="mt-3 space-y-2">
                   {prizes.map((prize, index) => (
@@ -516,9 +483,7 @@ export default function CreateXQuestPage() {
               </div>
 
               <div className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] p-4">
-                <h3 className="text-sm font-semibold text-[#101828]">
-                  Payment summary
-                </h3>
+                <h3 className="text-sm font-semibold text-[#101828]">Payment summary</h3>
 
                 <div className="mt-3 space-y-2">
                   <div className="flex justify-between text-sm">
@@ -529,9 +494,7 @@ export default function CreateXQuestPage() {
                   </div>
 
                   <div className="flex justify-between text-sm">
-                    <span className="text-[#667085]">
-                      Platform fee ({PLATFORM_FEE_PERCENT}%)
-                    </span>
+                    <span className="text-[#667085]">Platform fee ({PLATFORM_FEE_PERCENT}%)</span>
                     <span className="font-semibold text-[#101828]">
                       {platformFeeAmount.toLocaleString()} {asset}
                     </span>
@@ -539,9 +502,7 @@ export default function CreateXQuestPage() {
 
                   <div className="mt-3 border-t border-[#EAECF0] pt-3">
                     <div className="flex justify-between text-base">
-                      <span className="font-semibold text-[#101828]">
-                        Total due
-                      </span>
+                      <span className="font-semibold text-[#101828]">Total due</span>
                       <span className="font-bold text-[#2F0FD1]">
                         {totalAmountDue.toLocaleString()} {asset}
                       </span>
@@ -587,9 +548,7 @@ export default function CreateXQuestPage() {
               <div className="rounded-2xl border border-[#D1FADF] bg-[#F6FEF9] p-5 shadow-sm">
                 <div className="mb-3 flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-[#027A48]" />
-                  <h3 className="text-sm font-semibold text-[#101828]">
-                    Funding status
-                  </h3>
+                  <h3 className="text-sm font-semibold text-[#101828]">Funding status</h3>
                 </div>
 
                 <p className="text-sm leading-6 text-[#667085]">
@@ -809,9 +768,7 @@ export default function CreateXQuestPage() {
                     <input
                       type="checkbox"
                       checked={allowProtectedAccounts}
-                      onChange={(e) =>
-                        setAllowProtectedAccounts(e.target.checked)
-                      }
+                      onChange={(e) => setAllowProtectedAccounts(e.target.checked)}
                       className="mt-1"
                     />
                     <span>
@@ -878,15 +835,9 @@ export default function CreateXQuestPage() {
                       }}
                       className={`${selectClass} mt-2`}
                     >
-                      <option value="random_single">
-                        Random single winner
-                      </option>
-                      <option value="random_multiple">
-                        Random multiple winners
-                      </option>
-                      <option value="first_come_first_serve">
-                        First come, first serve
-                      </option>
+                      <option value="random_single">Random single winner</option>
+                      <option value="random_multiple">Random multiple winners</option>
+                      <option value="first_come_first_serve">First come, first serve</option>
                     </select>
                   </div>
 
@@ -922,9 +873,7 @@ export default function CreateXQuestPage() {
 
                 <div className="mt-5 space-y-3">
                   <div className="flex items-center justify-between gap-3">
-                    <h3 className="text-sm font-semibold text-[#101828]">
-                      Prize breakdown
-                    </h3>
+                    <h3 className="text-sm font-semibold text-[#101828]">Prize breakdown</h3>
 
                     <button
                       type="button"
@@ -953,9 +902,7 @@ export default function CreateXQuestPage() {
                         type="number"
                         min="0"
                         value={prize.amount}
-                        onChange={(e) =>
-                          updatePrizeAmount(index, e.target.value)
-                        }
+                        onChange={(e) => updatePrizeAmount(index, e.target.value)}
                         className={inputClass}
                         placeholder={`Prize amount in ${asset}`}
                       />

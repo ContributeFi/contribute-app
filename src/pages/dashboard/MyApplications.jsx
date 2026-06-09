@@ -20,13 +20,7 @@ import {
 
 const APPLICATION_LAYOUT_KEY = "contribute_mvp_application_layout";
 
-const statusFilters = [
-  "All",
-  "Under review",
-  "Shortlisted",
-  "Accepted",
-  "Submitted work",
-];
+const statusFilters = ["All", "Under review", "Shortlisted", "Accepted", "Submitted work"];
 
 const initialApplications = [
   {
@@ -194,14 +188,9 @@ function CompactApplicationsDashboard({ summary, onBrowseTasks }) {
 
       <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-4">
         {items.map(([label, value]) => (
-          <div
-            key={label}
-            className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-3 py-2"
-          >
+          <div key={label} className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-3 py-2">
             <p className="text-[11px] text-[#667085]">{label}</p>
-            <p className="mt-0.5 text-sm font-semibold text-[#101828]">
-              {value}
-            </p>
+            <p className="mt-0.5 text-sm font-semibold text-[#101828]">{value}</p>
           </div>
         ))}
       </div>
@@ -210,8 +199,7 @@ function CompactApplicationsDashboard({ summary, onBrowseTasks }) {
 }
 
 function ApplicationCard({ application, layout, onSubmitWork, onView }) {
-  const canSubmit =
-    application.decision === "Accepted" && !application.workSubmitted;
+  const canSubmit = application.decision === "Accepted" && !application.workSubmitted;
 
   if (layout === "grid") {
     return (
@@ -222,9 +210,7 @@ function ApplicationCard({ application, layout, onSubmitWork, onView }) {
         <div className="flex items-start justify-between gap-3">
           <div className="flex flex-wrap gap-2">
             <Badge tone="purple">{application.category}</Badge>
-            <Badge tone={getStatusTone(application.status)}>
-              {application.status}
-            </Badge>
+            <Badge tone={getStatusTone(application.status)}>{application.status}</Badge>
           </div>
 
           <ArrowUpRight className="h-4 w-4 shrink-0 text-[#98A2B3] transition group-hover:text-[#2F0FD1]" />
@@ -252,9 +238,7 @@ function ApplicationCard({ application, layout, onSubmitWork, onView }) {
 
           <div className="rounded-xl bg-[#F8FAFC] px-3 py-2">
             <p className="text-[11px] text-[#667085]">Applicants</p>
-            <p className="text-sm font-semibold text-[#101828]">
-              {application.applicants}
-            </p>
+            <p className="text-sm font-semibold text-[#101828]">{application.applicants}</p>
           </div>
         </div>
 
@@ -272,9 +256,7 @@ function ApplicationCard({ application, layout, onSubmitWork, onView }) {
             </button>
           ) : (
             <div className="flex h-10 items-center justify-center rounded-xl border border-[#EAECF0] bg-[#F8FAFC] text-sm font-medium text-[#667085]">
-              {application.workSubmitted
-                ? "Work submitted"
-                : "Awaiting decision"}
+              {application.workSubmitted ? "Work submitted" : "Awaiting decision"}
             </div>
           )}
         </div>
@@ -291,15 +273,9 @@ function ApplicationCard({ application, layout, onSubmitWork, onView }) {
         <div className="min-w-0 flex-1">
           <div className="mb-2 flex flex-wrap gap-2">
             <Badge tone="purple">{application.category}</Badge>
-            <Badge tone={getStatusTone(application.status)}>
-              {application.status}
-            </Badge>
-            <Badge tone={getStatusTone(application.decision)}>
-              {application.decision}
-            </Badge>
-            {application.viewedByPoster ? (
-              <Badge tone="blue">Viewed</Badge>
-            ) : null}
+            <Badge tone={getStatusTone(application.status)}>{application.status}</Badge>
+            <Badge tone={getStatusTone(application.decision)}>{application.decision}</Badge>
+            {application.viewedByPoster ? <Badge tone="blue">Viewed</Badge> : null}
           </div>
 
           <h3 className="line-clamp-1 text-[15px] font-semibold text-[#101828] sm:text-base">
@@ -307,8 +283,7 @@ function ApplicationCard({ application, layout, onSubmitWork, onView }) {
           </h3>
 
           <p className="mt-1 line-clamp-1 text-sm text-[#667085]">
-            {application.company} • Applied {application.submittedAt} •{" "}
-            {application.posterNote}
+            {application.company} • Applied {application.submittedAt} • {application.posterNote}
           </p>
         </div>
 
@@ -322,20 +297,14 @@ function ApplicationCard({ application, layout, onSubmitWork, onView }) {
 
           <div className="rounded-xl bg-[#F8FAFC] px-3 py-2">
             <p className="text-[11px] text-[#667085]">Applicants</p>
-            <p className="text-sm font-semibold text-[#101828]">
-              {application.applicants}
-            </p>
+            <p className="text-sm font-semibold text-[#101828]">{application.applicants}</p>
           </div>
 
           <div className="flex items-center justify-between rounded-xl bg-[#F8FAFC] px-3 py-2">
             <div>
               <p className="text-[11px] text-[#667085]">Action</p>
               <p className="text-sm font-semibold text-[#101828]">
-                {application.workSubmitted
-                  ? "Submitted"
-                  : canSubmit
-                    ? "Submit"
-                    : "Waiting"}
+                {application.workSubmitted ? "Submitted" : canSubmit ? "Submit" : "Waiting"}
               </p>
             </div>
             <ChevronRight className="h-4 w-4 text-[#98A2B3] transition group-hover:text-[#2F0FD1]" />
@@ -381,10 +350,8 @@ export default function MyApplications() {
   const summary = useMemo(() => {
     return {
       total: applications.length,
-      accepted: applications.filter((item) => item.decision === "Accepted")
-        .length,
-      pending: applications.filter((item) => item.decision === "Pending")
-        .length,
+      accepted: applications.filter((item) => item.decision === "Accepted").length,
+      pending: applications.filter((item) => item.decision === "Pending").length,
       submittedWork: applications.filter((item) => item.workSubmitted).length,
     };
   }, [applications]);
@@ -535,9 +502,7 @@ export default function MyApplications() {
             ) : (
               <div className="flex min-h-[240px] flex-col items-center justify-center rounded-2xl border border-dashed border-[#D9E1F2] bg-[#FCFCFD] px-6 py-10 text-center">
                 <BriefcaseBusiness className="mb-4 h-9 w-9 text-[#2F0FD1]" />
-                <h3 className="text-lg font-semibold text-[#101828]">
-                  No applications found
-                </h3>
+                <h3 className="text-lg font-semibold text-[#101828]">No applications found</h3>
                 <p className="mt-2 max-w-md text-sm leading-6 text-[#667085]">
                   Try another filter or search for a different task.
                 </p>
@@ -548,10 +513,7 @@ export default function MyApplications() {
       </div>
 
       {selectedApplication && !submitOpen ? (
-        <Modal
-          title="Application details"
-          onClose={() => setSelectedApplication(null)}
-        >
+        <Modal title="Application details" onClose={() => setSelectedApplication(null)}>
           <div className="space-y-5">
             <div className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] p-4">
               <div className="mb-3 flex flex-wrap gap-2">
@@ -569,8 +531,7 @@ export default function MyApplications() {
               </h2>
 
               <p className="mt-2 text-sm text-[#667085]">
-                {selectedApplication.company} • Applied{" "}
-                {selectedApplication.submittedAt}
+                {selectedApplication.company} • Applied {selectedApplication.submittedAt}
               </p>
             </div>
 
@@ -598,9 +559,7 @@ export default function MyApplications() {
             </div>
 
             <div className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
-              <h3 className="text-sm font-semibold text-[#101828]">
-                Poster note
-              </h3>
+              <h3 className="text-sm font-semibold text-[#101828]">Poster note</h3>
               <p className="mt-2 text-sm leading-7 text-[#667085]">
                 {selectedApplication.posterNote}
               </p>
@@ -608,9 +567,7 @@ export default function MyApplications() {
 
             {selectedApplication.workSubmitted ? (
               <div className="rounded-2xl border border-[#ABEFC6] bg-[#ECFDF3] p-4">
-                <h3 className="text-sm font-semibold text-[#027A48]">
-                  Submitted work
-                </h3>
+                <h3 className="text-sm font-semibold text-[#027A48]">Submitted work</h3>
                 <a
                   href={selectedApplication.workLink}
                   target="_blank"
@@ -640,9 +597,7 @@ export default function MyApplications() {
         <Modal title="Submit work" onClose={() => setSubmitOpen(false)}>
           <form onSubmit={handleSubmitWork} className="space-y-5">
             <div className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] p-4">
-              <h3 className="text-sm font-semibold text-[#101828]">
-                {selectedApplication.title}
-              </h3>
+              <h3 className="text-sm font-semibold text-[#101828]">{selectedApplication.title}</h3>
               <p className="mt-1 text-sm text-[#667085]">
                 {selectedApplication.company} • {selectedApplication.reward}{" "}
                 {selectedApplication.rewardAsset}

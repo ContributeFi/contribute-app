@@ -72,8 +72,7 @@ const tasks = [
     deadline: "7 days",
     applicants: 8,
     status: "Open",
-    description:
-      "Design premium task card variations for a contributor marketplace interface.",
+    description: "Design premium task card variations for a contributor marketplace interface.",
     requirements:
       "Submit portfolio links and explain your approach to hierarchy, spacing, and mobile design.",
   },
@@ -131,19 +130,14 @@ export default function TaskDetails() {
   const { taskId } = useParams();
   const navigate = useNavigate();
 
-  const task = useMemo(
-    () => tasks.find((item) => item.id === taskId),
-    [taskId],
-  );
+  const task = useMemo(() => tasks.find((item) => item.id === taskId), [taskId]);
 
   if (!task) {
     return (
       <main className="min-h-screen bg-[#F8FAFC] px-3 py-4">
         <div className="rounded-2xl border border-[#EAECF0] bg-white p-8 text-center shadow-sm">
           <BriefcaseBusiness className="mx-auto mb-4 h-9 w-9 text-[#2F0FD1]" />
-          <h1 className="text-lg font-semibold text-[#101828]">
-            Task not found
-          </h1>
+          <h1 className="text-lg font-semibold text-[#101828]">Task not found</h1>
           <button
             onClick={() => navigate("/")}
             className="mt-5 h-10 rounded-xl bg-[#2F0FD1] px-4 text-sm font-medium text-white"
@@ -223,40 +217,29 @@ export default function TaskDetails() {
             <div className="rounded-2xl border border-[#EAECF0] bg-white p-5 shadow-sm">
               <div className="mb-3 flex items-center gap-2">
                 <FileText className="h-4 w-4 text-[#2F0FD1]" />
-                <h2 className="text-base font-semibold text-[#101828]">
-                  Description
-                </h2>
+                <h2 className="text-base font-semibold text-[#101828]">Description</h2>
               </div>
-              <p className="text-sm leading-7 text-[#667085]">
-                {task.description}
-              </p>
+              <p className="text-sm leading-7 text-[#667085]">{task.description}</p>
             </div>
 
             <div className="rounded-2xl border border-[#EAECF0] bg-white p-5 shadow-sm">
               <div className="mb-3 flex items-center gap-2">
                 <ShieldCheck className="h-4 w-4 text-[#2F0FD1]" />
-                <h2 className="text-base font-semibold text-[#101828]">
-                  Application guide
-                </h2>
+                <h2 className="text-base font-semibold text-[#101828]">Application guide</h2>
               </div>
-              <p className="text-sm leading-7 text-[#667085]">
-                {task.requirements}
-              </p>
+              <p className="text-sm leading-7 text-[#667085]">{task.requirements}</p>
             </div>
           </div>
 
           <aside className="h-fit rounded-2xl border border-[#EAECF0] bg-white p-5 shadow-sm">
-            <h3 className="text-sm font-semibold text-[#101828]">
-              Before you apply
-            </h3>
+            <h3 className="text-sm font-semibold text-[#101828]">Before you apply</h3>
             <p className="mt-2 text-sm leading-6 text-[#667085]">
-              Send a focused proposal with relevant experience, your approach,
-              portfolio link, and estimated delivery time.
+              Send a focused proposal with relevant experience, your approach, portfolio link, and
+              estimated delivery time.
             </p>
 
             <div className="mt-4 rounded-xl border border-[#EAECF0] bg-[#F8FAFC] p-3 text-sm text-[#667085]">
-              Strong applications are short, specific, and easy for the poster
-              to evaluate.
+              Strong applications are short, specific, and easy for the poster to evaluate.
             </div>
 
             <button

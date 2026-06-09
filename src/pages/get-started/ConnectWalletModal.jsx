@@ -1,13 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 import { useWallet } from "@/hooks/useWallet";
-import {
-  ArrowRight,
-  KeyRound,
-  ShieldCheck,
-  WalletCards,
-  X,
-} from "lucide-react";
+import { ArrowRight, KeyRound, ShieldCheck, WalletCards, X } from "lucide-react";
 import { useSocketFi } from "@socketfi/react";
 
 export default function ConnectWalletModal({ open, onClose }) {
@@ -81,9 +75,7 @@ export default function ConnectWalletModal({ open, onClose }) {
                 </div>
 
                 <div>
-                  <p className="text-sm font-semibold text-[#101828]">
-                    Continue with Passkey
-                  </p>
+                  <p className="text-sm font-semibold text-[#101828]">Continue with Passkey</p>
                   <p className="mt-0.5 text-xs leading-5 font-normal text-[#667085]">
                     Sign in securely with SocketFi Passkey.
                   </p>
@@ -115,9 +107,7 @@ export default function ConnectWalletModal({ open, onClose }) {
                 </div>
 
                 <div>
-                  <p className="text-sm font-semibold text-[#101828]">
-                    Continue with Wallet Keys
-                  </p>
+                  <p className="text-sm font-semibold text-[#101828]">Continue with Wallet Keys</p>
                   <p className="mt-0.5 text-xs leading-5 font-normal text-[#667085]">
                     Connect using your Stellar wallet keys.
                   </p>

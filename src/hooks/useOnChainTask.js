@@ -49,9 +49,7 @@ async function signWithPasskey(options) {
     id: assertion.id,
     rawId: arrayBufferToBase64(assertion.rawId),
     response: {
-      authenticatorData: arrayBufferToBase64(
-        assertion.response.authenticatorData,
-      ),
+      authenticatorData: arrayBufferToBase64(assertion.response.authenticatorData),
       clientDataJSON: arrayBufferToBase64(assertion.response.clientDataJSON),
       signature: arrayBufferToBase64(assertion.response.signature),
     },
@@ -69,8 +67,7 @@ async function buildAndSignStellarTransaction({
   network,
   walletAddress,
 }) {
-  const networkPassphrase =
-    network === "TESTNET" ? Networks.TESTNET : Networks.PUBLIC;
+  const networkPassphrase = network === "TESTNET" ? Networks.TESTNET : Networks.PUBLIC;
   const rpcUrl =
     network === "TESTNET"
       ? "https://soroban-testnet.stellar.org"
@@ -152,9 +149,7 @@ async function buildAndSignStellarTransaction({
 
       return signedXdr;
     } else {
-      throw new Error(
-        "Transaction simulation failed. Please check your inputs.",
-      );
+      throw new Error("Transaction simulation failed. Please check your inputs.");
     }
   } catch (error) {
     console.error("Error building transaction:", error);
@@ -166,13 +161,7 @@ export function useOnChainTask() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const submitOnChainTask = async ({
-    task,
-    quest,
-    userInputs,
-    userId,
-    walletAddress,
-  }) => {
+  const submitOnChainTask = async ({ task, quest, userInputs, userId, walletAddress }) => {
     setLoading(true);
     setError(null);
 

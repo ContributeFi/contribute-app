@@ -48,8 +48,5 @@ export function formatReward(quest) {
 }
 
 export function findQuestById(quests = [], questId) {
-  return (
-    quests.find((quest) => String(quest.id || quest._id) === String(questId)) ||
-    null
-  );
+  return quests.find((quest) => String(quest.id || quest._id) === String(questId)) || null;
 }

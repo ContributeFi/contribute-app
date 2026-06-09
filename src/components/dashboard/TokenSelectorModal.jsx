@@ -196,29 +196,18 @@ export default function TokenSelectorModal({
       return (
         curatedList?.filter((token) => {
           const codeMatch = token.code?.toLowerCase().includes(code);
-          const issuerMatch = issuer
-            ? token.issuer?.toLowerCase().includes(issuer)
-            : true;
+          const issuerMatch = issuer ? token.issuer?.toLowerCase().includes(issuer) : true;
           return codeMatch && issuerMatch;
         }) || []
       );
     }
 
     // Regular search across multiple fields
-    const fieldsToSearch = [
-      "code",
-      "issuer",
-      "contract",
-      "name",
-      "org",
-      "domain",
-    ];
+    const fieldsToSearch = ["code", "issuer", "contract", "name", "org", "domain"];
 
     return (
       curatedList?.filter((token) =>
-        fieldsToSearch.some((field) =>
-          token[field]?.toLowerCase().includes(searchLower),
-        ),
+        fieldsToSearch.some((field) => token[field]?.toLowerCase().includes(searchLower)),
       ) || []
     );
   }, [search]);
@@ -332,12 +321,8 @@ export default function TokenSelectorModal({
             >
               <img src={token?.icon} alt={token?.code} className="h-6 w-6" />
               <div>
-                <div className="font-medium text-purple-900 dark:text-white">
-                  {token.code}
-                </div>
-                <div className="text-sm text-gray-500 dark:text-gray-300">
-                  {token.domain}
-                </div>
+                <div className="font-medium text-purple-900 dark:text-white">{token.code}</div>
+                <div className="text-sm text-gray-500 dark:text-gray-300">{token.domain}</div>
               </div>
             </div>
           ))}

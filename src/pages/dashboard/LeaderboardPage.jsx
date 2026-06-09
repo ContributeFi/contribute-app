@@ -127,9 +127,7 @@ function MetricCard({ icon: Icon, label, value, helper }) {
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-xs text-[#667085]">{label}</p>
-          <p className="mt-1 text-xl font-semibold tracking-tight text-[#101828]">
-            {value}
-          </p>
+          <p className="mt-1 text-xl font-semibold tracking-tight text-[#101828]">{value}</p>
           <p className="mt-1 text-xs text-[#98A2B3]">{helper}</p>
         </div>
 
@@ -173,8 +171,7 @@ export default function LeaderboardPage() {
           contributor.specialty.toLowerCase().includes(search) ||
           contributor.trustLevel.toLowerCase().includes(search);
 
-        const matchesCategory =
-          category === "All categories" || contributor.category === category;
+        const matchesCategory = category === "All categories" || contributor.category === category;
 
         return matchesSearch && matchesCategory;
       })
@@ -183,17 +180,10 @@ export default function LeaderboardPage() {
 
   const leader = filteredContributors[0];
 
-  const totalEarnings = contributors.reduce(
-    (sum, item) => sum + item.earnings,
-    0,
-  );
-  const totalContributions = contributors.reduce(
-    (sum, item) => sum + item.contributions,
-    0,
-  );
+  const totalEarnings = contributors.reduce((sum, item) => sum + item.earnings, 0);
+  const totalContributions = contributors.reduce((sum, item) => sum + item.contributions, 0);
   const averageTrust = Math.round(
-    contributors.reduce((sum, item) => sum + item.trustScore, 0) /
-      contributors.length,
+    contributors.reduce((sum, item) => sum + item.trustScore, 0) / contributors.length,
   );
 
   return (
@@ -215,8 +205,8 @@ export default function LeaderboardPage() {
                 </h1>
 
                 <p className="mt-3 max-w-2xl text-sm leading-6 text-[#667085] sm:text-base">
-                  Discover the most active contributors across Contribute based
-                  on points, completed work, earnings, and trust score.
+                  Discover the most active contributors across Contribute based on points, completed
+                  work, earnings, and trust score.
                 </p>
               </div>
 
@@ -281,9 +271,7 @@ export default function LeaderboardPage() {
                 </div>
 
                 <div className="mt-5">
-                  <h2 className="text-2xl font-semibold tracking-tight">
-                    {leader.name}
-                  </h2>
+                  <h2 className="text-2xl font-semibold tracking-tight">{leader.name}</h2>
                   <p className="mt-1 text-sm text-white/60">{leader.handle}</p>
 
                   <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -301,9 +289,7 @@ export default function LeaderboardPage() {
                 <div className="mt-5 grid grid-cols-3 gap-2">
                   <div className="rounded-2xl border border-white/10 bg-white/10 p-3 backdrop-blur-xl">
                     <p className="text-[11px] text-white/50">Points</p>
-                    <p className="mt-1 text-sm font-semibold">
-                      {leader.points.toLocaleString()}
-                    </p>
+                    <p className="mt-1 text-sm font-semibold">{leader.points.toLocaleString()}</p>
                   </div>
 
                   <div className="rounded-2xl border border-white/10 bg-white/10 p-3 backdrop-blur-xl">
@@ -315,17 +301,13 @@ export default function LeaderboardPage() {
 
                   <div className="rounded-2xl border border-white/10 bg-white/10 p-3 backdrop-blur-xl">
                     <p className="text-[11px] text-white/50">Trust</p>
-                    <p className="mt-1 text-sm font-semibold">
-                      {leader.trustScore}%
-                    </p>
+                    <p className="mt-1 text-sm font-semibold">{leader.trustScore}%</p>
                   </div>
                 </div>
 
                 <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.06] p-3">
                   <div className="flex items-center justify-between gap-3">
-                    <span className="text-xs font-medium text-white/60">
-                      Reputation strength
-                    </span>
+                    <span className="text-xs font-medium text-white/60">Reputation strength</span>
                     <span className="text-xs font-semibold text-white">
                       {leader.trustScore}/100
                     </span>
@@ -344,9 +326,7 @@ export default function LeaderboardPage() {
             <section className="rounded-3xl border border-[#EAECF0] bg-white p-4 shadow-sm">
               <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                 <div>
-                  <h2 className="text-base font-semibold text-[#101828]">
-                    Leaderboard
-                  </h2>
+                  <h2 className="text-base font-semibold text-[#101828]">Leaderboard</h2>
                   <p className="mt-1 text-sm text-[#667085]">
                     Filter contributors by category and ranking metric.
                   </p>
@@ -460,18 +440,14 @@ export default function LeaderboardPage() {
 
                           <div className="mt-3 grid grid-cols-3 gap-2 rounded-xl bg-[#F9FAFB] p-2">
                             <div>
-                              <p className="text-[10px] text-[#98A2B3]">
-                                Points
-                              </p>
+                              <p className="text-[10px] text-[#98A2B3]">Points</p>
                               <p className="text-xs font-semibold text-[#101828]">
                                 {contributor.points.toLocaleString()}
                               </p>
                             </div>
 
                             <div>
-                              <p className="text-[10px] text-[#98A2B3]">
-                                Earned
-                              </p>
+                              <p className="text-[10px] text-[#98A2B3]">Earned</p>
                               <p className="text-xs font-semibold text-[#101828]">
                                 ${contributor.earnings.toLocaleString()}
                               </p>
@@ -492,13 +468,10 @@ export default function LeaderboardPage() {
                               )}`}
                             >
                               <ShieldCheck className="h-3 w-3" />
-                              {contributor.trustScore}% ·{" "}
-                              {contributor.trustLevel}
+                              {contributor.trustScore}% · {contributor.trustLevel}
                             </span>
 
-                            <span className="text-xs text-[#98A2B3]">
-                              {contributor.category}
-                            </span>
+                            <span className="text-xs text-[#98A2B3]">{contributor.category}</span>
                           </div>
                         </div>
 
@@ -572,9 +545,7 @@ export default function LeaderboardPage() {
 
                 {filteredContributors.length === 0 && (
                   <div className="p-10 text-center">
-                    <p className="text-sm font-medium text-[#101828]">
-                      No contributors found
-                    </p>
+                    <p className="text-sm font-medium text-[#101828]">No contributors found</p>
                     <p className="mt-1 text-sm text-[#667085]">
                       Try changing your search or filter.
                     </p>

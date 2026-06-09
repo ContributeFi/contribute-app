@@ -10,8 +10,7 @@ export const useCreateGrowthQuest = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ payload, communityId }) =>
-      createGrowthQuest(payload, communityId),
+    mutationFn: ({ payload, communityId }) => createGrowthQuest(payload, communityId),
 
     onSuccess: (_, variables) => {
       queryClient.clear();
@@ -32,8 +31,7 @@ export const useCreateOnChainQuest = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ payload, communityId }) =>
-      createOnChainQuest(payload, communityId),
+    mutationFn: ({ payload, communityId }) => createOnChainQuest(payload, communityId),
 
     onSuccess: (_, variables) => {
       queryClient.clear();
@@ -75,8 +73,7 @@ export const useCreateTechnicalQuest = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ payload, communityId }) =>
-      createTechnicalQuest(payload, communityId),
+    mutationFn: ({ payload, communityId }) => createTechnicalQuest(payload, communityId),
 
     onSuccess: (_, variables) => {
       queryClient.clear();

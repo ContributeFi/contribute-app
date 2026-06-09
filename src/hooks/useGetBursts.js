@@ -1,12 +1,7 @@
 import { getBursts } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 
-export const useGetBursts = (
-  LIMIT = 10,
-  OFFSET = 1,
-  sortOrder = "DESC",
-  filter = "all",
-) => {
+export const useGetBursts = (LIMIT = 10, OFFSET = 1, sortOrder = "DESC", filter = "all") => {
   const {
     data: burstsData,
     isLoading: loadingBursts,

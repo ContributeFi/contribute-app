@@ -5,14 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ImSpinner5 } from "react-icons/im";
 import { useNavigate, useLocation } from "react-router";
 import { toast } from "react-toastify";
-import {
-  ArrowUpRight,
-  BriefcaseBusiness,
-  Coins,
-  Users,
-  ShieldCheck,
-  Sparkles,
-} from "lucide-react";
+import { ArrowUpRight, BriefcaseBusiness, Coins, Users, ShieldCheck, Sparkles } from "lucide-react";
 
 function CommunitiesCard({ community, layout = "grid" }) {
   const navigate = useNavigate();
@@ -50,108 +43,83 @@ function CommunitiesCard({ community, layout = "grid" }) {
   const isOwner = community?.communityOwnerId === user?.id;
 
   const memberCount = useMemo(() => {
-    return (
-      communityDetails?.totalMembers ??
-      communityDetails?.members ??
-      community?.members ??
-      0
-    );
+    return communityDetails?.totalMembers ?? communityDetails?.members ?? community?.members ?? 0;
   }, [communityDetails, community?.members]);
 
   const isMember = Boolean(communityDetails?.isMember);
   const newTasksCount = community?.newTasks ?? 0;
   const totalSpent = community?.totalSpent ?? 0;
   const communityName = community?.communityName || "Untitled Community";
-  const communityDescription =
-    community?.communityDescription || "No description provided yet.";
+  const communityDescription = community?.communityDescription || "No description provided yet.";
 
-  const { mutate: joinCommunityMutation, isPending: joinCommunityPending } =
-    useMutation({
-      mutationFn: () => joinCommunity(communityId),
-      onMutate: async () => {
-        await queryClient.cancelQueries({
-          queryKey: ["community", communityId],
-        });
+  const { mutate: joinCommunityMutation, isPending: joinCommunityPending } = useMutation({
+    mutationFn: () => joinCommunity(communityId),
+    onMutate: async () => {
+      await queryClient.cancelQueries({
+        queryKey: ["community", communityId],
+      });
 
-        const previousCommunity = queryClient.getQueryData([
-          "community",
-          communityId,
-        ]);
+      const previousCommunity = queryClient.getQueryData(["community", communityId]);
 
-        queryClient.setQueryData(["community", communityId], (old) => ({
-          ...(old || {}),
-          isMember: true,
-          totalMembers:
-            (old?.totalMembers ?? old?.members ?? community?.members ?? 0) + 1,
-        }));
+      queryClient.setQueryData(["community", communityId], (old) => ({
+        ...(old || {}),
+        isMember: true,
+        totalMembers: (old?.totalMembers ?? old?.members ?? community?.members ?? 0) + 1,
+      }));
 
-        return { previousCommunity };
-      },
-      onError: (error, _, context) => {
-        queryClient.setQueryData(
-          ["community", communityId],
-          context?.previousCommunity,
-        );
-        toast.error(
-          error?.response?.data?.message || "Failed to join community",
-        );
-      },
-      onSettled: () => {
-        queryClient.invalidateQueries({ queryKey: ["community", communityId] });
-      },
-      onSuccess: (response) => {
-        if (response?.status === 201) {
-          toast.success("Community joined successfully");
-        } else {
-          toast.error("Something went wrong");
-        }
-      },
-    });
+      return { previousCommunity };
+    },
+    onError: (error, _, context) => {
+      queryClient.setQueryData(["community", communityId], context?.previousCommunity);
+      toast.error(error?.response?.data?.message || "Failed to join community");
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["community", communityId] });
+    },
+    onSuccess: (response) => {
+      if (response?.status === 201) {
+        toast.success("Community joined successfully");
+      } else {
+        toast.error("Something went wrong");
+      }
+    },
+  });
 
-  const { mutate: leaveCommunityMutation, isPending: leaveCommunityPending } =
-    useMutation({
-      mutationFn: () => leaveCommunity(communityId, user?.id),
-      onMutate: async () => {
-        await queryClient.cancelQueries({
-          queryKey: ["community", communityId],
-        });
+  const { mutate: leaveCommunityMutation, isPending: leaveCommunityPending } = useMutation({
+    mutationFn: () => leaveCommunity(communityId, user?.id),
+    onMutate: async () => {
+      await queryClient.cancelQueries({
+        queryKey: ["community", communityId],
+      });
 
-        const previousCommunity = queryClient.getQueryData([
-          "community",
-          communityId,
-        ]);
+      const previousCommunity = queryClient.getQueryData(["community", communityId]);
 
-        queryClient.setQueryData(["community", communityId], (old) => ({
-          ...(old || {}),
-          isMember: false,
-          totalMembers: Math.max(
-            (old?.totalMembers ?? old?.members ?? community?.members ?? 1) - 1,
-            0,
-          ),
-        }));
+      queryClient.setQueryData(["community", communityId], (old) => ({
+        ...(old || {}),
+        isMember: false,
+        totalMembers: Math.max(
+          (old?.totalMembers ?? old?.members ?? community?.members ?? 1) - 1,
+          0,
+        ),
+      }));
 
-        return { previousCommunity };
-      },
-      onError: (error, _, context) => {
-        queryClient.setQueryData(
-          ["community", communityId],
-          context?.previousCommunity,
-        );
-        toast.error(
-          error?.response?.data?.message || "Failed to leave community",
-        );
-      },
-      onSettled: () => {
-        queryClient.invalidateQueries({ queryKey: ["community", communityId] });
-      },
-      onSuccess: (response) => {
-        if (response?.status === 201) {
-          toast.success("Successfully left the community");
-        } else {
-          toast.error("Something went wrong");
-        }
-      },
-    });
+      return { previousCommunity };
+    },
+    onError: (error, _, context) => {
+      queryClient.setQueryData(["community", communityId], context?.previousCommunity);
+      toast.error(error?.response?.data?.message || "Failed to leave community");
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["community", communityId] });
+    },
+    onSuccess: (response) => {
+      if (response?.status === 201) {
+        toast.success("Successfully left the community");
+      } else {
+        toast.error("Something went wrong");
+      }
+    },
+  });
 
   const handleJoinCommunity = (e) => {
     e.stopPropagation();
@@ -216,9 +184,7 @@ function CommunitiesCard({ community, layout = "grid" }) {
                 )}
               </div>
 
-              <p className="mt-1 line-clamp-1 text-sm text-[#667085]">
-                {communityDescription}
-              </p>
+              <p className="mt-1 line-clamp-1 text-sm text-[#667085]">{communityDescription}</p>
 
               <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-[#667085]">
                 <span className="inline-flex items-center gap-1 rounded-full bg-[#F4F7FF] px-2.5 py-1 font-medium text-[#2F0FD1]">
@@ -258,13 +224,7 @@ function CommunitiesCard({ community, layout = "grid" }) {
                   isPending ? "cursor-not-allowed opacity-70" : "",
                 ].join(" ")}
               >
-                {isPending ? (
-                  <ImSpinner5 className="animate-spin" />
-                ) : isMember ? (
-                  "Leave"
-                ) : (
-                  "Join"
-                )}
+                {isPending ? <ImSpinner5 className="animate-spin" /> : isMember ? "Leave" : "Join"}
               </button>
             ) : (
               <div className="text-xs font-medium text-[#98A2B3]">Managing</div>
@@ -305,9 +265,7 @@ function CommunitiesCard({ community, layout = "grid" }) {
 
               <div className="inline-flex items-center gap-2 rounded-full bg-[#F4F7FF] px-3 py-1 text-sm font-medium text-[#2F0FD1]">
                 <Users className="h-4 w-4" />
-                <span>
-                  {memberCount === 1 ? "1 member" : `${memberCount} members`}
-                </span>
+                <span>{memberCount === 1 ? "1 member" : `${memberCount} members`}</span>
               </div>
             </div>
           </div>
@@ -325,9 +283,7 @@ function CommunitiesCard({ community, layout = "grid" }) {
           )}
         </div>
 
-        <p className="line-clamp-3 text-sm leading-6 text-[#667085]">
-          {communityDescription}
-        </p>
+        <p className="line-clamp-3 text-sm leading-6 text-[#667085]">{communityDescription}</p>
 
         <div className="grid grid-cols-2 gap-3">
           <div className="rounded-[18px] border border-[#EEF2FF] bg-[#F8FAFC] p-3">
@@ -373,13 +329,7 @@ function CommunitiesCard({ community, layout = "grid" }) {
               isPending ? "cursor-not-allowed opacity-70" : "",
             ].join(" ")}
           >
-            {isPending ? (
-              <ImSpinner5 className="animate-spin" />
-            ) : isMember ? (
-              "Leave"
-            ) : (
-              "Join"
-            )}
+            {isPending ? <ImSpinner5 className="animate-spin" /> : isMember ? "Leave" : "Join"}
           </button>
         ) : (
           <div className="text-xs font-medium text-[#98A2B3]">Managing</div>

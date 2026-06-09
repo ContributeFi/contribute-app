@@ -77,9 +77,7 @@ function GetStarted() {
             </div>
 
             <div>
-              <p className="text-sm font-semibold text-[#101828]">
-                Continue with Passkey
-              </p>
+              <p className="text-sm font-semibold text-[#101828]">Continue with Passkey</p>
               <p className="mt-0.5 text-xs leading-5 font-normal text-[#667085]">
                 Sign in securely with SocketFi Passkey.
               </p>
@@ -110,9 +108,7 @@ function GetStarted() {
             </div>
 
             <div>
-              <p className="text-sm font-semibold text-[#101828]">
-                Continue with Wallet Keys
-              </p>
+              <p className="text-sm font-semibold text-[#101828]">Continue with Wallet Keys</p>
               <p className="mt-0.5 text-xs leading-5 font-normal text-[#667085]">
                 Connect using your Stellar wallet keys.
               </p>

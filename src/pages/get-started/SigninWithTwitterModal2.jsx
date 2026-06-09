@@ -84,9 +84,7 @@ function SigninWithTwitterModal2({ open, onClose }) {
                 </div>
 
                 <div>
-                  <p className="text-sm font-semibold text-[#101828]">
-                    Continue with X
-                  </p>
+                  <p className="text-sm font-semibold text-[#101828]">Continue with X</p>
                   <p className="mt-0.5 text-xs leading-5 font-normal text-[#667085]">
                     Sign in using your X / Twitter account.
                   </p>

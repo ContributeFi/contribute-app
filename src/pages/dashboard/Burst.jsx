@@ -48,8 +48,12 @@ function Burst() {
   const LIMIT = 10;
   const OFFSET = currentPage;
 
-  const { bursts, loadingBursts, errorLoadingBursts, totalPages } =
-    useGetBursts(LIMIT, OFFSET, "DESC", burstView);
+  const { bursts, loadingBursts, errorLoadingBursts, totalPages } = useGetBursts(
+    LIMIT,
+    OFFSET,
+    "DESC",
+    burstView,
+  );
 
   const rawBursts = bursts?.data ?? [];
 
@@ -66,16 +70,11 @@ function Burst() {
   }, [rawBursts, platformFilter]);
 
   const activePlatformLabel = useMemo(() => {
-    return (
-      PLATFORM_OPTIONS.find((item) => item.value === platformFilter)?.label ||
-      "All platforms"
-    );
+    return PLATFORM_OPTIONS.find((item) => item.value === platformFilter)?.label || "All platforms";
   }, [platformFilter]);
 
   const activeViewLabel = useMemo(() => {
-    return (
-      VIEW_OPTIONS.find((item) => item.value === burstView)?.label || "All"
-    );
+    return VIEW_OPTIONS.find((item) => item.value === burstView)?.label || "All";
   }, [burstView]);
 
   const handleChangeBurstView = useCallback(
@@ -118,13 +117,11 @@ function Burst() {
 
               <div className="space-y-2">
                 <h1 className="text-[24px] font-semibold tracking-tight text-[#050215] md:text-[28px]">
-                  Discover and launch visibility campaigns around active social
-                  trends
+                  Discover and launch visibility campaigns around active social trends
                 </h1>
                 <p className="max-w-2xl text-[15px] leading-7 text-[#667085]">
-                  Burst helps builders and brands join relevant conversations
-                  with community-powered post suggestions and campaign
-                  participation across social platforms.
+                  Burst helps builders and brands join relevant conversations with community-powered
+                  post suggestions and campaign participation across social platforms.
                 </p>
               </div>
 
@@ -185,9 +182,7 @@ function Burst() {
                         className={[
                           "h-10 rounded-lg px-4 text-sm font-medium transition-all",
                           "hover:bg-white hover:text-[#2F0FD1]",
-                          isActive
-                            ? "bg-white text-[#2F0FD1] shadow-sm"
-                            : "text-[#667085]",
+                          isActive ? "bg-white text-[#2F0FD1] shadow-sm" : "text-[#667085]",
                         ].join(" ")}
                       >
                         {option.label}
@@ -244,8 +239,8 @@ function Burst() {
                 Increase your brand or product visibility
               </h2>
               <p className="text-[15px] leading-7 text-[#667085]">
-                Burst helps you engage in relevant social trends through
-                community-powered suggestions and campaign participation.
+                Burst helps you engage in relevant social trends through community-powered
+                suggestions and campaign participation.
               </p>
             </div>
 
@@ -257,10 +252,7 @@ function Burst() {
                 Create New Burst
               </Button>
 
-              <MoreAboutBurst
-                sheetIsOpen={sheetIsOpen}
-                setSheetIsOpen={setSheetIsOpen}
-              />
+              <MoreAboutBurst sheetIsOpen={sheetIsOpen} setSheetIsOpen={setSheetIsOpen} />
             </div>
           </div>
         ) : (
@@ -271,8 +263,8 @@ function Burst() {
                   Explore Bursts
                 </h2>
                 <p className="mt-1 text-sm text-[#667085]">
-                  Browse active campaigns and find the ones most relevant to
-                  your platform and audience.
+                  Browse active campaigns and find the ones most relevant to your platform and
+                  audience.
                 </p>
               </div>
             </div>

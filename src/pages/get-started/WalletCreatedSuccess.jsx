@@ -39,8 +39,8 @@ function WalletCreatedSuccess() {
         </h2>
 
         <p className="mt-2 text-sm leading-6 text-[#667085] md:text-base">
-          Your Contribute wallet is ready. You can now receive rewards and
-          interact with tasks securely.
+          Your Contribute wallet is ready. You can now receive rewards and interact with tasks
+          securely.
         </p>
       </div>
 
@@ -48,12 +48,8 @@ function WalletCreatedSuccess() {
         <div className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
           <div className="mb-3 flex items-center justify-between gap-3">
             <div>
-              <p className="text-sm font-semibold text-[#101828]">
-                Wallet account ID
-              </p>
-              <p className="mt-1 text-xs text-[#667085]">
-                Save this address for reference.
-              </p>
+              <p className="text-sm font-semibold text-[#101828]">Wallet account ID</p>
+              <p className="mt-1 text-xs text-[#667085]">Save this address for reference.</p>
             </div>
 
             <CheckCircle2 className="h-5 w-5 text-[#027A48]" />

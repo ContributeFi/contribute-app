@@ -102,8 +102,7 @@ const initialTasks = [
     deadline: "7 days",
     applicants: 8,
     status: "Open",
-    description:
-      "Design premium task card variations for a contributor marketplace interface.",
+    description: "Design premium task card variations for a contributor marketplace interface.",
     requirements:
       "Submit portfolio links and explain your approach to hierarchy, spacing, and mobile design.",
   },
@@ -272,13 +271,9 @@ function ProfileDrawer({ user, onClose, onLogout }) {
             </div>
 
             <div className="min-w-0">
-              <h3 className="truncate text-base font-semibold text-[#101828]">
-                {profile.name}
-              </h3>
+              <h3 className="truncate text-base font-semibold text-[#101828]">{profile.name}</h3>
               <p className="truncate text-sm text-[#667085]">{profile.email}</p>
-              <p className="mt-1 text-xs font-medium text-[#2F0FD1]">
-                {profile.role}
-              </p>
+              <p className="mt-1 text-xs font-medium text-[#2F0FD1]">{profile.role}</p>
             </div>
           </div>
         </div>
@@ -288,14 +283,9 @@ function ProfileDrawer({ user, onClose, onLogout }) {
             const Icon = stat.icon;
 
             return (
-              <div
-                key={stat.label}
-                className="rounded-2xl border border-[#EEF2FF] bg-white p-4"
-              >
+              <div key={stat.label} className="rounded-2xl border border-[#EEF2FF] bg-white p-4">
                 <Icon className="mb-3 h-4 w-4 text-[#2F0FD1]" />
-                <p className="text-lg font-semibold text-[#101828]">
-                  {stat.value}
-                </p>
+                <p className="text-lg font-semibold text-[#101828]">{stat.value}</p>
                 <p className="text-xs text-[#667085]">{stat.label}</p>
               </div>
             );
@@ -374,14 +364,9 @@ function CompactDashboard({
 
       <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-4">
         {items.map(([label, value]) => (
-          <div
-            key={label}
-            className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-3 py-2"
-          >
+          <div key={label} className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-3 py-2">
             <p className="text-[11px] text-[#667085]">{label}</p>
-            <p className="mt-0.5 text-sm font-semibold text-[#101828]">
-              {value}
-            </p>
+            <p className="mt-0.5 text-sm font-semibold text-[#101828]">{value}</p>
           </div>
         ))}
       </div>
@@ -400,9 +385,7 @@ function PosterMini({ poster }) {
         <p className="truncate text-xs font-medium text-[#101828]">
           {poster?.name || "Contribute Team"}
         </p>
-        <p className="truncate text-[11px] text-[#667085]">
-          {poster?.role || "Project owner"}
-        </p>
+        <p className="truncate text-[11px] text-[#667085]">{poster?.role || "Project owner"}</p>
       </div>
     </div>
   );
@@ -430,9 +413,7 @@ function TaskCard({ task, layout, onView, hasApplied }) {
 
         <p className="mt-1 text-xs text-[#667085]">{task.company}</p>
 
-        <p className="mt-3 line-clamp-2 text-sm leading-6 text-[#667085]">
-          {task.description}
-        </p>
+        <p className="mt-3 line-clamp-2 text-sm leading-6 text-[#667085]">{task.description}</p>
 
         <div className="mt-4 flex items-center justify-between gap-3 border-t border-[#F2F4F7] pt-3">
           <PosterMini poster={task.postedBy} />
@@ -441,9 +422,7 @@ function TaskCard({ task, layout, onView, hasApplied }) {
             <p className="text-sm font-semibold text-[#101828]">
               {task.budget} {task.rewardAsset}
             </p>
-            <p className="text-[11px] text-[#667085]">
-              {task.applicants} applicants
-            </p>
+            <p className="text-[11px] text-[#667085]">{task.applicants} applicants</p>
           </div>
         </div>
       </article>
@@ -482,17 +461,13 @@ function TaskCard({ task, layout, onView, hasApplied }) {
 
           <div className="rounded-xl bg-[#F8FAFC] px-3 py-2">
             <p className="text-[11px] text-[#667085]">Applicants</p>
-            <p className="text-sm font-semibold text-[#101828]">
-              {task.applicants}
-            </p>
+            <p className="text-sm font-semibold text-[#101828]">{task.applicants}</p>
           </div>
 
           <div className="flex items-center justify-between rounded-xl bg-[#F8FAFC] px-3 py-2">
             <div>
               <p className="text-[11px] text-[#667085]">Due</p>
-              <p className="text-sm font-semibold text-[#101828]">
-                {task.deadline}
-              </p>
+              <p className="text-sm font-semibold text-[#101828]">{task.deadline}</p>
             </div>
             <ChevronRight className="h-4 w-4 text-[#98A2B3] transition group-hover:text-[#2F0FD1]" />
           </div>
@@ -568,8 +543,7 @@ export default function ContributeApp() {
 
   const filteredTasks = useMemo(() => {
     return tasks.filter((task) => {
-      const matchesCategory =
-        activeCategory === "All" || task.category === activeCategory;
+      const matchesCategory = activeCategory === "All" || task.category === activeCategory;
 
       const term = search.trim().toLowerCase();
 
@@ -587,9 +561,7 @@ export default function ContributeApp() {
 
   const totalBudget = tasks.reduce((sum, task) => sum + Number(task.budget), 0);
   const totalApplicants = tasks.reduce((sum, task) => sum + task.applicants, 0);
-  const acceptedApplications = applications.filter(
-    (item) => item.decision === "Accepted",
-  ).length;
+  const acceptedApplications = applications.filter((item) => item.decision === "Accepted").length;
 
   const openCreateTask = () => {
     if (!user) {
@@ -706,9 +678,7 @@ export default function ContributeApp() {
 
     setTasks((current) =>
       current.map((task) =>
-        task.id === selectedTask.id
-          ? { ...task, applicants: task.applicants + 1 }
-          : task,
+        task.id === selectedTask.id ? { ...task, applicants: task.applicants + 1 } : task,
       ),
     );
 
@@ -816,9 +786,7 @@ export default function ContributeApp() {
             ) : (
               <div className="flex min-h-[240px] flex-col items-center justify-center rounded-2xl border border-dashed border-[#D9E1F2] bg-[#FCFCFD] px-6 py-10 text-center">
                 <BriefcaseBusiness className="mb-4 h-9 w-9 text-[#2F0FD1]" />
-                <h3 className="text-lg font-semibold text-[#101828]">
-                  No tasks found
-                </h3>
+                <h3 className="text-lg font-semibold text-[#101828]">No tasks found</h3>
                 <p className="mt-2 max-w-md text-sm leading-6 text-[#667085]">
                   Try a different keyword or category.
                 </p>
@@ -829,11 +797,7 @@ export default function ContributeApp() {
       </div>
 
       {profileOpen ? (
-        <ProfileDrawer
-          user={user}
-          onClose={() => setProfileOpen(false)}
-          onLogout={handleLogout}
-        />
+        <ProfileDrawer user={user} onClose={() => setProfileOpen(false)} onLogout={handleLogout} />
       ) : null}
 
       {loginOpen ? (
@@ -843,9 +807,7 @@ export default function ContributeApp() {
               <input
                 required
                 value={loginForm.name}
-                onChange={(e) =>
-                  setLoginForm({ ...loginForm, name: e.target.value })
-                }
+                onChange={(e) => setLoginForm({ ...loginForm, name: e.target.value })}
                 className={inputClass}
               />
             </Field>
@@ -855,9 +817,7 @@ export default function ContributeApp() {
                 required
                 type="email"
                 value={loginForm.email}
-                onChange={(e) =>
-                  setLoginForm({ ...loginForm, email: e.target.value })
-                }
+                onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
                 className={inputClass}
               />
             </Field>
@@ -887,9 +847,7 @@ export default function ContributeApp() {
 
               <p className="mt-2 text-sm text-[#667085]">
                 Published by{" "}
-                <span className="font-medium text-[#344054]">
-                  {selectedTask.company}
-                </span>
+                <span className="font-medium text-[#344054]">{selectedTask.company}</span>
               </p>
             </div>
 
@@ -917,21 +875,13 @@ export default function ContributeApp() {
             </div>
 
             <div className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
-              <h3 className="text-sm font-semibold text-[#101828]">
-                Description
-              </h3>
-              <p className="mt-2 text-sm leading-7 text-[#667085]">
-                {selectedTask.description}
-              </p>
+              <h3 className="text-sm font-semibold text-[#101828]">Description</h3>
+              <p className="mt-2 text-sm leading-7 text-[#667085]">{selectedTask.description}</p>
             </div>
 
             <div className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
-              <h3 className="text-sm font-semibold text-[#101828]">
-                Application guide
-              </h3>
-              <p className="mt-2 text-sm leading-7 text-[#667085]">
-                {selectedTask.requirements}
-              </p>
+              <h3 className="text-sm font-semibold text-[#101828]">Application guide</h3>
+              <p className="mt-2 text-sm leading-7 text-[#667085]">{selectedTask.requirements}</p>
             </div>
 
             <div className="sticky bottom-0 -mx-5 -mb-5 border-t border-[#EAECF0] bg-white/95 px-5 py-4 backdrop-blur">
@@ -954,12 +904,9 @@ export default function ContributeApp() {
         <Modal title="Submit application" onClose={() => setApplyOpen(false)}>
           <form onSubmit={handleApply} className="space-y-5">
             <div className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] p-4">
-              <h3 className="text-sm font-semibold text-[#101828]">
-                {selectedTask?.title}
-              </h3>
+              <h3 className="text-sm font-semibold text-[#101828]">{selectedTask?.title}</h3>
               <p className="mt-1 text-sm text-[#667085]">
-                {selectedTask?.company} • {selectedTask?.budget}{" "}
-                {selectedTask?.rewardAsset}
+                {selectedTask?.company} • {selectedTask?.budget} {selectedTask?.rewardAsset}
               </p>
             </div>
 
@@ -968,9 +915,7 @@ export default function ContributeApp() {
                 <input
                   required
                   value={application.name}
-                  onChange={(e) =>
-                    setApplication({ ...application, name: e.target.value })
-                  }
+                  onChange={(e) => setApplication({ ...application, name: e.target.value })}
                   className={inputClass}
                   placeholder="Your name"
                 />
@@ -981,9 +926,7 @@ export default function ContributeApp() {
                   required
                   type="email"
                   value={application.email}
-                  onChange={(e) =>
-                    setApplication({ ...application, email: e.target.value })
-                  }
+                  onChange={(e) => setApplication({ ...application, email: e.target.value })}
                   className={inputClass}
                   placeholder="you@example.com"
                 />
@@ -993,9 +936,7 @@ export default function ContributeApp() {
             <Field label="Portfolio or work link">
               <input
                 value={application.portfolio}
-                onChange={(e) =>
-                  setApplication({ ...application, portfolio: e.target.value })
-                }
+                onChange={(e) => setApplication({ ...application, portfolio: e.target.value })}
                 className={inputClass}
                 placeholder="https://your-work.com"
               />
@@ -1006,17 +947,15 @@ export default function ContributeApp() {
                 required
                 rows={5}
                 value={application.proposal}
-                onChange={(e) =>
-                  setApplication({ ...application, proposal: e.target.value })
-                }
+                onChange={(e) => setApplication({ ...application, proposal: e.target.value })}
                 className={textareaClass}
                 placeholder="Briefly explain your relevant experience, how you would approach this task, and your estimated delivery time."
               />
             </Field>
 
             <div className="rounded-xl border border-[#EAECF0] bg-[#F8FAFC] px-4 py-3 text-sm leading-6 text-[#667085]">
-              Keep it clear and specific. Strong applications explain
-              experience, approach, and timeline.
+              Keep it clear and specific. Strong applications explain experience, approach, and
+              timeline.
             </div>
 
             <div className="sticky bottom-0 -mx-5 -mb-5 border-t border-[#EAECF0] bg-white/95 px-5 py-4 backdrop-blur">
@@ -1038,9 +977,7 @@ export default function ContributeApp() {
               <input
                 required
                 value={newTask.title}
-                onChange={(e) =>
-                  setNewTask({ ...newTask, title: e.target.value })
-                }
+                onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
                 className={inputClass}
               />
             </Field>
@@ -1049,9 +986,7 @@ export default function ContributeApp() {
               <input
                 required
                 value={newTask.company}
-                onChange={(e) =>
-                  setNewTask({ ...newTask, company: e.target.value })
-                }
+                onChange={(e) => setNewTask({ ...newTask, company: e.target.value })}
                 className={inputClass}
               />
             </Field>
@@ -1060,9 +995,7 @@ export default function ContributeApp() {
               <Field label="Category">
                 <select
                   value={newTask.category}
-                  onChange={(e) =>
-                    setNewTask({ ...newTask, category: e.target.value })
-                  }
+                  onChange={(e) => setNewTask({ ...newTask, category: e.target.value })}
                   className={inputClass}
                 >
                   {taskTypes.map((type) => (
@@ -1077,9 +1010,7 @@ export default function ContributeApp() {
                   type="number"
                   min="1"
                   value={newTask.budget}
-                  onChange={(e) =>
-                    setNewTask({ ...newTask, budget: e.target.value })
-                  }
+                  onChange={(e) => setNewTask({ ...newTask, budget: e.target.value })}
                   className={inputClass}
                 />
               </Field>
@@ -1089,9 +1020,7 @@ export default function ContributeApp() {
               <Field label="Reward asset">
                 <select
                   value={newTask.rewardAsset}
-                  onChange={(e) =>
-                    setNewTask({ ...newTask, rewardAsset: e.target.value })
-                  }
+                  onChange={(e) => setNewTask({ ...newTask, rewardAsset: e.target.value })}
                   className={inputClass}
                 >
                   <option>USDC</option>
@@ -1104,9 +1033,7 @@ export default function ContributeApp() {
                   required
                   placeholder="Example: 5 days"
                   value={newTask.deadline}
-                  onChange={(e) =>
-                    setNewTask({ ...newTask, deadline: e.target.value })
-                  }
+                  onChange={(e) => setNewTask({ ...newTask, deadline: e.target.value })}
                   className={inputClass}
                 />
               </Field>
@@ -1117,9 +1044,7 @@ export default function ContributeApp() {
                 required
                 rows={4}
                 value={newTask.description}
-                onChange={(e) =>
-                  setNewTask({ ...newTask, description: e.target.value })
-                }
+                onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
                 className={textareaClass}
               />
             </Field>
@@ -1129,9 +1054,7 @@ export default function ContributeApp() {
                 required
                 rows={4}
                 value={newTask.requirements}
-                onChange={(e) =>
-                  setNewTask({ ...newTask, requirements: e.target.value })
-                }
+                onChange={(e) => setNewTask({ ...newTask, requirements: e.target.value })}
                 className={textareaClass}
               />
             </Field>

@@ -48,14 +48,9 @@ export default function MarketplaceHero({ stats = {} }) {
 
       <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-4">
         {items.map(([label, value]) => (
-          <div
-            key={label}
-            className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-3 py-2"
-          >
+          <div key={label} className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-3 py-2">
             <p className="text-[11px] text-[#667085]">{label}</p>
-            <p className="mt-0.5 truncate text-sm font-semibold text-[#101828]">
-              {value}
-            </p>
+            <p className="mt-0.5 truncate text-sm font-semibold text-[#101828]">{value}</p>
           </div>
         ))}
       </div>

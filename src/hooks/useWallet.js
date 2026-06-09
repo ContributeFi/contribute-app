@@ -16,9 +16,7 @@ export const useWallet = () => {
 
   const network = useSelector((state) => state.wallet.network);
 
-  const stellarWalletKitIsOpen = useSelector(
-    (state) => state.wallet.stellarWalletKitIsOpen,
-  );
+  const stellarWalletKitIsOpen = useSelector((state) => state.wallet.stellarWalletKitIsOpen);
 
   const authModalOpen = useSelector((state) => state.wallet.authModalOpen);
 
@@ -49,8 +47,7 @@ export const useWallet = () => {
 
     stellarWalletKitIsOpen,
 
-    setStellarWalletKitIsOpen: (value) =>
-      dispatch(setStellarWalletKitIsOpen(value)),
+    setStellarWalletKitIsOpen: (value) => dispatch(setStellarWalletKitIsOpen(value)),
 
     authModalOpen,
 

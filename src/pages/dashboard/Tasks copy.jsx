@@ -45,9 +45,7 @@ function hasUserParticipation(task, userId) {
       if (!participant) return false;
       if (typeof participant === "string") return participant === userId;
       return (
-        participant?.id === userId ||
-        participant?.userId === userId ||
-        participant?._id === userId
+        participant?.id === userId || participant?.userId === userId || participant?._id === userId
       );
     });
   }
@@ -123,9 +121,7 @@ function Tasks() {
 
     if (term) {
       list = list.filter((task) => {
-        const title = String(
-          task?.title || task?.questTitle || "",
-        ).toLowerCase();
+        const title = String(task?.title || task?.questTitle || "").toLowerCase();
         const communityName = String(task?.communityName || "").toLowerCase();
         const category = String(task?.category || "").toLowerCase();
         const rewardType = String(task?.rewardType || "").toLowerCase();
@@ -152,8 +148,7 @@ function Tasks() {
     setCurrentPage(1);
   };
 
-  const activeViewLabel =
-    VIEW_OPTIONS.find((item) => item.value === taskView)?.label || "Active";
+  const activeViewLabel = VIEW_OPTIONS.find((item) => item.value === taskView)?.label || "Active";
 
   return (
     <div className="space-y-6">
@@ -176,8 +171,8 @@ function Tasks() {
                     Explore, track, and complete contribution tasks
                   </h2>
                   <p className="max-w-2xl text-[15px] leading-7 text-[#667085]">
-                    Discover active opportunities, keep up with your assigned
-                    work, and review completed tasks across communities.
+                    Discover active opportunities, keep up with your assigned work, and review
+                    completed tasks across communities.
                   </p>
                 </div>
 
@@ -243,9 +238,7 @@ function Tasks() {
                         className={[
                           "h-10 rounded-lg px-4 text-sm font-medium transition-all",
                           "hover:bg-white hover:text-[#2F0FD1]",
-                          isActive
-                            ? "bg-white text-[#2F0FD1] shadow-sm"
-                            : "text-[#667085]",
+                          isActive ? "bg-white text-[#2F0FD1] shadow-sm" : "text-[#667085]",
                         ].join(" ")}
                       >
                         {option.label}
@@ -295,8 +288,8 @@ function Tasks() {
                   No tasks found
                 </h3>
                 <p className="text-sm leading-6 text-[#667085]">
-                  Try changing your search, switching views, or check back later
-                  for new opportunities.
+                  Try changing your search, switching views, or check back later for new
+                  opportunities.
                 </p>
               </div>
 

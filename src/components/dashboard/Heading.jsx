@@ -23,12 +23,8 @@ export default function Heading() {
 
   return (
     <div className="space-y-1">
-      <h1 className="text-[22px] font-semibold tracking-tight text-[#101828]">
-        {title}
-      </h1>
-      <p className="text-sm text-[#667085]">
-        Manage and monitor your dashboard activity.
-      </p>
+      <h1 className="text-[22px] font-semibold tracking-tight text-[#101828]">{title}</h1>
+      <p className="text-sm text-[#667085]">Manage and monitor your dashboard activity.</p>
     </div>
   );
 }

@@ -8,12 +8,8 @@ function Empty({ title, description }) {
       </div>
 
       <div className="max-w-lg space-y-2">
-        <h3 className="text-[22px] font-semibold tracking-tight text-[#101828]">
-          {title}
-        </h3>
-        {description ? (
-          <p className="text-sm leading-6 text-[#667085]">{description}</p>
-        ) : null}
+        <h3 className="text-[22px] font-semibold tracking-tight text-[#101828]">{title}</h3>
+        {description ? <p className="text-sm leading-6 text-[#667085]">{description}</p> : null}
       </div>
     </div>
   );

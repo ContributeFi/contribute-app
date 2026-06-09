@@ -71,8 +71,7 @@ const tasks = [
     deadline: "7 days",
     applicants: 8,
     status: "Open",
-    description:
-      "Design premium task card variations for a contributor marketplace interface.",
+    description: "Design premium task card variations for a contributor marketplace interface.",
     requirements:
       "Submit portfolio links and explain your approach to hierarchy, spacing, and mobile design.",
   },
@@ -139,10 +138,7 @@ export default function ApplyTask() {
   const { taskId } = useParams();
   const navigate = useNavigate();
 
-  const task = useMemo(
-    () => tasks.find((item) => item.id === taskId),
-    [taskId],
-  );
+  const task = useMemo(() => tasks.find((item) => item.id === taskId), [taskId]);
 
   const [application, setApplication] = useState({
     name: "",
@@ -162,9 +158,7 @@ export default function ApplyTask() {
       <div className="space-y-4 px-3 py-4">
         <div className="rounded-2xl border border-[#EAECF0] bg-white p-8 text-center shadow-sm">
           <BriefcaseBusiness className="mx-auto mb-4 h-9 w-9 text-[#2F0FD1]" />
-          <h1 className="text-lg font-semibold text-[#101828]">
-            Task not found
-          </h1>
+          <h1 className="text-lg font-semibold text-[#101828]">Task not found</h1>
           <p className="mt-2 text-sm text-[#667085]">
             This task may have been removed or the link is incorrect.
           </p>
@@ -212,9 +206,7 @@ export default function ApplyTask() {
 
           <div className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] px-4 py-3">
             <p className="text-xs font-medium text-[#667085]">Project</p>
-            <p className="mt-1 text-sm font-semibold text-[#101828]">
-              {task.company}
-            </p>
+            <p className="mt-1 text-sm font-semibold text-[#101828]">{task.company}</p>
           </div>
         </div>
 
@@ -240,9 +232,7 @@ export default function ApplyTask() {
             </div>
 
             <div>
-              <h2 className="text-base font-semibold text-[#101828]">
-                Application details
-              </h2>
+              <h2 className="text-base font-semibold text-[#101828]">Application details</h2>
               <p className="mt-1 text-sm leading-6 text-[#667085]">
                 Keep it specific. Show experience, approach, and delivery time.
               </p>
@@ -255,9 +245,7 @@ export default function ApplyTask() {
                 <input
                   required
                   value={application.name}
-                  onChange={(e) =>
-                    setApplication({ ...application, name: e.target.value })
-                  }
+                  onChange={(e) => setApplication({ ...application, name: e.target.value })}
                   className={inputClass}
                   placeholder="Your name"
                 />
@@ -268,9 +256,7 @@ export default function ApplyTask() {
                   required
                   type="email"
                   value={application.email}
-                  onChange={(e) =>
-                    setApplication({ ...application, email: e.target.value })
-                  }
+                  onChange={(e) => setApplication({ ...application, email: e.target.value })}
                   className={inputClass}
                   placeholder="you@example.com"
                 />
@@ -317,8 +303,8 @@ export default function ApplyTask() {
             </Field>
 
             <div className="rounded-xl border border-[#EAECF0] bg-[#F8FAFC] px-4 py-3 text-sm leading-6 text-[#667085]">
-              Your application will be shared with the task poster for review.
-              Make sure your links are accessible.
+              Your application will be shared with the task poster for review. Make sure your links
+              are accessible.
             </div>
 
             <div className="sticky bottom-0 -mx-4 -mb-4 border-t border-[#EAECF0] bg-white/95 px-4 py-4 backdrop-blur sm:-mx-5 sm:-mb-5 sm:px-5">
@@ -334,9 +320,7 @@ export default function ApplyTask() {
 
         <aside className="space-y-4">
           <div className="rounded-2xl border border-[#EAECF0] bg-white p-5 shadow-sm">
-            <h3 className="text-sm font-semibold text-[#101828]">
-              Application checklist
-            </h3>
+            <h3 className="text-sm font-semibold text-[#101828]">Application checklist</h3>
 
             <div className="mt-4 space-y-3">
               {[
@@ -357,13 +341,9 @@ export default function ApplyTask() {
           </div>
 
           <div className="rounded-2xl border border-[#EAECF0] bg-white p-5 shadow-sm">
-            <h3 className="text-sm font-semibold text-[#101828]">
-              Task summary
-            </h3>
+            <h3 className="text-sm font-semibold text-[#101828]">Task summary</h3>
 
-            <p className="mt-3 text-sm leading-6 text-[#667085]">
-              {task.description}
-            </p>
+            <p className="mt-3 text-sm leading-6 text-[#667085]">{task.description}</p>
           </div>
         </aside>
       </section>

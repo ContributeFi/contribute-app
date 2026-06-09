@@ -21,13 +21,7 @@ const VIEW_OPTIONS = [
   { label: "Rewards", value: "rewards" },
 ];
 
-function NotificationStatCard({
-  label,
-  value,
-  icon,
-  accent = "blue",
-  helperText,
-}) {
+function NotificationStatCard({ label, value, icon, accent = "blue", helperText }) {
   const accentStyles = {
     blue: {
       card: "border-[#E0E7FF] bg-gradient-to-br from-white to-[#F8FAFF]",
@@ -65,15 +59,11 @@ function NotificationStatCard({
 
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-medium tracking-wide text-[#667085]">
-            {label}
-          </p>
+          <p className="text-sm font-medium tracking-wide text-[#667085]">{label}</p>
           <p className="mt-2 text-[28px] leading-none font-semibold tracking-tight text-[#101828]">
             {value}
           </p>
-          {helperText ? (
-            <p className="mt-2 text-xs text-[#98A2B3]">{helperText}</p>
-          ) : null}
+          {helperText ? <p className="mt-2 text-xs text-[#98A2B3]">{helperText}</p> : null}
         </div>
 
         <div
@@ -116,18 +106,14 @@ function NotificationRow({ item, onMarkRead }) {
     <div
       className={[
         "rounded-2xl border p-4 shadow-sm transition hover:shadow-md",
-        item.read
-          ? "border-[#E6EAF5] bg-white"
-          : "border-[#DCE4F8] bg-[#FAFBFF]",
+        item.read ? "border-[#E6EAF5] bg-white" : "border-[#DCE4F8] bg-[#FAFBFF]",
       ].join(" ")}
     >
       <div className="flex items-start gap-3">
         <div
           className={[
             "mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl",
-            item.read
-              ? "bg-[#F4F7FF] text-[#667085]"
-              : "bg-[#EEF2FF] text-[#2F0FD1]",
+            item.read ? "bg-[#F4F7FF] text-[#667085]" : "bg-[#EEF2FF] text-[#2F0FD1]",
           ].join(" ")}
         >
           <NotificationIcon type={item.type} />
@@ -136,12 +122,8 @@ function NotificationRow({ item, onMarkRead }) {
         <div className="min-w-0 flex-1 space-y-2">
           <div className="flex flex-wrap items-start justify-between gap-2">
             <div>
-              <h3 className="text-sm font-semibold text-[#101828]">
-                {item.title}
-              </h3>
-              <p className="mt-1 text-sm leading-6 text-[#667085]">
-                {item.description}
-              </p>
+              <h3 className="text-sm font-semibold text-[#101828]">{item.title}</h3>
+              <p className="mt-1 text-sm leading-6 text-[#667085]">{item.description}</p>
             </div>
 
             {!item.read ? (
@@ -190,8 +172,7 @@ function Notifications() {
       id: "1",
       type: "task",
       title: "Task approved",
-      description:
-        "Your submission for 'Growth Task Reward' has been approved.",
+      description: "Your submission for 'Growth Task Reward' has been approved.",
       time: "2 hours ago",
       read: false,
     },
@@ -223,8 +204,7 @@ function Notifications() {
       id: "5",
       type: "system",
       title: "System update",
-      description:
-        "Your dashboard experience has been updated with new features.",
+      description: "Your dashboard experience has been updated with new features.",
       time: "1 week ago",
       read: true,
     },
@@ -234,9 +214,7 @@ function Notifications() {
     const total = notifications.length;
     const unread = notifications.filter((item) => !item.read).length;
     const tasks = notifications.filter((item) => item.type === "task").length;
-    const rewards = notifications.filter(
-      (item) => item.type === "reward",
-    ).length;
+    const rewards = notifications.filter((item) => item.type === "reward").length;
 
     return { total, unread, tasks, rewards };
   }, [notifications]);
@@ -244,12 +222,9 @@ function Notifications() {
   const filteredNotifications = useMemo(() => {
     if (view === "all") return notifications;
     if (view === "unread") return notifications.filter((item) => !item.read);
-    if (view === "tasks")
-      return notifications.filter((item) => item.type === "task");
-    if (view === "communities")
-      return notifications.filter((item) => item.type === "community");
-    if (view === "rewards")
-      return notifications.filter((item) => item.type === "reward");
+    if (view === "tasks") return notifications.filter((item) => item.type === "task");
+    if (view === "communities") return notifications.filter((item) => item.type === "community");
+    if (view === "rewards") return notifications.filter((item) => item.type === "reward");
     return notifications;
   }, [notifications, view]);
 
@@ -283,20 +258,14 @@ function Notifications() {
                   Stay updated on tasks, rewards, and community activity
                 </h2>
                 <p className="max-w-2xl text-[15px] leading-7 text-[#667085]">
-                  Review important updates, follow task and reward progress, and
-                  keep track of platform activity from one place.
+                  Review important updates, follow task and reward progress, and keep track of
+                  platform activity from one place.
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-2">
-                <InfoPill
-                  icon={<Bell className="h-4 w-4" />}
-                  label="All updates in one place"
-                />
-                <InfoPill
-                  icon={<CheckCheck className="h-4 w-4" />}
-                  label="Track unread activity"
-                />
+                <InfoPill icon={<Bell className="h-4 w-4" />} label="All updates in one place" />
+                <InfoPill icon={<CheckCheck className="h-4 w-4" />} label="Track unread activity" />
                 <InfoPill
                   icon={<Sparkles className="h-4 w-4" />}
                   label="Stay on top of rewards and tasks"
@@ -365,9 +334,7 @@ function Notifications() {
                     className={[
                       "h-10 rounded-lg px-4 text-sm font-medium transition-all",
                       "hover:bg-white hover:text-[#2F0FD1]",
-                      isActive
-                        ? "bg-white text-[#2F0FD1] shadow-sm"
-                        : "text-[#667085]",
+                      isActive ? "bg-white text-[#2F0FD1] shadow-sm" : "text-[#667085]",
                     ].join(" ")}
                   >
                     {option.label}
@@ -393,8 +360,7 @@ function Notifications() {
                   No notifications found
                 </h3>
                 <p className="text-sm leading-6 text-[#667085]">
-                  Notifications matching this view will appear here when
-                  available.
+                  Notifications matching this view will appear here when available.
                 </p>
               </div>
             </div>
@@ -402,11 +368,7 @@ function Notifications() {
             <div className="rounded-2xl bg-[#F8FAFC] p-3 ring-1 ring-[#EEF2FF] md:p-4">
               <div className="space-y-4">
                 {filteredNotifications.map((item) => (
-                  <NotificationRow
-                    key={item.id}
-                    item={item}
-                    onMarkRead={handleMarkRead}
-                  />
+                  <NotificationRow key={item.id} item={item} onMarkRead={handleMarkRead} />
                 ))}
               </div>
             </div>

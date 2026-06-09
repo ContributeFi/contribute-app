@@ -84,8 +84,8 @@ function MoreAboutBurst({ sheetIsOpen, setSheetIsOpen, triggerClassName }) {
           </SheetTitle>
 
           <SheetDescription className="text-left text-[15px] leading-7 text-[#667085]">
-            Burst helps brands and builders grow visibility by joining relevant
-            social conversations with community-sourced content ideas.
+            Burst helps brands and builders grow visibility by joining relevant social conversations
+            with community-sourced content ideas.
           </SheetDescription>
         </SheetHeader>
 
@@ -104,15 +104,9 @@ function MoreAboutBurst({ sheetIsOpen, setSheetIsOpen, triggerClassName }) {
                   </div>
 
                   <div className="space-y-1">
-                    <p className="text-sm font-medium text-[#2F0FD1]">
-                      Step {index + 1}
-                    </p>
-                    <h3 className="text-base font-semibold text-[#09032A]">
-                      {step.title}
-                    </h3>
-                    <p className="text-sm leading-6 text-[#667085]">
-                      {step.description}
-                    </p>
+                    <p className="text-sm font-medium text-[#2F0FD1]">Step {index + 1}</p>
+                    <h3 className="text-base font-semibold text-[#09032A]">{step.title}</h3>
+                    <p className="text-sm leading-6 text-[#667085]">{step.description}</p>
                   </div>
                 </div>
               </div>

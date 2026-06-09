@@ -51,9 +51,7 @@ function AccountSocialConnection() {
   const [saving, setSaving] = useState(false);
   const [user] = useState(() => getItemFromSessionStorage("user"));
 
-  const [imageUrl, setImageUrl] = useState(
-    () => getItemFromSessionStorage("imageUrl") || null,
-  );
+  const [imageUrl, setImageUrl] = useState(() => getItemFromSessionStorage("imageUrl") || null);
 
   const [bio, setBio] = useState(() => getItemFromSessionStorage("bio") || "");
 
@@ -107,8 +105,7 @@ function AccountSocialConnection() {
     return [];
   }, [linkedAccountsData]);
 
-  const hasProgress =
-    Boolean(imageUrl) || bio.trim().length > 0 || linkedAccounts.length > 0;
+  const hasProgress = Boolean(imageUrl) || bio.trim().length > 0 || linkedAccounts.length > 0;
 
   // useEffect(() => {
   //   if (!username) {
@@ -120,9 +117,7 @@ function AccountSocialConnection() {
     if (!error) return;
 
     toast.error(
-      message
-        ? decodeURIComponent(message)
-        : "An error occurred while linking your account",
+      message ? decodeURIComponent(message) : "An error occurred while linking your account",
     );
 
     navigate(".", { replace: true });
@@ -194,34 +189,27 @@ function AccountSocialConnection() {
     }
 
     if (!/^[a-zA-Z0-9_]{5,32}$/.test(cleanUsername)) {
-      toast.error(
-        "Use 5-32 characters. Letters, numbers, and underscores only.",
-      );
+      toast.error("Use 5-32 characters. Letters, numbers, and underscores only.");
       return;
     }
 
     setLinkingAccount("telegram");
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BASE_URL}/auth/telegram/init-link`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ username: cleanUsername }),
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/auth/telegram/init-link`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-      );
+        body: JSON.stringify({ username: cleanUsername }),
+      });
 
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
         toast.error(
-          data?.message ||
-            data?.error ||
-            `Request failed with status ${response.status}`,
+          data?.message || data?.error || `Request failed with status ${response.status}`,
         );
         return;
       }
@@ -252,17 +240,14 @@ function AccountSocialConnection() {
     setLinkingAccount("telegram");
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BASE_URL}/auth/telegram/verify-otp`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ otp: cleanOtp }),
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/auth/telegram/verify-otp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-      );
+        body: JSON.stringify({ otp: cleanOtp }),
+      });
 
       const data = await response.json().catch(() => ({}));
 
@@ -320,9 +305,7 @@ function AccountSocialConnection() {
       setItemInSessionStorage("imageUrl", profileImageUrl);
       toast.success("Profile picture updated");
     } catch (error) {
-      toast.error(
-        error?.response?.data?.message || "Failed to upload profile picture",
-      );
+      toast.error(error?.response?.data?.message || "Failed to upload profile picture");
     } finally {
       setUploading(false);
     }
@@ -367,8 +350,8 @@ function AccountSocialConnection() {
         </h2>
 
         <p className="mt-2 text-sm leading-6 text-[#667085] md:text-base">
-          Add a profile image, short bio, and linked accounts so projects can
-          understand your experience.
+          Add a profile image, short bio, and linked accounts so projects can understand your
+          experience.
         </p>
 
         {!hasProgress ? (
@@ -418,9 +401,7 @@ function AccountSocialConnection() {
             </Label>
 
             <div className="min-w-0 flex-1">
-              <Label className="mb-2 block text-sm font-medium text-[#344054]">
-                Short bio
-              </Label>
+              <Label className="mb-2 block text-sm font-medium text-[#344054]">Short bio</Label>
 
               <Textarea
                 className="min-h-[96px] resize-none rounded-xl border border-[#EAECF0] bg-[#F8FAFC] px-4 py-3 text-sm text-[#101828] placeholder:text-[#98A2B3] focus-visible:ring-4 focus-visible:ring-[#EEF2FF]"
@@ -433,9 +414,7 @@ function AccountSocialConnection() {
                 maxLength={240}
               />
 
-              <p className="mt-2 text-xs text-[#98A2B3]">
-                {bio.length}/240 characters
-              </p>
+              <p className="mt-2 text-xs text-[#98A2B3]">{bio.length}/240 characters</p>
             </div>
           </div>
         </section>
@@ -447,9 +426,7 @@ function AccountSocialConnection() {
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-[#101828]">
-                Link social accounts
-              </h3>
+              <h3 className="text-sm font-semibold text-[#101828]">Link social accounts</h3>
               <p className="text-xs text-[#667085]">
                 Optional, but recommended for contributor credibility.
               </p>
@@ -513,9 +490,7 @@ function AccountSocialConnection() {
           disabled={
             uploading ||
             saving ||
-            (!imageUrl &&
-              bio.trim().length === 0 &&
-              linkedAccounts.length === 0)
+            (!imageUrl && bio.trim().length === 0 && linkedAccounts.length === 0)
           }
           type="submit"
         >
@@ -547,11 +522,7 @@ function AccountSocialConnection() {
               disabled={linkingAccount === "telegram"}
               className="flex-1 rounded-xl bg-[#2F0FD1] text-white hover:bg-[#2409B8]"
             >
-              {linkingAccount === "telegram" ? (
-                <ImSpinner5 className="animate-spin" />
-              ) : (
-                "Continue"
-              )}
+              {linkingAccount === "telegram" ? <ImSpinner5 className="animate-spin" /> : "Continue"}
             </Button>
 
             <Button
@@ -565,11 +536,7 @@ function AccountSocialConnection() {
         </div>
       </Modal>
 
-      <Modal
-        open={showOtpModal}
-        onClose={() => setShowOtpModal(false)}
-        heading="Enter OTP"
-      >
+      <Modal open={showOtpModal} onClose={() => setShowOtpModal(false)} heading="Enter OTP">
         <div className="space-y-4">
           <p className="text-sm leading-6 text-[#667085]">
             Enter the code sent to your Telegram account.
@@ -593,11 +560,7 @@ function AccountSocialConnection() {
               disabled={linkingAccount === "telegram"}
               className="flex-1 rounded-xl bg-[#2F0FD1] text-white hover:bg-[#2409B8]"
             >
-              {linkingAccount === "telegram" ? (
-                <ImSpinner5 className="animate-spin" />
-              ) : (
-                "Verify"
-              )}
+              {linkingAccount === "telegram" ? <ImSpinner5 className="animate-spin" /> : "Verify"}
             </Button>
 
             <Button
@@ -637,9 +600,7 @@ function AccountSocialConnection() {
             </ol>
 
             {telegramPendingId ? (
-              <p className="mt-3 text-xs text-[#98A2B3]">
-                Link request created. Waiting for OTP.
-              </p>
+              <p className="mt-3 text-xs text-[#98A2B3]">Link request created. Waiting for OTP.</p>
             ) : null}
           </div>
 
@@ -654,11 +615,7 @@ function AccountSocialConnection() {
               Enter OTP
             </Button>
 
-            <Button
-              variant="outline"
-              onClick={handleTelegramCancel}
-              className="flex-1 rounded-xl"
-            >
+            <Button variant="outline" onClick={handleTelegramCancel} className="flex-1 rounded-xl">
               Cancel
             </Button>
           </div>

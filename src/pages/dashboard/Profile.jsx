@@ -55,15 +55,11 @@ function ProfileStatCard({ label, value, icon, accent = "blue", helperText }) {
 
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-medium tracking-wide text-[#667085]">
-            {label}
-          </p>
+          <p className="text-sm font-medium tracking-wide text-[#667085]">{label}</p>
           <p className="mt-2 text-[28px] leading-none font-semibold tracking-tight text-[#101828]">
             {value}
           </p>
-          {helperText ? (
-            <p className="mt-2 text-xs text-[#98A2B3]">{helperText}</p>
-          ) : null}
+          {helperText ? <p className="mt-2 text-xs text-[#98A2B3]">{helperText}</p> : null}
         </div>
 
         <div
@@ -88,14 +84,11 @@ function InfoRow({ icon, label, value, muted = false }) {
       </div>
 
       <div className="min-w-0">
-        <p className="text-xs font-medium tracking-[0.08em] text-[#98A2B3] uppercase">
-          {label}
-        </p>
+        <p className="text-xs font-medium tracking-[0.08em] text-[#98A2B3] uppercase">{label}</p>
         <p
-          className={[
-            "mt-1 text-sm font-medium",
-            muted ? "text-[#98A2B3]" : "text-[#101828]",
-          ].join(" ")}
+          className={["mt-1 text-sm font-medium", muted ? "text-[#98A2B3]" : "text-[#101828]"].join(
+            " ",
+          )}
         >
           {value}
         </p>
@@ -109,16 +102,10 @@ function StatusBadge({ connected, label }) {
     <div
       className={[
         "inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium",
-        connected
-          ? "bg-[#ECFDF3] text-[#027A48]"
-          : "bg-[#FEF3F2] text-[#B42318]",
+        connected ? "bg-[#ECFDF3] text-[#027A48]" : "bg-[#FEF3F2] text-[#B42318]",
       ].join(" ")}
     >
-      {connected ? (
-        <CheckCircle2 className="h-4 w-4" />
-      ) : (
-        <AlertCircle className="h-4 w-4" />
-      )}
+      {connected ? <CheckCircle2 className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
       <span>{label}</span>
     </div>
   );
@@ -189,8 +176,8 @@ function Profile() {
               Sign in to view your profile
             </h2>
             <p className="text-sm leading-6 text-[#667085]">
-              Your profile will show your connected accounts, contributor stats,
-              wallet details, and activity summary.
+              Your profile will show your connected accounts, contributor stats, wallet details, and
+              activity summary.
             </p>
           </div>
         </section>
@@ -233,9 +220,7 @@ function Profile() {
                   </div>
                   <StatusBadge
                     connected={Boolean(publicKey)}
-                    label={
-                      publicKey ? "Wallet connected" : "Wallet not connected"
-                    }
+                    label={publicKey ? "Wallet connected" : "Wallet not connected"}
                   />
                 </div>
 
@@ -247,8 +232,8 @@ function Profile() {
                 </div>
 
                 <p className="max-w-2xl text-[15px] leading-7 text-[#667085]">
-                  Manage your account details, review connected services, and
-                  keep track of your contributor activity from one place.
+                  Manage your account details, review connected services, and keep track of your
+                  contributor activity from one place.
                 </p>
               </div>
             </div>
@@ -296,22 +281,14 @@ function Profile() {
           </div>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <InfoRow
-              icon={<User className="h-4 w-4" />}
-              label="Full Name"
-              value={fullName}
-            />
+            <InfoRow icon={<User className="h-4 w-4" />} label="Full Name" value={fullName} />
             <InfoRow
               icon={<Mail className="h-4 w-4" />}
               label="Email"
               value={email}
               muted={!user?.email}
             />
-            <InfoRow
-              icon={<Link2 className="h-4 w-4" />}
-              label="Username"
-              value={`@${username}`}
-            />
+            <InfoRow icon={<Link2 className="h-4 w-4" />} label="Username" value={`@${username}`} />
             <InfoRow
               icon={<CalendarDays className="h-4 w-4" />}
               label="Joined"
@@ -347,9 +324,7 @@ function Profile() {
             <div className="flex items-center justify-between rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-4 py-3">
               <div>
                 <p className="text-sm font-medium text-[#101828]">Email</p>
-                <p className="mt-1 text-xs text-[#667085]">
-                  {user?.email || "No email connected"}
-                </p>
+                <p className="mt-1 text-xs text-[#667085]">{user?.email || "No email connected"}</p>
               </div>
               <StatusBadge
                 connected={Boolean(user?.email)}
@@ -359,12 +334,9 @@ function Profile() {
 
             <div className="flex items-center justify-between rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-4 py-3">
               <div>
-                <p className="text-sm font-medium text-[#101828]">
-                  Profile Status
-                </p>
+                <p className="text-sm font-medium text-[#101828]">Profile Status</p>
                 <p className="mt-1 text-xs text-[#667085]">
-                  Keep your account information updated for better
-                  participation.
+                  Keep your account information updated for better participation.
                 </p>
               </div>
               <StatusBadge connected label="Active" />

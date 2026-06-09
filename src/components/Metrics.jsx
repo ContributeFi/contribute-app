@@ -4,13 +4,10 @@ function Metrics() {
   return (
     <div className="mx-auto w-full max-w-[1200px] space-y-8 bg-white px-5 py-10 md:space-y-16 md:pt-[104px]">
       <div className="mx-auto max-w-[1200px] space-y-4 text-center text-[#050215]">
-        <h2 className="text-[32px] font-extrabold md:text-[44px]">
-          A Growing Network of Builders
-        </h2>
+        <h2 className="text-[32px] font-extrabold md:text-[44px]">A Growing Network of Builders</h2>
 
         <p className="mx-auto max-w-[800px] text-[18px] font-light md:text-[20px]">
-          Join communities, complete tasks, and earn rewards alongside thousands
-          of contributors.
+          Join communities, complete tasks, and earn rewards alongside thousands of contributors.
         </p>
       </div>
 
@@ -26,9 +23,7 @@ function Metrics() {
               {metric.title === "paid out" && "$"}
               {metric.value} {metric.title !== "contributors" && "+"}
             </div>
-            <div className="text-[15px] text-[#636366] lg:text-[20px]">
-              {metric.title}
-            </div>
+            <div className="text-[15px] text-[#636366] lg:text-[20px]">{metric.title}</div>
           </div>
         ))}
       </div>

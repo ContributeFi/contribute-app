@@ -370,14 +370,7 @@ const ANALYTICS_DATA = {
   },
 };
 
-function AnalyticsStatCard({
-  label,
-  value,
-  icon,
-  accent = "blue",
-  helperText,
-  trend,
-}) {
+function AnalyticsStatCard({ label, value, icon, accent = "blue", helperText, trend }) {
   const accentStyles = {
     blue: {
       card: "border-[#E0E7FF] bg-gradient-to-br from-white to-[#F8FAFF]",
@@ -414,16 +407,12 @@ function AnalyticsStatCard({
       <div className={`absolute top-0 left-0 h-full w-1 ${theme.line}`} />
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-medium tracking-wide text-[#667085]">
-            {label}
-          </p>
+          <p className="text-sm font-medium tracking-wide text-[#667085]">{label}</p>
           <p className="mt-2 text-[28px] leading-none font-semibold tracking-tight text-[#101828]">
             {value}
           </p>
           <div className="mt-2 flex flex-wrap items-center gap-2">
-            {helperText ? (
-              <p className="text-xs text-[#98A2B3]">{helperText}</p>
-            ) : null}
+            {helperText ? <p className="text-xs text-[#98A2B3]">{helperText}</p> : null}
             {trend ? (
               <span className="rounded-full bg-white/70 px-2 py-0.5 text-[11px] font-medium text-[#475467]">
                 {trend}
@@ -462,9 +451,7 @@ function EmptyAnalyticsState({ title, description, actionLabel, icon }) {
         {icon}
       </div>
       <div className="max-w-lg space-y-2">
-        <h3 className="text-[22px] font-semibold tracking-tight text-[#101828]">
-          {title}
-        </h3>
+        <h3 className="text-[22px] font-semibold tracking-tight text-[#101828]">{title}</h3>
         <p className="text-sm leading-6 text-[#667085]">{description}</p>
       </div>
       {actionLabel ? (
@@ -543,9 +530,7 @@ function TrendBars({ data = [] }) {
         return (
           <div key={item.label} className="flex flex-1 flex-col items-center">
             {/* VALUE (TOP) */}
-            <div className="mb-2 text-sm font-semibold text-[#101828]">
-              {item.value}
-            </div>
+            <div className="mb-2 text-sm font-semibold text-[#101828]">{item.value}</div>
 
             {/* BAR TRACK */}
             <div className="flex h-[220px] w-full items-end rounded-2xl bg-[#F8FAFC] p-2 ring-1 ring-[#EEF2FF]">
@@ -559,9 +544,7 @@ function TrendBars({ data = [] }) {
             </div>
 
             {/* LABEL */}
-            <p className="mt-2 text-xs font-medium text-[#667085]">
-              {item.label}
-            </p>
+            <p className="mt-2 text-xs font-medium text-[#667085]">{item.label}</p>
           </div>
         );
       })}
@@ -573,9 +556,7 @@ function InsightsCard({ insights }) {
   return (
     <div className="rounded-[24px] border border-[#E6EAF5] bg-white p-5 shadow-sm">
       <div className="mb-5">
-        <h3 className="text-[18px] font-semibold tracking-tight text-[#101828]">
-          Insights
-        </h3>
+        <h3 className="text-[18px] font-semibold tracking-tight text-[#101828]">Insights</h3>
         <p className="mt-1 text-sm leading-6 text-[#667085]">
           Key observations from the selected scope and time range.
         </p>
@@ -583,10 +564,7 @@ function InsightsCard({ insights }) {
 
       <div className="space-y-3">
         {insights.map((insight, index) => (
-          <div
-            key={index}
-            className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-4 py-3"
-          >
+          <div key={index} className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-4 py-3">
             <p className="text-sm leading-6 text-[#667085]">{insight}</p>
           </div>
         ))}
@@ -632,8 +610,7 @@ function Analytics() {
     bursts: {
       empty: {
         title: "No bursts yet",
-        description:
-          "Launch a burst to start tracking submissions, responses, and participation.",
+        description: "Launch a burst to start tracking submissions, responses, and participation.",
         actionLabel: "Create Burst",
         icon: <Megaphone className="h-8 w-8" />,
       },
@@ -641,8 +618,7 @@ function Analytics() {
     bots: {
       empty: {
         title: "No bots connected",
-        description:
-          "Connect or launch bots to track runs, engagement, and conversions here.",
+        description: "Connect or launch bots to track runs, engagement, and conversions here.",
         actionLabel: "Explore Bots",
         icon: <Bot className="h-8 w-8" />,
       },
@@ -679,29 +655,21 @@ function Analytics() {
 
               <div className="space-y-2">
                 <h2 className="text-[28px] font-semibold tracking-tight text-[#101828]">
-                  Track performance across your activity, communities, quests,
-                  bursts, and bots
+                  Track performance across your activity, communities, quests, bursts, and bots
                 </h2>
                 <p className="max-w-2xl text-[15px] leading-7 text-[#667085]">
-                  Review high-level metrics, trends, and top-performing areas.
-                  Switch scopes to inspect different parts of your Contribute
-                  activity.
+                  Review high-level metrics, trends, and top-performing areas. Switch scopes to
+                  inspect different parts of your Contribute activity.
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-2">
-                <InfoPill
-                  icon={<TrendingUp className="h-4 w-4" />}
-                  label="Performance trends"
-                />
+                <InfoPill icon={<TrendingUp className="h-4 w-4" />} label="Performance trends" />
                 <InfoPill
                   icon={<CalendarRange className="h-4 w-4" />}
                   label="Time-based analysis"
                 />
-                <InfoPill
-                  icon={<Sparkles className="h-4 w-4" />}
-                  label="Scope-specific insights"
-                />
+                <InfoPill icon={<Sparkles className="h-4 w-4" />} label="Scope-specific insights" />
               </div>
             </div>
 
@@ -718,9 +686,7 @@ function Analytics() {
                       className={[
                         "h-10 rounded-lg px-4 text-sm font-medium transition-all",
                         "hover:bg-white hover:text-[#2F0FD1]",
-                        isActive
-                          ? "bg-white text-[#2F0FD1] shadow-sm"
-                          : "text-[#667085]",
+                        isActive ? "bg-white text-[#2F0FD1] shadow-sm" : "text-[#667085]",
                       ].join(" ")}
                     >
                       {option.label}
@@ -734,9 +700,7 @@ function Analytics() {
                 onClick={() => setShowEmptyStateDemo((prev) => !prev)}
                 className="h-10 rounded-xl border-[#D0D5DD] bg-white px-4 text-sm font-medium text-[#344054] hover:bg-[#F9FAFB]"
               >
-                {showEmptyStateDemo
-                  ? "Show Sample Data"
-                  : "Preview Empty State"}
+                {showEmptyStateDemo ? "Show Sample Data" : "Preview Empty State"}
               </Button>
             </div>
           </div>
@@ -783,9 +747,7 @@ function Analytics() {
                     className={[
                       "h-10 rounded-lg px-4 text-sm font-medium transition-all",
                       "hover:bg-white hover:text-[#2F0FD1]",
-                      isActive
-                        ? "bg-white text-[#2F0FD1] shadow-sm"
-                        : "text-[#667085]",
+                      isActive ? "bg-white text-[#2F0FD1] shadow-sm" : "text-[#667085]",
                     ].join(" ")}
                   >
                     {option.label}
@@ -850,9 +812,7 @@ function Analytics() {
         </div>
       </section>
 
-      {!isEmpty && currentData ? (
-        <InsightsCard insights={currentData.insights} />
-      ) : null}
+      {!isEmpty && currentData ? <InsightsCard insights={currentData.insights} /> : null}
     </div>
   );
 }

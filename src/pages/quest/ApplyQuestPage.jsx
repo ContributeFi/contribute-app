@@ -19,8 +19,7 @@ import { useAuth } from "@/hooks/useAuth";
 
 const API_URL = "http://localhost:4000";
 
-const PLACEHOLDER_REFERENCE_TWEET_URL =
-  "https://x.com/Socket_Fi/status/2050208626569069018?s=20";
+const PLACEHOLDER_REFERENCE_TWEET_URL = "https://x.com/Socket_Fi/status/2050208626569069018?s=20";
 
 const inputClass =
   "h-11 w-full rounded-xl border bg-white px-3.5 text-sm text-[#101828] outline-none transition placeholder:text-[#98A2B3] focus:ring-4";
@@ -29,9 +28,7 @@ const textareaClass =
   "w-full resize-none rounded-xl border border-[#EAECF0] bg-white px-3.5 py-3 text-sm text-[#101828] outline-none transition placeholder:text-[#98A2B3] focus:border-[#2F0FD1] focus:ring-4 focus:ring-[#EEF2FF]";
 
 function isValidXPostUrl(value) {
-  return /^https?:\/\/(www\.)?(x|twitter)\.com\/[^/]+\/status\/\d+/i.test(
-    value.trim(),
-  );
+  return /^https?:\/\/(www\.)?(x|twitter)\.com\/[^/]+\/status\/\d+/i.test(value.trim());
 }
 
 function formatDate(value) {
@@ -77,9 +74,7 @@ function getCompany(quest) {
 }
 
 function getHashtags(quest) {
-  return quest?.hashtags?.length
-    ? quest.hashtags
-    : ["Web3", "Stellar", "Contribute"];
+  return quest?.hashtags?.length ? quest.hashtags : ["Web3", "Stellar", "Contribute"];
 }
 
 function getReferenceTweetUrl(quest) {
@@ -134,9 +129,7 @@ function PreviewModal({ preview, onClose }) {
                   </p>
 
                   {preview.author?.handle ? (
-                    <p className="text-sm text-[#667085]">
-                      @{preview.author.handle}
-                    </p>
+                    <p className="text-sm text-[#667085]">@{preview.author.handle}</p>
                   ) : null}
                 </div>
 
@@ -195,19 +188,14 @@ function ReferenceTweetCard({
   const [expanded, setExpanded] = useState(false);
 
   const text = referencePreview?.text || "";
-  const shortText =
-    text.length > 110 ? `${text.slice(0, 110).trim()}...` : text;
+  const shortText = text.length > 110 ? `${text.slice(0, 110).trim()}...` : text;
 
   return (
     <div className="mt-5 overflow-hidden rounded-2xl border border-[#EAECF0] bg-white shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#EAECF0] bg-[#FCFCFD] px-4 py-3">
         <div>
-          <p className="text-sm font-semibold text-[#101828]">
-            Reference tweet
-          </p>
-          <p className="mt-0.5 text-xs text-[#667085]">
-            Quote this post to complete the quest.
-          </p>
+          <p className="text-sm font-semibold text-[#101828]">Reference tweet</p>
+          <p className="mt-0.5 text-xs text-[#667085]">Quote this post to complete the quest.</p>
         </div>
 
         <div className="flex items-center gap-2">
@@ -287,9 +275,7 @@ function ReferenceTweetCard({
                   ) : null}
 
                   {referencePreview.date ? (
-                    <span className="text-xs text-[#98A2B3]">
-                      {referencePreview.date}
-                    </span>
+                    <span className="text-xs text-[#98A2B3]">{referencePreview.date}</span>
                   ) : null}
                 </div>
 
@@ -308,9 +294,7 @@ function ReferenceTweetCard({
         </div>
       ) : (
         <div className="px-4 py-3">
-          <p className="text-sm text-[#667085]">
-            No reference tweet preview available.
-          </p>
+          <p className="text-sm text-[#667085]">No reference tweet preview available.</p>
         </div>
       )}
     </div>
@@ -373,9 +357,7 @@ export default function ApplyQuestPage() {
         }
       } catch (error) {
         if (isMounted) {
-          setQuestError(
-            error instanceof Error ? error.message : "Failed to fetch quest.",
-          );
+          setQuestError(error instanceof Error ? error.message : "Failed to fetch quest.");
         }
       } finally {
         if (isMounted) {
@@ -429,10 +411,7 @@ export default function ApplyQuestPage() {
         const data = await res.json();
 
         if (!res.ok || !data.success) {
-          throw new Error(
-            data.message ||
-              "There was an error fetching the reference quest post.",
-          );
+          throw new Error(data.message || "There was an error fetching the reference quest post.");
         }
 
         if (isMounted) {
@@ -482,17 +461,13 @@ export default function ApplyQuestPage() {
       const data = await res.json();
 
       if (!res.ok || !data.success) {
-        throw new Error(
-          data.message || "There was an error fetching the quote post.",
-        );
+        throw new Error(data.message || "There was an error fetching the quote post.");
       }
 
       setPreview(data.data);
     } catch (error) {
       const message =
-        error instanceof Error
-          ? error.message
-          : "There was an error fetching the quote post.";
+        error instanceof Error ? error.message : "There was an error fetching the quote post.";
 
       setPreviewError(message);
       setToast(message);
@@ -546,8 +521,7 @@ export default function ApplyQuestPage() {
 
   function openTwitterIntent() {
     const referenceTweetId =
-      referencePreview?.tweet_id ||
-      referenceTweetUrl.match(/status\/(\d+)/)?.[1];
+      referencePreview?.tweet_id || referenceTweetUrl.match(/status\/(\d+)/)?.[1];
 
     if (!referenceTweetId) {
       setToast("Unable to find the reference tweet ID.");
@@ -579,30 +553,25 @@ export default function ApplyQuestPage() {
     setSubmitting(true);
 
     try {
-      const res = await fetch(
-        `${API_URL}/api/twitter-quests/${questId}/submissions`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${
-              accessToken || localStorage.getItem("accessToken")
-            }`,
-          },
-          body: JSON.stringify({
-            draft,
-            postUrl,
-            referenceTweetUrl,
-            referencePreview,
-            preview,
-            tweetId: preview.tweet_id,
-            referenceTweetId: referencePreview?.tweet_id,
-            status: "submitted",
-            submissionType: "quote_tweet",
-            score: isRefined ? 91 : 78,
-          }),
+      const res = await fetch(`${API_URL}/api/twitter-quests/${questId}/submissions`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken || localStorage.getItem("accessToken")}`,
         },
-      );
+        body: JSON.stringify({
+          draft,
+          postUrl,
+          referenceTweetUrl,
+          referencePreview,
+          preview,
+          tweetId: preview.tweet_id,
+          referenceTweetId: referencePreview?.tweet_id,
+          status: "submitted",
+          submissionType: "quote_tweet",
+          score: isRefined ? 91 : 78,
+        }),
+      });
 
       const data = await res.json();
 
@@ -623,11 +592,7 @@ export default function ApplyQuestPage() {
       setAlreadyApplied(true);
       navigate("/applications");
     } catch (error) {
-      setToast(
-        error instanceof Error
-          ? error.message
-          : "Failed to submit quest entry.",
-      );
+      setToast(error instanceof Error ? error.message : "Failed to submit quest entry.");
     } finally {
       setSubmitting(false);
     }
@@ -639,9 +604,7 @@ export default function ApplyQuestPage() {
         <div className="flex min-h-[360px] items-center justify-center rounded-2xl border border-[#EAECF0] bg-white p-8 shadow-sm">
           <div className="text-center">
             <Loader2 className="mx-auto mb-4 h-8 w-8 animate-spin text-[#2F0FD1]" />
-            <p className="text-sm font-medium text-[#344054]">
-              Loading quest...
-            </p>
+            <p className="text-sm font-medium text-[#344054]">Loading quest...</p>
           </div>
         </div>
       </main>
@@ -653,12 +616,9 @@ export default function ApplyQuestPage() {
       <main className="min-h-screen bg-[#F8FAFC] px-3 py-4">
         <div className="rounded-2xl border border-[#EAECF0] bg-white p-8 text-center shadow-sm">
           <Compass className="mx-auto mb-4 h-9 w-9 text-[#2F0FD1]" />
-          <h1 className="text-lg font-semibold text-[#101828]">
-            Quest not found
-          </h1>
+          <h1 className="text-lg font-semibold text-[#101828]">Quest not found</h1>
           <p className="mt-2 text-sm text-[#667085]">
-            {questError ||
-              "This quest may have been removed or the link is incorrect."}
+            {questError || "This quest may have been removed or the link is incorrect."}
           </p>
           <button
             type="button"
@@ -723,28 +683,21 @@ export default function ApplyQuestPage() {
 
               <p className="mt-1 max-w-2xl text-sm text-[#667085]">
                 Write a quote post for{" "}
-                <span className="font-medium text-[#344054]">
-                  {quest.title}
-                </span>
-                , publish on X, then submit the link.
+                <span className="font-medium text-[#344054]">{quest.title}</span>, publish on X,
+                then submit the link.
               </p>
             </div>
 
             <div className="rounded-xl border border-[#EAECF0] bg-[#FCFCFD] px-3 py-2">
               <p className="text-[11px] text-[#667085]">Project</p>
-              <p className="mt-0.5 text-sm font-semibold text-[#101828]">
-                {getCompany(quest)}
-              </p>
+              <p className="mt-0.5 text-sm font-semibold text-[#101828]">{getCompany(quest)}</p>
             </div>
           </div>
 
           <div className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
             {[
               ["Reward", formatReward(quest)],
-              [
-                "Timeline",
-                `${formatDate(quest.startAt)} - ${formatDate(quest.endAt)}`,
-              ],
+              ["Timeline", `${formatDate(quest.startAt)} - ${formatDate(quest.endAt)}`],
               ["Winners", quest.reward?.winnerCount || 1],
               ["Participants", quest.reward?.maxParticipants || "Open"],
             ].map(([label, value]) => (
@@ -753,9 +706,7 @@ export default function ApplyQuestPage() {
                 className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-3 py-2"
               >
                 <p className="text-[11px] text-[#667085]">{label}</p>
-                <p className="mt-0.5 text-sm font-semibold text-[#101828]">
-                  {value}
-                </p>
+                <p className="mt-0.5 text-sm font-semibold text-[#101828]">{value}</p>
               </div>
             ))}
           </div>
@@ -772,13 +723,10 @@ export default function ApplyQuestPage() {
               </div>
 
               <div>
-                <h2 className="text-base font-semibold text-[#101828]">
-                  Quote post submission
-                </h2>
+                <h2 className="text-base font-semibold text-[#101828]">Quote post submission</h2>
                 <p className="mt-1 text-sm leading-6 text-[#667085]">
-                  Draft your quote post, publish it on X with the quest
-                  reference, paste the link, and the preview will fetch
-                  automatically.
+                  Draft your quote post, publish it on X with the quest reference, paste the link,
+                  and the preview will fetch automatically.
                 </p>
               </div>
             </div>
@@ -793,9 +741,7 @@ export default function ApplyQuestPage() {
                     : "border-[#EAECF0] bg-white hover:bg-[#F9FAFB]"
                 }`}
               >
-                <p className="text-sm font-semibold text-[#101828]">
-                  1. Write and quote
-                </p>
+                <p className="text-sm font-semibold text-[#101828]">1. Write and quote</p>
                 <p className="mt-1 text-xs leading-5 text-[#667085]">
                   Create a clear quote post using the quest reference.
                 </p>
@@ -810,9 +756,7 @@ export default function ApplyQuestPage() {
                     : "border-[#EAECF0] bg-white hover:bg-[#F9FAFB]"
                 }`}
               >
-                <p className="text-sm font-semibold text-[#101828]">
-                  2. Preview and submit
-                </p>
+                <p className="text-sm font-semibold text-[#101828]">2. Preview and submit</p>
                 <p className="mt-1 text-xs leading-5 text-[#667085]">
                   Paste the X quote post URL and verify it automatically.
                 </p>
@@ -932,8 +876,7 @@ export default function ApplyQuestPage() {
                             Fetching quote post preview
                           </p>
                           <p className="mt-0.5 text-xs text-[#667085]">
-                            We are checking the X link and preparing a clean
-                            preview.
+                            We are checking the X link and preparing a clean preview.
                           </p>
                         </div>
                       </div>
@@ -980,9 +923,7 @@ export default function ApplyQuestPage() {
                               </p>
 
                               {preview.author?.handle ? (
-                                <p className="text-sm text-[#667085]">
-                                  @{preview.author.handle}
-                                </p>
+                                <p className="text-sm text-[#667085]">@{preview.author.handle}</p>
                               ) : null}
                             </div>
 
@@ -1041,9 +982,7 @@ export default function ApplyQuestPage() {
                 <div className="sticky bottom-0 -mx-4 mt-5 -mb-4 border-t border-[#EAECF0] bg-white/95 px-4 py-4 backdrop-blur sm:-mx-5 sm:-mb-5 sm:px-5">
                   <button
                     type="submit"
-                    disabled={
-                      !postUrl || !preview || alreadyApplied || submitting
-                    }
+                    disabled={!postUrl || !preview || alreadyApplied || submitting}
                     className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#2F0FD1] px-6 text-sm font-medium text-white shadow-sm transition hover:bg-[#2409B8] disabled:cursor-not-allowed disabled:bg-[#D0D5DD]"
                   >
                     {submitting ? (
@@ -1069,9 +1008,7 @@ export default function ApplyQuestPage() {
 
           <aside className="space-y-4">
             <div className="rounded-2xl border border-[#EAECF0] bg-white p-5 shadow-sm">
-              <h3 className="text-sm font-semibold text-[#101828]">
-                Submission checklist
-              </h3>
+              <h3 className="text-sm font-semibold text-[#101828]">Submission checklist</h3>
 
               <div className="mt-4 space-y-3">
                 {[
@@ -1096,14 +1033,10 @@ export default function ApplyQuestPage() {
             <div className="rounded-2xl border border-[#EAECF0] bg-white p-5 shadow-sm">
               <div className="mb-3 flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-[#2F0FD1]" />
-                <h3 className="text-sm font-semibold text-[#101828]">
-                  Quest brief
-                </h3>
+                <h3 className="text-sm font-semibold text-[#101828]">Quest brief</h3>
               </div>
 
-              <p className="text-sm leading-6 text-[#667085]">
-                {quest.description}
-              </p>
+              <p className="text-sm leading-6 text-[#667085]">{quest.description}</p>
             </div>
           </aside>
         </section>

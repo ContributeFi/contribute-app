@@ -104,15 +104,15 @@ export default function WalletKitModal() {
   // });
 
   useEffect(() => {
-    Promise.all(
-      stellarWalletKitOptions.map(async ({ isAvailable }) => isAvailable()),
-    ).then((results) => {
-      const map = new Map();
-      results.forEach((isAvailable, index) => {
-        map.set(stellarWalletKitOptions[index].productName, isAvailable);
-      });
-      setIsAvailableMap(map);
-    });
+    Promise.all(stellarWalletKitOptions.map(async ({ isAvailable }) => isAvailable())).then(
+      (results) => {
+        const map = new Map();
+        results.forEach((isAvailable, index) => {
+          map.set(stellarWalletKitOptions[index].productName, isAvailable);
+        });
+        setIsAvailableMap(map);
+      },
+    );
   }, [stellarWalletKitOptions]);
 
   // Mount and show modal

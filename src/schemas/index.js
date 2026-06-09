@@ -44,10 +44,7 @@ const urlSchema = (message) =>
     .refine(validateUrl, { message });
 
 const optionalUrlSchema = (message) =>
-  z.preprocess(
-    (val) => (val === "" ? undefined : val),
-    urlSchema(message).optional(),
-  );
+  z.preprocess((val) => (val === "" ? undefined : val), urlSchema(message).optional());
 
 export const CreateCommunitySchema = z.object({
   communityName: z.string().nonempty("Community name is required"),
@@ -100,9 +97,7 @@ const GrowthTaskSchema = z.object({
 export const CreateBurstSchema = z
   .object({
     burstTitle: z.string().nonempty("Burst title is required"),
-    platform: z
-      .string({ required_error: "Platform is required" })
-      .min(1, "Platform is required"),
+    platform: z.string({ required_error: "Platform is required" }).min(1, "Platform is required"),
     selectionMethod: z
       .string({ required_error: "Selection method is required" })
       .min(1, "Selection method is required"),
@@ -148,14 +143,8 @@ export const CreateBurstSchema = z
 
 export const CompleteBurstCreateSchema = z
   .object({
-    startDate: z.preprocess(
-      (val) => (val === "" ? null : val),
-      z.date().nullable(),
-    ),
-    endDate: z.preprocess(
-      (val) => (val === "" ? null : val),
-      z.date().nullable(),
-    ),
+    startDate: z.preprocess((val) => (val === "" ? null : val), z.date().nullable()),
+    endDate: z.preprocess((val) => (val === "" ? null : val), z.date().nullable()),
     trendAge: z
       .string({ required_error: "Post start time is required" })
       .min(1, "Post start time is required"),
@@ -218,26 +207,17 @@ export const CreateGrowthQuestSchema = z
     runContinuously: z.boolean().default(false),
     makeConcurrent: z.boolean().default(false),
     rewardAllWithPoints: z.boolean().default(false),
-    startDate: z.preprocess(
-      (val) => (val === "" ? null : val),
-      z.date().nullable(),
-    ),
-    endDate: z.preprocess(
-      (val) => (val === "" ? null : val),
-      z.date().nullable(),
-    ),
+    startDate: z.preprocess((val) => (val === "" ? null : val), z.date().nullable()),
+    endDate: z.preprocess((val) => (val === "" ? null : val), z.date().nullable()),
     rewardMode: z
       .string()
       .nullish()
       .refine((val) => val !== null && val.length > 0, {
         message: "Reward mode is required",
       })
-      .refine(
-        (val) => val === "Overall Reward" || val === "Individual Task Reward",
-        {
-          message: "Invalid reward mode",
-        },
-      ),
+      .refine((val) => val === "Overall Reward" || val === "Individual Task Reward", {
+        message: "Invalid reward mode",
+      }),
     tokensPerWinner: numberOrNullSchema,
     pointsPerWinner: numberOrNullSchema,
     extraPoints: numberOrNullSchema,
@@ -253,10 +233,7 @@ export const CreateGrowthQuestSchema = z
         });
       }
 
-      if (
-        !data.winnerSelectionMethod ||
-        data.winnerSelectionMethod.trim() === ""
-      ) {
+      if (!data.winnerSelectionMethod || data.winnerSelectionMethod.trim() === "") {
         ctx.addIssue({
           path: ["winnerSelectionMethod"],
           message: "Winner selection method is required",
@@ -327,11 +304,7 @@ export const CreateGrowthQuestSchema = z
       }
     }
 
-    if (
-      !data.runContinuously &&
-      data.endDate &&
-      data.endDate < data.startDate
-    ) {
+    if (!data.runContinuously && data.endDate && data.endDate < data.startDate) {
       ctx.addIssue({
         path: ["endDate"],
         message: "End date must be greater than start date",
@@ -498,39 +471,26 @@ export const CreateOnChainQuestSchema = z
     runContinuously: z.boolean().default(false),
     makeConcurrent: z.boolean().default(false),
     rewardAllWithPoints: z.boolean().default(false),
-    startDate: z.preprocess(
-      (val) => (val === "" ? null : val),
-      z.date().nullable(),
-    ),
-    endDate: z.preprocess(
-      (val) => (val === "" ? null : val),
-      z.date().nullable(),
-    ),
+    startDate: z.preprocess((val) => (val === "" ? null : val), z.date().nullable()),
+    endDate: z.preprocess((val) => (val === "" ? null : val), z.date().nullable()),
     verificationMode: z
       .string()
       .nullish()
       .refine((val) => val !== null && val.length > 0, {
         message: "Verification mode is required",
       })
-      .refine(
-        (val) =>
-          val === "Contract Invocation" || val === "Observe Account Calls",
-        {
-          message: "Invalid reward mode",
-        },
-      ),
+      .refine((val) => val === "Contract Invocation" || val === "Observe Account Calls", {
+        message: "Invalid reward mode",
+      }),
     rewardMode: z
       .string()
       .nullish()
       .refine((val) => val !== null && val.length > 0, {
         message: "Reward mode is required",
       })
-      .refine(
-        (val) => val === "Overall Reward" || val === "Individual Task Reward",
-        {
-          message: "Invalid reward mode",
-        },
-      ),
+      .refine((val) => val === "Overall Reward" || val === "Individual Task Reward", {
+        message: "Invalid reward mode",
+      }),
     tokensPerWinner: numberOrNullSchema,
     pointsPerWinner: numberOrNullSchema,
     extraPoints: numberOrNullSchema,
@@ -548,10 +508,7 @@ export const CreateOnChainQuestSchema = z
         });
       }
 
-      if (
-        !data.winnerSelectionMethod ||
-        data.winnerSelectionMethod.trim() === ""
-      ) {
+      if (!data.winnerSelectionMethod || data.winnerSelectionMethod.trim() === "") {
         ctx.addIssue({
           path: ["winnerSelectionMethod"],
           message: "Winner selection method is required",
@@ -622,11 +579,7 @@ export const CreateOnChainQuestSchema = z
       }
     }
 
-    if (
-      !data.runContinuously &&
-      data.endDate &&
-      data.endDate < data.startDate
-    ) {
+    if (!data.runContinuously && data.endDate && data.endDate < data.startDate) {
       ctx.addIssue({
         path: ["endDate"],
         message: "End date must be greater than start date",
@@ -664,10 +617,7 @@ export const CreateOnChainQuestSchema = z
       }
     }
 
-    if (
-      data.verificationMode === "Observe Account Calls" &&
-      !data.callerAccountId
-    ) {
+    if (data.verificationMode === "Observe Account Calls" && !data.callerAccountId) {
       ctx.addIssue({
         path: ["callerAccountId"],
         message: "Caller account ID is required",
@@ -750,12 +700,9 @@ export const CreateTechnicalQuestSchema = z
       .refine((val) => val !== null && val.length > 0, {
         message: "Quest goal is required",
       })
-      .refine(
-        (val) => val === "Project-based" || val === "Recruit Candidates",
-        {
-          message: "Invalid quest goal",
-        },
-      ),
+      .refine((val) => val === "Project-based" || val === "Recruit Candidates", {
+        message: "Invalid quest goal",
+      }),
     questVisibility: z.string().nullish(),
     candidateListFile: z.instanceof(File).optional().or(z.literal(null)),
     numberOfPeople: numberOrNullSchema,
@@ -766,12 +713,9 @@ export const CreateTechnicalQuestSchema = z
       .refine((val) => val !== null && val.length > 0, {
         message: "Reward mode is required",
       })
-      .refine(
-        (val) => val === "Overall Reward" || val === "Individual Task Reward",
-        {
-          message: "Invalid reward mode",
-        },
-      ),
+      .refine((val) => val === "Overall Reward" || val === "Individual Task Reward", {
+        message: "Invalid reward mode",
+      }),
     tokensPerWinner: numberOrNullSchema,
     pointsPerWinner: numberOrNullSchema,
     rewardAllWithPoints: z.boolean().default(false),
@@ -791,8 +735,7 @@ export const CreateTechnicalQuestSchema = z
 
     if (
       data.questGoal === "Project-based" ||
-      (data.questGoal === "Recruit Candidates" &&
-        data.questVisibility === "Open Quest")
+      (data.questGoal === "Recruit Candidates" && data.questVisibility === "Open Quest")
     ) {
       if (!data.selectionMethod || data.selectionMethod.trim() === "") {
         ctx.addIssue({

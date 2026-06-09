@@ -39,10 +39,7 @@ import {
   WINNER_SELECTION_METHOD,
 } from "@/utils/constants";
 import { BsFillInfoCircleFill } from "react-icons/bs";
-import {
-  useCreateOnChainQuest,
-  useLoadContractSpec,
-} from "@/hooks/useCreateQuest";
+import { useCreateOnChainQuest, useLoadContractSpec } from "@/hooks/useCreateQuest";
 import TokenSelectorModal from "./TokenSelectorModal";
 import { RxCaretDown } from "react-icons/rx";
 import { toast } from "react-toastify";
@@ -55,12 +52,8 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
   const side = isDesktop ? "right" : "bottom";
   const [collapsedTasks, setCollapsedTasks] = useState({});
   const [openTokenSelectorModal, setOpenTokenSelectorModal] = useState(false);
-  const [rewardToken, setRewardToken] = useState(
-    getItemFromLocalStorage("rewardToken") || null,
-  );
-  const [step, setStep] = useState(
-    getItemFromLocalStorage("onChainQuestStep") || 1,
-  );
+  const [rewardToken, setRewardToken] = useState(getItemFromLocalStorage("rewardToken") || null);
+  const [step, setStep] = useState(getItemFromLocalStorage("onChainQuestStep") || 1);
   const [step1Data, setStep1Data] = useState(() => {
     const stored = getItemFromLocalStorage("onChainQuestStep1Data");
     return stored ? hydrateQuestData(stored) : null;
@@ -247,9 +240,7 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
     if (!requireAuth()) return;
 
     try {
-      let payload = JSON.parse(
-        JSON.stringify(mapFormToCreateOnChainQuestPayload(step1Data)),
-      );
+      let payload = JSON.parse(JSON.stringify(mapFormToCreateOnChainQuestPayload(step1Data)));
 
       payload = {
         ...payload,
@@ -440,10 +431,7 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
 
         {step === 1 ? (
           <>
-            <form
-              className="grid gap-5 px-4 py-4"
-              onSubmit={handleSubmit(onSubmit)}
-            >
+            <form className="grid gap-5 px-4 py-4" onSubmit={handleSubmit(onSubmit)}>
               <CustomInput
                 label="Quest Title"
                 placeholder="Enter Title"
@@ -495,13 +483,7 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                   type="text"
                   error={errors.tokenContract?.message}
                   {...register("tokenContract")}
-                  className={
-                    rewardType !== "Token"
-                      ? "hidden"
-                      : rewardToken
-                        ? "pl-[30%]"
-                        : ""
-                  }
+                  className={rewardType !== "Token" ? "hidden" : rewardToken ? "pl-[30%]" : ""}
                   onFocus={handleChangeToken}
                   handleClickIcon={() => {}}
                   icon={<RiArrowDownSFill className="size-6 text-[#B2B9C7]" />}
@@ -509,11 +491,7 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                     rewardToken && (
                       <div className="flex w-full items-center gap-2 text-sm text-black">
                         <span>
-                          {rewardToken?.contract
-                            ? "Sym:"
-                            : rewardToken?.issuer
-                              ? "Asset:"
-                              : ""}
+                          {rewardToken?.contract ? "Sym:" : rewardToken?.issuer ? "Asset:" : ""}
                         </span>
                         <span className="font-bold">{rewardToken?.code}</span>
                       </div>
@@ -560,9 +538,7 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                 <div className="flex w-full items-center justify-between text-base font-light text-[#09032A]">
                   Quest Duration
                   <div className="ml-auto flex items-center gap-2">
-                    <p className="text-[14px] font-[300] text-[#09032A]">
-                      Run quest continuously
-                    </p>
+                    <p className="text-[14px] font-[300] text-[#09032A]">Run quest continuously</p>
                     <Controller
                       name="runContinuously"
                       control={control}
@@ -625,19 +601,14 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                       className="flex w-[100%] flex-col items-start justify-between gap-2 sm:flex-row sm:items-center"
                     >
                       {VERIFICATION_MODES.map((plan) => (
-                        <Field
-                          key={plan}
-                          className="flex w-[50%] items-center gap-2"
-                        >
+                        <Field key={plan} className="flex w-[50%] items-center gap-2">
                           <Radio
                             value={plan}
                             className="group flex size-5 items-center justify-center rounded-full border bg-white data-checked:bg-[#2F0FD1]"
                           >
                             <span className="invisible size-2 rounded-full bg-white group-data-checked:visible" />
                           </Radio>
-                          <Label className="text-[15px] font-[300] text-[#09032A]">
-                            {plan}
-                          </Label>
+                          <Label className="text-[15px] font-[300] text-[#09032A]">{plan}</Label>
                         </Field>
                       ))}
                     </RadioGroup>
@@ -702,36 +673,27 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                 control={control}
                 render={({ field }) => (
                   <div className="grid gap-2">
-                    <p className="text-base font-light text-[#09032A]">
-                      Reward Mode
-                    </p>
+                    <p className="text-base font-light text-[#09032A]">Reward Mode</p>
                     <RadioGroup
                       value={field.value}
                       onChange={field.onChange}
                       className="flex w-[100%] flex-col items-start justify-between gap-2 sm:flex-row sm:items-center"
                     >
                       {REWARD_MODES.map((plan) => (
-                        <Field
-                          key={plan}
-                          className="flex w-[50%] items-center gap-2"
-                        >
+                        <Field key={plan} className="flex w-[50%] items-center gap-2">
                           <Radio
                             value={plan}
                             className="group flex size-5 items-center justify-center rounded-full border bg-white data-checked:bg-[#2F0FD1]"
                           >
                             <span className="invisible size-2 rounded-full bg-white group-data-checked:visible" />
                           </Radio>
-                          <Label className="text-[15px] font-[300] text-[#09032A]">
-                            {plan}
-                          </Label>
+                          <Label className="text-[15px] font-[300] text-[#09032A]">{plan}</Label>
                         </Field>
                       ))}
                     </RadioGroup>
 
                     {errors.rewardMode && (
-                      <span className="text-xs text-red-500">
-                        {errors.rewardMode.message}
-                      </span>
+                      <span className="text-xs text-red-500">{errors.rewardMode.message}</span>
                     )}
                   </div>
                 )}
@@ -784,11 +746,7 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                         onClick={() => toggleTask(index)}
                         className="rounded bg-white p-2"
                       >
-                        {collapsedTasks[index] ? (
-                          <IoChevronDown />
-                        ) : (
-                          <IoChevronUp />
-                        )}
+                        {collapsedTasks[index] ? <IoChevronDown /> : <IoChevronUp />}
                       </button>
                     </div>
                   </div>
@@ -813,9 +771,7 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                             value={field.value}
                             onChange={field.onChange}
                             error={errors.tasks?.[index]?.function?.message}
-                            onSpecSelect={(specData) =>
-                              handleSpecSelection(index, specData)
-                            }
+                            onSpecSelect={(specData) => handleSpecSelection(index, specData)}
                           />
                         )}
                       />
@@ -831,35 +787,29 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                         }
                       /> */}
 
-                      {rewardType === "Token" &&
-                        rewardMode === "Individual Task Reward" && (
-                          <CustomInput
-                            label="How many tokens per task?"
-                            placeholder="eg 50"
-                            type="number"
-                            error={
-                              errors.tasks?.[index]?.tokensPerTask?.message
-                            }
-                            {...register(`tasks.${index}.tokensPerTask`, {
-                              valueAsNumber: true,
-                            })}
-                          />
-                        )}
+                      {rewardType === "Token" && rewardMode === "Individual Task Reward" && (
+                        <CustomInput
+                          label="How many tokens per task?"
+                          placeholder="eg 50"
+                          type="number"
+                          error={errors.tasks?.[index]?.tokensPerTask?.message}
+                          {...register(`tasks.${index}.tokensPerTask`, {
+                            valueAsNumber: true,
+                          })}
+                        />
+                      )}
 
-                      {rewardType === "Points" &&
-                        rewardMode === "Individual Task Reward" && (
-                          <CustomInput
-                            label="How many points per task?"
-                            placeholder="eg 50"
-                            type="number"
-                            error={
-                              errors.tasks?.[index]?.pointsPerTask?.message
-                            }
-                            {...register(`tasks.${index}.pointsPerTask`, {
-                              valueAsNumber: true,
-                            })}
-                          />
-                        )}
+                      {rewardType === "Points" && rewardMode === "Individual Task Reward" && (
+                        <CustomInput
+                          label="How many points per task?"
+                          placeholder="eg 50"
+                          type="number"
+                          error={errors.tasks?.[index]?.pointsPerTask?.message}
+                          {...register(`tasks.${index}.pointsPerTask`, {
+                            valueAsNumber: true,
+                          })}
+                        />
+                      )}
 
                       <CustomInput
                         label={
@@ -922,12 +872,7 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                 </button>
               </div>
 
-              <Button
-                variant="secondary"
-                size="lg"
-                type="submit"
-                className="mt-5 w-full"
-              >
+              <Button variant="secondary" size="lg" type="submit" className="mt-5 w-full">
                 Continue
               </Button>
             </form>
@@ -937,23 +882,17 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <p className="w-1/2 font-[300] text-[#525866]">Quest Title</p>
-                <p className="w-1/2 font-medium text-[#050215]">
-                  {step1Data.questTitle}
-                </p>
+                <p className="w-1/2 font-medium text-[#050215]">{step1Data.questTitle}</p>
               </div>
 
               <div className="flex items-center gap-2">
                 <p className="w-1/2 font-[300] text-[#525866]">Reward Type</p>
-                <p className="w-1/2 font-medium text-[#050215]">
-                  {step1Data.rewardType}
-                </p>
+                <p className="w-1/2 font-medium text-[#050215]">{step1Data.rewardType}</p>
               </div>
 
               {step1Data.rewardType === "Token" && (
                 <div className="flex items-center gap-2">
-                  <p className="w-1/2 font-[300] text-[#525866]">
-                    Token Contract
-                  </p>
+                  <p className="w-1/2 font-[300] text-[#525866]">Token Contract</p>
                   <p className="w-1/2 font-medium text-[#050215]">
                     {step1Data.tokenContract.slice(0, 10)}...
                     {step1Data?.tokenContract.slice(-8)}
@@ -963,12 +902,8 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
 
               {step1Data?.numberOfWinners && (
                 <div className="flex items-center gap-2">
-                  <p className="w-1/2 font-[300] text-[#525866]">
-                    Number of Winners
-                  </p>
-                  <p className="w-1/2 font-medium text-[#050215]">
-                    {step1Data.numberOfWinners}
-                  </p>
+                  <p className="w-1/2 font-[300] text-[#525866]">Number of Winners</p>
+                  <p className="w-1/2 font-medium text-[#050215]">{step1Data.numberOfWinners}</p>
                 </div>
               )}
 
@@ -977,18 +912,14 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                   {step1Data?.endDate ? "Quest Duration" : "Quest Start"}
                 </p>
                 <p className="w-1/2 font-medium text-[#050215]">
-                  {step1Data.startDate &&
-                    formatDateToYYYYMMDD(new Date(step1Data.startDate))}
-                  {step1Data.endDate &&
-                    ` to ${formatDateToYYYYMMDD(new Date(step1Data.endDate))}`}
+                  {step1Data.startDate && formatDateToYYYYMMDD(new Date(step1Data.startDate))}
+                  {step1Data.endDate && ` to ${formatDateToYYYYMMDD(new Date(step1Data.endDate))}`}
                 </p>
               </div>
 
               {step1Data.rewardType === "Token" && (
                 <div className="flex items-center gap-2">
-                  <p className="w-1/2 font-[300] text-[#525866]">
-                    Selection Method
-                  </p>
+                  <p className="w-1/2 font-[300] text-[#525866]">Selection Method</p>
                   <p className="w-1/2 font-medium text-[#050215]">
                     {step1Data.winnerSelectionMethod}
                   </p>
@@ -997,25 +928,17 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
 
               <div className="flex items-center gap-2">
                 <p className="w-1/2 font-[300] text-[#525866]">Reward Mode</p>
-                <p className="w-1/2 font-medium text-[#050215]">
-                  {step1Data.rewardMode}
-                </p>
+                <p className="w-1/2 font-medium text-[#050215]">{step1Data.rewardMode}</p>
               </div>
 
               <div className="flex items-center gap-2">
-                <p className="w-1/2 font-[300] text-[#525866]">
-                  Verification Mode
-                </p>
-                <p className="w-1/2 font-medium text-[#050215]">
-                  {step1Data.verificationMode}
-                </p>
+                <p className="w-1/2 font-[300] text-[#525866]">Verification Mode</p>
+                <p className="w-1/2 font-medium text-[#050215]">{step1Data.verificationMode}</p>
               </div>
 
               {step1Data?.contractAddress && (
                 <div className="flex items-center gap-2">
-                  <p className="w-1/2 font-[300] text-[#525866]">
-                    Contract Address
-                  </p>
+                  <p className="w-1/2 font-[300] text-[#525866]">Contract Address</p>
                   <p className="w-1/2 font-medium text-[#050215]">
                     {step1Data.contractAddress.slice(0, 10)}...
                     {step1Data?.contractAddress.slice(-8)}
@@ -1025,21 +948,15 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
 
               {step1Data?.callerAccountId && (
                 <div className="flex items-center gap-2">
-                  <p className="w-1/2 font-[300] text-[#525866]">
-                    Caller Account ID
-                  </p>
-                  <p className="w-1/2 font-medium text-[#050215]">
-                    {step1Data.callerAccountId}
-                  </p>
+                  <p className="w-1/2 font-[300] text-[#525866]">Caller Account ID</p>
+                  <p className="w-1/2 font-medium text-[#050215]">{step1Data.callerAccountId}</p>
                 </div>
               )}
 
               {step1Data?.rewardMode === "Overall Reward" && (
                 <>
                   <div className="flex items-center gap-2">
-                    <p className="w-1/2 font-[300] text-[#525866]">
-                      Reward Per Winner
-                    </p>
+                    <p className="w-1/2 font-[300] text-[#525866]">Reward Per Winner</p>
                     <p className="w-1/2 font-medium text-[#050215]">
                       {step1Data?.tokensPerWinner
                         ? `${step1Data?.tokensPerWinner} XLM`
@@ -1058,48 +975,31 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                   <div className="mb-4">
                     <div className="rounded-[8px] bg-[#EDF2FF] px-3 py-2">
                       <div className="flex items-center justify-between">
-                        <p className="font-semibold text-[#2F0FD1]">
-                          Task {index + 1}
-                        </p>
+                        <p className="font-semibold text-[#2F0FD1]">Task {index + 1}</p>
                         <button
                           type="button"
                           onClick={() => toggleTask(index)}
                           className="rounded bg-white p-2"
                         >
-                          {collapsedTasks[index] ? (
-                            <IoChevronDown />
-                          ) : (
-                            <IoChevronUp />
-                          )}
+                          {collapsedTasks[index] ? <IoChevronDown /> : <IoChevronUp />}
                         </button>
                       </div>
 
                       {!collapsedTasks[index] && (
                         <div className="mt-2 flex flex-wrap justify-between gap-4 rounded-[8px] bg-white p-4">
                           <div className="space-y-2">
-                            <p className="font-[300] text-[#525866]">
-                              Task Description
-                            </p>
-                            <p className="font-medium text-[#050215]">
-                              {task.description}
-                            </p>
+                            <p className="font-[300] text-[#525866]">Task Description</p>
+                            <p className="font-medium text-[#050215]">{task.description}</p>
                           </div>
 
                           <div className="space-y-2">
-                            <p className="font-[300] text-[#525866]">
-                              Functional Name
-                            </p>
-                            <p className="font-medium text-[#050215]">
-                              {task.function}
-                            </p>
+                            <p className="font-[300] text-[#525866]">Functional Name</p>
+                            <p className="font-medium text-[#050215]">{task.function}</p>
                           </div>
 
-                          {step1Data?.rewardMode ===
-                            "Individual Task Reward" && (
+                          {step1Data?.rewardMode === "Individual Task Reward" && (
                             <div className="space-y-2">
-                              <p className="font-[300] text-[#525866]">
-                                Reward Per Task
-                              </p>
+                              <p className="font-[300] text-[#525866]">Reward Per Task</p>
                               <p className="font-medium text-[#050215]">
                                 {task.pointsPerTask || task?.tokensPerTask}{" "}
                                 {task?.tokensPerTask ? "XLM" : "Points"}
@@ -1110,9 +1010,7 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                           {task.link && (
                             <div className="space-y-2">
                               <p className="font-[300] text-[#525866]">Link</p>
-                              <p className="font-medium text-[#050215]">
-                                {task.link}
-                              </p>
+                              <p className="font-medium text-[#050215]">{task.link}</p>
                             </div>
                           )}
                         </div>
@@ -1190,9 +1088,7 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
               ) : step === 2 && step1Data?.rewardType === "Token" ? (
                 <>
                   <div className="flex items-center justify-between gap-2">
-                    <p className="font-[300] text-[#09032A]">
-                      Total Rewards (to be deposited):
-                    </p>
+                    <p className="font-[300] text-[#09032A]">Total Rewards (to be deposited):</p>
                     <p className="text-2xl font-bold text-[#050215]">
                       {step1Data.rewardMode === "Overall Reward" &&
                         `${step1Data.tokensPerWinner * step1Data.numberOfWinners} XLM`}
@@ -1226,9 +1122,7 @@ function OnChainQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
               {step === 3 && (
                 <>
                   <div className="space-y-1 text-center">
-                    <p className="font-[300] text-[#09032A]">
-                      Amount Deposited
-                    </p>
+                    <p className="font-[300] text-[#09032A]">Amount Deposited</p>
                     <p className="text-2xl font-bold text-[#050215]">
                       {step1Data.rewardMode === "Overall Reward" &&
                         `${step1Data.tokensPerWinner * step1Data.numberOfWinners} XLM`}

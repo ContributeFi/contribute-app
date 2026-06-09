@@ -50,9 +50,7 @@ export default function ApplyGeneralQuestPage() {
       <main className="min-h-screen bg-[#F8FAFC] px-3 py-4">
         <div className="rounded-2xl border border-[#EAECF0] bg-white p-8 text-center shadow-sm">
           <Compass className="mx-auto mb-4 h-9 w-9 text-[#2F0FD1]" />
-          <h1 className="text-lg font-semibold text-[#101828]">
-            Quest not found
-          </h1>
+          <h1 className="text-lg font-semibold text-[#101828]">Quest not found</h1>
           <p className="mt-2 text-sm text-[#667085]">
             This quest may have been removed or the link is incorrect.
           </p>
@@ -97,9 +95,7 @@ export default function ApplyGeneralQuestPage() {
                 <Badge2 tone="purple">{quest.category}</Badge2>
                 <Badge2 tone="green">{quest.status}</Badge2>
                 <Badge2 tone="blue">{quest.level}</Badge2>
-                {alreadyApplied ? (
-                  <Badge2 tone="amber">Application submitted</Badge2>
-                ) : null}
+                {alreadyApplied ? <Badge2 tone="amber">Application submitted</Badge2> : null}
               </div>
 
               <h1 className="max-w-4xl text-2xl font-semibold tracking-tight text-[#101828] sm:text-3xl">
@@ -108,38 +104,21 @@ export default function ApplyGeneralQuestPage() {
 
               <p className="mt-2 max-w-3xl text-sm leading-6 text-[#667085]">
                 Submit a clear application for{" "}
-                <span className="font-medium text-[#344054]">
-                  {quest.title}
-                </span>
-                .
+                <span className="font-medium text-[#344054]">{quest.title}</span>.
               </p>
             </div>
 
             <div className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] px-4 py-3">
               <p className="text-xs font-medium text-[#667085]">Project</p>
-              <p className="mt-1 text-sm font-semibold text-[#101828]">
-                {quest.company}
-              </p>
+              <p className="mt-1 text-sm font-semibold text-[#101828]">{quest.company}</p>
             </div>
           </div>
 
           <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard
-              icon={WalletCards}
-              label="Reward"
-              value={formatReward(quest)}
-            />
+            <StatCard icon={WalletCards} label="Reward" value={formatReward(quest)} />
             <StatCard icon={Clock3} label="Timeline" value={quest.deadline} />
-            <StatCard
-              icon={Users}
-              label="Applicants"
-              value={quest.applicants}
-            />
-            <StatCard
-              icon={CheckCircle2}
-              label="Estimated work"
-              value={quest.estimatedTime}
-            />
+            <StatCard icon={Users} label="Applicants" value={quest.applicants} />
+            <StatCard icon={CheckCircle2} label="Estimated work" value={quest.estimatedTime} />
           </div>
         </section>
 
@@ -154,12 +133,9 @@ export default function ApplyGeneralQuestPage() {
               </div>
 
               <div>
-                <h2 className="text-base font-semibold text-[#101828]">
-                  Application details
-                </h2>
+                <h2 className="text-base font-semibold text-[#101828]">Application details</h2>
                 <p className="mt-1 text-sm leading-6 text-[#667085]">
-                  Keep it specific. Share your experience, approach, and
-                  delivery timeline.
+                  Keep it specific. Share your experience, approach, and delivery timeline.
                 </p>
               </div>
             </div>
@@ -181,9 +157,7 @@ export default function ApplyGeneralQuestPage() {
                     required
                     type="email"
                     value={form.email}
-                    onChange={(e) =>
-                      setForm({ ...form, email: e.target.value })
-                    }
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
                     className={inputClass}
                     placeholder="you@example.com"
                   />
@@ -195,9 +169,7 @@ export default function ApplyGeneralQuestPage() {
                   <Link2 className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-[#98A2B3]" />
                   <input
                     value={form.portfolio}
-                    onChange={(e) =>
-                      setForm({ ...form, portfolio: e.target.value })
-                    }
+                    onChange={(e) => setForm({ ...form, portfolio: e.target.value })}
                     className={`${inputClass} pl-9`}
                     placeholder="https://your-work.com"
                   />
@@ -209,17 +181,15 @@ export default function ApplyGeneralQuestPage() {
                   required
                   rows={8}
                   value={form.proposal}
-                  onChange={(e) =>
-                    setForm({ ...form, proposal: e.target.value })
-                  }
+                  onChange={(e) => setForm({ ...form, proposal: e.target.value })}
                   className={textareaClass}
                   placeholder="I can help with this quest by..."
                 />
               </Field>
 
               <div className="rounded-xl border border-[#EAECF0] bg-[#F8FAFC] px-4 py-3 text-sm leading-6 text-[#667085]">
-                Your application will be shared with the project owner for
-                review. Make sure your links are accessible.
+                Your application will be shared with the project owner for review. Make sure your
+                links are accessible.
               </div>
 
               <div className="sticky bottom-0 -mx-4 -mb-4 border-t border-[#EAECF0] bg-white/95 px-4 py-4 backdrop-blur sm:-mx-5 sm:-mb-5 sm:px-5">
@@ -228,9 +198,7 @@ export default function ApplyGeneralQuestPage() {
                   disabled={alreadyApplied}
                   className="h-11 w-full rounded-xl bg-[#2F0FD1] px-6 text-sm font-medium text-white shadow-sm transition hover:bg-[#2409B8] disabled:cursor-not-allowed disabled:bg-[#D0D5DD]"
                 >
-                  {alreadyApplied
-                    ? "Application already submitted"
-                    : "Submit application"}
+                  {alreadyApplied ? "Application already submitted" : "Submit application"}
                 </button>
               </div>
             </div>
@@ -238,9 +206,7 @@ export default function ApplyGeneralQuestPage() {
 
           <aside className="space-y-4">
             <div className="rounded-2xl border border-[#EAECF0] bg-white p-5 shadow-sm">
-              <h3 className="text-sm font-semibold text-[#101828]">
-                Application checklist
-              </h3>
+              <h3 className="text-sm font-semibold text-[#101828]">Application checklist</h3>
 
               <div className="mt-4 space-y-3">
                 {[
@@ -261,13 +227,9 @@ export default function ApplyGeneralQuestPage() {
             </div>
 
             <div className="rounded-2xl border border-[#EAECF0] bg-white p-5 shadow-sm">
-              <h3 className="text-sm font-semibold text-[#101828]">
-                Quest summary
-              </h3>
+              <h3 className="text-sm font-semibold text-[#101828]">Quest summary</h3>
 
-              <p className="mt-3 text-sm leading-6 text-[#667085]">
-                {quest.description}
-              </p>
+              <p className="mt-3 text-sm leading-6 text-[#667085]">{quest.description}</p>
             </div>
           </aside>
         </section>

@@ -64,11 +64,7 @@ function CreateWallet() {
     <div className="text-left">
       <div className="mb-7 text-center">
         <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#EEF2FF] text-[#2F0FD1]">
-          {isError ? (
-            <RefreshCcw className="h-5 w-5" />
-          ) : (
-            <ShieldCheck className="h-5 w-5" />
-          )}
+          {isError ? <RefreshCcw className="h-5 w-5" /> : <ShieldCheck className="h-5 w-5" />}
         </div>
 
         <h2 className="text-2xl font-semibold tracking-tight text-[#101828] md:text-[28px]">
@@ -90,9 +86,7 @@ function CreateWallet() {
             </div>
 
             <div>
-              <p className="text-sm font-semibold text-[#101828]">
-                Setting up wallet
-              </p>
+              <p className="text-sm font-semibold text-[#101828]">Setting up wallet</p>
               <p className="mt-1 text-sm text-[#667085]">
                 Generating account and configuring {network}.
               </p>

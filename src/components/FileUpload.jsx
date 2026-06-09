@@ -54,9 +54,7 @@ export default function FileUpload({
             {previews.length < 3 && (
               <>
                 {uploading ? (
-                  <span className="font-medium text-[#2F0FD1]">
-                    Uploading...
-                  </span>
+                  <span className="font-medium text-[#2F0FD1]">Uploading...</span>
                 ) : (
                   <img src="/pic_2_fill.svg" alt="" />
                 )}

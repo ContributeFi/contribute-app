@@ -60,23 +60,17 @@ function MetricCard({ item, children }) {
 
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-medium tracking-wide text-[#667085]">
-            {item.title}
-          </p>
+          <p className="text-sm font-medium tracking-wide text-[#667085]">{item.title}</p>
 
           <p className="mt-2 text-[28px] leading-none font-semibold tracking-tight text-[#101828]">
             {item.title === "amount earned" ? "$" : ""}
             {item.value}
             {item.title === "reputation score" ? (
-              <span className="ml-1 text-sm font-medium text-[#98A2B3]">
-                / 10
-              </span>
+              <span className="ml-1 text-sm font-medium text-[#98A2B3]">/ 10</span>
             ) : null}
           </p>
 
-          {helperText ? (
-            <p className="mt-2 text-xs text-[#98A2B3]">{helperText}</p>
-          ) : null}
+          {helperText ? <p className="mt-2 text-xs text-[#98A2B3]">{helperText}</p> : null}
         </div>
 
         <div

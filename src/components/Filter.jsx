@@ -11,19 +11,9 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
-function Filter({
-  tag,
-  value,
-  onChange,
-  options = [],
-  placeholder = "Filter",
-}) {
+function Filter({ tag, value, onChange, options = [], placeholder = "Filter" }) {
   const [open, setOpen] = React.useState(false);
 
   const activeOption = React.useMemo(
@@ -46,10 +36,7 @@ function Filter({
         >
           <span className="flex items-center gap-2">
             <LuSlidersVertical
-              className={cn(
-                "text-[18px]",
-                tag === "landing" ? "text-white" : "text-[#2F0FD1]",
-              )}
+              className={cn("text-[18px]", tag === "landing" ? "text-white" : "text-[#2F0FD1]")}
             />
             <span
               className={cn(
@@ -62,10 +49,7 @@ function Filter({
           </span>
 
           <ChevronDown
-            className={cn(
-              "h-4 w-4",
-              tag === "landing" ? "text-white" : "text-[#667085]",
-            )}
+            className={cn("h-4 w-4", tag === "landing" ? "text-white" : "text-[#667085]")}
           />
         </Button>
       </PopoverTrigger>
@@ -82,8 +66,7 @@ function Filter({
                   value={option.value}
                   className="cursor-pointer rounded-lg"
                   onSelect={(selectedValue) => {
-                    const nextValue =
-                      selectedValue === value ? "all" : selectedValue;
+                    const nextValue = selectedValue === value ? "all" : selectedValue;
                     onChange?.(nextValue);
                     setOpen(false);
                   }}

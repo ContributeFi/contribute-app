@@ -173,9 +173,7 @@ export default function CustomSelect({
 }) {
   const handleValueChange = (val) => {
     if (onSpecSelect && options.length > 0 && options[0].doc) {
-      const selectedSpec = options.find(
-        (opt) => (opt.value || opt.name) === val,
-      );
+      const selectedSpec = options.find((opt) => (opt.value || opt.name) === val);
       if (selectedSpec) {
         onSpecSelect(selectedSpec);
       }
@@ -186,15 +184,9 @@ export default function CustomSelect({
 
   return (
     <div className="flex w-full flex-col gap-1">
-      {label && (
-        <label className="text-base font-light text-[#09032A]">{label}</label>
-      )}
+      {label && <label className="text-base font-light text-[#09032A]">{label}</label>}
 
-      <Select
-        value={value || undefined}
-        onValueChange={handleValueChange}
-        disabled={disabled}
-      >
+      <Select value={value || undefined} onValueChange={handleValueChange} disabled={disabled}>
         <SelectTrigger
           className={`w-full truncate rounded-[12px] border-2 border-none border-red-500 bg-[#F7F9FD] px-3 py-6 text-base text-[#09032A] focus:ring-0 focus:outline-none focus-visible:ring-0 ${className}`}
         >

@@ -73,9 +73,7 @@ export default function CustomTimeSelect({
             </PopoverContent>
           </Popover>
 
-          {startTimeError && (
-            <span className="text-xs text-red-500">{startTimeError}</span>
-          )}
+          {startTimeError && <span className="text-xs text-red-500">{startTimeError}</span>}
         </div>
 
         {/* END TIME */}
@@ -94,8 +92,7 @@ export default function CustomTimeSelect({
             <PopoverContent className="max-h-60 overflow-y-auto p-0">
               <div className="flex flex-col">
                 {TIMES.map((time) => {
-                  const disabled =
-                    startTime && !isValidEndTime(startTime, time);
+                  const disabled = startTime && !isValidEndTime(startTime, time);
 
                   return (
                     <button
@@ -106,9 +103,7 @@ export default function CustomTimeSelect({
                         setOpenEnd(false);
                       }}
                       className={`px-4 py-2 text-left ${
-                        disabled
-                          ? "cursor-not-allowed text-gray-400"
-                          : "hover:bg-gray-100"
+                        disabled ? "cursor-not-allowed text-gray-400" : "hover:bg-gray-100"
                       }`}
                     >
                       {time}
@@ -119,9 +114,7 @@ export default function CustomTimeSelect({
             </PopoverContent>
           </Popover>
 
-          {endTimeError && (
-            <span className="text-xs text-red-500">{endTimeError}</span>
-          )}
+          {endTimeError && <span className="text-xs text-red-500">{endTimeError}</span>}
         </div>
       </div>
     </Label>

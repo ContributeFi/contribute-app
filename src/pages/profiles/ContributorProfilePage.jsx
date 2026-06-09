@@ -24,10 +24,8 @@ const twitterProfile = {
   username: "Socket_Fi",
   displayName: "SocketFi",
   provider: "twitter",
-  avatar:
-    "https://pbs.twimg.com/profile_images/1828184024059154432/IInR1E_8_normal.jpg",
-  banner:
-    "https://pbs.twimg.com/profile_banners/1827473072988864512/1724708026",
+  avatar: "https://pbs.twimg.com/profile_images/1828184024059154432/IInR1E_8_normal.jpg",
+  banner: "https://pbs.twimg.com/profile_banners/1827473072988864512/1724708026",
   description:
     "Smart non-custodial wallet, simplifying access to web3 and decentralized applications",
   website: "https://socket.fi",
@@ -100,12 +98,8 @@ function MetricCard({ label, value, helper }) {
   return (
     <div className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-4 py-3">
       <p className="text-[11px] text-[#667085]">{label}</p>
-      <p className="mt-0.5 text-lg font-semibold tracking-tight text-[#101828]">
-        {value}
-      </p>
-      {helper ? (
-        <p className="mt-0.5 text-[11px] text-[#98A2B3]">{helper}</p>
-      ) : null}
+      <p className="mt-0.5 text-lg font-semibold tracking-tight text-[#101828]">{value}</p>
+      {helper ? <p className="mt-0.5 text-[11px] text-[#98A2B3]">{helper}</p> : null}
     </div>
   );
 }
@@ -128,24 +122,16 @@ function PlatformCard({ platform, active }) {
 
         <span
           className={`rounded-full px-2.5 py-1 text-xs font-medium ${
-            isConnected
-              ? "bg-[#ECFDF3] text-[#027A48]"
-              : "bg-[#F2F4F7] text-[#667085]"
+            isConnected ? "bg-[#ECFDF3] text-[#027A48]" : "bg-[#F2F4F7] text-[#667085]"
           }`}
         >
           {platform.status}
         </span>
       </div>
 
-      <h3 className="mt-4 text-sm font-semibold text-[#101828]">
-        {platform.name}
-      </h3>
-      <p className="mt-1 text-xs font-medium text-[#2F0FD1]">
-        {platform.handle}
-      </p>
-      <p className="mt-2 text-sm leading-6 text-[#667085]">
-        {platform.description}
-      </p>
+      <h3 className="mt-4 text-sm font-semibold text-[#101828]">{platform.name}</h3>
+      <p className="mt-1 text-xs font-medium text-[#2F0FD1]">{platform.handle}</p>
+      <p className="mt-2 text-sm leading-6 text-[#667085]">{platform.description}</p>
 
       <div className="mt-4 grid grid-cols-2 gap-2 border-t border-[#F2F4F7] pt-3">
         <div>
@@ -156,9 +142,7 @@ function PlatformCard({ platform, active }) {
         </div>
         <div>
           <p className="text-[11px] text-[#98A2B3]">Activity</p>
-          <p className="text-sm font-semibold text-[#101828]">
-            {platform.activity}
-          </p>
+          <p className="text-sm font-semibold text-[#101828]">{platform.activity}</p>
         </div>
       </div>
     </button>
@@ -189,14 +173,11 @@ function StatusItem({ icon: Icon, title, description }) {
 }
 
 export default function ContributorProfilePage() {
-  const accountCreated = new Date(twitterProfile.createdAt).toLocaleDateString(
-    "en-US",
-    {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    },
-  );
+  const accountCreated = new Date(twitterProfile.createdAt).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 
   return (
     <main className="min-h-screen">
@@ -217,8 +198,8 @@ export default function ContributorProfilePage() {
                 </h1>
 
                 <p className="mt-3 max-w-2xl text-sm leading-6 text-[#667085] sm:text-base">
-                  View global contributor reputation, connected social accounts,
-                  and platform-specific engagement metrics.
+                  View global contributor reputation, connected social accounts, and
+                  platform-specific engagement metrics.
                 </p>
               </div>
 
@@ -260,12 +241,10 @@ export default function ContributorProfilePage() {
           <div className="space-y-4">
             <section className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
               <div className="flex flex-col gap-1">
-                <h2 className="text-base font-semibold text-[#101828]">
-                  Connected platforms
-                </h2>
+                <h2 className="text-base font-semibold text-[#101828]">Connected platforms</h2>
                 <p className="text-sm text-[#667085]">
-                  Each platform can have its own engagement metrics, profile
-                  strength, quest history, and contribution score.
+                  Each platform can have its own engagement metrics, profile strength, quest
+                  history, and contribution score.
                 </p>
               </div>
 
@@ -304,9 +283,7 @@ export default function ContributorProfilePage() {
                           <BadgeCheck className="h-4 w-4 text-[#2F0FD1]" />
                         ) : null}
                       </div>
-                      <p className="text-sm text-[#667085]">
-                        @{twitterProfile.username}
-                      </p>
+                      <p className="text-sm text-[#667085]">@{twitterProfile.username}</p>
                     </div>
                   </div>
 
@@ -346,38 +323,23 @@ export default function ContributorProfilePage() {
                     value={twitterProfile.followers}
                     helper="Audience size"
                   />
-                  <MetricCard
-                    label="Following"
-                    value={twitterProfile.following}
-                    helper="Network"
-                  />
+                  <MetricCard label="Following" value={twitterProfile.following} helper="Network" />
                   <MetricCard
                     label="Posts"
                     value={twitterProfile.posts}
                     helper="Published content"
                   />
-                  <MetricCard
-                    label="Likes"
-                    value={twitterProfile.likes}
-                    helper="Total favorites"
-                  />
-                  <MetricCard
-                    label="Listed"
-                    value={twitterProfile.listed}
-                    helper="Public lists"
-                  />
+                  <MetricCard label="Likes" value={twitterProfile.likes} helper="Total favorites" />
+                  <MetricCard label="Listed" value={twitterProfile.listed} helper="Public lists" />
                 </div>
               </div>
             </section>
 
             <section className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
               <div className="flex flex-col gap-1">
-                <h2 className="text-base font-semibold text-[#101828]">
-                  Latest X activity
-                </h2>
+                <h2 className="text-base font-semibold text-[#101828]">Latest X activity</h2>
                 <p className="text-sm text-[#667085]">
-                  Recent profile activity can help calculate social contribution
-                  quality.
+                  Recent profile activity can help calculate social contribution quality.
                 </p>
               </div>
 
@@ -406,9 +368,7 @@ export default function ContributorProfilePage() {
 
           <aside className="space-y-4">
             <section className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
-              <h3 className="text-sm font-semibold text-[#101828]">
-                Reputation breakdown
-              </h3>
+              <h3 className="text-sm font-semibold text-[#101828]">Reputation breakdown</h3>
 
               <div className="mt-4 space-y-3">
                 <StatusItem
@@ -430,24 +390,13 @@ export default function ContributorProfilePage() {
             </section>
 
             <section className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
-              <h3 className="text-sm font-semibold text-[#101828]">
-                Account details
-              </h3>
+              <h3 className="text-sm font-semibold text-[#101828]">Account details</h3>
 
               <div className="mt-2">
                 <InfoRow label="Provider" value="Twitter" />
-                <InfoRow
-                  label="Username"
-                  value={`@${twitterProfile.username}`}
-                />
-                <InfoRow
-                  label="Verified"
-                  value={twitterProfile.verified ? "Yes" : "No"}
-                />
-                <InfoRow
-                  label="Protected"
-                  value={twitterProfile.protected ? "Yes" : "No"}
-                />
+                <InfoRow label="Username" value={`@${twitterProfile.username}`} />
+                <InfoRow label="Verified" value={twitterProfile.verified ? "Yes" : "No"} />
+                <InfoRow label="Protected" value={twitterProfile.protected ? "Yes" : "No"} />
                 <InfoRow label="Account ID" value={twitterProfile.id} />
               </div>
             </section>
@@ -457,12 +406,10 @@ export default function ContributorProfilePage() {
                 <WalletCards className="h-5 w-5" />
               </div>
 
-              <h3 className="mt-4 text-sm font-semibold">
-                Build portable reputation
-              </h3>
+              <h3 className="mt-4 text-sm font-semibold">Build portable reputation</h3>
               <p className="mt-2 text-sm leading-6 text-white/70">
-                Combine social accounts, contribution history, and platform
-                analytics into one trusted contributor profile.
+                Combine social accounts, contribution history, and platform analytics into one
+                trusted contributor profile.
               </p>
 
               <button
@@ -474,9 +421,7 @@ export default function ContributorProfilePage() {
             </section>
 
             <section className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
-              <h3 className="text-sm font-semibold text-[#101828]">
-                Suggested scoring model
-              </h3>
+              <h3 className="text-sm font-semibold text-[#101828]">Suggested scoring model</h3>
 
               <div className="mt-4 space-y-3">
                 <StatusItem

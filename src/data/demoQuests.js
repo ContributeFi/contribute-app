@@ -77,11 +77,7 @@ export const demoQuests = [
       "Create short, clear social posts that explain how contributors can discover quests and earn from projects.",
     requirements:
       "Include samples of previous writing and a short explanation of your content style.",
-    deliverables: [
-      "10 short-form posts",
-      "3 hook variations",
-      "Suggested posting sequence",
-    ],
+    deliverables: ["10 short-form posts", "3 hook variations", "Suggested posting sequence"],
   },
   {
     id: "quest-003",
@@ -101,8 +97,7 @@ export const demoQuests = [
     status: "Open",
     level: "Advanced",
     estimatedTime: "3–4 days",
-    description:
-      "Design premium quest card variations for a contributor marketplace interface.",
+    description: "Design premium quest card variations for a contributor marketplace interface.",
     requirements:
       "Submit portfolio links and explain your approach to hierarchy, spacing, and mobile design.",
     deliverables: [

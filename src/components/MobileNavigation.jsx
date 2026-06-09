@@ -10,13 +10,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-function MobileNavigation({
-  side = "left",
-  sheetIsOpen,
-  setSheetIsOpen,
-  children,
-  tag,
-}) {
+function MobileNavigation({ side = "left", sheetIsOpen, setSheetIsOpen, children, tag }) {
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 1024px)");
 

@@ -24,15 +24,8 @@ import {
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 import TaskItem from "./TaskItem";
-import {
-  REWARD_MODES,
-  REWARD_TYPES,
-  SELECTION_METHOD,
-} from "@/utils/constants";
-import {
-  hydrateQuestData,
-  mapFormToCreateTechnicalQuestPayload,
-} from "@/utils";
+import { REWARD_MODES, REWARD_TYPES, SELECTION_METHOD } from "@/utils/constants";
+import { hydrateQuestData, mapFormToCreateTechnicalQuestPayload } from "@/utils";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import FileUpload from "../FileUpload";
 import { useCreateTechnicalQuest } from "@/hooks/useCreateQuest";
@@ -154,10 +147,7 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
   }, [questGoal, setValue, watch]);
 
   useEffect(() => {
-    if (
-      questGoal !== "Recruit Candidates" ||
-      questVisibility !== "Closed Quest"
-    ) {
+    if (questGoal !== "Recruit Candidates" || questVisibility !== "Closed Quest") {
       setValue("candidateListFile", null);
     }
   }, [questGoal, questVisibility, setValue]);
@@ -170,9 +160,7 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
     if (!requireAuth()) return;
 
     try {
-      const payload = JSON.parse(
-        JSON.stringify(mapFormToCreateTechnicalQuestPayload(step1Data)),
-      );
+      const payload = JSON.parse(JSON.stringify(mapFormToCreateTechnicalQuestPayload(step1Data)));
 
       setIsSubmitting(true);
       // await createTechnicalQuest(payload, communityId);
@@ -212,9 +200,7 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
       <SheetTrigger asChild>
         <div className="flex cursor-pointer items-center justify-between gap-4 rounded-md bg-[#F7F9FD] p-5 hover:bg-[#F7F9FF]/70">
           <div className="space-y-2">
-            <p className="text-left text-[18px] font-semibold text-[#09032A]">
-              Technical Quest
-            </p>
+            <p className="text-left text-[18px] font-semibold text-[#09032A]">Technical Quest</p>
 
             <p className="text-[#525866]">
               {" "}
@@ -270,10 +256,7 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
 
         {technicalQuestStep === 1 ? (
           <>
-            <form
-              className="grid gap-5 px-4 py-4"
-              onSubmit={handleSubmit(onSubmit)}
-            >
+            <form className="grid gap-5 px-4 py-4" onSubmit={handleSubmit(onSubmit)}>
               <CustomInput
                 label="Quest Title"
                 placeholder="Enter Title"
@@ -319,13 +302,7 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                   type="text"
                   error={errors.tokenContract?.message}
                   {...register("tokenContract")}
-                  className={
-                    rewardType !== "Token"
-                      ? "hidden"
-                      : rewardToken
-                        ? "pl-[30%]"
-                        : ""
-                  }
+                  className={rewardType !== "Token" ? "hidden" : rewardToken ? "pl-[30%]" : ""}
                   onFocus={handleChangeToken}
                   handleClickIcon={() => {}}
                   icon={<RxCaretDown />}
@@ -333,11 +310,7 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                     rewardToken && (
                       <div className="flex w-full items-center gap-2 text-sm text-black">
                         <span>
-                          {rewardToken?.contract
-                            ? "Sym:"
-                            : rewardToken?.issuer
-                              ? "Asset:"
-                              : ""}
+                          {rewardToken?.contract ? "Sym:" : rewardToken?.issuer ? "Asset:" : ""}
                         </span>
                         <span className="font-bold">{rewardToken?.code}</span>
                       </div>
@@ -397,27 +370,20 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                       className="flex w-[100%] flex-col items-start justify-between gap-2 sm:flex-row sm:items-center"
                     >
                       {QUEST_GOAL.map((plan) => (
-                        <Field
-                          key={plan}
-                          className="flex w-[50%] items-center gap-2"
-                        >
+                        <Field key={plan} className="flex w-[50%] items-center gap-2">
                           <Radio
                             value={plan}
                             className="group flex size-5 items-center justify-center rounded-full border bg-white data-checked:bg-[#2F0FD1]"
                           >
                             <span className="invisible size-2 rounded-full bg-white group-data-checked:visible" />
                           </Radio>
-                          <Label className="text-[15px] font-[300] text-[#09032A]">
-                            {plan}
-                          </Label>
+                          <Label className="text-[15px] font-[300] text-[#09032A]">{plan}</Label>
                         </Field>
                       ))}
                     </RadioGroup>
 
                     {errors.questGoal && (
-                      <span className="text-xs text-red-500">
-                        {errors.questGoal.message}
-                      </span>
+                      <span className="text-xs text-red-500">{errors.questGoal.message}</span>
                     )}
                   </div>
                 )}
@@ -438,19 +404,14 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                         className="flex w-[100%] flex-col items-start justify-between gap-2 sm:flex-row sm:items-center"
                       >
                         {QUEST_VISIBILITY.map((plan) => (
-                          <Field
-                            key={plan}
-                            className="flex w-[50%] items-center gap-2"
-                          >
+                          <Field key={plan} className="flex w-[50%] items-center gap-2">
                             <Radio
                               value={plan}
                               className="group flex size-5 items-center justify-center rounded-full border bg-white data-checked:bg-[#2F0FD1]"
                             >
                               <span className="invisible size-2 rounded-full bg-white group-data-checked:visible" />
                             </Radio>
-                            <Label className="text-[15px] font-[300] text-[#09032A]">
-                              {plan}
-                            </Label>
+                            <Label className="text-[15px] font-[300] text-[#09032A]">{plan}</Label>
                           </Field>
                         ))}
                       </RadioGroup>
@@ -465,36 +426,30 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                 />
               )}
 
-              {questGoal === "Recruit Candidates" &&
-                questVisibility === "Closed Quest" && (
-                  <div className="space-y-1">
-                    <Controller
-                      name="candidateListFile"
-                      control={control}
-                      render={({ field }) => (
-                        <FileUpload
-                          description="Files supported: CSV"
-                          buttonText={
-                            watch("candidateListFile")?.name || "Upload List"
-                          }
-                          accept="text/csv"
-                          onChange={(e) => {
-                            const file = e.target.files?.[0] ?? null;
-                            field.onChange(file);
-                          }}
-                        />
-                      )}
-                    />
-                    {errors.candidateListFile && (
-                      <p className="text-xs text-red-500">
-                        {errors.candidateListFile.message}
-                      </p>
+              {questGoal === "Recruit Candidates" && questVisibility === "Closed Quest" && (
+                <div className="space-y-1">
+                  <Controller
+                    name="candidateListFile"
+                    control={control}
+                    render={({ field }) => (
+                      <FileUpload
+                        description="Files supported: CSV"
+                        buttonText={watch("candidateListFile")?.name || "Upload List"}
+                        accept="text/csv"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0] ?? null;
+                          field.onChange(file);
+                        }}
+                      />
                     )}
-                  </div>
-                )}
+                  />
+                  {errors.candidateListFile && (
+                    <p className="text-xs text-red-500">{errors.candidateListFile.message}</p>
+                  )}
+                </div>
+              )}
 
-              {((questGoal === "Recruit Candidates" &&
-                questVisibility === "Open Quest") ||
+              {((questGoal === "Recruit Candidates" && questVisibility === "Open Quest") ||
                 questGoal === "Project-based") && (
                 <div className={`grid gap-5 sm:grid-cols-2`}>
                   <CustomInput
@@ -521,36 +476,27 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                 control={control}
                 render={({ field }) => (
                   <div className="grid gap-2">
-                    <p className="text-[14px] font-light text-[#09032A]">
-                      Reward Mode
-                    </p>
+                    <p className="text-[14px] font-light text-[#09032A]">Reward Mode</p>
                     <RadioGroup
                       value={field.value}
                       onChange={field.onChange}
                       className="flex w-[100%] flex-col items-start justify-between gap-2 sm:flex-row sm:items-center"
                     >
                       {REWARD_MODES.map((plan) => (
-                        <Field
-                          key={plan}
-                          className="flex w-[50%] items-center gap-2"
-                        >
+                        <Field key={plan} className="flex w-[50%] items-center gap-2">
                           <Radio
                             value={plan}
                             className="group flex size-5 items-center justify-center rounded-full border bg-white data-checked:bg-[#2F0FD1]"
                           >
                             <span className="invisible size-2 rounded-full bg-white group-data-checked:visible" />
                           </Radio>
-                          <Label className="text-[15px] font-[300] text-[#09032A]">
-                            {plan}
-                          </Label>
+                          <Label className="text-[15px] font-[300] text-[#09032A]">{plan}</Label>
                         </Field>
                       ))}
                     </RadioGroup>
 
                     {errors.rewardMode && (
-                      <span className="text-xs text-red-500">
-                        {errors.rewardMode.message}
-                      </span>
+                      <span className="text-xs text-red-500">{errors.rewardMode.message}</span>
                     )}
                   </div>
                 )}
@@ -650,12 +596,7 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                 </button>
               </div>
 
-              <Button
-                variant="secondary"
-                size="lg"
-                type="submit"
-                className="mt-5 w-full"
-              >
+              <Button variant="secondary" size="lg" type="submit" className="mt-5 w-full">
                 Continue
               </Button>
             </form>
@@ -665,65 +606,43 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <p className="w-1/2 font-[300] text-[#525866]">Quest Title</p>
-                <p className="w-1/2 font-medium text-[#050215]">
-                  {step1Data.questTitle}
-                </p>
+                <p className="w-1/2 font-medium text-[#050215]">{step1Data.questTitle}</p>
               </div>
 
               <div className="flex items-center gap-2">
                 <p className="w-1/2 font-[300] text-[#525866]">Reward Type</p>
-                <p className="w-1/2 font-medium text-[#050215]">
-                  {step1Data.rewardType}
-                </p>
+                <p className="w-1/2 font-medium text-[#050215]">{step1Data.rewardType}</p>
               </div>
 
               {step1Data.rewardType === "Token" && (
                 <div className="flex items-center gap-2">
-                  <p className="w-1/2 font-[300] text-[#525866]">
-                    Token Contract
-                  </p>
-                  <p className="w-1/2 font-medium text-[#050215]">
-                    {step1Data.tokenContract}
-                  </p>
+                  <p className="w-1/2 font-[300] text-[#525866]">Token Contract</p>
+                  <p className="w-1/2 font-medium text-[#050215]">{step1Data.tokenContract}</p>
                 </div>
               )}
 
               <div className="flex items-center gap-2">
                 <p className="w-1/2 font-[300] text-[#525866]">Quest Goal</p>
-                <p className="w-1/2 font-medium text-[#050215]">
-                  {step1Data.questGoal}
-                </p>
+                <p className="w-1/2 font-medium text-[#050215]">{step1Data.questGoal}</p>
               </div>
 
               <div className="flex items-center gap-2">
-                <p className="w-1/2 font-[300] text-[#525866]">
-                  Number of People
-                </p>
-                <p className="w-1/2 font-medium text-[#050215]">
-                  {step1Data.numberOfPeople}
-                </p>
+                <p className="w-1/2 font-[300] text-[#525866]">Number of People</p>
+                <p className="w-1/2 font-medium text-[#050215]">{step1Data.numberOfPeople}</p>
               </div>
 
               <div className="flex items-center gap-2">
-                <p className="w-1/2 font-[300] text-[#525866]">
-                  Selection Method
-                </p>
-                <p className="w-1/2 font-medium text-[#050215]">
-                  {step1Data.selectionMethod}
-                </p>
+                <p className="w-1/2 font-[300] text-[#525866]">Selection Method</p>
+                <p className="w-1/2 font-medium text-[#050215]">{step1Data.selectionMethod}</p>
               </div>
 
               <div className="flex items-center gap-2">
                 <p className="w-1/2 font-[300] text-[#525866]">Reward Mode</p>
-                <p className="w-1/2 font-medium text-[#050215]">
-                  {step1Data.rewardMode}
-                </p>
+                <p className="w-1/2 font-medium text-[#050215]">{step1Data.rewardMode}</p>
               </div>
 
               <div className="flex items-center gap-2">
-                <p className="w-1/2 font-[300] text-[#525866]">
-                  Reward Per Person
-                </p>
+                <p className="w-1/2 font-[300] text-[#525866]">Reward Per Person</p>
                 <p className="w-1/2 font-medium text-[#050215]">
                   {step1Data?.tokensPerWinner
                     ? `${step1Data?.tokensPerWinner} XLM`
@@ -741,39 +660,26 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                   <div className="mb-4">
                     <div className="rounded-[8px] bg-[#EDF2FF] px-3 py-2">
                       <div className="flex items-center justify-between">
-                        <p className="font-semibold text-[#2F0FD1]">
-                          Task {index + 1}
-                        </p>
+                        <p className="font-semibold text-[#2F0FD1]">Task {index + 1}</p>
                         <button
                           type="button"
                           onClick={() => toggleTask(index)}
                           className="rounded bg-white p-2"
                         >
-                          {collapsedTasks[index] ? (
-                            <IoChevronDown />
-                          ) : (
-                            <IoChevronUp />
-                          )}
+                          {collapsedTasks[index] ? <IoChevronDown /> : <IoChevronUp />}
                         </button>
                       </div>
 
                       {!collapsedTasks[index] && (
                         <div className="mt-2 flex flex-wrap justify-between gap-4 rounded-[8px] bg-white p-4">
                           <div className="space-y-2">
-                            <p className="font-[300] text-[#525866]">
-                              Task Description
-                            </p>
-                            <p className="font-medium text-[#050215]">
-                              {task.description}
-                            </p>
+                            <p className="font-[300] text-[#525866]">Task Description</p>
+                            <p className="font-medium text-[#050215]">{task.description}</p>
                           </div>
 
-                          {step1Data?.rewardMode ===
-                            "Individual Task Reward" && (
+                          {step1Data?.rewardMode === "Individual Task Reward" && (
                             <div className="space-y-2">
-                              <p className="font-[300] text-[#525866]">
-                                Reward Per Task
-                              </p>
+                              <p className="font-[300] text-[#525866]">Reward Per Task</p>
                               <p className="font-medium text-[#050215]">
                                 {task.pointsPerTask || task?.tokensPerTask}{" "}
                                 {task?.tokensPerTask ? "XLM" : "Points"}
@@ -783,22 +689,14 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
 
                           {task.links.map((link) => (
                             <div className="space-y-2">
-                              <p className="font-[300] text-[#525866]">
-                                {link.name}
-                              </p>
-                              <p className="font-medium text-[#050215]">
-                                {link.url}
-                              </p>
+                              <p className="font-[300] text-[#525866]">{link.name}</p>
+                              <p className="font-medium text-[#050215]">{link.url}</p>
                             </div>
                           ))}
 
                           <div className="space-y-2">
-                            <p className="font-[300] text-[#525866]">
-                              Task Instruction
-                            </p>
-                            <p className="font-medium text-[#050215]">
-                              {task.instruction}
-                            </p>
+                            <p className="font-[300] text-[#525866]">Task Instruction</p>
+                            <p className="font-medium text-[#050215]">{task.instruction}</p>
                           </div>
                         </div>
                       )}
@@ -852,8 +750,7 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
             )}
 
             <div className="mt-6 space-y-2 rounded-[8px] bg-[#EDF2FF] px-9 py-6">
-              {technicalQuestStep === 2 &&
-              step1Data?.rewardType === "Points" ? (
+              {technicalQuestStep === 2 && step1Data?.rewardType === "Points" ? (
                 <>
                   <Button
                     variant="secondary"
@@ -871,13 +768,10 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                     {isSubmitting ? "Publishing..." : "Publish Quest"}
                   </Button>
                 </>
-              ) : technicalQuestStep === 2 &&
-                step1Data?.rewardType === "Token" ? (
+              ) : technicalQuestStep === 2 && step1Data?.rewardType === "Token" ? (
                 <>
                   <div className="flex items-center justify-between gap-2">
-                    <p className="font-[300] text-[#09032A]">
-                      Total Rewards (to be deposited):
-                    </p>
+                    <p className="font-[300] text-[#09032A]">Total Rewards (to be deposited):</p>
                     <p className="text-2xl font-bold text-[#050215]">
                       {step1Data.rewardMode === "Overall Reward" &&
                         `${step1Data.tokensPerWinner * step1Data.numberOfWinners} XLM`}
@@ -911,9 +805,7 @@ function TechnicalQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
               {technicalQuestStep === 3 && (
                 <>
                   <div className="space-y-1 text-center">
-                    <p className="font-[300] text-[#09032A]">
-                      Amount Deposited
-                    </p>
+                    <p className="font-[300] text-[#09032A]">Amount Deposited</p>
                     <p className="text-2xl font-bold text-[#050215]">
                       {step1Data.rewardMode === "Overall Reward" &&
                         `${step1Data.tokensPerWinner * step1Data.numberOfWinners} XLM`}

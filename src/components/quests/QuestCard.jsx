@@ -14,9 +14,7 @@ function PosterMini({ poster }) {
         <p className="truncate text-xs font-medium text-[#101828]">
           {poster?.name || "Contribute Team"}
         </p>
-        <p className="truncate text-[11px] text-[#667085]">
-          {poster?.role || "Project owner"}
-        </p>
+        <p className="truncate text-[11px] text-[#667085]">{poster?.role || "Project owner"}</p>
       </div>
     </div>
   );
@@ -24,10 +22,7 @@ function PosterMini({ poster }) {
 
 function getEntriesCount(quest) {
   return Number(
-    quest.entriesCount ??
-      quest.submissionsCount ??
-      quest.metadata?.submissions?.length ??
-      0,
+    quest.entriesCount ?? quest.submissionsCount ?? quest.metadata?.submissions?.length ?? 0,
   );
 }
 
@@ -69,9 +64,7 @@ export default function QuestCard({ quest, hasApplied, onClick }) {
 
           {isCreator ? <Badge2 tone="purple">Creator</Badge2> : null}
 
-          {!isCreator && hasSubmitted ? (
-            <Badge2 tone="blue">Entry received</Badge2>
-          ) : null}
+          {!isCreator && hasSubmitted ? <Badge2 tone="blue">Entry received</Badge2> : null}
         </div>
 
         <ArrowUpRight className="h-4 w-4 shrink-0 text-[#98A2B3] transition group-hover:text-[#2F0FD1]" />
@@ -81,29 +74,21 @@ export default function QuestCard({ quest, hasApplied, onClick }) {
         {quest.title}
       </h3>
 
-      <p className="mt-1 text-xs text-[#667085]">
-        {quest.company || "Contribute.fi"}
-      </p>
+      <p className="mt-1 text-xs text-[#667085]">{quest.company || "Contribute.fi"}</p>
 
-      <p className="mt-3 line-clamp-3 text-sm leading-6 text-[#667085]">
-        {quest.description}
-      </p>
+      <p className="mt-3 line-clamp-3 text-sm leading-6 text-[#667085]">{quest.description}</p>
 
       <div className="mt-4 grid grid-cols-2 gap-2">
         <div className="rounded-xl bg-[#F8FAFC] px-3 py-2">
           <p className="text-[11px] text-[#667085]">Reward</p>
 
-          <p className="text-sm font-semibold text-[#101828]">
-            {formatReward(quest)}
-          </p>
+          <p className="text-sm font-semibold text-[#101828]">{formatReward(quest)}</p>
         </div>
 
         <div className="rounded-xl bg-[#F8FAFC] px-3 py-2">
           <p className="text-[11px] text-[#667085]">{timeline.label}</p>
 
-          <p className="text-sm font-semibold text-[#101828]">
-            {timeline.value}
-          </p>
+          <p className="text-sm font-semibold text-[#101828]">{timeline.value}</p>
         </div>
       </div>
 

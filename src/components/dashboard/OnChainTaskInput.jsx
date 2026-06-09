@@ -109,9 +109,7 @@ export default function OnChainTaskInput({ task, quest, userId }) {
             </div>
           </div>
           {validationErrors[input.name] && (
-            <p className="ml-2 text-xs text-red-500">
-              {validationErrors[input.name]}
-            </p>
+            <p className="ml-2 text-xs text-red-500">{validationErrors[input.name]}</p>
           )}
         </div>
       ))}

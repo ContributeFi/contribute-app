@@ -60,45 +60,44 @@ function VerifyEmail() {
     resolver: zodResolver(VerifyEmailSchema),
   });
 
-  const { mutate: verifyEmailMutation, isPending: verifyEmailPending } =
-    useMutation({
-      mutationFn: (data) => verifyEmail(data),
-      onSuccess: async (data, variable) => {
-        if (data.status === 200) {
-          const content = data.data.content;
+  const { mutate: verifyEmailMutation, isPending: verifyEmailPending } = useMutation({
+    mutationFn: (data) => verifyEmail(data),
+    onSuccess: async (data, variable) => {
+      if (data.status === 200) {
+        const content = data.data.content;
 
-          if (!content.username) {
-            login({
-              token,
-              email,
-              user: null,
-              otp: variable.otp,
-              username: null,
-            });
+        if (!content.username) {
+          login({
+            token,
+            email,
+            user: null,
+            otp: variable.otp,
+            username: null,
+          });
 
-            //navigate("/get-started/username", { replace: true });
-          } else {
-            login({
-              token,
-              email,
-              user: null,
-              otp: null,
-              username: content.username,
-            });
-
-            //navigate("/get-started/account-configuration", { replace: true });
-          }
-
-          toast.success("Email verified successfully");
-          reset();
+          //navigate("/get-started/username", { replace: true });
         } else {
-          toast.error("Something went wrong");
+          login({
+            token,
+            email,
+            user: null,
+            otp: null,
+            username: content.username,
+          });
+
+          //navigate("/get-started/account-configuration", { replace: true });
         }
-      },
-      onError: (error) => {
-        toast.error(error?.response?.data?.message || "Verification failed");
-      },
-    });
+
+        toast.success("Email verified successfully");
+        reset();
+      } else {
+        toast.error("Something went wrong");
+      }
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.message || "Verification failed");
+    },
+  });
 
   const { resendOTPMutation, resendOTPPending } = useSendOtp();
 
@@ -116,9 +115,7 @@ function VerifyEmail() {
           toast.success("Verification code resent");
         },
         onError: (error) => {
-          toast.error(
-            error?.response?.data?.message || "Could not resend code",
-          );
+          toast.error(error?.response?.data?.message || "Could not resend code");
         },
       },
     );
@@ -182,10 +179,7 @@ function VerifyEmail() {
         <div className="rounded-xl border border-[#EAECF0] bg-[#F8FAFC] px-4 py-3 text-center text-sm text-[#667085]">
           {!canResend ? (
             <span>
-              Resend code in{" "}
-              <span className="font-semibold text-[#101828]">
-                {formattedTime}
-              </span>
+              Resend code in <span className="font-semibold text-[#101828]">{formattedTime}</span>
             </span>
           ) : (
             <span>

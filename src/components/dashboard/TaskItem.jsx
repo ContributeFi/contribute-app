@@ -30,9 +30,7 @@ export default function TaskItem({
     <div className="grid gap-4">
       {/* Task Header */}
       <div className="flex items-center justify-between bg-[#EDF2FF] px-3 py-2">
-        <p className="font-semibold text-[#2F0FD1]">
-          Task {totalTasks > 1 && taskIndex + 1}
-        </p>
+        <p className="font-semibold text-[#2F0FD1]">Task {totalTasks > 1 && taskIndex + 1}</p>
 
         <div className="flex items-center gap-2">
           {totalTasks > 1 && (
@@ -73,9 +71,7 @@ export default function TaskItem({
           {linkFields.map((link, linkIndex) => (
             <div key={link.id} className="space-y-2">
               <div className="flex items-center justify-between">
-                <p className="text-[14px] font-light text-[#09032A]">
-                  Link {linkIndex + 1}
-                </p>
+                <p className="text-[14px] font-light text-[#09032A]">Link {linkIndex + 1}</p>
 
                 {linkFields.length > 1 && (
                   <button
@@ -89,18 +85,14 @@ export default function TaskItem({
               </div>
               <CustomInput
                 placeholder="Link name"
-                error={
-                  errors.tasks?.[taskIndex]?.links?.[linkIndex]?.name?.message
-                }
+                error={errors.tasks?.[taskIndex]?.links?.[linkIndex]?.name?.message}
                 {...register(`tasks.${taskIndex}.links.${linkIndex}.name`)}
               />
 
               <CustomInput
                 placeholder="Paste URL"
                 prefix="https://"
-                error={
-                  errors.tasks?.[taskIndex]?.links?.[linkIndex]?.url?.message
-                }
+                error={errors.tasks?.[taskIndex]?.links?.[linkIndex]?.url?.message}
                 {...register(`tasks.${taskIndex}.links.${linkIndex}.url`)}
               />
             </div>
@@ -124,31 +116,29 @@ export default function TaskItem({
             {...register(`tasks.${taskIndex}.instruction`)}
           />
 
-          {rewardType === "Token" &&
-            rewardMode === "Individual Task Reward" && (
-              <CustomInput
-                label="How many tokens per task?"
-                placeholder="eg 50"
-                type="number"
-                error={errors.tasks?.[taskIndex]?.tokensPerTask?.message}
-                {...register(`tasks.${taskIndex}.tokensPerTask`, {
-                  valueAsNumber: true,
-                })}
-              />
-            )}
+          {rewardType === "Token" && rewardMode === "Individual Task Reward" && (
+            <CustomInput
+              label="How many tokens per task?"
+              placeholder="eg 50"
+              type="number"
+              error={errors.tasks?.[taskIndex]?.tokensPerTask?.message}
+              {...register(`tasks.${taskIndex}.tokensPerTask`, {
+                valueAsNumber: true,
+              })}
+            />
+          )}
 
-          {rewardType === "Points" &&
-            rewardMode === "Individual Task Reward" && (
-              <CustomInput
-                label="How many points per task?"
-                placeholder="eg 50"
-                type="number"
-                error={errors.tasks?.[taskIndex]?.pointsPerTask?.message}
-                {...register(`tasks.${taskIndex}.pointsPerTask`, {
-                  valueAsNumber: true,
-                })}
-              />
-            )}
+          {rewardType === "Points" && rewardMode === "Individual Task Reward" && (
+            <CustomInput
+              label="How many points per task?"
+              placeholder="eg 50"
+              type="number"
+              error={errors.tasks?.[taskIndex]?.pointsPerTask?.message}
+              {...register(`tasks.${taskIndex}.pointsPerTask`, {
+                valueAsNumber: true,
+              })}
+            />
+          )}
         </>
       )}
     </div>

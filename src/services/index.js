@@ -20,10 +20,7 @@ export function resendOTP(data) {
     email: data.email,
   };
 
-  return api.post(
-    `${import.meta.env.VITE_BASE_URL}/auth/send-otp`,
-    requestPayload,
-  );
+  return api.post(`${import.meta.env.VITE_BASE_URL}/auth/send-otp`, requestPayload);
 }
 
 export function bindEmail(data) {
@@ -45,10 +42,7 @@ export function verifyEmail(data) {
     email: data.email,
   };
 
-  return api.post(
-    `${import.meta.env.VITE_BASE_URL}/auth/verify-otp`,
-    requestPayload,
-  );
+  return api.post(`${import.meta.env.VITE_BASE_URL}/auth/verify-otp`, requestPayload);
 }
 
 export function createUsername(data) {
@@ -56,16 +50,11 @@ export function createUsername(data) {
     username: data.username,
   };
 
-  return api.patch(
-    `${import.meta.env.VITE_BASE_URL}/users/username`,
-    requestPayload,
-  );
+  return api.patch(`${import.meta.env.VITE_BASE_URL}/users/username`, requestPayload);
 }
 
 export function checkUsernameAvailability(username) {
-  return api.get(
-    `${import.meta.env.VITE_BASE_URL}/users/check-username?username=${username}`,
-  );
+  return api.get(`${import.meta.env.VITE_BASE_URL}/users/check-username?username=${username}`);
 }
 
 export function createWallet(network) {
@@ -126,47 +115,29 @@ export function createCommunity(data) {
     ],
   };
 
-  return api.post(
-    `${import.meta.env.VITE_BASE_URL}/communities`,
-    requestPayload,
-  );
+  return api.post(`${import.meta.env.VITE_BASE_URL}/communities`, requestPayload);
 }
 
 export function createGrowthQuest(payload, communityId) {
-  return api.post(
-    `${import.meta.env.VITE_BASE_URL}/quests/${communityId}/growth`,
-    payload,
-  );
+  return api.post(`${import.meta.env.VITE_BASE_URL}/quests/${communityId}/growth`, payload);
 }
 
 export function completeTask(payload, taskId) {
   console.log({ payload, taskId });
-  return api.post(
-    `${import.meta.env.VITE_BASE_URL}/quests/tasks/${taskId}/complete`,
-    payload,
-  );
+  return api.post(`${import.meta.env.VITE_BASE_URL}/quests/tasks/${taskId}/complete`, payload);
 }
 
 export function createOnChainQuest(payload, communityId) {
   console.log({ payload, communityId });
-  return api.post(
-    `${import.meta.env.VITE_BASE_URL}/quests/${communityId}/on-chain`,
-    payload,
-  );
+  return api.post(`${import.meta.env.VITE_BASE_URL}/quests/${communityId}/on-chain`, payload);
 }
 
 export function loadContractSpec(payload) {
-  return api.post(
-    `${import.meta.env.VITE_BASE_URL}/quests/load-contract-spec`,
-    payload,
-  );
+  return api.post(`${import.meta.env.VITE_BASE_URL}/quests/load-contract-spec`, payload);
 }
 
 export function createTechnicalQuest(payload, communityId) {
-  return api.post(
-    `${import.meta.env.VITE_BASE_URL}/quests/${communityId}/technical`,
-    payload,
-  );
+  return api.post(`${import.meta.env.VITE_BASE_URL}/quests/${communityId}/technical`, payload);
 }
 
 export const getCommunities = async ({
@@ -183,12 +154,7 @@ export const getCommunities = async ({
   return data.content;
 };
 
-export const getQuests = async ({
-  limit = 10,
-  offset = 1,
-  sort = "DESC",
-  isActive,
-} = {}) => {
+export const getQuests = async ({ limit = 10, offset = 1, sort = "DESC", isActive } = {}) => {
   const { data } = await api.get(
     `${import.meta.env.VITE_BASE_URL}/quests?sortBy=createdAt:${sort}&limit=${limit}&offset=${offset}&${isActive ? `isActive=${isActive}` : ""}`,
   );
@@ -210,9 +176,7 @@ export const getQuestsByCommunity = async ({
 };
 
 export const getQuest = async (taskId) => {
-  const { data } = await api.get(
-    `${import.meta.env.VITE_BASE_URL}/quests/${taskId}`,
-  );
+  const { data } = await api.get(`${import.meta.env.VITE_BASE_URL}/quests/${taskId}`);
 
   return data.content;
 };
@@ -226,9 +190,7 @@ export const getMemberCommunities = async ({ limit = 10, offset = 1 } = {}) => {
 };
 
 export const getCommunity = async (communityId) => {
-  const { data } = await api.get(
-    `${import.meta.env.VITE_BASE_URL}/communities/${communityId}`,
-  );
+  const { data } = await api.get(`${import.meta.env.VITE_BASE_URL}/communities/${communityId}`);
 
   return data.content;
 };
@@ -238,10 +200,7 @@ export function joinCommunity(communityId) {
     communityId,
   };
 
-  return api.post(
-    `${import.meta.env.VITE_BASE_URL}/members/join`,
-    requestPayload,
-  );
+  return api.post(`${import.meta.env.VITE_BASE_URL}/members/join`, requestPayload);
 }
 
 export function leaveCommunity(communityId, memberId) {
@@ -249,10 +208,7 @@ export function leaveCommunity(communityId, memberId) {
     memberId,
   };
 
-  return api.post(
-    `${import.meta.env.VITE_BASE_URL}/members/leave/${communityId}`,
-    requestPayload,
-  );
+  return api.post(`${import.meta.env.VITE_BASE_URL}/members/leave/${communityId}`, requestPayload);
 }
 
 export const uploadProfilePicture = (file) => {
@@ -260,15 +216,11 @@ export const uploadProfilePicture = (file) => {
 
   formData.append("image", file);
 
-  return api.patch(
-    `${import.meta.env.VITE_BASE_URL}/users/upload-profile-picture`,
-    formData,
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+  return api.patch(`${import.meta.env.VITE_BASE_URL}/api/users/upload-profile-picture`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
     },
-  );
+  });
 };
 
 export const uploadCommunityCover = (file, communityId) => {
@@ -291,36 +243,25 @@ export const uploadBurstImage = (file) => {
   const formData = new FormData();
   formData.append("images", file);
 
-  return api.post(
-    `${import.meta.env.VITE_BASE_URL}/bursts/upload-images`,
-    formData,
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+  return api.post(`${import.meta.env.VITE_BASE_URL}/bursts/upload-images`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
     },
-  );
+  });
 };
 
 export const createBurst = (data) => {
   return api.post(`${import.meta.env.VITE_BASE_URL}/bursts`, data);
 };
 
-export const getBursts = ({
-  limit = 10,
-  offset = 1,
-  sort = "DESC",
-  filter = "all",
-} = {}) => {
+export const getBursts = ({ limit = 10, offset = 1, sort = "DESC", filter = "all" } = {}) => {
   return api.get(
     `${import.meta.env.VITE_BASE_URL}/bursts?sortBy=createdAt:${sort}&limit=${limit}&offset=${offset}&filter=${filter}`,
   );
 };
 
 export const getBurst = async (burstId) => {
-  const { data } = await api.get(
-    `${import.meta.env.VITE_BASE_URL}/bursts/${burstId}`,
-  );
+  const { data } = await api.get(`${import.meta.env.VITE_BASE_URL}/bursts/${burstId}`);
 
   return data.content;
 };
@@ -331,22 +272,16 @@ export const updateBio = (bio) => {
   });
 };
 
-export function completeOnboarding() {
-  return api.patch(`${import.meta.env.VITE_BASE_URL}/api/users/complete-onboarding`);
+export function completeOnboarding(bio) {
+  return api.patch(`${import.meta.env.VITE_BASE_URL}/api/users/complete-onboarding`, {
+    ...(bio && { bio }),
+  });
 }
 
 export function initSignTransaction(data) {
-  return api.post(
-    `${import.meta.env.VITE_BASE_URL}/quests/init-sign-transaction`,
-    data,
-  );
+  return api.post(`${import.meta.env.VITE_BASE_URL}/quests/init-sign-transaction`, data);
 }
 
 export function submitTransactionExternal(data) {
-  return api.post(
-    `${import.meta.env.VITE_BASE_URL}/quests/submit-transaction-external`,
-    data,
-  );
+  return api.post(`${import.meta.env.VITE_BASE_URL}/quests/submit-transaction-external`, data);
 }
-
-

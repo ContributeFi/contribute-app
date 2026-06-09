@@ -67,19 +67,13 @@ function StatCard({ icon, label, value, accent = "blue", helperText }) {
 
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-medium tracking-wide text-[#667085]">
-            {label}
-          </p>
+          <p className="text-sm font-medium tracking-wide text-[#667085]">{label}</p>
 
-          <p
-            className={`mt-2 text-2xl leading-none font-semibold tracking-tight ${theme.value}`}
-          >
+          <p className={`mt-2 text-2xl leading-none font-semibold tracking-tight ${theme.value}`}>
             {value}
           </p>
 
-          {helperText ? (
-            <p className="mt-2 text-xs text-[#98A2B3]">{helperText}</p>
-          ) : null}
+          {helperText ? <p className="mt-2 text-xs text-[#98A2B3]">{helperText}</p> : null}
         </div>
 
         <div
@@ -122,8 +116,7 @@ function BurstDetailsPage() {
     enabled: !!burstId,
   });
 
-  const isCreator =
-    user?.id && burst?.creatorId ? user.id === burst.creatorId : false;
+  const isCreator = user?.id && burst?.creatorId ? user.id === burst.creatorId : false;
 
   const sentimentColor = useMemo(() => {
     if (burst?.sentimentCheck === "Positive") return "text-[#67AD19]";
@@ -161,9 +154,7 @@ function BurstDetailsPage() {
     },
     {
       key: "numberOfSelections",
-      show:
-        burst?.numberOfSelections !== undefined &&
-        burst?.numberOfSelections !== null,
+      show: burst?.numberOfSelections !== undefined && burst?.numberOfSelections !== null,
       label: "Number of Winners",
       value: burst?.numberOfSelections ?? 0,
       icon: <BsTrophyFill className="text-[18px]" />,
@@ -220,8 +211,7 @@ function BurstDetailsPage() {
                     </h1>
 
                     <p className="text-base leading-7 text-[#667085]">
-                      {burst?.conversation ||
-                        "No conversation details provided."}
+                      {burst?.conversation || "No conversation details provided."}
                     </p>
                   </div>
                 </div>
@@ -237,8 +227,8 @@ function BurstDetailsPage() {
 
                   {!isCreator && (
                     <p className="mt-3 text-sm leading-6 text-[#667085]">
-                      Submit a relevant trend link and a strong post suggestion
-                      to participate in this burst.
+                      Submit a relevant trend link and a strong post suggestion to participate in
+                      this burst.
                     </p>
                   )}
                 </div>
@@ -261,10 +251,7 @@ function BurstDetailsPage() {
             {!isCreator && (
               <section className="rounded-2xl border border-[#D9E2FF] bg-[#FBFCFF] p-3 md:p-4">
                 <Accordion type="single" collapsible defaultValue="post-entry">
-                  <AccordionItem
-                    value="post-entry"
-                    className="overflow-hidden rounded-xl border-0"
-                  >
+                  <AccordionItem value="post-entry" className="overflow-hidden rounded-xl border-0">
                     <AccordionTrigger className="rounded-xl bg-[#2F0FD1] px-5 py-4 text-left text-white hover:no-underline">
                       <div className="flex items-center gap-3">
                         <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/15">
@@ -272,9 +259,7 @@ function BurstDetailsPage() {
                         </div>
 
                         <div>
-                          <p className="text-base font-semibold">
-                            Submit your entry
-                          </p>
+                          <p className="text-base font-semibold">Submit your entry</p>
                           <p className="text-sm text-white/80">
                             Post a trend link and suggest a matching post
                           </p>
@@ -292,19 +277,14 @@ function BurstDetailsPage() {
                             <div className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-[#8791A7]">
                               <LinkIcon className="h-4 w-4" />
                             </div>
-                            <CustomInput
-                              placeholder="Paste post URL here"
-                              className="pl-10"
-                            />
+                            <CustomInput placeholder="Paste post URL here" className="pl-10" />
                           </div>
                         </div>
 
                         <div className="overflow-hidden rounded-2xl border border-[#E4E7EC]">
                           <div className="flex items-center justify-between px-4 py-3">
                             <div>
-                              <p className="font-semibold text-[#09032A]">
-                                2. Suggested Post
-                              </p>
+                              <p className="font-semibold text-[#09032A]">2. Suggested Post</p>
                               <p className="text-sm text-[#667085]">
                                 Write a short, relevant, and engaging post
                               </p>
@@ -354,9 +334,7 @@ function BurstDetailsPage() {
               <section className="space-y-4 border-t border-[#EAECF0] pt-6">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                   <div>
-                    <h2 className="text-xl font-bold text-[#050215]">
-                      Top Entries (5)
-                    </h2>
+                    <h2 className="text-xl font-bold text-[#050215]">Top Entries (5)</h2>
                     <p className="text-base text-[#667085]">
                       Review the best submissions and select the winner.
                     </p>
@@ -365,9 +343,8 @@ function BurstDetailsPage() {
 
                 <div className="rounded-2xl border border-dashed border-[#D0D5DD] bg-[#FCFCFD] p-8 text-center">
                   <p className="text-sm text-[#667085]">
-                    Top entries UI can be upgraded next into cards with:
-                    participant info, suggested post preview, source link,
-                    score, and a “Select Winner” action.
+                    Top entries UI can be upgraded next into cards with: participant info, suggested
+                    post preview, source link, score, and a “Select Winner” action.
                   </p>
                 </div>
               </section>

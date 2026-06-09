@@ -22,9 +22,7 @@ function MetricCard({ label, value, helper, icon: Icon }) {
         <div>
           <p className="text-xs text-[#667085]">{label}</p>
 
-          <p className="mt-1 text-xl font-semibold tracking-tight text-[#101828]">
-            {value}
-          </p>
+          <p className="mt-1 text-xl font-semibold tracking-tight text-[#101828]">{value}</p>
 
           <p className="mt-1 text-xs text-[#98A2B3]">{helper}</p>
         </div>
@@ -39,15 +37,7 @@ function MetricCard({ label, value, helper, icon: Icon }) {
   );
 }
 
-function ActionCard({
-  icon: Icon,
-  title,
-  description,
-  label,
-  meta,
-  status = "active",
-  onClick,
-}) {
+function ActionCard({ icon: Icon, title, description, label, meta, status = "active", onClick }) {
   const isComingSoon = status === "soon";
 
   return (
@@ -63,9 +53,7 @@ function ActionCard({
 
         <span
           className={`rounded-full px-2.5 py-1 text-xs font-medium ${
-            isComingSoon
-              ? "bg-[#F2F4F7] text-[#667085]"
-              : "bg-[#ECFDF3] text-[#027A48]"
+            isComingSoon ? "bg-[#F2F4F7] text-[#667085]" : "bg-[#ECFDF3] text-[#027A48]"
           }`}
         >
           {meta}
@@ -107,10 +95,7 @@ function StatusItem({ icon: Icon, title, description }) {
 }
 
 function getQuestRewardTotal(quest) {
-  return (quest.reward?.prizes || []).reduce(
-    (sum, prize) => sum + (Number(prize.amount) || 0),
-    0,
-  );
+  return (quest.reward?.prizes || []).reduce((sum, prize) => sum + (Number(prize.amount) || 0), 0);
 }
 
 function isOpenQuest(quest) {
@@ -151,10 +136,7 @@ export default function DashboardHome() {
 
         const activeQuests = quests.filter(isOpenQuest).length;
 
-        const rewardsAvailable = quests.reduce(
-          (sum, quest) => sum + getQuestRewardTotal(quest),
-          0,
-        );
+        const rewardsAvailable = quests.reduce((sum, quest) => sum + getQuestRewardTotal(quest), 0);
 
         const completedWork = quests.reduce(
           (sum, quest) => sum + (Number(quest.submissionsCount) || 0),
@@ -214,33 +196,25 @@ export default function DashboardHome() {
   const metrics = [
     {
       label: "Open opportunities",
-      value: loadingStats
-        ? "--"
-        : dashboardStats.openOpportunities.toLocaleString(),
+      value: loadingStats ? "--" : dashboardStats.openOpportunities.toLocaleString(),
       helper: "Across active quests",
       icon: BriefcaseBusiness,
     },
     {
       label: "Active contributors",
-      value: loadingStats
-        ? "--"
-        : dashboardStats.activeContributors.toLocaleString(),
+      value: loadingStats ? "--" : dashboardStats.activeContributors.toLocaleString(),
       helper: "Based on quest submissions",
       icon: Users,
     },
     {
       label: "Rewards available",
-      value: loadingStats
-        ? "--"
-        : `${dashboardStats.rewardsAvailable.toLocaleString()} USDC`,
+      value: loadingStats ? "--" : `${dashboardStats.rewardsAvailable.toLocaleString()} USDC`,
       helper: "Available quest rewards",
       icon: WalletCards,
     },
     {
       label: "Completed work",
-      value: loadingStats
-        ? "--"
-        : dashboardStats.completedWork.toLocaleString(),
+      value: loadingStats ? "--" : dashboardStats.completedWork.toLocaleString(),
       helper: "Verified submissions",
       icon: CheckCircle2,
     },
@@ -265,8 +239,8 @@ export default function DashboardHome() {
                 </h1>
 
                 <p className="mt-3 max-w-2xl text-sm leading-6 text-[#667085] sm:text-base">
-                  Find opportunities from ecosystem projects, submit work, and
-                  build a verifiable contributor profile.
+                  Find opportunities from ecosystem projects, submit work, and build a verifiable
+                  contributor profile.
                 </p>
               </div>
 
@@ -297,12 +271,8 @@ export default function DashboardHome() {
         <section className="grid gap-3 xl:grid-cols-[1fr_340px]">
           <div className="space-y-3 sm:space-y-0">
             <section className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
-              <h2 className="text-base font-semibold text-[#101828]">
-                Start contributing
-              </h2>
-              <p className="mt-1 text-sm text-[#667085]">
-                Choose how you want to participate.
-              </p>
+              <h2 className="text-base font-semibold text-[#101828]">Start contributing</h2>
+              <p className="mt-1 text-sm text-[#667085]">Choose how you want to participate.</p>
 
               <div className="mt-4 grid gap-3 md:grid-cols-2">
                 <ActionCard
@@ -310,11 +280,7 @@ export default function DashboardHome() {
                   title="Tasks"
                   description="Apply to structured work from ecosystem projects."
                   label="Browse tasks"
-                  meta={
-                    loadingStats
-                      ? "--"
-                      : `${dashboardStats.openTasks.toLocaleString()} open`
-                  }
+                  meta={loadingStats ? "--" : `${dashboardStats.openTasks.toLocaleString()} open`}
                   onClick={() => navigate("/tasks")}
                 />
 
@@ -324,9 +290,7 @@ export default function DashboardHome() {
                   description="Create campaign posts and submit your post link."
                   label="Browse X Quests"
                   meta={
-                    loadingStats
-                      ? "--"
-                      : `${dashboardStats.activeQuests.toLocaleString()} active`
+                    loadingStats ? "--" : `${dashboardStats.activeQuests.toLocaleString()} active`
                   }
                   onClick={() => navigate("/quests")}
                 />
@@ -356,9 +320,7 @@ export default function DashboardHome() {
 
           <aside className="space-y-3">
             <section className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
-              <h3 className="text-sm font-semibold text-[#101828]">
-                Contributor overview
-              </h3>
+              <h3 className="text-sm font-semibold text-[#101828]">Contributor overview</h3>
 
               <div className="mt-4 space-y-3">
                 <StatusItem
@@ -366,11 +328,7 @@ export default function DashboardHome() {
                   title="Rewards"
                   description="Earn from approved work."
                 />
-                <StatusItem
-                  icon={Users}
-                  title="Profile"
-                  description="Track your activity."
-                />
+                <StatusItem icon={Users} title="Profile" description="Track your activity." />
                 <StatusItem
                   icon={CheckCircle2}
                   title="Contributions"
@@ -380,9 +338,7 @@ export default function DashboardHome() {
             </section>
 
             <section className="rounded-2xl bg-[#101828] p-5 text-white shadow-sm">
-              <h3 className="text-sm font-semibold">
-                Ready to start contributing?
-              </h3>
+              <h3 className="text-sm font-semibold">Ready to start contributing?</h3>
               <p className="mt-2 text-sm text-white/70">
                 Explore available opportunities and begin building your profile.
               </p>
@@ -400,12 +356,9 @@ export default function DashboardHome() {
 
         <section className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
           <div className="flex flex-col gap-1">
-            <h2 className="text-base font-semibold text-[#101828]">
-              How Contribute works
-            </h2>
+            <h2 className="text-base font-semibold text-[#101828]">How Contribute works</h2>
             <p className="text-sm text-[#667085]">
-              Move from discovery to verified contribution, reputation, and
-              rewards.
+              Move from discovery to verified contribution, reputation, and rewards.
             </p>
           </div>
 

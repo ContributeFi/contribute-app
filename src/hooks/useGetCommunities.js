@@ -14,14 +14,7 @@ export const useGetCommunities = (
     isError: errorLoadingCommunities,
     refetch,
   } = useQuery({
-    queryKey: [
-      "communities",
-      LIMIT,
-      OFFSET,
-      sortOrder,
-      communityOwnerId,
-      searchValue,
-    ],
+    queryKey: ["communities", LIMIT, OFFSET, sortOrder, communityOwnerId, searchValue],
     queryFn: () =>
       getCommunities({
         limit: LIMIT,
