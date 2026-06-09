@@ -25,13 +25,11 @@ const FAQS = [
   },
   {
     question: "How do I claim rewards?",
-    answer:
-      "Open the Earnings page and claim rewards that are marked as claimable.",
+    answer: "Open the Earnings page and claim rewards that are marked as claimable.",
   },
   {
     question: "Why is my reward still pending?",
-    answer:
-      "Some rewards require manual or automated verification before they become claimable.",
+    answer: "Some rewards require manual or automated verification before they become claimable.",
   },
 ];
 
@@ -73,15 +71,11 @@ function SupportStatCard({ label, value, icon, accent = "blue", helperText }) {
 
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-medium tracking-wide text-[#667085]">
-            {label}
-          </p>
+          <p className="text-sm font-medium tracking-wide text-[#667085]">{label}</p>
           <p className="mt-2 text-[28px] leading-none font-semibold tracking-tight text-[#101828]">
             {value}
           </p>
-          {helperText ? (
-            <p className="mt-2 text-xs text-[#98A2B3]">{helperText}</p>
-          ) : null}
+          {helperText ? <p className="mt-2 text-xs text-[#98A2B3]">{helperText}</p> : null}
         </div>
 
         <div
@@ -130,9 +124,7 @@ function FAQRow({ item, isOpen, onToggle }) {
         onClick={onToggle}
         className="flex w-full items-center justify-between gap-3 px-4 py-4 text-left"
       >
-        <span className="text-sm font-semibold text-[#101828]">
-          {item.question}
-        </span>
+        <span className="text-sm font-semibold text-[#101828]">{item.question}</span>
         <ChevronRight
           className={[
             "h-4 w-4 text-[#667085] transition-transform",
@@ -158,10 +150,7 @@ function HelpSupport() {
     const term = searchValue.trim().toLowerCase();
     if (!term) return true;
 
-    return (
-      item.question.toLowerCase().includes(term) ||
-      item.answer.toLowerCase().includes(term)
-    );
+    return item.question.toLowerCase().includes(term) || item.answer.toLowerCase().includes(term);
   });
 
   return (
@@ -184,8 +173,8 @@ function HelpSupport() {
                   Get help, find answers, and contact support
                 </h2>
                 <p className="max-w-2xl text-[15px] leading-7 text-[#667085]">
-                  Browse help resources, read frequently asked questions, and
-                  find the best way to get support for your account or activity.
+                  Browse help resources, read frequently asked questions, and find the best way to
+                  get support for your account or activity.
                 </p>
               </div>
             </div>
@@ -268,9 +257,7 @@ function HelpSupport() {
                     key={item.question}
                     item={item}
                     isOpen={openFaq === index}
-                    onToggle={() =>
-                      setOpenFaq(openFaq === index ? null : index)
-                    }
+                    onToggle={() => setOpenFaq(openFaq === index ? null : index)}
                   />
                 ))
               )}

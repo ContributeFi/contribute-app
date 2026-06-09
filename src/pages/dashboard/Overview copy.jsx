@@ -76,10 +76,7 @@ function Overview() {
       </div>
 
       <div className="space-y-5">
-        <OverviewHeading
-          title="Open Tasks"
-          description="Explore available tasks"
-        >
+        <OverviewHeading title="Open Tasks" description="Explore available tasks">
           <Button
             onClick={() => navigate("/tasks")}
             variant="secondary"

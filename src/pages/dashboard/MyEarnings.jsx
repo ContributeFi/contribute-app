@@ -80,9 +80,7 @@ function MetricCard({ icon: Icon, label, value, helper }) {
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-xs text-[#667085]">{label}</p>
-          <p className="mt-1 text-xl font-semibold tracking-tight text-[#101828]">
-            {value}
-          </p>
+          <p className="mt-1 text-xl font-semibold tracking-tight text-[#101828]">{value}</p>
           <p className="mt-1 text-xs text-[#98A2B3]">{helper}</p>
         </div>
 
@@ -134,9 +132,7 @@ function EarningsHero({ summary, onClaimAll, claimingId }) {
               disabled={!hasPending || isClaimingAll}
               className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-xl bg-[#2F0FD1] px-4 text-sm font-medium text-white shadow-sm transition hover:bg-[#2409B8] disabled:cursor-not-allowed disabled:bg-[#F2F4F7] disabled:text-[#98A2B3]"
             >
-              {isClaimingAll ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : null}
+              {isClaimingAll ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
               Claim all
               {!isClaimingAll ? <ArrowRight className="h-4 w-4" /> : null}
             </button>
@@ -186,9 +182,7 @@ function EarningRow({ earning, onClaim, claimingId }) {
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div className="min-w-0 flex-1">
           <div className="mb-2 flex flex-wrap gap-2">
-            <Badge tone={earning.type === "Quest" ? "purple" : "default"}>
-              {earning.type}
-            </Badge>
+            <Badge tone={earning.type === "Quest" ? "purple" : "default"}>{earning.type}</Badge>
             <Badge tone={isPending ? "amber" : "green"}>{earning.status}</Badge>
           </div>
 
@@ -260,8 +254,7 @@ export default function MyEarnings() {
         item.type.toLowerCase().includes(term) ||
         item.status.toLowerCase().includes(term);
 
-      const matchesStatus =
-        activeStatus === "All" || item.status === activeStatus;
+      const matchesStatus = activeStatus === "All" || item.status === activeStatus;
 
       const matchesType = activeType === "All" || item.type === activeType;
 
@@ -274,9 +267,7 @@ export default function MyEarnings() {
 
     setTimeout(() => {
       setItems((current) =>
-        current.map((item) =>
-          item.id === earning.id ? { ...item, status: "Claimed" } : item,
-        ),
+        current.map((item) => (item.id === earning.id ? { ...item, status: "Claimed" } : item)),
       );
       setClaimingId("");
     }, 500);
@@ -287,9 +278,7 @@ export default function MyEarnings() {
 
     setTimeout(() => {
       setItems((current) =>
-        current.map((item) =>
-          item.status === "Pending" ? { ...item, status: "Claimed" } : item,
-        ),
+        current.map((item) => (item.status === "Pending" ? { ...item, status: "Claimed" } : item)),
       );
       setClaimingId("");
     }, 700);
@@ -298,11 +287,7 @@ export default function MyEarnings() {
   return (
     <main className="min-h-screen">
       <div className="mx-auto space-y-3 px-2 py-2">
-        <EarningsHero
-          summary={summary}
-          onClaimAll={handleClaimAll}
-          claimingId={claimingId}
-        />
+        <EarningsHero summary={summary} onClaimAll={handleClaimAll} claimingId={claimingId} />
 
         <section>
           <div className="sticky top-16 z-30 rounded-2xl border border-[#EAECF0] bg-white/95 p-3 shadow-sm backdrop-blur sm:p-4">
@@ -370,12 +355,9 @@ export default function MyEarnings() {
             ) : (
               <div className="flex min-h-[260px] flex-col items-center justify-center rounded-2xl border border-dashed border-[#D9E1F2] bg-white px-6 py-10 text-center">
                 <WalletCards className="mb-4 h-10 w-10 text-[#2F0FD1]" />
-                <h3 className="text-lg font-semibold text-[#101828]">
-                  No earnings found
-                </h3>
+                <h3 className="text-lg font-semibold text-[#101828]">No earnings found</h3>
                 <p className="mt-2 max-w-md text-sm leading-6 text-[#667085]">
-                  Rewards from completed quests and accepted task work will
-                  appear here.
+                  Rewards from completed quests and accepted task work will appear here.
                 </p>
               </div>
             )}

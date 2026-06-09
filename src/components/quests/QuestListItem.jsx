@@ -22,10 +22,7 @@ function getTimelineLabel(quest) {
 
 function getEntriesCount(quest) {
   return Number(
-    quest.entriesCount ??
-      quest.submissionsCount ??
-      quest.metadata?.submissions?.length ??
-      0,
+    quest.entriesCount ?? quest.submissionsCount ?? quest.metadata?.submissions?.length ?? 0,
   );
 }
 
@@ -49,9 +46,7 @@ export default function QuestListItem({ quest, hasApplied, onClick }) {
 
             {isCreator ? <Badge2 tone="purple">Creator</Badge2> : null}
 
-            {!isCreator && hasSubmitted ? (
-              <Badge2 tone="blue">Entry received</Badge2>
-            ) : null}
+            {!isCreator && hasSubmitted ? <Badge2 tone="blue">Entry received</Badge2> : null}
           </div>
 
           <h3 className="line-clamp-1 text-[15px] font-semibold text-[#101828] sm:text-base">
@@ -66,24 +61,18 @@ export default function QuestListItem({ quest, hasApplied, onClick }) {
         <div className="grid shrink-0 grid-cols-3 gap-2 md:w-[430px]">
           <div className="rounded-xl bg-[#F8FAFC] px-3 py-2">
             <p className="text-[11px] text-[#667085]">Reward</p>
-            <p className="truncate text-sm font-semibold text-[#101828]">
-              {formatReward(quest)}
-            </p>
+            <p className="truncate text-sm font-semibold text-[#101828]">{formatReward(quest)}</p>
           </div>
 
           <div className="rounded-xl bg-[#F8FAFC] px-3 py-2">
             <p className="text-[11px] text-[#667085]">Entries</p>
-            <p className="text-sm font-semibold text-[#101828]">
-              {entriesCount}
-            </p>
+            <p className="text-sm font-semibold text-[#101828]">{entriesCount}</p>
           </div>
 
           <div className="flex items-center justify-between rounded-xl bg-[#F8FAFC] px-3 py-2">
             <div>
               <p className="text-[11px] text-[#667085]">{timeline.label}</p>
-              <p className="text-sm font-semibold text-[#101828]">
-                {timeline.value}
-              </p>
+              <p className="text-sm font-semibold text-[#101828]">{timeline.value}</p>
             </div>
             <ChevronRight className="h-4 w-4 text-[#98A2B3] transition group-hover:text-[#2F0FD1]" />
           </div>

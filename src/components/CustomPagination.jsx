@@ -46,9 +46,7 @@ function CustomPagination({ currentPage, totalPages, onPageChange }) {
             aria-disabled={currentPage === 1}
             className={[
               "rounded-lg border border-[#EAECF5] bg-white text-[#667085] shadow-sm",
-              currentPage === 1
-                ? "pointer-events-none opacity-50"
-                : "hover:bg-[#F9FAFB]",
+              currentPage === 1 ? "pointer-events-none opacity-50" : "hover:bg-[#F9FAFB]",
             ].join(" ")}
             onClick={(e) => {
               e.preventDefault();

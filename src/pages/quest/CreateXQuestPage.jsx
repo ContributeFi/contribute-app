@@ -23,11 +23,7 @@ import { useSocketFi } from "@socketfi/react";
 import Badge2 from "@/components/ui/Badge2";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "react-toastify";
-import {
-  activeFeeAssets,
-  escrowContract,
-  selectedNetwork,
-} from "@/lib/contracts";
+import { activeFeeAssets, escrowContract, selectedNetwork } from "@/lib/contracts";
 import { datetimeLocalToUnixSeconds } from "@/lib/utils";
 import { useWallet } from "@/hooks/useWallet";
 import { WalletKitService } from "@/utils/wallet-kit/services/global-service";
@@ -70,9 +66,7 @@ function getDefaultEndAt() {
 }
 
 function getAssetByCode(code) {
-  return (
-    activeFeeAssets?.find((item) => item.code === code) || activeFeeAssets[0]
-  );
+  return activeFeeAssets?.find((item) => item.code === code) || activeFeeAssets[0];
 }
 
 function extractRewardId(res) {
@@ -131,9 +125,7 @@ function StickySummary({
       <div className="rounded-2xl border border-[#EAECF0] bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <Sparkles className="h-4 w-4 text-[#2F0FD1]" />
-          <h3 className="text-sm font-semibold text-[#101828]">
-            Quest summary
-          </h3>
+          <h3 className="text-sm font-semibold text-[#101828]">Quest summary</h3>
         </div>
 
         <div className="space-y-3">
@@ -147,9 +139,7 @@ function StickySummary({
           ].map(([label, value]) => (
             <div key={label} className="rounded-xl bg-[#F8FAFC] px-3 py-2">
               <p className="text-[11px] text-[#667085]">{label}</p>
-              <p className="mt-0.5 truncate text-sm font-semibold text-[#101828]">
-                {value}
-              </p>
+              <p className="mt-0.5 truncate text-sm font-semibold text-[#101828]">{value}</p>
             </div>
           ))}
         </div>
@@ -158,9 +148,7 @@ function StickySummary({
       <div className="rounded-2xl border border-[#EAECF0] bg-white p-5 shadow-sm">
         <div className="mb-3 flex items-center gap-2">
           <Info className="h-4 w-4 text-[#2F0FD1]" />
-          <h3 className="text-sm font-semibold text-[#101828]">
-            Eligibility rules
-          </h3>
+          <h3 className="text-sm font-semibold text-[#101828]">Eligibility rules</h3>
         </div>
 
         <div className="space-y-3">
@@ -168,12 +156,8 @@ function StickySummary({
             `Minimum followers: ${minFollowers || 0}`,
             `Minimum following: ${minFollowing || 0}`,
             `Account age: ${minAccountAgeDays || 0} days`,
-            verifiedOnly
-              ? "Verified accounts only"
-              : "Verification not required",
-            allowProtectedAccounts
-              ? "Protected accounts allowed"
-              : "Public accounts recommended",
+            verifiedOnly ? "Verified accounts only" : "Verification not required",
+            allowProtectedAccounts ? "Protected accounts allowed" : "Public accounts recommended",
           ].map((item) => (
             <div
               key={item}
@@ -193,8 +177,8 @@ function StickySummary({
         </div>
 
         <p className="text-sm leading-6 text-[#667085]">
-          Higher-ranked winners must receive an amount greater than or equal to
-          lower-ranked winners. Equal rewards are allowed.
+          Higher-ranked winners must receive an amount greater than or equal to lower-ranked
+          winners. Equal rewards are allowed.
         </p>
       </div>
     </aside>
@@ -356,9 +340,7 @@ export default function CreateXQuestPage() {
 
   function updatePrizeAmount(index, value) {
     setPrizes((current) =>
-      current.map((item, itemIndex) =>
-        itemIndex === index ? { ...item, amount: value } : item,
-      ),
+      current.map((item, itemIndex) => (itemIndex === index ? { ...item, amount: value } : item)),
     );
 
     markDraftChanged();
@@ -473,9 +455,7 @@ export default function CreateXQuestPage() {
             selectionType,
             winnerCount: normalizedWinnerCount,
             maxParticipants:
-              selectionType === "first_come_first_serve"
-                ? Number(maxParticipants)
-                : undefined,
+              selectionType === "first_come_first_serve" ? Number(maxParticipants) : undefined,
             prizes: prizes.map((prize, index) => ({
               rank: index + 1,
               amount: Number(prize.amount),
@@ -558,9 +538,7 @@ export default function CreateXQuestPage() {
 
       toast.success("Draft saved.");
     } catch (error) {
-      toast.error(
-        error instanceof Error ? error.message : "Failed to save draft.",
-      );
+      toast.error(error instanceof Error ? error.message : "Failed to save draft.");
     } finally {
       setSavingDraft(false);
     }
@@ -589,9 +567,7 @@ export default function CreateXQuestPage() {
 
       const token = accessToken || localStorage.getItem("accessToken");
 
-      const rewards = prizes.map((prize) =>
-        String(Math.round(Number(prize.amount) * 1e7)),
-      );
+      const rewards = prizes.map((prize) => String(Math.round(Number(prize.amount) * 1e7)));
 
       let submitResponse;
 
@@ -670,14 +646,9 @@ export default function CreateXQuestPage() {
                     type: "address",
                   }),
                   nativeToScVal(escrowContract, { type: "address" }),
-                  nativeToScVal(
-                    String(
-                      Math.round(totalRewardAmount * 1e7) + Number(questFee),
-                    ),
-                    {
-                      type: "i128",
-                    },
-                  ),
+                  nativeToScVal(String(Math.round(totalRewardAmount * 1e7) + Number(questFee)), {
+                    type: "i128",
+                  }),
                 ]),
               }),
               new xdr.ScMapEntry({
@@ -730,11 +701,7 @@ export default function CreateXQuestPage() {
       toast.success("Payment confirmed. You can now publish this quest.");
     } catch (error) {
       console.error(error);
-      toast.error(
-        error instanceof Error
-          ? error.message
-          : "Payment could not be completed.",
-      );
+      toast.error(error instanceof Error ? error.message : "Payment could not be completed.");
     } finally {
       setProcessingPayment(false);
     }
@@ -767,9 +734,7 @@ export default function CreateXQuestPage() {
       toast.success("Quest published successfully.");
       navigate(`/quests/${data.quest?._id || currentDraftId}`);
     } catch (error) {
-      toast.error(
-        error instanceof Error ? error.message : "Failed to publish quest.",
-      );
+      toast.error(error instanceof Error ? error.message : "Failed to publish quest.");
     } finally {
       setSubmitting(false);
     }
@@ -809,9 +774,7 @@ export default function CreateXQuestPage() {
         }
 
         const hasStarted =
-          quest.status !== "draft" &&
-          quest.startAt &&
-          new Date() >= new Date(quest.startAt);
+          quest.status !== "draft" && quest.startAt && new Date() >= new Date(quest.startAt);
 
         if (hasStarted) {
           toast.error("This quest has already started and cannot be edited.");
@@ -837,43 +800,30 @@ export default function CreateXQuestPage() {
         setEndAt(toDateTimeLocal(quest.endAt) || getDefaultEndAt());
 
         setMinFollowers(
-          quest.eligibility?.minFollowers
-            ? String(quest.eligibility.minFollowers)
-            : "",
+          quest.eligibility?.minFollowers ? String(quest.eligibility.minFollowers) : "",
         );
         setMinFollowing(
-          quest.eligibility?.minFollowing
-            ? String(quest.eligibility.minFollowing)
-            : "",
+          quest.eligibility?.minFollowing ? String(quest.eligibility.minFollowing) : "",
         );
         setMinAccountAgeDays(
-          quest.eligibility?.minAccountAgeDays
-            ? String(quest.eligibility.minAccountAgeDays)
-            : "",
+          quest.eligibility?.minAccountAgeDays ? String(quest.eligibility.minAccountAgeDays) : "",
         );
         setVerifiedOnly(Boolean(quest.eligibility?.verifiedOnly));
-        setAllowProtectedAccounts(
-          Boolean(quest.eligibility?.allowProtectedAccounts),
-        );
+        setAllowProtectedAccounts(Boolean(quest.eligibility?.allowProtectedAccounts));
 
         setDefaultPoints(Number(quest.reward?.defaultPoints || 500));
         setAsset(getAssetByCode(quest.reward?.asset));
         setSelectionType(quest.reward?.selectionType || "random_single");
         setWinnerCount(String(quest.reward?.winnerCount || 1));
         setMaxParticipants(
-          quest.reward?.maxParticipants
-            ? String(quest.reward.maxParticipants)
-            : "",
+          quest.reward?.maxParticipants ? String(quest.reward.maxParticipants) : "",
         );
 
         setPrizes(
           quest.reward?.prizes?.length
             ? quest.reward.prizes.map((prize, index) => ({
                 rank: Number(prize.rank || index + 1),
-                amount:
-                  prize.amount || prize.amount === 0
-                    ? String(prize.amount)
-                    : "",
+                amount: prize.amount || prize.amount === 0 ? String(prize.amount) : "",
               }))
             : [{ rank: 1, amount: "" }],
         );
@@ -882,9 +832,7 @@ export default function CreateXQuestPage() {
           setPageStep("review");
         }
       } catch (error) {
-        toast.error(
-          error instanceof Error ? error.message : "Failed to load quest.",
-        );
+        toast.error(error instanceof Error ? error.message : "Failed to load quest.");
         navigate("/quests");
       } finally {
         if (isMounted) {
@@ -900,9 +848,7 @@ export default function CreateXQuestPage() {
     };
   }, [isExistingQuest, questId, accessToken, navigate]);
 
-  const socketfiAccessToken = useSelector(
-    (state) => state.socketfiAuth.accessToken,
-  );
+  const socketfiAccessToken = useSelector((state) => state.socketfiAuth.accessToken);
   const userProfile = useSelector((state) => state.socketfiAuth.userProfile);
 
   // console.log("the user profile is", userProfile?.address?.TESTNET);
@@ -915,9 +861,7 @@ export default function CreateXQuestPage() {
         <div className="flex min-h-[360px] items-center justify-center rounded-2xl border border-[#EAECF0] bg-white p-8 shadow-sm">
           <div className="text-center">
             <Loader2 className="mx-auto mb-4 h-8 w-8 animate-spin text-[#2F0FD1]" />
-            <p className="text-sm font-medium text-[#344054]">
-              Loading quest...
-            </p>
+            <p className="text-sm font-medium text-[#344054]">Loading quest...</p>
           </div>
         </div>
       </main>
@@ -930,9 +874,7 @@ export default function CreateXQuestPage() {
         <button
           type="button"
           disabled={isBusy}
-          onClick={() =>
-            pageStep === "review" ? setPageStep("form") : navigate(-1)
-          }
+          onClick={() => (pageStep === "review" ? setPageStep("form") : navigate(-1))}
           className="inline-flex h-10 items-center gap-2 rounded-xl border border-[#EAECF0] bg-white px-4 text-sm font-medium text-[#344054] shadow-sm transition hover:bg-[#F9FAFB] disabled:cursor-not-allowed disabled:opacity-60"
         >
           <ArrowLeft className="h-4 w-4" />
@@ -990,9 +932,7 @@ export default function CreateXQuestPage() {
                 className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-3 py-2"
               >
                 <p className="text-[11px] text-[#667085]">{label}</p>
-                <p className="mt-0.5 text-sm font-semibold text-[#101828] capitalize">
-                  {value}
-                </p>
+                <p className="mt-0.5 text-sm font-semibold text-[#101828] capitalize">{value}</p>
               </div>
             ))}
           </div>
@@ -1016,10 +956,7 @@ export default function CreateXQuestPage() {
                   ["Winners", normalizedWinnerCount],
                   ["Asset", asset?.code],
                 ].map(([label, value]) => (
-                  <div
-                    key={label}
-                    className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] p-4"
-                  >
+                  <div key={label} className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] p-4">
                     <p className="text-[11px] text-[#667085]">{label}</p>
                     <p className="mt-1 text-sm font-semibold text-[#101828]">
                       {value || "Not set"}
@@ -1029,18 +966,12 @@ export default function CreateXQuestPage() {
               </div>
 
               <div className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] p-4">
-                <h3 className="text-sm font-semibold text-[#101828]">
-                  Description
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-[#667085]">
-                  {description}
-                </p>
+                <h3 className="text-sm font-semibold text-[#101828]">Description</h3>
+                <p className="mt-2 text-sm leading-6 text-[#667085]">{description}</p>
               </div>
 
               <div className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] p-4">
-                <h3 className="text-sm font-semibold text-[#101828]">
-                  Prize breakdown
-                </h3>
+                <h3 className="text-sm font-semibold text-[#101828]">Prize breakdown</h3>
 
                 <div className="mt-3 space-y-2">
                   {prizes.map((prize, index) => (
@@ -1050,8 +981,7 @@ export default function CreateXQuestPage() {
                     >
                       <span className="text-[#667085]">Rank {index + 1}</span>
                       <span className="font-semibold text-[#101828]">
-                        {(Number(prize.amount) || 0).toLocaleString()}{" "}
-                        {asset?.code}
+                        {(Number(prize.amount) || 0).toLocaleString()} {asset?.code}
                       </span>
                     </div>
                   ))}
@@ -1059,9 +989,7 @@ export default function CreateXQuestPage() {
               </div>
 
               <div className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] p-4">
-                <h3 className="text-sm font-semibold text-[#101828]">
-                  Payment summary
-                </h3>
+                <h3 className="text-sm font-semibold text-[#101828]">Payment summary</h3>
 
                 <div className="mt-3 space-y-2">
                   <div className="flex justify-between text-sm">
@@ -1072,9 +1000,7 @@ export default function CreateXQuestPage() {
                   </div>
 
                   <div className="flex justify-between text-sm">
-                    <span className="text-[#667085]">
-                      Platform fee ({PLATFORM_FEE_PERCENT}%)
-                    </span>
+                    <span className="text-[#667085]">Platform fee ({PLATFORM_FEE_PERCENT}%)</span>
                     <span className="font-semibold text-[#101828]">
                       {platformFeeAmount.toLocaleString()} {asset?.code}
                     </span>
@@ -1082,9 +1008,7 @@ export default function CreateXQuestPage() {
 
                   <div className="mt-3 border-t border-[#EAECF0] pt-3">
                     <div className="flex justify-between text-base">
-                      <span className="font-semibold text-[#101828]">
-                        Total due
-                      </span>
+                      <span className="font-semibold text-[#101828]">Total due</span>
                       <span className="font-bold text-[#2F0FD1]">
                         {totalAmountDue.toLocaleString()} {asset?.code}
                       </span>
@@ -1170,13 +1094,9 @@ export default function CreateXQuestPage() {
               >
                 <div className="mb-3 flex items-center gap-2">
                   <CheckCircle2
-                    className={`h-4 w-4 ${
-                      paymentConfirmed ? "text-[#027A48]" : "text-[#B54708]"
-                    }`}
+                    className={`h-4 w-4 ${paymentConfirmed ? "text-[#027A48]" : "text-[#B54708]"}`}
                   />
-                  <h3 className="text-sm font-semibold text-[#101828]">
-                    Funding status
-                  </h3>
+                  <h3 className="text-sm font-semibold text-[#101828]">Funding status</h3>
                 </div>
 
                 <p className="text-sm leading-6 text-[#667085]">
@@ -1388,9 +1308,7 @@ export default function CreateXQuestPage() {
                     <input
                       type="checkbox"
                       checked={allowProtectedAccounts}
-                      onChange={(e) =>
-                        setAllowProtectedAccounts(e.target.checked)
-                      }
+                      onChange={(e) => setAllowProtectedAccounts(e.target.checked)}
                       className="mt-1"
                     />
                     <span>
@@ -1417,10 +1335,9 @@ export default function CreateXQuestPage() {
                       Reward funding is confirmed.
                     </p>
                     <p className="mt-1 text-xs leading-5 text-[#667085]">
-                      Reward asset, winner count, selection type, and prize
-                      amounts are locked. You can still update the quest
-                      details, timeline, post requirements, and eligibility
-                      rules before publishing.
+                      Reward asset, winner count, selection type, and prize amounts are locked. You
+                      can still update the quest details, timeline, post requirements, and
+                      eligibility rules before publishing.
                     </p>
                   </div>
                 ) : null}
@@ -1467,24 +1384,15 @@ export default function CreateXQuestPage() {
                           syncPrizeCount(1);
                         }
 
-                        if (
-                          value === "random_multiple" &&
-                          normalizedWinnerCount < 2
-                        ) {
+                        if (value === "random_multiple" && normalizedWinnerCount < 2) {
                           syncPrizeCount(2);
                         }
                       }}
                       className={`${selectClass} mt-2`}
                     >
-                      <option value="random_single">
-                        Random single winner
-                      </option>
-                      <option value="random_multiple">
-                        Random multiple winners
-                      </option>
-                      <option value="first_come_first_serve">
-                        First come, first serve
-                      </option>
+                      <option value="random_single">Random single winner</option>
+                      <option value="random_multiple">Random multiple winners</option>
+                      <option value="first_come_first_serve">First come, first serve</option>
                     </select>
                   </div>
 
@@ -1495,9 +1403,7 @@ export default function CreateXQuestPage() {
                       type="number"
                       min={selectionType === "random_multiple" ? 2 : 1}
                       value={winnerCount}
-                      disabled={
-                        selectionType === "random_single" || rewardConfigLocked
-                      }
+                      disabled={selectionType === "random_single" || rewardConfigLocked}
                       onChange={(e) => handleWinnerCountChange(e.target.value)}
                       onBlur={handleWinnerCountBlur}
                       className={`${inputClass} mt-2 disabled:bg-[#F9FAFB] disabled:text-[#98A2B3]`}
@@ -1522,16 +1428,12 @@ export default function CreateXQuestPage() {
 
                 <div className="mt-5 space-y-3">
                   <div className="flex items-center justify-between gap-3">
-                    <h3 className="text-sm font-semibold text-[#101828]">
-                      Prize breakdown
-                    </h3>
+                    <h3 className="text-sm font-semibold text-[#101828]">Prize breakdown</h3>
 
                     <button
                       type="button"
                       onClick={addPrize}
-                      disabled={
-                        selectionType === "random_single" || rewardConfigLocked
-                      }
+                      disabled={selectionType === "random_single" || rewardConfigLocked}
                       className="inline-flex h-9 items-center gap-2 rounded-xl border border-[#EAECF0] bg-white px-3 text-xs font-medium text-[#344054] shadow-sm transition hover:bg-[#F9FAFB] disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       <Plus className="h-3.5 w-3.5" />
@@ -1554,9 +1456,7 @@ export default function CreateXQuestPage() {
                         step="0.0000001"
                         disabled={rewardConfigLocked}
                         value={prize.amount}
-                        onChange={(e) =>
-                          updatePrizeAmount(index, e.target.value)
-                        }
+                        onChange={(e) => updatePrizeAmount(index, e.target.value)}
                         className={inputClass}
                         placeholder={`Prize amount in ${asset?.code}`}
                       />

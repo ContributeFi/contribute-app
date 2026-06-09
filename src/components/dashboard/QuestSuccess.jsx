@@ -25,9 +25,7 @@ function QuestSuccess({ openQuestSuccess, setOpenQuestSuccess }) {
           <img src="/success.svg" alt="" className="mx-auto h-28 w-28" />
 
           <div className="space-y-3">
-            <p className="text-[28px] font-semibold tracking-tight text-[#101828]">
-              Successful!
-            </p>
+            <p className="text-[28px] font-semibold tracking-tight text-[#101828]">Successful!</p>
             <p className="text-sm leading-6 text-[#667085]">
               Your quest has been successfully published.
             </p>

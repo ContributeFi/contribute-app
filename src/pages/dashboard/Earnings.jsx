@@ -1,13 +1,5 @@
 import { useMemo, useState } from "react";
-import {
-  Wallet,
-  Coins,
-  Clock3,
-  CheckCircle2,
-  ArrowUpRight,
-  Search,
-  Sparkles,
-} from "lucide-react";
+import { Wallet, Coins, Clock3, CheckCircle2, ArrowUpRight, Search, Sparkles } from "lucide-react";
 import Heading from "@/components/dashboard/Heading";
 import { Button } from "@/components/ui/button";
 import CustomPagination from "@/components/CustomPagination";
@@ -66,15 +58,11 @@ function EarningStatCard({ label, value, icon, accent = "blue", helperText }) {
 
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-medium tracking-wide text-[#667085]">
-            {label}
-          </p>
+          <p className="text-sm font-medium tracking-wide text-[#667085]">{label}</p>
           <p className="mt-2 text-[28px] leading-none font-semibold tracking-tight text-[#101828]">
             {value}
           </p>
-          {helperText ? (
-            <p className="mt-2 text-xs text-[#98A2B3]">{helperText}</p>
-          ) : null}
+          {helperText ? <p className="mt-2 text-xs text-[#98A2B3]">{helperText}</p> : null}
         </div>
 
         <div
@@ -108,9 +96,7 @@ function EmptyState({ title, description, action }) {
       </div>
 
       <div className="max-w-lg space-y-2">
-        <h3 className="text-[22px] font-semibold tracking-tight text-[#101828]">
-          {title}
-        </h3>
+        <h3 className="text-[22px] font-semibold tracking-tight text-[#101828]">{title}</h3>
         <p className="text-sm leading-6 text-[#667085]">{description}</p>
       </div>
 
@@ -195,12 +181,9 @@ function EarningRowCard({ item, onClaim }) {
           </div>
 
           <div className="space-y-1">
-            <h3 className="text-[17px] font-semibold text-[#101828]">
-              {item?.title || "Reward"}
-            </h3>
+            <h3 className="text-[17px] font-semibold text-[#101828]">{item?.title || "Reward"}</h3>
             <p className="text-sm leading-6 text-[#667085]">
-              {item?.description ||
-                "Reward entry from your contribution activity."}
+              {item?.description || "Reward entry from your contribution activity."}
             </p>
           </div>
 
@@ -353,10 +336,7 @@ function Earnings() {
   }, [filteredRewards, currentPage]);
 
   const summary = useMemo(() => {
-    const totalEarned = rewards.reduce(
-      (sum, item) => sum + (item.amount ?? 0),
-      0,
-    );
+    const totalEarned = rewards.reduce((sum, item) => sum + (item.amount ?? 0), 0);
     const totalClaimed = rewards
       .filter((item) => item.status === "claimed")
       .reduce((sum, item) => sum + (item.amount ?? 0), 0);
@@ -435,9 +415,8 @@ function Earnings() {
                   Track rewards, pending reviews, and claims
                 </h2>
                 <p className="max-w-2xl text-[15px] leading-7 text-[#667085]">
-                  View your contribution rewards, monitor claimable balances,
-                  and keep track of what has been claimed or is still awaiting
-                  approval.
+                  View your contribution rewards, monitor claimable balances, and keep track of what
+                  has been claimed or is still awaiting approval.
                 </p>
               </div>
 
@@ -532,9 +511,7 @@ function Earnings() {
                         className={[
                           "h-10 rounded-lg px-4 text-sm font-medium transition-all",
                           "hover:bg-white hover:text-[#2F0FD1]",
-                          isActive
-                            ? "bg-white text-[#2F0FD1] shadow-sm"
-                            : "text-[#667085]",
+                          isActive ? "bg-white text-[#2F0FD1] shadow-sm" : "text-[#667085]",
                         ].join(" ")}
                       >
                         {option.label}
@@ -546,8 +523,7 @@ function Earnings() {
 
               <div className="flex flex-wrap items-center gap-2">
                 <span className="rounded-full bg-[#F4F7FF] px-3 py-1.5 text-xs font-medium text-[#2F0FD1]">
-                  View:{" "}
-                  {VIEW_OPTIONS.find((item) => item.value === view)?.label}
+                  View: {VIEW_OPTIONS.find((item) => item.value === view)?.label}
                 </span>
 
                 <span className="rounded-full bg-[#F8FAFC] px-3 py-1.5 text-xs font-medium text-[#667085]">
@@ -599,12 +575,7 @@ function Earnings() {
             <div className="rounded-2xl bg-[#F8FAFC] p-3 ring-1 ring-[#EEF2FF] md:p-4">
               <div className="space-y-4">
                 {paginatedRewards.map((item) => (
-                  <div
-                    key={item.id}
-                    className={
-                      claimingIds.includes(item.id) ? "opacity-70" : ""
-                    }
-                  >
+                  <div key={item.id} className={claimingIds.includes(item.id) ? "opacity-70" : ""}>
                     <EarningRowCard item={item} onClaim={handleClaimReward} />
                   </div>
                 ))}

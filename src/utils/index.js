@@ -205,11 +205,9 @@ export const mapFormToCreateGrowthQuestPayload = (data) => {
     if (task.tweetUrl) taskPayload.tweetUrl = task.tweetUrl;
     if (task.discordLink) taskPayload.discordLink = task.discordLink;
     if (task.telegramLink) taskPayload.telegramLink = task.telegramLink;
-    if (task.telegramGroupLink)
-      taskPayload.telegramGroupLink = task.telegramGroupLink;
+    if (task.telegramGroupLink) taskPayload.telegramGroupLink = task.telegramGroupLink;
     if (task.channelId) taskPayload.channelId = task.channelId;
-    if (task.keywordValidation)
-      taskPayload.keywordValidation = task.keywordValidation;
+    if (task.keywordValidation) taskPayload.keywordValidation = task.keywordValidation;
 
     return taskPayload;
   });

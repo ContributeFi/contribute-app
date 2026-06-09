@@ -14,9 +14,7 @@ function NotFound() {
         </div>
 
         {/* title */}
-        <h1 className="text-3xl font-semibold tracking-tight text-[#101828]">
-          Page not found
-        </h1>
+        <h1 className="text-3xl font-semibold tracking-tight text-[#101828]">Page not found</h1>
 
         {/* subtitle */}
         <p className="mt-3 text-sm leading-6 text-[#667085]">
@@ -25,11 +23,7 @@ function NotFound() {
 
         {/* actions */}
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
-          <Button
-            onClick={() => navigate(-1)}
-            variant="outline"
-            className="h-11 rounded-xl"
-          >
+          <Button onClick={() => navigate(-1)} variant="outline" className="h-11 rounded-xl">
             <ArrowLeft className="h-4 w-4" />
             Go back
           </Button>

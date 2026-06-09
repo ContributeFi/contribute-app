@@ -6,13 +6,7 @@ import { UsernameSchema } from "@/schemas";
 import { checkUsernameAvailability, createUsername } from "@/services";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import {
-  ArrowRight,
-  AtSign,
-  CheckCircle2,
-  Loader2,
-  XCircle,
-} from "lucide-react";
+import { ArrowRight, AtSign, CheckCircle2, Loader2, XCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
@@ -71,48 +65,45 @@ function Username() {
 
   const isTaken = usernameCheckData?.data?.content?.isAvailable === false;
 
-  const { mutate: createUserNameMutation, isPending: createUsernamePending } =
-    useMutation({
-      mutationFn: (data) => createUsername(data),
-      onSuccess: async (data, variable) => {
-        if (data.status === 200) {
-          const content = data.data.content;
+  const { mutate: createUserNameMutation, isPending: createUsernamePending } = useMutation({
+    mutationFn: (data) => createUsername(data),
+    onSuccess: async (data, variable) => {
+      if (data.status === 200) {
+        const content = data.data.content;
 
-          setItemInSessionStorage("user", content);
+        setItemInSessionStorage("user", content);
 
-          if (content.authMethod === "WALLET") {
-            login({
-              token,
-              email: null,
-              user: null,
-              otp: null,
-              username: variable.username,
-            });
+        if (content.authMethod === "WALLET") {
+          login({
+            token,
+            email: null,
+            user: null,
+            otp: null,
+            username: variable.username,
+          });
 
-            //navigate("/get-started/bind-email", { replace: true });
-          } else {
-            login({
-              token,
-              email,
-              user: null,
-              otp,
-              username: variable.username,
-            });
-
-            //navigate("/get-started/create-wallet", { replace: true });
-          }
-
-          reset();
+          //navigate("/get-started/bind-email", { replace: true });
         } else {
-          toast.error("Something went wrong");
+          login({
+            token,
+            email,
+            user: null,
+            otp,
+            username: variable.username,
+          });
+
+          //navigate("/get-started/create-wallet", { replace: true });
         }
-      },
-      onError: (error) => {
-        toast.error(
-          error?.response?.data?.message || "Could not create username",
-        );
-      },
-    });
+
+        reset();
+      } else {
+        toast.error("Something went wrong");
+      }
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.message || "Could not create username");
+    },
+  });
 
   const handleUsernameChange = (e) => {
     const value = e.target.value.toLowerCase().replace(/\s/g, "");
@@ -129,11 +120,7 @@ function Username() {
   };
 
   const disableSubmit =
-    createUsernamePending ||
-    checkingUsername ||
-    !isUsernameValid ||
-    isTaken ||
-    !isAvailable;
+    createUsernamePending || checkingUsername || !isUsernameValid || isTaken || !isAvailable;
 
   return (
     <div className="text-left">
@@ -182,9 +169,7 @@ function Username() {
                 Username is already taken
               </p>
             ) : (
-              <p className="text-sm text-[#98A2B3]">
-                Use letters, numbers, or underscores.
-              </p>
+              <p className="text-sm text-[#98A2B3]">Use letters, numbers, or underscores.</p>
             )}
           </div>
         </div>

@@ -5,13 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  ArrowRight,
-  CheckCircle2,
-  Link2,
-  Loader2,
-  UserCog,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, Link2, UserCog } from "lucide-react";
 import { FaDiscord, FaPlus, FaTelegram } from "react-icons/fa";
 import { FaSquareXTwitter, FaUserLarge } from "react-icons/fa6";
 import { PiGithubLogoFill } from "react-icons/pi";
@@ -24,12 +18,7 @@ import {
   removeItemFromSessionStorage,
   setItemInSessionStorage,
 } from "@/lib/utils";
-import {
-  linkedAccount,
-  updateBio,
-  uploadProfilePicture,
-  completeOnboarding,
-} from "@/services";
+import { linkedAccount, uploadProfilePicture, completeOnboarding } from "@/services";
 
 const API_URL = "http://localhost:4000";
 
@@ -92,11 +81,9 @@ function Connect() {
   const [saving, setSaving] = useState(false);
   const [user] = useState(() => getItemFromSessionStorage("user"));
 
-  const [imageUrl, setImageUrl] = useState(
-    () => getItemFromSessionStorage("imageUrl") || null,
-  );
+  const [imageUrl, setImageUrl] = useState(() => getItemFromSessionStorage("imageUrl") || null);
 
-  const [bio, setBio] = useState(() => getItemFromSessionStorage("bio") || "");
+  const [bio, setBio] = useState("");
 
   const [linkingAccount, setLinkingAccount] = useState(null);
   const [telegramUsername, setTelegramUsername] = useState("");
@@ -124,9 +111,7 @@ function Connect() {
   useEffect(() => {
     if (!error) return;
     toast.error(
-      message
-        ? decodeURIComponent(message)
-        : "An error occurred while linking your account",
+      message ? decodeURIComponent(message) : "An error occurred while linking your account",
     );
   }, [error, message]);
 
@@ -207,27 +192,18 @@ function Connect() {
       return;
     }
 
-    if (
-      accountType === "github" ||
-      accountType === "discord" ||
-      accountType === "twitter"
-    ) {
+    if (accountType === "github" || accountType === "discord" || accountType === "twitter") {
       setLinkingAccount(accountType);
       try {
-        const res = await fetch(
-          `${API_URL}/api/bind-socials/${accountType}/init`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        const res = await fetch(`${API_URL}/api/bind-socials/${accountType}/init`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-        );
+        });
 
         const data = await res.json();
         if (!res.ok || !data.success) {
-          throw new Error(
-            data?.message || `Failed to link ${accountType} account`,
-          );
+          throw new Error(data?.message || `Failed to link ${accountType} account`);
         }
         window.location.href = `${API_URL}${data.url}`;
       } catch (error) {
@@ -251,9 +227,7 @@ function Connect() {
     }
 
     if (!/^[a-zA-Z0-9_]{5,32}$/.test(cleanUsername)) {
-      toast.error(
-        "Use 5-32 characters. Letters, numbers, and underscores only.",
-      );
+      toast.error("Use 5-32 characters. Letters, numbers, and underscores only.");
       return;
     }
 
@@ -273,9 +247,7 @@ function Connect() {
 
       if (!response.ok) {
         toast.error(
-          data?.message ||
-            data?.error ||
-            `Request failed with status ${response.status}`,
+          data?.message || data?.error || `Request failed with status ${response.status}`,
         );
         return;
       }
@@ -360,7 +332,7 @@ function Connect() {
       setUploading(true);
 
       const response = await uploadProfilePicture(file);
-      const profileImageUrl = response?.data?.content?.profileImageUrl;
+      const profileImageUrl = response?.data?.data?.profileImageUrl;
 
       if (!profileImageUrl) {
         toast.error("Failed to upload profile picture");
@@ -371,9 +343,7 @@ function Connect() {
       setItemInSessionStorage("imageUrl", profileImageUrl);
       toast.success("Profile picture updated");
     } catch (error) {
-      toast.error(
-        error?.response?.data?.message || "Failed to upload profile picture",
-      );
+      toast.error(error?.response?.data?.message || "Failed to upload profile picture");
     } finally {
       setUploading(false);
     }
@@ -384,19 +354,7 @@ function Connect() {
 
     try {
       setSaving(true);
-
-      if (bio.trim()) {
-        const res = await updateBio(bio.trim());
-
-        if (!res?.data?.content?.bio) {
-          toast.error("Failed to save bio");
-          return;
-        }
-
-        toast.success("Profile updated");
-      }
-
-      await completeOnboarding();
+      await completeOnboarding(bio.trim() || undefined);
       finishAccountSetup({ includeBio: !!bio.trim() });
     } catch {
       toast.error("Failed to save bio");
@@ -406,7 +364,7 @@ function Connect() {
   }
 
   return (
-    <div className="mx-auto max-w-[600px] items-start justify-center px-4 py-5 sm:items-center sm:py-6">
+    <div className="mx-auto max-w-150 items-start justify-center px-4 py-5 sm:items-center sm:py-6">
       <div className="w-full">
         <div className="text-left">
           <div className="mb-5 text-center">
@@ -418,9 +376,9 @@ function Connect() {
               Set up your profile
             </h2>
 
-            <p className="mx-auto mt-2 max-w-[430px] text-sm leading-6 text-[#667085]">
-              Add your profile details and connect at least one social account
-              so projects can verify your contributor identity.
+            <p className="mx-auto mt-2 max-w-107.5 text-sm leading-6 text-[#667085]">
+              Add your profile details and connect at least one social account so projects can
+              verify your contributor identity.
             </p>
           </div>
 
@@ -465,19 +423,16 @@ function Connect() {
                   </Label>
 
                   <Textarea
-                    className="min-h-[72px] resize-none rounded-xl border border-[#EAECF0] bg-[#F8FAFC] px-3.5 py-2.5 text-sm text-[#101828] placeholder:text-[#98A2B3] focus-visible:ring-4 focus-visible:ring-[#EEF2FF]"
+                    className="min-h-18 resize-none rounded-xl border border-[#EAECF0] bg-[#F8FAFC] px-3.5 py-2.5 text-sm text-[#101828] placeholder:text-[#98A2B3] focus-visible:ring-4 focus-visible:ring-[#EEF2FF]"
                     placeholder="Tell projects what you do, your skills, and preferred tasks."
                     onChange={(e) => {
                       setBio(e.target.value);
-                      setItemInSessionStorage("bio", e.target.value);
                     }}
                     value={bio}
                     maxLength={240}
                   />
 
-                  <p className="mt-1.5 text-xs text-[#98A2B3]">
-                    {bio.length}/240 characters
-                  </p>
+                  <p className="mt-1.5 text-xs text-[#98A2B3]">{bio.length}/240 characters</p>
                 </div>
               </div>
             </section>
@@ -489,12 +444,8 @@ function Connect() {
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-semibold text-[#101828]">
-                    Link social accounts
-                  </h3>
-                  <p className="text-xs text-[#667085]">
-                    Recommended for contributor credibility.
-                  </p>
+                  <h3 className="text-sm font-semibold text-[#101828]">Link social accounts</h3>
+                  <p className="text-xs text-[#667085]">Recommended for contributor credibility.</p>
                 </div>
               </div>
 
@@ -556,9 +507,7 @@ function Connect() {
                 disabled={
                   uploading ||
                   saving ||
-                  (!imageUrl &&
-                    bio.trim().length === 0 &&
-                    linkedAccounts.length === 0)
+                  (!imageUrl && bio.trim().length === 0 && linkedAccounts.length === 0)
                 }
                 type="submit"
               >
@@ -610,11 +559,7 @@ function Connect() {
           </div>
         </Modal>
 
-        <Modal
-          open={showOtpModal}
-          onClose={() => setShowOtpModal(false)}
-          heading="Enter OTP"
-        >
+        <Modal open={showOtpModal} onClose={() => setShowOtpModal(false)} heading="Enter OTP">
           <div className="space-y-4">
             <p className="text-sm leading-6 text-[#667085]">
               Enter the code sent to your Telegram account.
@@ -638,11 +583,7 @@ function Connect() {
                 disabled={linkingAccount === "telegram"}
                 className="flex-1 rounded-xl bg-[#2F0FD1] text-white hover:bg-[#2409B8]"
               >
-                {linkingAccount === "telegram" ? (
-                  <ImSpinner5 className="animate-spin" />
-                ) : (
-                  "Verify"
-                )}
+                {linkingAccount === "telegram" ? <ImSpinner5 className="animate-spin" /> : "Verify"}
               </Button>
 
               <Button
@@ -663,9 +604,7 @@ function Connect() {
         >
           <div className="space-y-4">
             <div className="rounded-xl border border-[#EAECF0] bg-[#F8FAFC] p-4 text-sm leading-6 text-[#667085]">
-              <p className="font-medium text-[#101828]">
-                Complete these steps:
-              </p>
+              <p className="font-medium text-[#101828]">Complete these steps:</p>
 
               <ol className="mt-2 list-inside list-decimal space-y-1">
                 <li>

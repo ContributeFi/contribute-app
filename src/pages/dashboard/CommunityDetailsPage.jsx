@@ -4,12 +4,7 @@ import { RiTwitterXFill, RiInstagramFill } from "react-icons/ri";
 import { LuGithub } from "react-icons/lu";
 import { HiOutlineUsers, HiOutlineSparkles } from "react-icons/hi";
 import { ImSpinner5 } from "react-icons/im";
-import {
-  ArrowUpRight,
-  BriefcaseBusiness,
-  Coins,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowUpRight, BriefcaseBusiness, Coins, ShieldCheck } from "lucide-react";
 
 import BackButton from "@/components/BackButton";
 import TasksCard from "@/components/TasksCard";
@@ -24,12 +19,7 @@ import Sort from "@/components/Sort";
 import CustomPagination from "@/components/CustomPagination";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  getCommunity,
-  getQuestsByCommunity,
-  joinCommunity,
-  leaveCommunity,
-} from "@/services";
+import { getCommunity, getQuestsByCommunity, joinCommunity, leaveCommunity } from "@/services";
 import { useNavigate, useLocation, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { useAuth } from "@/hooks/useAuth";
@@ -72,9 +62,7 @@ function CommunityStatCard({ label, value, icon, accent = "blue" }) {
 
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-medium tracking-wide text-[#667085]">
-            {label}
-          </p>
+          <p className="text-sm font-medium tracking-wide text-[#667085]">{label}</p>
           <p className="mt-2 text-2xl leading-none font-semibold tracking-tight text-[#101828]">
             {value}
           </p>
@@ -180,9 +168,7 @@ function CommunityDetailsPage() {
     const term = searchValue.trim().toLowerCase();
 
     return quests.filter((quest) => {
-      const title = String(
-        quest?.title || quest?.questTitle || "",
-      ).toLowerCase();
+      const title = String(quest?.title || quest?.questTitle || "").toLowerCase();
       const category = String(quest?.category || "").toLowerCase();
       return title.includes(term) || category.includes(term);
     });
@@ -225,89 +211,71 @@ function CommunityDetailsPage() {
     },
   ];
 
-  const { mutate: joinCommunityMutation, isPending: joinCommunityPending } =
-    useMutation({
-      mutationFn: () => joinCommunity(community.id),
-      onMutate: async () => {
-        await queryClient.cancelQueries({
-          queryKey: ["community", communityId],
-        });
+  const { mutate: joinCommunityMutation, isPending: joinCommunityPending } = useMutation({
+    mutationFn: () => joinCommunity(community.id),
+    onMutate: async () => {
+      await queryClient.cancelQueries({
+        queryKey: ["community", communityId],
+      });
 
-        const previousCommunity = queryClient.getQueryData([
-          "community",
-          communityId,
-        ]);
+      const previousCommunity = queryClient.getQueryData(["community", communityId]);
 
-        queryClient.setQueryData(["community", communityId], (old) => ({
-          ...(old || {}),
-          isMember: true,
-          totalMembers: (old?.totalMembers ?? 0) + 1,
-        }));
+      queryClient.setQueryData(["community", communityId], (old) => ({
+        ...(old || {}),
+        isMember: true,
+        totalMembers: (old?.totalMembers ?? 0) + 1,
+      }));
 
-        return { previousCommunity };
-      },
-      onError: (error, _, context) => {
-        queryClient.setQueryData(
-          ["community", communityId],
-          context?.previousCommunity,
-        );
-        toast.error(
-          error?.response?.data?.message || "Failed to join community",
-        );
-      },
-      onSettled: () => {
-        queryClient.invalidateQueries({ queryKey: ["community", communityId] });
-      },
-      onSuccess: (data) => {
-        if (data?.status === 201) {
-          toast.success("Community joined successfully");
-        } else {
-          toast.error("Something went wrong");
-        }
-      },
-    });
+      return { previousCommunity };
+    },
+    onError: (error, _, context) => {
+      queryClient.setQueryData(["community", communityId], context?.previousCommunity);
+      toast.error(error?.response?.data?.message || "Failed to join community");
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["community", communityId] });
+    },
+    onSuccess: (data) => {
+      if (data?.status === 201) {
+        toast.success("Community joined successfully");
+      } else {
+        toast.error("Something went wrong");
+      }
+    },
+  });
 
-  const { mutate: leaveCommunityMutation, isPending: leaveCommunityPending } =
-    useMutation({
-      mutationFn: () => leaveCommunity(community.id, user?.id),
-      onMutate: async () => {
-        await queryClient.cancelQueries({
-          queryKey: ["community", communityId],
-        });
+  const { mutate: leaveCommunityMutation, isPending: leaveCommunityPending } = useMutation({
+    mutationFn: () => leaveCommunity(community.id, user?.id),
+    onMutate: async () => {
+      await queryClient.cancelQueries({
+        queryKey: ["community", communityId],
+      });
 
-        const previousCommunity = queryClient.getQueryData([
-          "community",
-          communityId,
-        ]);
+      const previousCommunity = queryClient.getQueryData(["community", communityId]);
 
-        queryClient.setQueryData(["community", communityId], (old) => ({
-          ...(old || {}),
-          isMember: false,
-          totalMembers: Math.max((old?.totalMembers ?? 1) - 1, 0),
-        }));
+      queryClient.setQueryData(["community", communityId], (old) => ({
+        ...(old || {}),
+        isMember: false,
+        totalMembers: Math.max((old?.totalMembers ?? 1) - 1, 0),
+      }));
 
-        return { previousCommunity };
-      },
-      onError: (error, _, context) => {
-        queryClient.setQueryData(
-          ["community", communityId],
-          context?.previousCommunity,
-        );
-        toast.error(
-          error?.response?.data?.message || "Failed to leave community",
-        );
-      },
-      onSettled: () => {
-        queryClient.invalidateQueries({ queryKey: ["community", communityId] });
-      },
-      onSuccess: (data) => {
-        if (data?.status === 201) {
-          toast.success("Successfully left the community");
-        } else {
-          toast.error("Something went wrong");
-        }
-      },
-    });
+      return { previousCommunity };
+    },
+    onError: (error, _, context) => {
+      queryClient.setQueryData(["community", communityId], context?.previousCommunity);
+      toast.error(error?.response?.data?.message || "Failed to leave community");
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["community", communityId] });
+    },
+    onSuccess: (data) => {
+      if (data?.status === 201) {
+        toast.success("Successfully left the community");
+      } else {
+        toast.error("Something went wrong");
+      }
+    },
+  });
 
   const handleJoinCommunity = () => {
     if (!isAuthenticated) {
@@ -328,10 +296,7 @@ function CommunityDetailsPage() {
 
   return (
     <div className="space-y-6">
-      <QuestSuccess
-        openQuestSuccess={openQuestSuccess}
-        setOpenQuestSuccess={setOpenQuestSuccess}
-      />
+      <QuestSuccess openQuestSuccess={openQuestSuccess} setOpenQuestSuccess={setOpenQuestSuccess} />
 
       <div className="md:hidden">
         <BackButton />
@@ -373,11 +338,7 @@ function CommunityDetailsPage() {
                       className="h-full w-full object-cover"
                     />
                   ) : (
-                    <img
-                      src="/ChartPolar (1).svg"
-                      alt=""
-                      className="h-12 w-12"
-                    />
+                    <img src="/ChartPolar (1).svg" alt="" className="h-12 w-12" />
                   )}
                 </div>
               </div>
@@ -409,8 +370,7 @@ function CommunityDetailsPage() {
                     </h1>
 
                     <p className="max-w-3xl text-[15px] leading-7 text-[#667085]">
-                      {community?.communityDescription ||
-                        "No community description provided yet."}
+                      {community?.communityDescription || "No community description provided yet."}
                     </p>
                   </div>
 
@@ -447,11 +407,7 @@ function CommunityDetailsPage() {
                     </>
                   ) : (
                     <Button
-                      onClick={
-                        community?.isMember
-                          ? handleLeaveCommunity
-                          : handleJoinCommunity
-                      }
+                      onClick={community?.isMember ? handleLeaveCommunity : handleJoinCommunity}
                       disabled={joinCommunityPending || leaveCommunityPending}
                       className={[
                         "h-11 rounded-xl px-6 text-sm font-medium",
@@ -511,9 +467,7 @@ function CommunityDetailsPage() {
                             className={[
                               "h-10 rounded-lg px-4 text-sm font-medium transition-all",
                               "hover:bg-white hover:text-[#2F0FD1]",
-                              isActive
-                                ? "bg-white text-[#2F0FD1] shadow-sm"
-                                : "text-[#667085]",
+                              isActive ? "bg-white text-[#2F0FD1] shadow-sm" : "text-[#667085]",
                             ].join(" ")}
                           >
                             {option.label}
@@ -525,8 +479,7 @@ function CommunityDetailsPage() {
 
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="rounded-full bg-[#F4F7FF] px-3 py-1.5 text-xs font-medium text-[#2F0FD1]">
-                      View:{" "}
-                      {DETAIL_VIEWS.find((v) => v.value === detailView)?.label}
+                      View: {DETAIL_VIEWS.find((v) => v.value === detailView)?.label}
                     </span>
 
                     {detailView === "tasks" ? (
@@ -552,13 +505,11 @@ function CommunityDetailsPage() {
 
                   <div className="max-w-lg space-y-2">
                     <h3 className="text-[22px] font-semibold tracking-tight text-[#101828]">
-                      {detailView === "forum"
-                        ? "Forum coming soon"
-                        : "Leader board coming soon"}
+                      {detailView === "forum" ? "Forum coming soon" : "Leader board coming soon"}
                     </h3>
                     <p className="text-sm leading-6 text-[#667085]">
-                      This section is not available yet, but it can be added
-                      with the same design system as the tasks tab.
+                      This section is not available yet, but it can be added with the same design
+                      system as the tasks tab.
                     </p>
                   </div>
                 </div>

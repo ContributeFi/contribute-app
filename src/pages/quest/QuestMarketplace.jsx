@@ -54,18 +54,13 @@ function normalizeQuest(quest) {
     company: "Contribute.fi",
     level: quest.reward?.selectionType?.replaceAll("_", " ") || "Quest",
     status: quest.status || "active",
-    deadline: quest.endAt
-      ? new Date(quest.endAt).toLocaleDateString()
-      : "Not set",
+    deadline: quest.endAt ? new Date(quest.endAt).toLocaleDateString() : "Not set",
     applicants: quest.submissionsCount || 0,
     estimatedTime: "Open",
     rewardAmount: totalReward || 0,
     rewardAsset: quest.reward?.asset || "USDC",
     postedBy: {
-      name:
-        quest.createdBy?.displayName ||
-        quest.createdBy?.username ||
-        "Project owner",
+      name: quest.createdBy?.displayName || quest.createdBy?.username || "Project owner",
       initials:
         quest.createdBy?.displayName
           ?.split(" ")
@@ -87,15 +82,9 @@ function buildStats(quests) {
       ),
   ).length;
 
-  const totalRewards = quests.reduce(
-    (sum, q) => sum + (Number(q.rewardAmount) || 0),
-    0,
-  );
+  const totalRewards = quests.reduce((sum, q) => sum + (Number(q.rewardAmount) || 0), 0);
 
-  const totalApplications = quests.reduce(
-    (sum, q) => sum + (Number(q.applicants) || 0),
-    0,
-  );
+  const totalApplications = quests.reduce((sum, q) => sum + (Number(q.applicants) || 0), 0);
 
   return {
     openQuests: activeQuests,
@@ -240,9 +229,7 @@ export default function QuestMarketplace() {
         }
       } catch (error) {
         if (isMounted) {
-          setErrorMessage(
-            error instanceof Error ? error.message : "Failed to fetch quests.",
-          );
+          setErrorMessage(error instanceof Error ? error.message : "Failed to fetch quests.");
         }
       } finally {
         if (isMounted) {
@@ -299,22 +286,14 @@ export default function QuestMarketplace() {
       {loading ? (
         <div className="flex min-h-[280px] flex-col items-center justify-center rounded-2xl border border-[#EAECF0] bg-white px-6 py-10 text-center shadow-sm">
           <Loader2 className="mb-4 h-9 w-9 animate-spin text-[#2F0FD1]" />
-          <h3 className="text-lg font-semibold text-[#101828]">
-            Loading quests
-          </h3>
-          <p className="mt-2 text-sm text-[#667085]">
-            Fetching available quests...
-          </p>
+          <h3 className="text-lg font-semibold text-[#101828]">Loading quests</h3>
+          <p className="mt-2 text-sm text-[#667085]">Fetching available quests...</p>
         </div>
       ) : errorMessage ? (
         <div className="flex min-h-[280px] flex-col items-center justify-center rounded-2xl border border-dashed border-[#D9E1F2] bg-white px-6 py-10 text-center">
           <BriefcaseBusiness className="mb-4 h-10 w-10 text-[#2F0FD1]" />
-          <h3 className="text-lg font-semibold text-[#101828]">
-            Could not load quests
-          </h3>
-          <p className="mt-2 max-w-md text-sm leading-6 text-[#667085]">
-            {errorMessage}
-          </p>
+          <h3 className="text-lg font-semibold text-[#101828]">Could not load quests</h3>
+          <p className="mt-2 max-w-md text-sm leading-6 text-[#667085]">{errorMessage}</p>
         </div>
       ) : filteredQuests.length > 0 ? (
         <section
@@ -327,8 +306,7 @@ export default function QuestMarketplace() {
           {filteredQuests.map((quest) => {
             const questId = quest.id || quest._id;
             const hasApplied =
-              applicationQuestIds.has(String(questId)) ||
-              Boolean(quest.hasSubmitted);
+              applicationQuestIds.has(String(questId)) || Boolean(quest.hasSubmitted);
 
             const handleOpenQuest = () => {
               navigate(getQuestPath(quest));
@@ -354,9 +332,7 @@ export default function QuestMarketplace() {
       ) : (
         <div className="flex min-h-[280px] flex-col items-center justify-center rounded-2xl border border-dashed border-[#D9E1F2] bg-white px-6 py-10 text-center">
           <BriefcaseBusiness className="mb-4 h-10 w-10 text-[#2F0FD1]" />
-          <h3 className="text-lg font-semibold text-[#101828]">
-            No quests found
-          </h3>
+          <h3 className="text-lg font-semibold text-[#101828]">No quests found</h3>
           <p className="mt-2 max-w-md text-sm leading-6 text-[#667085]">
             Try a different keyword or category.
           </p>

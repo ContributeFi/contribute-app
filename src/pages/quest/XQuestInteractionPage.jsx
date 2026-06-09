@@ -33,9 +33,7 @@ const textareaClass =
   "w-full resize-none rounded-xl border border-[#EAECF0] bg-white px-3.5 py-3 text-sm text-[#101828] outline-none transition placeholder:text-[#98A2B3] focus:border-[#2F0FD1] focus:ring-4 focus:ring-[#EEF2FF]";
 
 function isValidXPostUrl(value) {
-  return /^https?:\/\/(www\.)?(x|twitter)\.com\/[^/]+\/status\/\d+/i.test(
-    value.trim(),
-  );
+  return /^https?:\/\/(www\.)?(x|twitter)\.com\/[^/]+\/status\/\d+/i.test(value.trim());
 }
 
 function formatDate(value, withTime = false) {
@@ -87,9 +85,7 @@ function getCompany(quest) {
 }
 
 function getHashtags(quest) {
-  return quest?.hashtags?.length
-    ? quest.hashtags
-    : ["Web3", "Stellar", "Contribute"];
+  return quest?.hashtags?.length ? quest.hashtags : ["Web3", "Stellar", "Contribute"];
 }
 
 function getUserId(user) {
@@ -97,8 +93,7 @@ function getUserId(user) {
 }
 
 function getCreatorId(quest) {
-  const creator =
-    quest?.creator || quest?.createdBy || quest?.user || quest?.userId;
+  const creator = quest?.creator || quest?.createdBy || quest?.user || quest?.userId;
 
   if (typeof creator === "string") return creator;
 
@@ -154,9 +149,7 @@ function PreviewModal({ preview, onClose }) {
               </p>
 
               {preview.author?.handle ? (
-                <p className="text-sm text-[#667085]">
-                  @{preview.author.handle}
-                </p>
+                <p className="text-sm text-[#667085]">@{preview.author.handle}</p>
               ) : null}
             </div>
 
@@ -188,9 +181,7 @@ function PreviewModal({ preview, onClose }) {
                 <p className="text-[11px] font-medium tracking-wide text-[#98A2B3] uppercase">
                   Date
                 </p>
-                <p className="mt-1 text-sm font-medium text-[#344054]">
-                  {preview.date || "N/A"}
-                </p>
+                <p className="mt-1 text-sm font-medium text-[#344054]">{preview.date || "N/A"}</p>
               </div>
             </div>
           </div>
@@ -211,9 +202,7 @@ function QuestDetailsCard({ quest }) {
         </div>
 
         <div>
-          <h2 className="text-base font-semibold text-[#101828]">
-            Quest details
-          </h2>
+          <h2 className="text-base font-semibold text-[#101828]">Quest details</h2>
           <p className="mt-1 text-sm leading-6 text-[#667085]">
             Review the quest brief, requirements, timeline, and reward setup.
           </p>
@@ -231,10 +220,7 @@ function QuestDetailsCard({ quest }) {
           ["Winners", quest.reward?.winnerCount || 1],
           ["Participants", quest.reward?.maxParticipants || "Open"],
         ].map(([label, value]) => (
-          <div
-            key={label}
-            className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] p-4"
-          >
+          <div key={label} className="rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] p-4">
             <p className="text-[11px] text-[#667085]">{label}</p>
             <p className="mt-1 text-sm font-semibold text-[#101828] capitalize">
               {value || "Not set"}
@@ -260,9 +246,7 @@ function QuestDetailsCard({ quest }) {
       ) : null}
 
       <div className="mt-4 rounded-2xl border border-[#EAECF0] bg-[#FCFCFD] p-4">
-        <h3 className="text-sm font-semibold text-[#101828]">
-          Post requirements
-        </h3>
+        <h3 className="text-sm font-semibold text-[#101828]">Post requirements</h3>
 
         <div className="mt-3 flex flex-wrap gap-2">
           {hashtags.map((tag) => (
@@ -287,9 +271,7 @@ function CreatorEntriesPanel({ entries, loading, error }) {
     return (
       <div className="rounded-2xl border border-[#EAECF0] bg-white p-8 text-center shadow-sm">
         <Loader2 className="mx-auto mb-3 h-7 w-7 animate-spin text-[#2F0FD1]" />
-        <p className="text-sm font-medium text-[#344054]">
-          Loading submissions...
-        </p>
+        <p className="text-sm font-medium text-[#344054]">Loading submissions...</p>
       </div>
     );
   }
@@ -306,9 +288,7 @@ function CreatorEntriesPanel({ entries, loading, error }) {
     return (
       <div className="rounded-2xl border border-[#EAECF0] bg-white p-8 text-center shadow-sm">
         <Users className="mx-auto mb-4 h-9 w-9 text-[#2F0FD1]" />
-        <h3 className="text-base font-semibold text-[#101828]">
-          No entries yet
-        </h3>
+        <h3 className="text-base font-semibold text-[#101828]">No entries yet</h3>
         <p className="mt-2 text-sm text-[#667085]">
           Submitted quest entries will appear here once participants apply.
         </p>
@@ -319,12 +299,7 @@ function CreatorEntriesPanel({ entries, loading, error }) {
   return (
     <div className="space-y-3">
       {entries.map((entry, index) => {
-        const participant =
-          entry.user ||
-          entry.participant ||
-          entry.creator ||
-          entry.profile ||
-          {};
+        const participant = entry.user || entry.participant || entry.creator || entry.profile || {};
 
         const name =
           participant.name ||
@@ -333,9 +308,7 @@ function CreatorEntriesPanel({ entries, loading, error }) {
           `Participant ${index + 1}`;
 
         const handle =
-          entry.preview?.author?.handle ||
-          participant.twitterUsername ||
-          participant.xUsername;
+          entry.preview?.author?.handle || participant.twitterUsername || participant.xUsername;
 
         return (
           <article
@@ -345,9 +318,7 @@ function CreatorEntriesPanel({ entries, loading, error }) {
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="text-sm font-semibold text-[#101828]">
-                    {name}
-                  </h3>
+                  <h3 className="text-sm font-semibold text-[#101828]">{name}</h3>
 
                   {handle ? <Badge2 tone="blue">@{handle}</Badge2> : null}
 
@@ -376,10 +347,7 @@ function CreatorEntriesPanel({ entries, loading, error }) {
               {[
                 ["Score", entry.score || "N/A"],
                 ["Tweet ID", entry.tweetId || entry.preview?.tweet_id || "N/A"],
-                [
-                  "Submitted",
-                  formatDate(entry.createdAt || entry.submittedAt, true),
-                ],
+                ["Submitted", formatDate(entry.createdAt || entry.submittedAt, true)],
                 ["Status", entry.status || "submitted"],
               ].map(([label, value]) => (
                 <div
@@ -387,9 +355,7 @@ function CreatorEntriesPanel({ entries, loading, error }) {
                   className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-3 py-2"
                 >
                   <p className="text-[11px] text-[#667085]">{label}</p>
-                  <p className="mt-0.5 truncate text-sm font-semibold text-[#101828]">
-                    {value}
-                  </p>
+                  <p className="mt-0.5 truncate text-sm font-semibold text-[#101828]">{value}</p>
                 </div>
               ))}
             </div>
@@ -440,9 +406,7 @@ function CreatorQuestView({
             >
               <Users className="h-4 w-4" />
               Entries
-              <span className="rounded-full bg-white/20 px-2 py-0.5 text-xs">
-                {entries.length}
-              </span>
+              <span className="rounded-full bg-white/20 px-2 py-0.5 text-xs">{entries.length}</span>
             </button>
           </div>
         </div>
@@ -450,11 +414,7 @@ function CreatorQuestView({
         {activeTab === "details" ? (
           <QuestDetailsCard quest={quest} />
         ) : (
-          <CreatorEntriesPanel
-            entries={entries}
-            loading={entriesLoading}
-            error={entriesError}
-          />
+          <CreatorEntriesPanel entries={entries} loading={entriesLoading} error={entriesError} />
         )}
       </div>
 
@@ -462,23 +422,18 @@ function CreatorQuestView({
         <div className="rounded-2xl border border-[#EAECF0] bg-white p-5 shadow-sm">
           <div className="mb-3 flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-[#2F0FD1]" />
-            <h3 className="text-sm font-semibold text-[#101828]">
-              Creator controls
-            </h3>
+            <h3 className="text-sm font-semibold text-[#101828]">Creator controls</h3>
           </div>
 
           <p className="text-sm leading-6 text-[#667085]">
-            You created this quest, so submissions are disabled for your
-            account. You can review quest details and manage participant entries
-            here.
+            You created this quest, so submissions are disabled for your account. You can review
+            quest details and manage participant entries here.
           </p>
 
           {!started ? (
             <button
               type="button"
-              onClick={() =>
-                navigate(`/twitter-quests/${quest._id || quest.id}/edit`)
-              }
+              onClick={() => navigate(`/twitter-quests/${quest._id || quest.id}/edit`)}
               className="mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#2F0FD1] px-5 text-sm font-medium text-white shadow-sm transition hover:bg-[#2409B8]"
             >
               Edit quest
@@ -509,9 +464,7 @@ function CreatorQuestView({
             ].map(([label, value]) => (
               <div key={label} className="rounded-xl bg-[#F8FAFC] px-3 py-2">
                 <p className="text-[11px] text-[#667085]">{label}</p>
-                <p className="mt-0.5 text-sm font-semibold text-[#101828]">
-                  {value}
-                </p>
+                <p className="mt-0.5 text-sm font-semibold text-[#101828]">{value}</p>
               </div>
             ))}
           </div>
@@ -567,9 +520,7 @@ export default function XQuestInteractionPage() {
 
         const res = await fetch(`${API_URL}/api/twitter-quests/${questId}`, {
           headers: {
-            Authorization: `Bearer ${
-              accessToken || localStorage.getItem("accessToken") || ""
-            }`,
+            Authorization: `Bearer ${accessToken || localStorage.getItem("accessToken") || ""}`,
           },
         });
 
@@ -594,9 +545,7 @@ export default function XQuestInteractionPage() {
         }
       } catch (error) {
         if (isMounted) {
-          setQuestError(
-            error instanceof Error ? error.message : "Failed to fetch quest.",
-          );
+          setQuestError(error instanceof Error ? error.message : "Failed to fetch quest.");
         }
       } finally {
         if (isMounted) {
@@ -627,16 +576,11 @@ export default function XQuestInteractionPage() {
         setEntriesLoading(true);
         setEntriesError("");
 
-        const res = await fetch(
-          `${API_URL}/api/twitter-quests/${questId}/submissions`,
-          {
-            headers: {
-              Authorization: `Bearer ${
-                accessToken || localStorage.getItem("accessToken") || ""
-              }`,
-            },
+        const res = await fetch(`${API_URL}/api/twitter-quests/${questId}/submissions`, {
+          headers: {
+            Authorization: `Bearer ${accessToken || localStorage.getItem("accessToken") || ""}`,
           },
-        );
+        });
 
         const data = await res.json();
 
@@ -649,11 +593,7 @@ export default function XQuestInteractionPage() {
         }
       } catch (error) {
         if (isMounted) {
-          setEntriesError(
-            error instanceof Error
-              ? error.message
-              : "Failed to fetch submissions.",
-          );
+          setEntriesError(error instanceof Error ? error.message : "Failed to fetch submissions.");
         }
       } finally {
         if (isMounted) {
@@ -686,17 +626,13 @@ export default function XQuestInteractionPage() {
       const data = await res.json();
 
       if (!res.ok || !data.success) {
-        throw new Error(
-          data.message || "There was an error fetching the post.",
-        );
+        throw new Error(data.message || "There was an error fetching the post.");
       }
 
       setPreview(data.data);
     } catch (error) {
       const message =
-        error instanceof Error
-          ? error.message
-          : "There was an error fetching the post.";
+        error instanceof Error ? error.message : "There was an error fetching the post.";
 
       setPreviewError(message);
       setToast(message);
@@ -749,9 +685,7 @@ export default function XQuestInteractionPage() {
   }
 
   function openTwitterIntent() {
-    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-      draft,
-    )}`;
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(draft)}`;
 
     const width = Math.min(900, window.innerWidth * 0.9);
     const height = Math.min(720, window.innerHeight * 0.85);
@@ -780,26 +714,21 @@ export default function XQuestInteractionPage() {
     setSubmitting(true);
 
     try {
-      const res = await fetch(
-        `${API_URL}/api/twitter-quests/${questId}/submissions`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${
-              accessToken || localStorage.getItem("accessToken")
-            }`,
-          },
-          body: JSON.stringify({
-            draft,
-            postUrl,
-            preview,
-            tweetId: preview.tweet_id,
-            status: "submitted",
-            score: isRefined ? 91 : 78,
-          }),
+      const res = await fetch(`${API_URL}/api/twitter-quests/${questId}/submissions`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken || localStorage.getItem("accessToken")}`,
         },
-      );
+        body: JSON.stringify({
+          draft,
+          postUrl,
+          preview,
+          tweetId: preview.tweet_id,
+          status: "submitted",
+          score: isRefined ? 91 : 78,
+        }),
+      });
 
       const data = await res.json();
 
@@ -818,11 +747,7 @@ export default function XQuestInteractionPage() {
       setAlreadyApplied(true);
       navigate("/applications");
     } catch (error) {
-      setToast(
-        error instanceof Error
-          ? error.message
-          : "Failed to submit quest entry.",
-      );
+      setToast(error instanceof Error ? error.message : "Failed to submit quest entry.");
     } finally {
       setSubmitting(false);
     }
@@ -834,9 +759,7 @@ export default function XQuestInteractionPage() {
         <div className="flex min-h-[360px] items-center justify-center rounded-2xl border border-[#EAECF0] bg-white p-8 shadow-sm">
           <div className="text-center">
             <Loader2 className="mx-auto mb-4 h-8 w-8 animate-spin text-[#2F0FD1]" />
-            <p className="text-sm font-medium text-[#344054]">
-              Loading quest...
-            </p>
+            <p className="text-sm font-medium text-[#344054]">Loading quest...</p>
           </div>
         </div>
       </main>
@@ -848,12 +771,9 @@ export default function XQuestInteractionPage() {
       <main className="min-h-screen bg-[#F8FAFC] px-3 py-4">
         <div className="rounded-2xl border border-[#EAECF0] bg-white p-8 text-center shadow-sm">
           <Compass className="mx-auto mb-4 h-9 w-9 text-[#2F0FD1]" />
-          <h1 className="text-lg font-semibold text-[#101828]">
-            Quest not found
-          </h1>
+          <h1 className="text-lg font-semibold text-[#101828]">Quest not found</h1>
           <p className="mt-2 text-sm text-[#667085]">
-            {questError ||
-              "This quest may have been removed or the link is incorrect."}
+            {questError || "This quest may have been removed or the link is incorrect."}
           </p>
           <button
             type="button"
@@ -905,9 +825,7 @@ export default function XQuestInteractionPage() {
               <div className="flex flex-wrap items-center gap-2">
                 <Badge2 tone="purple">X Quest</Badge2>
                 <Badge2 tone="green">{status}</Badge2>
-                <Badge2 tone="blue">
-                  {creatorView ? "Creator view" : "Participant view"}
-                </Badge2>
+                <Badge2 tone="blue">{creatorView ? "Creator view" : "Participant view"}</Badge2>
 
                 {alreadyApplied && !creatorView ? (
                   <Badge2 tone="green">
@@ -930,19 +848,14 @@ export default function XQuestInteractionPage() {
 
             <div className="rounded-xl border border-[#EAECF0] bg-[#FCFCFD] px-3 py-2">
               <p className="text-[11px] text-[#667085]">Project</p>
-              <p className="mt-0.5 text-sm font-semibold text-[#101828]">
-                {getCompany(quest)}
-              </p>
+              <p className="mt-0.5 text-sm font-semibold text-[#101828]">{getCompany(quest)}</p>
             </div>
           </div>
 
           <div className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
             {[
               ["Reward", formatReward(quest)],
-              [
-                "Timeline",
-                `${formatDate(quest.startAt)} - ${formatDate(quest.endAt)}`,
-              ],
+              ["Timeline", `${formatDate(quest.startAt)} - ${formatDate(quest.endAt)}`],
               ["Winners", quest.reward?.winnerCount || 1],
               ["Participants", quest.reward?.maxParticipants || "Open"],
             ].map(([label, value]) => (
@@ -951,9 +864,7 @@ export default function XQuestInteractionPage() {
                 className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-3 py-2"
               >
                 <p className="text-[11px] text-[#667085]">{label}</p>
-                <p className="mt-0.5 text-sm font-semibold text-[#101828]">
-                  {value}
-                </p>
+                <p className="mt-0.5 text-sm font-semibold text-[#101828]">{value}</p>
               </div>
             ))}
           </div>
@@ -980,12 +891,10 @@ export default function XQuestInteractionPage() {
                 </div>
 
                 <div>
-                  <h2 className="text-base font-semibold text-[#101828]">
-                    Quest submission
-                  </h2>
+                  <h2 className="text-base font-semibold text-[#101828]">Quest submission</h2>
                   <p className="mt-1 text-sm leading-6 text-[#667085]">
-                    Draft your post, publish it on X, paste the link, and the
-                    preview will fetch automatically.
+                    Draft your post, publish it on X, paste the link, and the preview will fetch
+                    automatically.
                   </p>
                 </div>
               </div>
@@ -1000,9 +909,7 @@ export default function XQuestInteractionPage() {
                       : "border-[#EAECF0] bg-white hover:bg-[#F9FAFB]"
                   }`}
                 >
-                  <p className="text-sm font-semibold text-[#101828]">
-                    1. Write and publish
-                  </p>
+                  <p className="text-sm font-semibold text-[#101828]">1. Write and publish</p>
                   <p className="mt-1 text-xs leading-5 text-[#667085]">
                     Create a clear post using the quest brief.
                   </p>
@@ -1017,9 +924,7 @@ export default function XQuestInteractionPage() {
                       : "border-[#EAECF0] bg-white hover:bg-[#F9FAFB]"
                   }`}
                 >
-                  <p className="text-sm font-semibold text-[#101828]">
-                    2. Preview and submit
-                  </p>
+                  <p className="text-sm font-semibold text-[#101828]">2. Preview and submit</p>
                   <p className="mt-1 text-xs leading-5 text-[#667085]">
                     Paste the X post URL and verify it automatically.
                   </p>
@@ -1088,9 +993,7 @@ export default function XQuestInteractionPage() {
                   <div className="mt-5 rounded-2xl border border-[#EAECF0] bg-white p-4">
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                       <div className="flex-1">
-                        <label className="text-sm font-medium text-[#344054]">
-                          X post link
-                        </label>
+                        <label className="text-sm font-medium text-[#344054]">X post link</label>
 
                         <div className="relative mt-2">
                           <Link2 className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-[#98A2B3]" />
@@ -1157,9 +1060,7 @@ export default function XQuestInteractionPage() {
                   <div className="sticky bottom-0 -mx-4 mt-5 -mb-4 border-t border-[#EAECF0] bg-white/95 px-4 py-4 backdrop-blur sm:-mx-5 sm:-mb-5 sm:px-5">
                     <button
                       type="submit"
-                      disabled={
-                        !postUrl || !preview || alreadyApplied || submitting
-                      }
+                      disabled={!postUrl || !preview || alreadyApplied || submitting}
                       className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#2F0FD1] px-6 text-sm font-medium text-white shadow-sm transition hover:bg-[#2409B8] disabled:cursor-not-allowed disabled:bg-[#D0D5DD]"
                     >
                       {submitting ? (
@@ -1185,9 +1086,7 @@ export default function XQuestInteractionPage() {
 
             <aside className="space-y-4">
               <div className="rounded-2xl border border-[#EAECF0] bg-white p-5 shadow-sm">
-                <h3 className="text-sm font-semibold text-[#101828]">
-                  Submission checklist
-                </h3>
+                <h3 className="text-sm font-semibold text-[#101828]">Submission checklist</h3>
 
                 <div className="mt-4 space-y-3">
                   {[
@@ -1211,14 +1110,10 @@ export default function XQuestInteractionPage() {
               <div className="rounded-2xl border border-[#EAECF0] bg-white p-5 shadow-sm">
                 <div className="mb-3 flex items-center gap-2">
                   <Sparkles className="h-4 w-4 text-[#2F0FD1]" />
-                  <h3 className="text-sm font-semibold text-[#101828]">
-                    Quest brief
-                  </h3>
+                  <h3 className="text-sm font-semibold text-[#101828]">Quest brief</h3>
                 </div>
 
-                <p className="text-sm leading-6 text-[#667085]">
-                  {quest.description}
-                </p>
+                <p className="text-sm leading-6 text-[#667085]">{quest.description}</p>
               </div>
             </aside>
           </section>

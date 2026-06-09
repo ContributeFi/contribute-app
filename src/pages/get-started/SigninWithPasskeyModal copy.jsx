@@ -1,14 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useSocketFi } from "@socketfi/react";
-import {
-  ArrowRight,
-  Fingerprint,
-  Loader2,
-  ShieldCheck,
-  Wallet,
-  X,
-} from "lucide-react";
+import { ArrowRight, Fingerprint, Loader2, ShieldCheck, Wallet, X } from "lucide-react";
 import { savePasskeySession } from "@/hooks/socketfiAuth";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -95,9 +88,7 @@ function SigninWithPasskeyModal() {
 
                     <div>
                       <p className="text-sm font-semibold text-[#101828]">
-                        {isLoading
-                          ? "Waiting for passkey..."
-                          : "Continue with Passkey"}
+                        {isLoading ? "Waiting for passkey..." : "Continue with Passkey"}
                       </p>
                       <p className="mt-0.5 text-xs leading-5 font-normal text-[#667085]">
                         {isLoading
@@ -126,9 +117,8 @@ function SigninWithPasskeyModal() {
                       </p>
 
                       <p className="mt-1 text-xs leading-5 text-[#667085]">
-                        Your secure SocketFi embedded wallet is created
-                        automatically in seconds when you sign in with your
-                        passkey.
+                        Your secure SocketFi embedded wallet is created automatically in seconds
+                        when you sign in with your passkey.
                       </p>
                     </div>
                   </div>

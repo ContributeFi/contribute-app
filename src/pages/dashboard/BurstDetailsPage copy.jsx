@@ -97,9 +97,7 @@ function BurstDetailsPage() {
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <div className="flex shrink-0 items-center justify-between gap-2 rounded-[144px] bg-[#F0F4FD] px-5 py-2">
                           <BsInfoCircleFill />
-                          <p
-                            className={`flex gap-1.5 font-normal text-[#525866]`}
-                          >
+                          <p className={`flex gap-1.5 font-normal text-[#525866]`}>
                             Your entry should be:{" "}
                             <span
                               className={`font-semibold ${burst?.sentimentCheck === "Positive" ? "text-[#67AD19]" : burst?.sentimentCheck === "Negative" ? "text-[#FF3B30]" : "text-[#525866]"}`}
@@ -122,42 +120,32 @@ function BurstDetailsPage() {
                     {burst?.participants && (
                       <div className="space-y-[12px] px-4 py-5 text-center lg:py-0">
                         <p className="text-[#525866]">Number of Participants</p>
-                        <p className="font-semibold text-[#09032A]">
-                          {burst?.participants.length}
-                        </p>
+                        <p className="font-semibold text-[#09032A]">{burst?.participants.length}</p>
                       </div>
                     )}
 
                     {burst?.endDate && (
                       <div className="space-y-[12px] px-4 py-5 text-center lg:py-0">
                         <p className="text-[#525866]">Burst Time</p>
-                        <p className="font-semibold text-[#09032A]">
-                          {endTime(burst?.endDate)}
-                        </p>
+                        <p className="font-semibold text-[#09032A]">{endTime(burst?.endDate)}</p>
                       </div>
                     )}
 
                     {burst?.trendAge && (
                       <div className="space-y-[12px] px-4 py-5 text-center lg:py-0">
                         <p className="text-[#525866]">Trend Age</p>
-                        <p className="font-semibold text-[#09032A]">
-                          {burst?.trendAge}
-                        </p>
+                        <p className="font-semibold text-[#09032A]">{burst?.trendAge}</p>
                       </div>
                     )}
 
                     {burst?.numberOfSelections && (
                       <div className="space-y-[12px] px-4 py-5 text-center lg:py-0">
                         <p className="text-[#525866]"> Number of Winners</p>
-                        <p className="font-semibold text-[#09032A]">
-                          {burst?.numberOfSelections}
-                        </p>
+                        <p className="font-semibold text-[#09032A]">{burst?.numberOfSelections}</p>
                       </div>
                     )}
                   </div>
-                  <p className="font-normal text-[#525866]">
-                    {burst?.conversation}
-                  </p>
+                  <p className="font-normal text-[#525866]">{burst?.conversation}</p>
                 </div>
 
                 {user.id !== burst?.creatorId && (

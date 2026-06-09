@@ -12,21 +12,15 @@ function About() {
           </h2>
 
           <p className="text-[18px] font-light md:text-[20px]">
-            Contribute.fi is a decentralized contributor coordination and
-            community management platform built on Soroban and integrated into
-            the Stellar ecosystem. Contribute.fi connects projects with
-            contributors through smart-contract-enforced tasks, wallet-linked
-            reputation, community hubs, AI-powered analytics, and Git-based
-            development tracking.
+            Contribute.fi is a decentralized contributor coordination and community management
+            platform built on Soroban and integrated into the Stellar ecosystem. Contribute.fi
+            connects projects with contributors through smart-contract-enforced tasks, wallet-linked
+            reputation, community hubs, AI-powered analytics, and Git-based development tracking.
           </p>
         </div>
       </div>
 
-      <img
-        className="mx-auto h-auto w-full sm:w-1/2 lg:w-full"
-        src="/Frame (1).svg"
-        alt=""
-      />
+      <img className="mx-auto h-auto w-full sm:w-1/2 lg:w-full" src="/Frame (1).svg" alt="" />
     </div>
   );
 }

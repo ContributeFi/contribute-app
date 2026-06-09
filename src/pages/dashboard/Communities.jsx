@@ -23,10 +23,7 @@ import Loader from "@/components/Loader";
 import Error from "@/components/Error";
 import Empty from "@/components/Empty";
 import { useAuth } from "@/hooks/useAuth";
-import {
-  useGetCommunities,
-  useGetMemberCommunities,
-} from "@/hooks/useGetCommunities";
+import { useGetCommunities, useGetMemberCommunities } from "@/hooks/useGetCommunities";
 
 const VIEW_OPTIONS = [
   { label: "All", value: "all" },
@@ -75,9 +72,7 @@ function Communities() {
   const [communityOwnerId, setCommunityOwnerId] = useState("");
   const [displayedCommunities, setDisplayedCommunities] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-  const [communityLayout, setCommunityLayout] = useState(
-    getInitialCommunityLayout,
-  );
+  const [communityLayout, setCommunityLayout] = useState(getInitialCommunityLayout);
 
   const LIMIT = 10;
   const OFFSET = currentPage;
@@ -99,10 +94,7 @@ function Communities() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      window.localStorage.setItem(
-        COMMUNITY_LAYOUT_STORAGE_KEY,
-        communityLayout,
-      );
+      window.localStorage.setItem(COMMUNITY_LAYOUT_STORAGE_KEY, communityLayout);
     }
   }, [communityLayout]);
 
@@ -126,19 +118,11 @@ function Communities() {
     const term = searchValue.trim().toLowerCase();
 
     return list.filter((community) => {
-      const communityName = String(
-        community?.communityName || "",
-      ).toLowerCase();
-      const description = String(
-        community?.communityDescription || "",
-      ).toLowerCase();
+      const communityName = String(community?.communityName || "").toLowerCase();
+      const description = String(community?.communityDescription || "").toLowerCase();
       const alias = String(community?.communityAlias || "").toLowerCase();
 
-      return (
-        communityName.includes(term) ||
-        description.includes(term) ||
-        alias.includes(term)
-      );
+      return communityName.includes(term) || description.includes(term) || alias.includes(term);
     });
   }, [displayedCommunities, searchValue]);
 
@@ -174,8 +158,7 @@ function Communities() {
     setCurrentPage(1);
   };
 
-  const activeViewLabel =
-    VIEW_OPTIONS.find((item) => item.value === communityView)?.label || "All";
+  const activeViewLabel = VIEW_OPTIONS.find((item) => item.value === communityView)?.label || "All";
 
   const isGridLayout = communityLayout === COMMUNITY_LAYOUT_OPTIONS.GRID;
 
@@ -200,9 +183,8 @@ function Communities() {
                     Discover, join, and manage project communities
                   </h2>
                   <p className="max-w-2xl text-[15px] leading-7 text-[#667085]">
-                    Explore communities across the ecosystem, keep track of the
-                    ones you joined, and create your own space for contributors
-                    and builders.
+                    Explore communities across the ecosystem, keep track of the ones you joined, and
+                    create your own space for contributors and builders.
                   </p>
                 </div>
 
@@ -271,15 +253,11 @@ function Communities() {
                           key={option.value}
                           type="button"
                           variant="ghost"
-                          onClick={() =>
-                            handleChangeCommunityView(option.value)
-                          }
+                          onClick={() => handleChangeCommunityView(option.value)}
                           className={[
                             "h-10 rounded-lg px-4 text-sm font-medium transition-all",
                             "hover:bg-white hover:text-[#2F0FD1]",
-                            isActive
-                              ? "bg-white text-[#2F0FD1] shadow-sm"
-                              : "text-[#667085]",
+                            isActive ? "bg-white text-[#2F0FD1] shadow-sm" : "text-[#667085]",
                           ].join(" ")}
                         >
                           {option.label}
@@ -293,16 +271,12 @@ function Communities() {
                   <Button
                     type="button"
                     variant="ghost"
-                    onClick={() =>
-                      setCommunityLayout(COMMUNITY_LAYOUT_OPTIONS.GRID)
-                    }
+                    onClick={() => setCommunityLayout(COMMUNITY_LAYOUT_OPTIONS.GRID)}
                     className={[
                       "h-10 flex-1 rounded-lg px-4 text-sm font-medium transition-all sm:flex-none",
                       "inline-flex items-center justify-center gap-2",
                       "hover:bg-white hover:text-[#2F0FD1]",
-                      isGridLayout
-                        ? "bg-white text-[#2F0FD1] shadow-sm"
-                        : "text-[#667085]",
+                      isGridLayout ? "bg-white text-[#2F0FD1] shadow-sm" : "text-[#667085]",
                     ].join(" ")}
                   >
                     <HiOutlineViewGrid className="h-4 w-4" />
@@ -312,16 +286,12 @@ function Communities() {
                   <Button
                     type="button"
                     variant="ghost"
-                    onClick={() =>
-                      setCommunityLayout(COMMUNITY_LAYOUT_OPTIONS.LIST)
-                    }
+                    onClick={() => setCommunityLayout(COMMUNITY_LAYOUT_OPTIONS.LIST)}
                     className={[
                       "h-10 flex-1 rounded-lg px-4 text-sm font-medium transition-all sm:flex-none",
                       "inline-flex items-center justify-center gap-2",
                       "hover:bg-white hover:text-[#2F0FD1]",
-                      !isGridLayout
-                        ? "bg-white text-[#2F0FD1] shadow-sm"
-                        : "text-[#667085]",
+                      !isGridLayout ? "bg-white text-[#2F0FD1] shadow-sm" : "text-[#667085]",
                     ].join(" ")}
                   >
                     <HiOutlineViewList className="h-4 w-4" />
@@ -374,8 +344,8 @@ function Communities() {
                   No communities found
                 </h3>
                 <p className="text-sm leading-6 text-[#667085]">
-                  Try changing your search, switching views, or create a new
-                  community to get started.
+                  Try changing your search, switching views, or create a new community to get
+                  started.
                 </p>
               </div>
 

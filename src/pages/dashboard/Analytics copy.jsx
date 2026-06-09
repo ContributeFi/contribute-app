@@ -31,14 +31,7 @@ const RANGE_OPTIONS = [
   { label: "1 Year", value: "1y" },
 ];
 
-function AnalyticsStatCard({
-  label,
-  value,
-  icon,
-  accent = "blue",
-  helperText,
-  trend,
-}) {
+function AnalyticsStatCard({ label, value, icon, accent = "blue", helperText, trend }) {
   const accentStyles = {
     blue: {
       card: "border-[#E0E7FF] bg-gradient-to-br from-white to-[#F8FAFF]",
@@ -76,18 +69,14 @@ function AnalyticsStatCard({
 
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-medium tracking-wide text-[#667085]">
-            {label}
-          </p>
+          <p className="text-sm font-medium tracking-wide text-[#667085]">{label}</p>
 
           <p className="mt-2 text-[28px] leading-none font-semibold tracking-tight text-[#101828]">
             {value}
           </p>
 
           <div className="mt-2 flex flex-wrap items-center gap-2">
-            {helperText ? (
-              <p className="text-xs text-[#98A2B3]">{helperText}</p>
-            ) : null}
+            {helperText ? <p className="text-xs text-[#98A2B3]">{helperText}</p> : null}
 
             {trend ? (
               <span className="rounded-full bg-white/70 px-2 py-0.5 text-[11px] font-medium text-[#475467]">
@@ -124,9 +113,7 @@ function ChartPlaceholder({ title, description, children }) {
   return (
     <div className="rounded-[24px] border border-[#E6EAF5] bg-white p-5 shadow-sm">
       <div className="mb-5">
-        <h3 className="text-[18px] font-semibold tracking-tight text-[#101828]">
-          {title}
-        </h3>
+        <h3 className="text-[18px] font-semibold tracking-tight text-[#101828]">{title}</h3>
         <p className="mt-1 text-sm leading-6 text-[#667085]">{description}</p>
       </div>
 
@@ -165,9 +152,7 @@ function EmptyAnalyticsState({ title, description }) {
       </div>
 
       <div className="max-w-lg space-y-2">
-        <h3 className="text-[22px] font-semibold tracking-tight text-[#101828]">
-          {title}
-        </h3>
+        <h3 className="text-[22px] font-semibold tracking-tight text-[#101828]">{title}</h3>
         <p className="text-sm leading-6 text-[#667085]">{description}</p>
       </div>
     </div>
@@ -180,10 +165,7 @@ function Analytics() {
   const [range, setRange] = useState("30d");
 
   const isOwnerLike = Boolean(
-    user?.isCommunityOwner ||
-    user?.isCreator ||
-    user?.isAdmin ||
-    user?.roles?.includes?.("owner"),
+    user?.isCommunityOwner || user?.isCreator || user?.isAdmin || user?.roles?.includes?.("owner"),
   );
 
   const stats = useMemo(() => {
@@ -329,28 +311,21 @@ function Analytics() {
 
               <div className="space-y-2">
                 <h2 className="text-[28px] font-semibold tracking-tight text-[#101828]">
-                  Track performance across communities, quests, bursts, and
-                  tools
+                  Track performance across communities, quests, bursts, and tools
                 </h2>
                 <p className="max-w-2xl text-[15px] leading-7 text-[#667085]">
-                  Review high-level performance metrics and activity insights.
-                  This view adapts to the type of work you do on the platform.
+                  Review high-level performance metrics and activity insights. This view adapts to
+                  the type of work you do on the platform.
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-2">
-                <InfoPill
-                  icon={<TrendingUp className="h-4 w-4" />}
-                  label="Performance trends"
-                />
+                <InfoPill icon={<TrendingUp className="h-4 w-4" />} label="Performance trends" />
                 <InfoPill
                   icon={<CalendarRange className="h-4 w-4" />}
                   label="Time-based analysis"
                 />
-                <InfoPill
-                  icon={<Sparkles className="h-4 w-4" />}
-                  label="Role-aware insights"
-                />
+                <InfoPill icon={<Sparkles className="h-4 w-4" />} label="Role-aware insights" />
               </div>
             </div>
 
@@ -368,9 +343,7 @@ function Analytics() {
                       className={[
                         "h-10 rounded-lg px-4 text-sm font-medium transition-all",
                         "hover:bg-white hover:text-[#2F0FD1]",
-                        isActive
-                          ? "bg-white text-[#2F0FD1] shadow-sm"
-                          : "text-[#667085]",
+                        isActive ? "bg-white text-[#2F0FD1] shadow-sm" : "text-[#667085]",
                       ].join(" ")}
                     >
                       {option.label}
@@ -415,9 +388,7 @@ function Analytics() {
                     className={[
                       "h-10 rounded-lg px-4 text-sm font-medium transition-all",
                       "hover:bg-white hover:text-[#2F0FD1]",
-                      isActive
-                        ? "bg-white text-[#2F0FD1] shadow-sm"
-                        : "text-[#667085]",
+                      isActive ? "bg-white text-[#2F0FD1] shadow-sm" : "text-[#667085]",
                     ].join(" ")}
                   >
                     {option.label}
@@ -428,12 +399,10 @@ function Analytics() {
 
             <div className="flex flex-wrap items-center gap-2">
               <span className="rounded-full bg-[#F4F7FF] px-3 py-1.5 text-xs font-medium text-[#2F0FD1]">
-                Scope:{" "}
-                {SCOPE_OPTIONS.find((item) => item.value === scope)?.label}
+                Scope: {SCOPE_OPTIONS.find((item) => item.value === scope)?.label}
               </span>
               <span className="rounded-full bg-[#F8FAFC] px-3 py-1.5 text-xs font-medium text-[#667085]">
-                Range:{" "}
-                {RANGE_OPTIONS.find((item) => item.value === range)?.label}
+                Range: {RANGE_OPTIONS.find((item) => item.value === range)?.label}
               </span>
             </div>
           </div>
@@ -452,12 +421,10 @@ function Analytics() {
                   <TrendingUp className="h-7 w-7" />
                 </div>
                 <div className="max-w-md space-y-2">
-                  <h3 className="text-lg font-semibold text-[#101828]">
-                    Chart area ready
-                  </h3>
+                  <h3 className="text-lg font-semibold text-[#101828]">Chart area ready</h3>
                   <p className="text-sm leading-6 text-[#667085]">
-                    This panel is ready for a real line, bar, or area chart once
-                    analytics data is connected.
+                    This panel is ready for a real line, bar, or area chart once analytics data is
+                    connected.
                   </p>
                 </div>
               </div>
@@ -544,9 +511,7 @@ function Analytics() {
 
       <section className="rounded-[28px] border border-[#EEF2FF] bg-white p-5 shadow-sm lg:p-6">
         <div className="mb-5">
-          <h2 className="text-[22px] font-semibold tracking-tight text-[#101828]">
-            Insights
-          </h2>
+          <h2 className="text-[22px] font-semibold tracking-tight text-[#101828]">Insights</h2>
           <p className="mt-1 text-sm text-[#667085]">
             Key observations from the selected scope and time range.
           </p>
@@ -554,9 +519,7 @@ function Analytics() {
 
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           <div className="rounded-2xl border border-[#E6EAF5] bg-[#FCFCFD] p-4">
-            <p className="text-sm font-semibold text-[#101828]">
-              Growth Signal
-            </p>
+            <p className="text-sm font-semibold text-[#101828]">Growth Signal</p>
             <p className="mt-2 text-sm leading-6 text-[#667085]">
               {isOwnerLike
                 ? "Participation and reach are increasing in your selected scope."
@@ -576,8 +539,8 @@ function Analytics() {
           <div className="rounded-2xl border border-[#E6EAF5] bg-[#FCFCFD] p-4">
             <p className="text-sm font-semibold text-[#101828]">Next Step</p>
             <p className="mt-2 text-sm leading-6 text-[#667085]">
-              Connect this page to real analytics endpoints, then add charts,
-              comparisons, and exportable reports.
+              Connect this page to real analytics endpoints, then add charts, comparisons, and
+              exportable reports.
             </p>
           </div>
         </div>

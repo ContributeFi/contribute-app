@@ -149,10 +149,8 @@ function Badge({ children, tone = "neutral" }) {
 
 function Button({ children, variant = "primary", className = "", ...props }) {
   const variants = {
-    primary:
-      "bg-slate-950 text-white shadow-sm shadow-slate-950/10 hover:bg-slate-800",
-    secondary:
-      "border border-slate-200 bg-white text-slate-800 hover:bg-slate-50",
+    primary: "bg-slate-950 text-white shadow-sm shadow-slate-950/10 hover:bg-slate-800",
+    secondary: "border border-slate-200 bg-white text-slate-800 hover:bg-slate-50",
     ghost: "text-slate-700 hover:bg-slate-100",
   };
 
@@ -176,9 +174,7 @@ function MetricCard({ icon: Icon, label, value, description }) {
       <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-950 text-white">
         <Icon size={20} />
       </div>
-      <p className="text-2xl font-bold tracking-tight text-slate-950">
-        {value}
-      </p>
+      <p className="text-2xl font-bold tracking-tight text-slate-950">{value}</p>
       <p className="mt-1 text-sm font-semibold text-slate-700">{label}</p>
       <p className="mt-1 text-sm text-slate-500">{description}</p>
     </div>
@@ -196,21 +192,13 @@ function CampaignCard({ campaign, selected, onSelect }) {
     >
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Badge tone="green">{campaign.status}</Badge>
-        <span className="text-sm font-semibold text-slate-500">
-          {campaign.deadline}
-        </span>
+        <span className="text-sm font-semibold text-slate-500">{campaign.deadline}</span>
       </div>
 
       <div className="mt-4">
-        <p className="text-sm font-semibold text-violet-700">
-          {campaign.brand}
-        </p>
-        <h3 className="mt-1 text-lg leading-snug font-bold text-slate-950">
-          {campaign.title}
-        </h3>
-        <p className="mt-2 line-clamp-2 text-sm leading-6 text-slate-500">
-          {campaign.brief}
-        </p>
+        <p className="text-sm font-semibold text-violet-700">{campaign.brand}</p>
+        <h3 className="mt-1 text-lg leading-snug font-bold text-slate-950">{campaign.title}</h3>
+        <p className="mt-2 line-clamp-2 text-sm leading-6 text-slate-500">{campaign.brief}</p>
       </div>
 
       <div className="mt-5 grid grid-cols-2 gap-3">
@@ -220,9 +208,7 @@ function CampaignCard({ campaign, selected, onSelect }) {
         </div>
         <div className="rounded-2xl bg-slate-50 p-3">
           <p className="text-xs font-medium text-slate-500">Submissions</p>
-          <p className="mt-1 font-bold text-slate-950">
-            {campaign.submissions}
-          </p>
+          <p className="mt-1 font-bold text-slate-950">{campaign.submissions}</p>
         </div>
       </div>
 
@@ -293,9 +279,7 @@ function CreateCampaignPanel({ onCreate }) {
           <Badge tone="purple">
             <Plus size={13} /> Create request
           </Badge>
-          <h2 className="mt-3 text-xl font-bold text-slate-950">
-            Launch an engagement campaign
-          </h2>
+          <h2 className="mt-3 text-xl font-bold text-slate-950">Launch an engagement campaign</h2>
           <p className="mt-1 text-sm leading-6 text-slate-500">
             Set the brief, reward pool, hashtags, and winner selection method.
           </p>
@@ -359,15 +343,9 @@ function CampaignDetails({ campaign, onStart }) {
       </div>
 
       <div className="mt-5">
-        <p className="text-sm font-semibold text-violet-700">
-          {campaign.brand}
-        </p>
-        <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-950">
-          {campaign.title}
-        </h2>
-        <p className="mt-3 text-sm leading-6 text-slate-600">
-          {campaign.brief}
-        </p>
+        <p className="text-sm font-semibold text-violet-700">{campaign.brand}</p>
+        <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-950">{campaign.title}</h2>
+        <p className="mt-3 text-sm leading-6 text-slate-600">{campaign.brief}</p>
       </div>
 
       <div className="mt-6 grid gap-3 sm:grid-cols-3">
@@ -383,12 +361,8 @@ function CampaignDetails({ campaign, onStart }) {
         </div>
         <div className="rounded-2xl bg-slate-50 p-4">
           <Users className="text-slate-700" size={18} />
-          <p className="mt-3 text-xs font-medium text-slate-500">
-            Participants
-          </p>
-          <p className="mt-1 font-bold text-slate-950">
-            {campaign.participants}
-          </p>
+          <p className="mt-3 text-xs font-medium text-slate-500">Participants</p>
+          <p className="mt-1 font-bold text-slate-950">{campaign.participants}</p>
         </div>
       </div>
 
@@ -397,10 +371,7 @@ function CampaignDetails({ campaign, onStart }) {
         <div className="mt-3 space-y-2">
           {campaign.rules.map((rule) => (
             <div key={rule} className="flex gap-3 rounded-2xl bg-slate-50 p-3">
-              <CheckCircle2
-                className="mt-0.5 shrink-0 text-emerald-600"
-                size={16}
-              />
+              <CheckCircle2 className="mt-0.5 shrink-0 text-emerald-600" size={16} />
               <p className="text-sm leading-6 text-slate-600">{rule}</p>
             </div>
           ))}
@@ -473,12 +444,9 @@ function ComposerPanel({ campaign, onClose, onSubmit }) {
             <Badge tone="purple">
               <Sparkles size={13} /> AI assisted post
             </Badge>
-            <h2 className="mt-3 text-2xl font-bold text-slate-950">
-              Create your campaign post
-            </h2>
+            <h2 className="mt-3 text-2xl font-bold text-slate-950">Create your campaign post</h2>
             <p className="mt-1 text-sm leading-6 text-slate-500">
-              Draft, improve, publish on X, then paste your post link for
-              review.
+              Draft, improve, publish on X, then paste your post link for review.
             </p>
           </div>
           <button
@@ -493,14 +461,10 @@ function ComposerPanel({ campaign, onClose, onSubmit }) {
           <div
             className={cn(
               "rounded-2xl border p-4",
-              step === "write"
-                ? "border-slate-950 bg-slate-50"
-                : "border-slate-200",
+              step === "write" ? "border-slate-950 bg-slate-50" : "border-slate-200",
             )}
           >
-            <p className="text-sm font-bold text-slate-950">
-              1. Write and publish
-            </p>
+            <p className="text-sm font-bold text-slate-950">1. Write and publish</p>
             <p className="mt-1 text-xs leading-5 text-slate-500">
               Create a clear post using the campaign brief.
             </p>
@@ -508,14 +472,10 @@ function ComposerPanel({ campaign, onClose, onSubmit }) {
           <div
             className={cn(
               "rounded-2xl border p-4",
-              step === "submit"
-                ? "border-slate-950 bg-slate-50"
-                : "border-slate-200",
+              step === "submit" ? "border-slate-950 bg-slate-50" : "border-slate-200",
             )}
           >
-            <p className="text-sm font-bold text-slate-950">
-              2. Submit post link
-            </p>
+            <p className="text-sm font-bold text-slate-950">2. Submit post link</p>
             <p className="mt-1 text-xs leading-5 text-slate-500">
               Paste the public X post URL for verification.
             </p>
@@ -550,9 +510,7 @@ function ComposerPanel({ campaign, onClose, onSubmit }) {
         </div>
 
         <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-4">
-          <label className="text-sm font-bold text-slate-950">
-            Paste your X post link
-          </label>
+          <label className="text-sm font-bold text-slate-950">Paste your X post link</label>
           <div className="mt-3 flex flex-col gap-3 sm:flex-row">
             <input
               value={postUrl}
@@ -565,8 +523,8 @@ function ComposerPanel({ campaign, onClose, onSubmit }) {
             </Button>
           </div>
           <p className="mt-3 text-xs leading-5 text-slate-500">
-            The platform can fetch the public embed, read the post content, and
-            send it for AI scoring and creator review.
+            The platform can fetch the public embed, read the post content, and send it for AI
+            scoring and creator review.
           </p>
         </div>
       </div>
@@ -601,9 +559,7 @@ function Leaderboard({ submissions }) {
                 <p className="text-sm text-slate-500">{item.handle}</p>
               </div>
               <div className="flex items-center gap-2">
-                <Badge tone={item.status === "Finalist" ? "green" : "blue"}>
-                  {item.status}
-                </Badge>
+                <Badge tone={item.status === "Finalist" ? "green" : "blue"}>{item.status}</Badge>
                 <span className="rounded-full bg-slate-950 px-3 py-1 text-sm font-bold text-white">
                   {item.score}
                 </span>
@@ -706,16 +662,13 @@ export default function EngageToEarn2() {
               Reward high-quality posts, not empty engagement.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-              Create campaigns, guide contributors with clear context, let AI
-              improve submissions, and reward the best posts from a funded prize
-              pool.
+              Create campaigns, guide contributors with clear context, let AI improve submissions,
+              and reward the best posts from a funded prize pool.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button
                 onClick={() =>
-                  document
-                    .getElementById("campaigns")
-                    ?.scrollIntoView({ behavior: "smooth" })
+                  document.getElementById("campaigns")?.scrollIntoView({ behavior: "smooth" })
                 }
               >
                 Explore campaigns <ArrowRight size={16} />
@@ -723,9 +676,7 @@ export default function EngageToEarn2() {
               <Button
                 variant="secondary"
                 onClick={() =>
-                  document
-                    .getElementById("create")
-                    ?.scrollIntoView({ behavior: "smooth" })
+                  document.getElementById("create")?.scrollIntoView({ behavior: "smooth" })
                 }
               >
                 Create request <Plus size={16} />
@@ -755,10 +706,7 @@ export default function EngageToEarn2() {
           </div>
         </section>
 
-        <section
-          id="campaigns"
-          className="mt-8 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]"
-        >
+        <section id="campaigns" className="mt-8 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="space-y-4">
             <div className="rounded-[2rem] border border-slate-200 bg-white p-4 shadow-sm shadow-slate-200/70">
               <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3">
@@ -785,17 +733,11 @@ export default function EngageToEarn2() {
           </div>
 
           <div className="space-y-6 lg:sticky lg:top-24 lg:self-start">
-            <CampaignDetails
-              campaign={selectedCampaign}
-              onStart={() => setComposerOpen(true)}
-            />
+            <CampaignDetails campaign={selectedCampaign} onStart={() => setComposerOpen(true)} />
           </div>
         </section>
 
-        <section
-          id="create"
-          className="mt-8 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]"
-        >
+        <section id="create" className="mt-8 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <CreateCampaignPanel onCreate={createCampaign} />
 
           <div className="rounded-[2rem] border border-slate-200 bg-slate-950 p-6 text-white shadow-sm">
@@ -813,10 +755,7 @@ export default function EngageToEarn2() {
                 "Platform fetches the public embed, extracts content, scores quality, and queues review.",
                 "Winner is selected by best post, finalists, random draw, or creator review.",
               ].map((item, index) => (
-                <div
-                  key={item}
-                  className="flex gap-3 rounded-2xl bg-white/10 p-4"
-                >
+                <div key={item} className="flex gap-3 rounded-2xl bg-white/10 p-4">
                   <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-sm font-black text-slate-950">
                     {index + 1}
                   </div>

@@ -9,13 +9,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  BriefcaseBusiness,
-  CalendarClock,
-  Trophy,
-  Sparkles,
-  ArrowUpRight,
-} from "lucide-react";
+import { BriefcaseBusiness, CalendarClock, Trophy, Sparkles, ArrowUpRight } from "lucide-react";
 
 import BackButton from "@/components/BackButton";
 import TasksCard from "@/components/TasksCard";
@@ -69,9 +63,7 @@ function DetailStatCard({ label, value, icon, accent = "blue" }) {
 
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-medium tracking-wide text-[#667085]">
-            {label}
-          </p>
+          <p className="text-sm font-medium tracking-wide text-[#667085]">{label}</p>
           <p className="mt-2 text-2xl leading-none font-semibold tracking-tight text-[#101828]">
             {value}
           </p>
@@ -134,21 +126,15 @@ function QuickActionTask({ task, quest, onRefresh }) {
       <div className="flex w-[92%] items-center justify-between gap-3">
         <div className="space-y-1">
           <p
-            className={[
-              "text-sm font-semibold",
-              completed ? "text-[#1C097D]" : "text-white",
-            ].join(" ")}
+            className={["text-sm font-semibold", completed ? "text-[#1C097D]" : "text-white"].join(
+              " ",
+            )}
           >
             {task?.title}
           </p>
 
           {reward ? (
-            <p
-              className={[
-                "text-xs",
-                completed ? "text-[#475467]" : "text-white/80",
-              ].join(" ")}
-            >
+            <p className={["text-xs", completed ? "text-[#475467]" : "text-white/80"].join(" ")}>
               Reward: {reward}
             </p>
           ) : null}
@@ -190,12 +176,8 @@ function SubmissionAccordionTask({
         <AccordionTrigger className="cursor-pointer rounded-xl bg-[#2F0FD1] px-5 py-4 text-white hover:no-underline">
           <div className="flex w-full items-center justify-between gap-3 text-left">
             <div>
-              <p className="font-semibold">
-                {task?.title || task?.payload?.functionSpec?.doc}
-              </p>
-              {reward ? (
-                <p className="mt-1 text-xs text-white/80">Reward: {reward}</p>
-              ) : null}
+              <p className="font-semibold">{task?.title || task?.payload?.functionSpec?.doc}</p>
+              {reward ? <p className="mt-1 text-xs text-white/80">Reward: {reward}</p> : null}
             </div>
           </div>
         </AccordionTrigger>
@@ -206,9 +188,7 @@ function SubmissionAccordionTask({
               placeholder="Submission"
               value={task?.userProgress?.submission}
               disabled
-              icon={
-                <IoIosCheckmarkCircle className="text-[28px] text-[#538E11]" />
-              }
+              icon={<IoIosCheckmarkCircle className="text-[28px] text-[#538E11]" />}
             />
           ) : onChain ? (
             <OnChainTaskInput task={task} quest={quest} userId={userId} />
@@ -306,9 +286,7 @@ function TaskDetailsPage() {
         value: quest?.numberOfWinners ?? "Open",
         icon: <Trophy className="h-[18px] w-[18px]" />,
         accent: "green",
-        show:
-          quest?.numberOfWinners !== undefined &&
-          quest?.numberOfWinners !== null,
+        show: quest?.numberOfWinners !== undefined && quest?.numberOfWinners !== null,
       },
       {
         key: "selection",
@@ -398,13 +376,7 @@ function TaskDetailsPage() {
       );
     }
 
-    return (
-      <SubmissionAccordionTask
-        key={`${title || "task"}-${i}`}
-        task={task}
-        quest={quest}
-      />
-    );
+    return <SubmissionAccordionTask key={`${title || "task"}-${i}`} task={task} quest={quest} />;
   };
 
   return (
@@ -472,12 +444,10 @@ function TaskDetailsPage() {
 
               <div className="w-full rounded-2xl border border-[#E5E7EB] bg-gradient-to-br from-[#F8FAFF] to-white p-5 shadow-sm xl:max-w-[320px]">
                 <p className="mb-2 text-sm text-[#667085]">Quest reward</p>
-                <p className="text-2xl font-semibold text-[#2F0FD1]">
-                  {RewardLabel({ quest })}
-                </p>
+                <p className="text-2xl font-semibold text-[#2F0FD1]">{RewardLabel({ quest })}</p>
                 <p className="mt-3 text-sm leading-6 text-[#667085]">
-                  Complete the required actions and submit proof where needed to
-                  be considered for rewards.
+                  Complete the required actions and submit proof where needed to be considered for
+                  rewards.
                 </p>
               </div>
             </div>
@@ -525,9 +495,8 @@ function TaskDetailsPage() {
                     Technical task flow
                   </h3>
                   <p className="text-sm leading-6 text-[#667085]">
-                    This task category can be upgraded into a dedicated
-                    technical submission experience similar to the new on-chain
-                    and growth task flows.
+                    This task category can be upgraded into a dedicated technical submission
+                    experience similar to the new on-chain and growth task flows.
                   </p>
                 </div>
               </div>
@@ -538,9 +507,7 @@ function TaskDetailsPage() {
 
       <section className="space-y-4">
         <div>
-          <h2 className="text-[22px] font-semibold tracking-tight text-[#101828]">
-            Similar Tasks
-          </h2>
+          <h2 className="text-[22px] font-semibold tracking-tight text-[#101828]">Similar Tasks</h2>
           <p className="mt-1 text-sm text-[#667085]">
             Explore other tasks you may be interested in.
           </p>

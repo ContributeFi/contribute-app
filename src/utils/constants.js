@@ -84,7 +84,4 @@ export const TASK_PREVIEW_CONFIG = {
   },
 };
 
-export const VERIFICATION_MODES = [
-  "Contract Invocation",
-  "Observe Account Calls",
-];
+export const VERIFICATION_MODES = ["Contract Invocation", "Observe Account Calls"];

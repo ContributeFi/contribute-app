@@ -25,10 +25,7 @@ function TasksCard({ task, tag }) {
     }
 
     if (pathLength === 3 && location.pathname.startsWith("/communities")) {
-      navigate(
-        `/${location.pathname.slice(1)}/${encodeURIComponent(task.id)}`,
-        { replace: false },
-      );
+      navigate(`/${location.pathname.slice(1)}/${encodeURIComponent(task.id)}`, { replace: false });
       return;
     }
 

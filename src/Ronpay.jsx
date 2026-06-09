@@ -17,26 +17,22 @@ const features = [
   {
     icon: QrCode,
     title: "Payment links",
-    description:
-      "Create secure payment requests and share them instantly with customers.",
+    description: "Create secure payment requests and share them instantly with customers.",
   },
   {
     icon: Wallet,
     title: "Smart wallet",
-    description:
-      "Receive, hold, and manage balances from a simple wallet experience.",
+    description: "Receive, hold, and manage balances from a simple wallet experience.",
   },
   {
     icon: Banknote,
     title: "Fiat or digital dollars",
-    description:
-      "Let users settle in local currency or keep funds in stable digital dollars.",
+    description: "Let users settle in local currency or keep funds in stable digital dollars.",
   },
   {
     icon: ShieldCheck,
     title: "Secure access",
-    description:
-      "Email and passkey access give users a simple and protected account experience.",
+    description: "Email and passkey access give users a simple and protected account experience.",
   },
 ];
 
@@ -144,8 +140,8 @@ export default function Ronpay() {
             </h1>
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-              RonPay lets users create payment links, receive funds in fiat or
-              digital dollars, and keep stable savings from one simple wallet.
+              RonPay lets users create payment links, receive funds in fiat or digital dollars, and
+              keep stable savings from one simple wallet.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -179,9 +175,7 @@ export default function Ronpay() {
             <div className="rounded-[36px] border border-slate-200 bg-white p-4 shadow-2xl shadow-slate-200">
               <div className="overflow-hidden rounded-[28px] bg-slate-950 p-5 text-white">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-semibold text-slate-400">
-                    Available balance
-                  </span>
+                  <span className="text-sm font-semibold text-slate-400">Available balance</span>
                   <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold">
                     Active
                   </span>
@@ -198,9 +192,7 @@ export default function Ronpay() {
 
                   <div className="mt-5 flex items-center justify-between rounded-2xl bg-white p-4 text-slate-950">
                     <div>
-                      <p className="text-xs font-bold text-slate-400">
-                        Payment QR
-                      </p>
+                      <p className="text-xs font-bold text-slate-400">Payment QR</p>
                       <p className="mt-1 text-sm font-black">Ready to share</p>
                     </div>
                     <QrCode size={42} />
@@ -210,15 +202,11 @@ export default function Ronpay() {
 
               <div className="mt-4 grid grid-cols-2 gap-3">
                 <div className="rounded-3xl border border-slate-100 bg-slate-50 p-4">
-                  <p className="text-xs font-bold text-slate-400 uppercase">
-                    Pending
-                  </p>
+                  <p className="text-xs font-bold text-slate-400 uppercase">Pending</p>
                   <p className="mt-2 text-2xl font-black">$500</p>
                 </div>
                 <div className="rounded-3xl border border-slate-100 bg-slate-50 p-4">
-                  <p className="text-xs font-bold text-slate-400 uppercase">
-                    Savings
-                  </p>
+                  <p className="text-xs font-bold text-slate-400 uppercase">Savings</p>
                   <p className="mt-2 text-2xl font-black">$740</p>
                 </div>
               </div>
@@ -247,9 +235,7 @@ export default function Ronpay() {
                 <feature.icon size={22} />
               </div>
               <h3 className="mt-5 text-lg font-black">{feature.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-500">
-                {feature.description}
-              </p>
+              <p className="mt-2 text-sm leading-6 text-slate-500">{feature.description}</p>
             </div>
           ))}
         </div>
@@ -258,15 +244,13 @@ export default function Ronpay() {
       <section id="how-it-works" className="border-y border-slate-200 bg-white">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-2">
           <div>
-            <p className="font-bold tracking-wide text-sky-700 uppercase">
-              How it works
-            </p>
+            <p className="font-bold tracking-wide text-sky-700 uppercase">How it works</p>
             <h2 className="mt-3 text-4xl font-black tracking-tight">
               From request to settlement in a few simple steps.
             </h2>
             <p className="mt-4 text-lg leading-8 text-slate-600">
-              RonPay keeps the experience simple for users while handling wallet
-              and settlement preferences behind the scenes.
+              RonPay keeps the experience simple for users while handling wallet and settlement
+              preferences behind the scenes.
             </p>
           </div>
 
@@ -299,9 +283,8 @@ export default function Ronpay() {
               </h2>
 
               <p className="mt-4 text-lg leading-8 text-slate-300">
-                RonPay supports familiar account access with email and passkeys,
-                while giving users a clean wallet experience for payments,
-                payouts, and savings.
+                RonPay supports familiar account access with email and passkeys, while giving users
+                a clean wallet experience for payments, payouts, and savings.
               </p>
             </div>
 
@@ -331,8 +314,8 @@ export default function Ronpay() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600">
-            RonPay gives users a simple way to receive, settle, and save value
-            across fiat and digital dollars.
+            RonPay gives users a simple way to receive, settle, and save value across fiat and
+            digital dollars.
           </p>
 
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">

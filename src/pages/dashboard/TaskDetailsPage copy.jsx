@@ -105,9 +105,7 @@ function TaskDetailsPage() {
                 <div className="space-y-6">
                   <div>
                     <div className="space-y-4">
-                      <h2 className="text-[20px] font-bold text-[#050215]">
-                        {quest?.questTitle}
-                      </h2>
+                      <h2 className="text-[20px] font-bold text-[#050215]">{quest?.questTitle}</h2>
                       {/* <div className="flex flex-wrap gap-2">
                         <div
                           className={`rounded-[4px] px-[12px] py-[5px] text-sm font-normal text-[#313131] ${TASK_TAG_BG[quest.category]}`}
@@ -128,10 +126,7 @@ function TaskDetailsPage() {
                           {/* <img src="/Gift.svg" alt="" /> */}
                           {quest?.rewardType === "Token" &&
                             quest.tokensPerWinner &&
-                            quest.tokensPerWinner +
-                              " " +
-                              quest?.symbol +
-                              " Per Winner"}
+                            quest.tokensPerWinner + " " + quest?.symbol + " Per Winner"}
 
                           {quest?.rewardType === "Points" &&
                             quest?.pointsPerWinner &&
@@ -147,33 +142,25 @@ function TaskDetailsPage() {
                     {quest?.participants && (
                       <div className="space-y-[12px] px-4 py-5 text-center lg:py-0">
                         <p className="text-[#525866]">Number of Participants</p>
-                        <p className="font-semibold text-[#09032A]">
-                          {quest?.participants.length}
-                        </p>
+                        <p className="font-semibold text-[#09032A]">{quest?.participants.length}</p>
                       </div>
                     )}
 
                     {quest?.endDate ? (
                       <div className="space-y-[12px] px-4 py-5 text-center lg:py-0">
                         <p className="text-[#525866]">Quest Duration</p>
-                        <p className="font-semibold text-[#09032A]">
-                          {endTime(quest?.endDate)}
-                        </p>
+                        <p className="font-semibold text-[#09032A]">{endTime(quest?.endDate)}</p>
                       </div>
                     ) : (
                       <div className="space-y-[12px] px-4 py-5 text-center lg:py-0">
                         <p className="text-[#525866]">Quest Duration</p>
-                        <p className="font-semibold text-[#09032A]">
-                          Continuous
-                        </p>
+                        <p className="font-semibold text-[#09032A]">Continuous</p>
                       </div>
                     )}
                     {quest?.numberOfWinners && (
                       <div className="space-y-[12px] px-4 py-5 text-center lg:py-0">
                         <p className="text-[#525866]"> Number of Winners</p>
-                        <p className="font-semibold text-[#09032A]">
-                          {quest?.numberOfWinners}
-                        </p>
+                        <p className="font-semibold text-[#09032A]">{quest?.numberOfWinners}</p>
                       </div>
                     )}
 
@@ -187,9 +174,7 @@ function TaskDetailsPage() {
                     )}
                   </div>
 
-                  <p className="font-normal text-[#525866]">
-                    {quest?.questDescription}
-                  </p>
+                  <p className="font-normal text-[#525866]">{quest?.questDescription}</p>
                 </div>
 
                 {quest.category === "ON_CHAIN" && (
@@ -212,9 +197,7 @@ function TaskDetailsPage() {
                                   className={`cursor-pointer bg-[#2F0FD1] px-8 py-4 text-white hover:no-underline`}
                                 >
                                   <p className="flex w-full items-center justify-between gap-2">
-                                    <span>
-                                      {task?.payload?.functionSpec?.doc}
-                                    </span>
+                                    <span>{task?.payload?.functionSpec?.doc}</span>
 
                                     <span className="text-white">
                                       {quest?.rewardType === "Token" &&
@@ -358,9 +341,7 @@ function TaskDetailsPage() {
                                         <>
                                           <CustomInput
                                             placeholder="Paste Post URL Here"
-                                            value={
-                                              task?.userProgress?.submission
-                                            }
+                                            value={task?.userProgress?.submission}
                                             disabled
                                             icon={
                                               <IoIosCheckmarkCircle className="text-[30px] text-[#538E11]" />
@@ -425,9 +406,7 @@ function TaskDetailsPage() {
                                         <>
                                           <CustomInput
                                             placeholder="Paste Post URL Here"
-                                            value={
-                                              task?.userProgress?.submission
-                                            }
+                                            value={task?.userProgress?.submission}
                                             disabled
                                             icon={
                                               <IoIosCheckmarkCircle className="text-[30px] text-[#538E11]" />
@@ -493,9 +472,7 @@ function TaskDetailsPage() {
                                         <>
                                           <CustomInput
                                             placeholder="Paste Post URL Here"
-                                            value={
-                                              task?.userProgress?.submission
-                                            }
+                                            value={task?.userProgress?.submission}
                                             disabled
                                             icon={
                                               <IoIosCheckmarkCircle className="text-[30px] text-[#538E11]" />
@@ -591,9 +568,7 @@ function TaskDetailsPage() {
                                         <>
                                           <CustomInput
                                             placeholder="Paste Post URL Here"
-                                            value={
-                                              task?.userProgress?.submission
-                                            }
+                                            value={task?.userProgress?.submission}
                                             disabled
                                             icon={
                                               <IoIosCheckmarkCircle className="text-[30px] text-[#538E11]" />
@@ -690,9 +665,7 @@ function TaskDetailsPage() {
         </div>
 
         <div className="space-y-3">
-          <h2 className="text-[20px] font-semibold text-[#050215]">
-            Similar Tasks
-          </h2>
+          <h2 className="text-[20px] font-semibold text-[#050215]">Similar Tasks</h2>
 
           {loadingQuests ? (
             <Loader />

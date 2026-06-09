@@ -9,13 +9,7 @@ function DashboardNavigation({ setSheetIsOpen, platform = "desktop" }) {
   const location = useLocation();
 
   const restrictedTitles = useMemo(
-    () => [
-      "Earnings",
-      "Analytics",
-      "Profile",
-      "Notifications",
-      "Help & Support",
-    ],
+    () => ["Earnings", "Analytics", "Profile", "Notifications", "Help & Support"],
     [],
   );
 
@@ -26,10 +20,9 @@ function DashboardNavigation({ setSheetIsOpen, platform = "desktop" }) {
 
   return (
     <aside
-      className={[
-        "flex h-full flex-col",
-        platform === "mobile" ? "px-4 py-4" : "px-4 py-5",
-      ].join(" ")}
+      className={["flex h-full flex-col", platform === "mobile" ? "px-4 py-4" : "px-4 py-5"].join(
+        " ",
+      )}
     >
       {platform === "desktop" && (
         <div className="mb-5 rounded-2xl border border-[#EEF2FF] bg-gradient-to-br from-[#FAFBFF] to-white p-4">
@@ -38,8 +31,7 @@ function DashboardNavigation({ setSheetIsOpen, platform = "desktop" }) {
           </p>
 
           <p className="mt-1 text-sm leading-6 text-[#667085]">
-            Manage quests, contributions, rewards, and your account in one
-            place.
+            Manage quests, contributions, rewards, and your account in one place.
           </p>
         </div>
       )}

@@ -23,12 +23,7 @@ import { useWallet } from "@/hooks/useWallet";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { uploadProfilePicture } from "@/services";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useTwitterAuthCallback } from "@/hooks/useTwitterAuthCallback";
 import ConnectWalletModal from "@/pages/get-started/ConnectWalletModal";
 import WalletKitModal from "../WalletKitModal";
@@ -58,20 +53,14 @@ function ProfileButton({ user, onClick }) {
     >
       <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#EEF2FF] text-xs font-semibold text-[#2F0FD1]">
         {user?.profileImageUrl ? (
-          <img
-            src={user.profileImageUrl}
-            alt="Profile"
-            className="h-full w-full object-cover"
-          />
+          <img src={user.profileImageUrl} alt="Profile" className="h-full w-full object-cover" />
         ) : (
           initials
         )}
       </div>
 
       <div className="hidden min-w-0 text-left sm:block">
-        <p className="max-w-[150px] truncate text-sm font-semibold text-[#101828]">
-          {displayName}
-        </p>
+        <p className="max-w-[150px] truncate text-sm font-semibold text-[#101828]">{displayName}</p>
         <p className="text-xs text-[#667085]">View profile</p>
       </div>
 
@@ -80,15 +69,7 @@ function ProfileButton({ user, onClick }) {
   );
 }
 
-function ProfileDrawer({
-  open,
-  user,
-  publicKey,
-  uploading,
-  handleImageSelect,
-  onClose,
-  onLogout,
-}) {
+function ProfileDrawer({ open, user, publicKey, uploading, handleImageSelect, onClose, onLogout }) {
   const [copied, setCopied] = useState(false);
 
   const displayName = user?.name || user?.username || "Contributor";
@@ -153,12 +134,8 @@ function ProfileDrawer({
         <SheetHeader className="border-b border-[#EAECF0] px-5 py-4 text-left">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <SheetTitle className="text-base font-semibold text-[#101828]">
-                Profile
-              </SheetTitle>
-              <p className="mt-1 text-sm text-[#667085]">
-                Contributor details and activity.
-              </p>
+              <SheetTitle className="text-base font-semibold text-[#101828]">Profile</SheetTitle>
+              <p className="mt-1 text-sm text-[#667085]">Contributor details and activity.</p>
             </div>
 
             <button
@@ -185,9 +162,7 @@ function ProfileDrawer({
                     className="h-full w-full object-cover"
                   />
                 ) : (
-                  <span className="text-base font-semibold text-[#2F0FD1]">
-                    {initials}
-                  </span>
+                  <span className="text-base font-semibold text-[#2F0FD1]">{initials}</span>
                 )}
 
                 <Input
@@ -209,21 +184,15 @@ function ProfileDrawer({
               </Label>
 
               <div className="min-w-0">
-                <h3 className="truncate text-lg font-semibold text-[#101828]">
-                  {profile.name}
-                </h3>
-                <p className="truncate text-sm text-[#667085]">
-                  @{profile.username}
-                </p>
+                <h3 className="truncate text-lg font-semibold text-[#101828]">{profile.name}</h3>
+                <p className="truncate text-sm text-[#667085]">@{profile.username}</p>
                 <p className="mt-1 inline-flex rounded-full border border-[#E0E7FF] bg-[#F4F7FF] px-2.5 py-1 text-xs font-medium text-[#2F0FD1]">
                   {profile.role}
                 </p>
               </div>
             </div>
 
-            <p className="mt-4 text-sm leading-6 text-[#667085]">
-              {profile.bio}
-            </p>
+            <p className="mt-4 text-sm leading-6 text-[#667085]">{profile.bio}</p>
           </div>
 
           <div className="mt-5 grid grid-cols-2 gap-3">
@@ -236,9 +205,7 @@ function ProfileDrawer({
                   className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm"
                 >
                   <Icon className="mb-3 h-4 w-4 text-[#2F0FD1]" />
-                  <p className="text-lg font-semibold text-[#101828]">
-                    {stat.value}
-                  </p>
+                  <p className="text-lg font-semibold text-[#101828]">{stat.value}</p>
                   <p className="text-xs text-[#667085]">{stat.label}</p>
                 </div>
               );
@@ -246,9 +213,7 @@ function ProfileDrawer({
           </div>
 
           <div className="mt-5 rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
-            <h4 className="text-sm font-semibold text-[#101828]">
-              Application activity
-            </h4>
+            <h4 className="text-sm font-semibold text-[#101828]">Application activity</h4>
 
             <div className="mt-4 space-y-3">
               {applicationStats.map(([label, value]) => (
@@ -257,18 +222,14 @@ function ProfileDrawer({
                   className="flex items-center justify-between rounded-xl bg-[#F8FAFC] px-3 py-2"
                 >
                   <span className="text-sm text-[#667085]">{label}</span>
-                  <span className="text-sm font-semibold text-[#101828]">
-                    {value}
-                  </span>
+                  <span className="text-sm font-semibold text-[#101828]">{value}</span>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="mt-5 rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
-            <h4 className="text-sm font-semibold text-[#101828]">
-              Account details
-            </h4>
+            <h4 className="text-sm font-semibold text-[#101828]">Account details</h4>
 
             <div className="mt-4 space-y-3">
               <div>
@@ -329,17 +290,11 @@ function DashboardLayout() {
   const [profileOpen, setProfileOpen] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [isTelegramAuthenticating, setIsTelegramAuthenticating] = useState(
-    () =>
-      window.location.hash && window.location.hash.includes("tgAuthResult="),
+    () => window.location.hash && window.location.hash.includes("tgAuthResult="),
   );
 
   const location = useLocation();
-  const {
-    communityAlias: communityId,
-    taskId,
-    newBurst,
-    burstId,
-  } = useParams();
+  const { communityAlias: communityId, taskId, newBurst, burstId } = useParams();
   const dispatch = useDispatch();
 
   useTwitterAuthCallback();
@@ -408,9 +363,7 @@ function DashboardLayout() {
         toast.error("Failed to upload profile picture");
       }
     } catch (error) {
-      toast.error(
-        error?.response?.data?.message || "Failed to upload profile picture",
-      );
+      toast.error(error?.response?.data?.message || "Failed to upload profile picture");
     } finally {
       setUploading(false);
     }
@@ -421,9 +374,7 @@ function DashboardLayout() {
       <div className="flex h-screen w-full items-center justify-center bg-white">
         <div className="flex flex-col items-center gap-3">
           <ImSpinner5 className="animate-spin text-[32px] text-[#5865F2]" />
-          <p className="text-sm text-[#667085]">
-            Completing Telegram authentication...
-          </p>
+          <p className="text-sm text-[#667085]">Completing Telegram authentication...</p>
         </div>
       </div>
     );
@@ -440,10 +391,7 @@ function DashboardLayout() {
           setSheetIsOpen={setSheetIsOpen}
           tag="dashboard"
         >
-          <DashboardNavigation
-            setSheetIsOpen={setSheetIsOpen}
-            platform="mobile"
-          />
+          <DashboardNavigation setSheetIsOpen={setSheetIsOpen} platform="mobile" />
         </MobileNavigation>
 
         <DashboardLogo />
@@ -460,10 +408,7 @@ function DashboardLayout() {
           <DashboardLogo />
         </div>
 
-        <DashboardNavigation
-          setSheetIsOpen={setSheetIsOpen}
-          platform="desktop"
-        />
+        <DashboardNavigation setSheetIsOpen={setSheetIsOpen} platform="desktop" />
       </DashboardSidebarContainer>
 
       <DashboardDesktopHeader>

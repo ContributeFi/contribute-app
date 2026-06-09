@@ -67,8 +67,8 @@ function Overview() {
                 </h2>
 
                 <p className="max-w-2xl text-[15px] leading-7 text-[#667085]">
-                  View open tasks, discover active communities, and monitor key
-                  performance metrics from one place.
+                  View open tasks, discover active communities, and monitor key performance metrics
+                  from one place.
                 </p>
               </div>
             </div>
@@ -121,10 +121,7 @@ function Overview() {
         {loadingQuests ? (
           <Loader label="Loading open tasks..." />
         ) : errorLoadingQuests ? (
-          <Error
-            title="Failed to load tasks"
-            description="Please refresh the page or try again."
-          />
+          <Error title="Failed to load tasks" description="Please refresh the page or try again." />
         ) : quests.length === 0 ? (
           <div className="flex min-h-[260px] flex-col items-center justify-center rounded-[24px] border border-dashed border-[#D9E1F2] bg-[#FCFCFD] px-6 py-10 text-center">
             <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[#F4F7FF] text-[#2F0FD1]">
@@ -136,8 +133,8 @@ function Overview() {
                 No open tasks right now
               </h3>
               <p className="text-sm leading-6 text-[#667085]">
-                New contribution opportunities will appear here as communities
-                publish them. Explore all tasks to check for updates.
+                New contribution opportunities will appear here as communities publish them. Explore
+                all tasks to check for updates.
               </p>
             </div>
 
@@ -198,8 +195,8 @@ function Overview() {
                 No communities yet
               </h3>
               <p className="text-sm leading-6 text-[#667085]">
-                Create a community to bring contributors together, publish
-                tasks, and start growing activity around your project.
+                Create a community to bring contributors together, publish tasks, and start growing
+                activity around your project.
               </p>
             </div>
 
@@ -233,8 +230,8 @@ function Overview() {
             </h3>
 
             <p className="text-sm leading-6 text-[#667085]">
-              Launch a Burst campaign to engage in active social conversations
-              with community-powered ideas and visibility-focused submissions.
+              Launch a Burst campaign to engage in active social conversations with
+              community-powered ideas and visibility-focused submissions.
             </p>
           </div>
 

@@ -34,10 +34,7 @@ export default function CustomDateSelect({
                 <IoMdArrowDropdown className="size-6 text-[#B2B9C7]" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent
-              className="w-auto overflow-hidden p-0"
-              align="start"
-            >
+            <PopoverContent className="w-auto overflow-hidden p-0" align="start">
               <Calendar
                 mode="single"
                 selected={startDate}
@@ -50,9 +47,7 @@ export default function CustomDateSelect({
             </PopoverContent>
           </Popover>
 
-          {startDateError && (
-            <span className="text-xs text-red-500">{startDateError}</span>
-          )}
+          {startDateError && <span className="text-xs text-red-500">{startDateError}</span>}
         </div>
 
         {!runContinuously && (
@@ -68,10 +63,7 @@ export default function CustomDateSelect({
                   <IoMdArrowDropdown className="size-6 text-[#B2B9C7]" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent
-                className="w-auto overflow-hidden p-0"
-                align="start"
-              >
+              <PopoverContent className="w-auto overflow-hidden p-0" align="start">
                 <Calendar
                   mode="single"
                   selected={endDate}
@@ -84,9 +76,7 @@ export default function CustomDateSelect({
               </PopoverContent>
             </Popover>
 
-            {endDateError && (
-              <span className="text-xs text-red-500">{endDateError}</span>
-            )}
+            {endDateError && <span className="text-xs text-red-500">{endDateError}</span>}
           </div>
         )}
       </div>

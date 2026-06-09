@@ -25,11 +25,7 @@ import {
   setItemInLocalStorage,
 } from "@/lib/utils";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import {
-  formatDateToYYYYMMDD,
-  hydrateQuestData,
-  mapFormToCreateGrowthQuestPayload,
-} from "@/utils";
+import { formatDateToYYYYMMDD, hydrateQuestData, mapFormToCreateGrowthQuestPayload } from "@/utils";
 import {
   REWARD_MODES,
   REWARD_TYPES,
@@ -50,12 +46,8 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
   const side = isDesktop ? "right" : "bottom";
   const [collapsedTasks, setCollapsedTasks] = useState({});
   const [openTokenSelectorModal, setOpenTokenSelectorModal] = useState(false);
-  const [rewardToken, setRewardToken] = useState(
-    getItemFromLocalStorage("rewardToken") || null,
-  );
-  const [step, setStep] = useState(
-    getItemFromLocalStorage("growthQuestStep") || 1,
-  );
+  const [rewardToken, setRewardToken] = useState(getItemFromLocalStorage("rewardToken") || null);
+  const [step, setStep] = useState(getItemFromLocalStorage("growthQuestStep") || 1);
   const [step1Data, setStep1Data] = useState(() => {
     const stored = getItemFromLocalStorage("growthQuestStep1Data");
     return stored ? hydrateQuestData(stored) : null;
@@ -229,9 +221,7 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
     if (!requireAuth()) return;
 
     try {
-      const payload = JSON.parse(
-        JSON.stringify(mapFormToCreateGrowthQuestPayload(step1Data)),
-      );
+      const payload = JSON.parse(JSON.stringify(mapFormToCreateGrowthQuestPayload(step1Data)));
 
       setIsSubmitting(true);
       // await createGrowthQuest(payload, communityId);
@@ -273,13 +263,9 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
       <SheetTrigger asChild>
         <div className="flex cursor-pointer items-center justify-between gap-4 rounded-md bg-[#F7F9FD] p-5 hover:bg-[#F7F9FF]/70">
           <div className="space-y-2">
-            <p className="text-left text-[18px] font-semibold text-[#09032A]">
-              Growth Quest
-            </p>
+            <p className="text-left text-[18px] font-semibold text-[#09032A]">Growth Quest</p>
 
-            <p className="text-[#525866]">
-              Social media engagement and community growth tasks.
-            </p>
+            <p className="text-[#525866]">Social media engagement and community growth tasks.</p>
           </div>
 
           <IoIosArrowForward className="text-[#2F0FD1]" />
@@ -318,9 +304,7 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
             </>
           ) : (
             <>
-              <SheetTitle className="text-[28px] font-bold text-[#09032A]">
-                Growth Quest
-              </SheetTitle>
+              <SheetTitle className="text-[28px] font-bold text-[#09032A]">Growth Quest</SheetTitle>
               <SheetDescription className="font-[300] text-[#525866]">
                 Boost visibility and engagement across social media
               </SheetDescription>
@@ -330,10 +314,7 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
 
         {step === 1 ? (
           <>
-            <form
-              className="relative grid gap-5 px-4 py-4"
-              onSubmit={handleSubmit(onSubmit)}
-            >
+            <form className="relative grid gap-5 px-4 py-4" onSubmit={handleSubmit(onSubmit)}>
               <CustomInput
                 label="Quest Title"
                 placeholder="Enter Title"
@@ -385,13 +366,7 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                   type="text"
                   error={errors.tokenContract?.message}
                   {...register("tokenContract")}
-                  className={
-                    rewardType !== "Token"
-                      ? "hidden"
-                      : rewardToken
-                        ? "pl-[30%]"
-                        : ""
-                  }
+                  className={rewardType !== "Token" ? "hidden" : rewardToken ? "pl-[30%]" : ""}
                   onFocus={handleChangeToken}
                   handleClickIcon={() => {}}
                   icon={<RxCaretDown />}
@@ -399,11 +374,7 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                     rewardToken && (
                       <div className="flex w-full items-center gap-2 text-sm text-black">
                         <span>
-                          {rewardToken?.contract
-                            ? "Sym:"
-                            : rewardToken?.issuer
-                              ? "Asset:"
-                              : ""}
+                          {rewardToken?.contract ? "Sym:" : rewardToken?.issuer ? "Asset:" : ""}
                         </span>
                         <span className="font-bold">{rewardToken?.code}</span>
                       </div>
@@ -451,9 +422,7 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                 <div className="flex w-full items-center justify-between text-base font-light text-[#09032A]">
                   Quest Duration
                   <div className="ml-auto flex items-center gap-2">
-                    <p className="text-[14px] font-[300] text-[#09032A]">
-                      Run quest continuously
-                    </p>
+                    <p className="text-[14px] font-[300] text-[#09032A]">Run quest continuously</p>
                     <Controller
                       name="runContinuously"
                       control={control}
@@ -506,36 +475,27 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                 control={control}
                 render={({ field }) => (
                   <div className="grid gap-2">
-                    <p className="text-base font-light text-[#09032A]">
-                      Reward Mode
-                    </p>
+                    <p className="text-base font-light text-[#09032A]">Reward Mode</p>
                     <RadioGroup
                       value={field.value}
                       onChange={field.onChange}
                       className="flex w-[100%] flex-col items-start justify-between gap-2 sm:flex-row sm:items-center"
                     >
                       {REWARD_MODES.map((plan) => (
-                        <Field
-                          key={plan}
-                          className="flex w-[50%] items-center gap-2"
-                        >
+                        <Field key={plan} className="flex w-[50%] items-center gap-2">
                           <Radio
                             value={plan}
                             className="group flex size-5 items-center justify-center rounded-full border bg-white data-checked:bg-[#2F0FD1]"
                           >
                             <span className="invisible size-2 rounded-full bg-white group-data-checked:visible" />
                           </Radio>
-                          <Label className="text-[15px] font-[300] text-[#09032A]">
-                            {plan}
-                          </Label>
+                          <Label className="text-[15px] font-[300] text-[#09032A]">{plan}</Label>
                         </Field>
                       ))}
                     </RadioGroup>
 
                     {errors.rewardMode && (
-                      <span className="text-xs text-red-500">
-                        {errors.rewardMode.message}
-                      </span>
+                      <span className="text-xs text-red-500">{errors.rewardMode.message}</span>
                     )}
                   </div>
                 )}
@@ -589,11 +549,7 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                           onClick={() => toggleTask(index)}
                           className="rounded bg-white p-2"
                         >
-                          {collapsedTasks[index] ? (
-                            <IoChevronDown />
-                          ) : (
-                            <IoChevronUp />
-                          )}
+                          {collapsedTasks[index] ? <IoChevronDown /> : <IoChevronUp />}
                         </button>
                       </div>
                     </div>
@@ -622,35 +578,29 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                           register={register(`tasks.${index}.type`)}
                         /> */}
 
-                        {rewardType === "Token" &&
-                          rewardMode === "Individual Task Reward" && (
-                            <CustomInput
-                              label="How many tokens per task?"
-                              placeholder="eg 50"
-                              type="number"
-                              error={
-                                errors.tasks?.[index]?.tokensPerTask?.message
-                              }
-                              {...register(`tasks.${index}.tokensPerTask`, {
-                                valueAsNumber: true,
-                              })}
-                            />
-                          )}
+                        {rewardType === "Token" && rewardMode === "Individual Task Reward" && (
+                          <CustomInput
+                            label="How many tokens per task?"
+                            placeholder="eg 50"
+                            type="number"
+                            error={errors.tasks?.[index]?.tokensPerTask?.message}
+                            {...register(`tasks.${index}.tokensPerTask`, {
+                              valueAsNumber: true,
+                            })}
+                          />
+                        )}
 
-                        {rewardType === "Points" &&
-                          rewardMode === "Individual Task Reward" && (
-                            <CustomInput
-                              label="How many points per task?"
-                              placeholder="eg 50"
-                              type="number"
-                              error={
-                                errors.tasks?.[index]?.pointsPerTask?.message
-                              }
-                              {...register(`tasks.${index}.pointsPerTask`, {
-                                valueAsNumber: true,
-                              })}
-                            />
-                          )}
+                        {rewardType === "Points" && rewardMode === "Individual Task Reward" && (
+                          <CustomInput
+                            label="How many points per task?"
+                            placeholder="eg 50"
+                            type="number"
+                            error={errors.tasks?.[index]?.pointsPerTask?.message}
+                            {...register(`tasks.${index}.pointsPerTask`, {
+                              valueAsNumber: true,
+                            })}
+                          />
+                        )}
 
                         {/* {watch(`tasks.${index}.type`) === "Post on Twitter" && (
                           <CustomInput
@@ -663,8 +613,7 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                           />
                         )} */}
 
-                        {watch(`tasks.${index}.type`) ===
-                          "Follow on Twitter" && (
+                        {watch(`tasks.${index}.type`) === "Follow on Twitter" && (
                           <CustomInput
                             label="Twitter (X) Link"
                             error={errors.tasks?.[index]?.twitterUrl?.message}
@@ -679,9 +628,7 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                           <div className="space-y-5">
                             <CustomInput
                               label="Discord Invite Link"
-                              error={
-                                errors.tasks?.[index]?.discordLink?.message
-                              }
+                              error={errors.tasks?.[index]?.discordLink?.message}
                               {...register(`tasks.${index}.discordLink`)}
                               placeholder="Paste URL"
                               prefix="https://"
@@ -709,15 +656,13 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                           />
                         )}
 
-                        {watch(`tasks.${index}.type`) ===
-                          "Join Telegram Channel" && (
+                        {watch(`tasks.${index}.type`) === "Join Telegram Channel" && (
                           <CustomInput
                             label={
                               <div className="flex w-full items-center justify-between">
                                 <span>Telegram Link</span>
                                 <span className="flex items-center gap-1 text-[14px] font-normal text-[#2F0FD1]">
-                                  Channel needs a ContributeFi bot{" "}
-                                  <BsFillInfoCircleFill />
+                                  Channel needs a ContributeFi bot <BsFillInfoCircleFill />
                                 </span>
                               </div>
                             }
@@ -729,13 +674,10 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                           />
                         )}
 
-                        {watch(`tasks.${index}.type`) ===
-                          "Post on Telegram Group" && (
+                        {watch(`tasks.${index}.type`) === "Post on Telegram Group" && (
                           <CustomInput
                             label="Telegram Group Link"
-                            error={
-                              errors.tasks?.[index]?.telegramGroupLink?.message
-                            }
+                            error={errors.tasks?.[index]?.telegramGroupLink?.message}
                             {...register(`tasks.${index}.telegramGroupLink`)}
                             placeholder="Paste URL"
                             prefix="https://"
@@ -743,8 +685,7 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                           />
                         )}
 
-                        {watch(`tasks.${index}.type`) ===
-                          "Comment on Twitter" && (
+                        {watch(`tasks.${index}.type`) === "Comment on Twitter" && (
                           <div className="space-y-5">
                             <CustomInput
                               label="Tweet URL"
@@ -757,10 +698,7 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
 
                             <CustomInput
                               label="Keyword Validation (optional)"
-                              error={
-                                errors.tasks?.[index]?.keywordValidation
-                                  ?.message
-                              }
+                              error={errors.tasks?.[index]?.keywordValidation?.message}
                               {...register(`tasks.${index}.keywordValidation`)}
                               placeholder="Enter Text"
                               type="text"
@@ -823,12 +761,7 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                 </button>
               </div>
 
-              <Button
-                variant="secondary"
-                size="lg"
-                type="submit"
-                className="mt-5 w-full"
-              >
+              <Button variant="secondary" size="lg" type="submit" className="mt-5 w-full">
                 Continue
               </Button>
             </form>
@@ -838,23 +771,17 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <p className="w-1/2 font-[300] text-[#525866]">Quest Title</p>
-                <p className="w-1/2 font-medium text-[#050215]">
-                  {step1Data.questTitle}
-                </p>
+                <p className="w-1/2 font-medium text-[#050215]">{step1Data.questTitle}</p>
               </div>
 
               <div className="flex items-center gap-2">
                 <p className="w-1/2 font-[300] text-[#525866]">Reward Type</p>
-                <p className="w-1/2 font-medium text-[#050215]">
-                  {step1Data.rewardType}
-                </p>
+                <p className="w-1/2 font-medium text-[#050215]">{step1Data.rewardType}</p>
               </div>
 
               {step1Data.rewardType === "Token" && (
                 <div className="flex items-center gap-2">
-                  <p className="w-1/2 font-[300] text-[#525866]">
-                    Token Contract
-                  </p>
+                  <p className="w-1/2 font-[300] text-[#525866]">Token Contract</p>
                   <p className="w-1/2 font-medium text-[#050215]">
                     {step1Data.tokenContract.slice(0, 6)}...
                     {step1Data.tokenContract.slice(-6)}
@@ -864,12 +791,8 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
 
               {step1Data?.numberOfWinners && (
                 <div className="flex items-center gap-2">
-                  <p className="w-1/2 font-[300] text-[#525866]">
-                    Number of Winners
-                  </p>
-                  <p className="w-1/2 font-medium text-[#050215]">
-                    {step1Data.numberOfWinners}
-                  </p>
+                  <p className="w-1/2 font-[300] text-[#525866]">Number of Winners</p>
+                  <p className="w-1/2 font-medium text-[#050215]">{step1Data.numberOfWinners}</p>
                 </div>
               )}
 
@@ -878,18 +801,14 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                   {step1Data?.endDate ? "Quest Duration" : "Quest Start"}
                 </p>
                 <p className="w-1/2 font-medium text-[#050215]">
-                  {step1Data.startDate &&
-                    formatDateToYYYYMMDD(new Date(step1Data.startDate))}
-                  {step1Data.endDate &&
-                    ` to ${formatDateToYYYYMMDD(new Date(step1Data.endDate))}`}
+                  {step1Data.startDate && formatDateToYYYYMMDD(new Date(step1Data.startDate))}
+                  {step1Data.endDate && ` to ${formatDateToYYYYMMDD(new Date(step1Data.endDate))}`}
                 </p>
               </div>
 
               {step1Data.rewardType === "Token" && (
                 <div className="flex items-center gap-2">
-                  <p className="w-1/2 font-[300] text-[#525866]">
-                    Selection Method
-                  </p>
+                  <p className="w-1/2 font-[300] text-[#525866]">Selection Method</p>
                   <p className="w-1/2 font-medium text-[#050215]">
                     {step1Data.winnerSelectionMethod}
                   </p>
@@ -898,17 +817,13 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
 
               <div className="flex items-center gap-2">
                 <p className="w-1/2 font-[300] text-[#525866]">Reward Mode</p>
-                <p className="w-1/2 font-medium text-[#050215]">
-                  {step1Data.rewardMode}
-                </p>
+                <p className="w-1/2 font-medium text-[#050215]">{step1Data.rewardMode}</p>
               </div>
 
               {step1Data?.rewardMode === "Overall Reward" && (
                 <>
                   <div className="flex items-center gap-2">
-                    <p className="w-1/2 font-[300] text-[#525866]">
-                      Reward Per Winner
-                    </p>
+                    <p className="w-1/2 font-[300] text-[#525866]">Reward Per Winner</p>
                     <p className="w-1/2 font-medium text-[#050215]">
                       {step1Data?.tokensPerWinner
                         ? `${step1Data?.tokensPerWinner} ${step1Data?.symbol}`
@@ -930,82 +845,55 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
                     <div className="mb-4">
                       <div className="rounded-[8px] bg-[#EDF2FF] px-3 py-2">
                         <div className="flex items-center justify-between">
-                          <p className="font-semibold text-[#2F0FD1]">
-                            Task {index + 1}
-                          </p>
+                          <p className="font-semibold text-[#2F0FD1]">Task {index + 1}</p>
                           <button
                             type="button"
                             onClick={() => toggleTask(index)}
                             className="rounded bg-white p-2"
                           >
-                            {collapsedTasks[index] ? (
-                              <IoChevronDown />
-                            ) : (
-                              <IoChevronUp />
-                            )}
+                            {collapsedTasks[index] ? <IoChevronDown /> : <IoChevronUp />}
                           </button>
                         </div>
 
                         {!collapsedTasks[index] && (
                           <div className="mt-2 flex flex-wrap justify-between gap-4 rounded-[8px] bg-white p-4">
                             <div className="space-y-2">
-                              <p className="font-[300] text-[#525866]">
-                                Task Type
-                              </p>
-                              <p className="font-medium text-[#050215]">
-                                {task.type}
-                              </p>
+                              <p className="font-[300] text-[#525866]">Task Type</p>
+                              <p className="font-medium text-[#050215]">{task.type}</p>
                             </div>
 
-                            {step1Data?.rewardMode ===
-                              "Individual Task Reward" && (
+                            {step1Data?.rewardMode === "Individual Task Reward" && (
                               <div className="space-y-2">
-                                <p className="font-[300] text-[#525866]">
-                                  Reward Per Task
-                                </p>
+                                <p className="font-[300] text-[#525866]">Reward Per Task</p>
                                 <p className="font-medium text-[#050215]">
                                   {task.pointsPerTask || task?.tokensPerTask}{" "}
-                                  {task?.tokensPerTask
-                                    ? step1Data?.symbol
-                                    : "Points"}
+                                  {task?.tokensPerTask ? step1Data?.symbol : "Points"}
                                 </p>
                               </div>
                             )}
 
                             {config && (
                               <div className="space-y-2">
-                                <p className="font-[300] text-[#525866]">
-                                  {config.label}
-                                </p>
+                                <p className="font-[300] text-[#525866]">{config.label}</p>
+                                <p className="font-medium text-[#050215]">{task[config.field]}</p>
+                              </div>
+                            )}
+
+                            {task["keywordValidation"] && task.type === "Comment on Twitter" && (
+                              <div className="space-y-2">
+                                <p className="font-[300] text-[#525866]">Keyword Validation</p>
                                 <p className="font-medium text-[#050215]">
-                                  {task[config.field]}
+                                  {task["keywordValidation"]}
                                 </p>
                               </div>
                             )}
 
-                            {task["keywordValidation"] &&
-                              task.type === "Comment on Twitter" && (
-                                <div className="space-y-2">
-                                  <p className="font-[300] text-[#525866]">
-                                    Keyword Validation
-                                  </p>
-                                  <p className="font-medium text-[#050215]">
-                                    {task["keywordValidation"]}
-                                  </p>
-                                </div>
-                              )}
-
-                            {task["channelId"] &&
-                              task.type === "Post on Discord" && (
-                                <div className="space-y-2">
-                                  <p className="font-[300] text-[#525866]">
-                                    Channel ID
-                                  </p>
-                                  <p className="font-medium text-[#050215]">
-                                    {task["channelId"]}
-                                  </p>
-                                </div>
-                              )}
+                            {task["channelId"] && task.type === "Post on Discord" && (
+                              <div className="space-y-2">
+                                <p className="font-[300] text-[#525866]">Channel ID</p>
+                                <p className="font-medium text-[#050215]">{task["channelId"]}</p>
+                              </div>
+                            )}
                           </div>
                         )}
                       </div>
@@ -1081,9 +969,7 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
               ) : step === 2 && step1Data?.rewardType === "Token" ? (
                 <>
                   <div className="flex items-center justify-between gap-2">
-                    <p className="font-[300] text-[#09032A]">
-                      Total Rewards (to be deposited):
-                    </p>
+                    <p className="font-[300] text-[#09032A]">Total Rewards (to be deposited):</p>
                     <p className="text-2xl font-bold text-[#050215]">
                       {step1Data.rewardMode === "Overall Reward" &&
                         `${step1Data.tokensPerWinner * step1Data.numberOfWinners} ${step1Data?.symbol}`}
@@ -1095,9 +981,7 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
 
                   <div className="flex items-center justify-between gap-2">
                     <p className="font-[300] text-[#09032A]">Fees to Charge</p>
-                    <p className="text-2xl font-bold text-[#050215]">
-                      100 {step1Data?.symbol}
-                    </p>
+                    <p className="text-2xl font-bold text-[#050215]">100 {step1Data?.symbol}</p>
                   </div>
 
                   <Button
@@ -1119,9 +1003,7 @@ function GrowthQuest({ setSheetIsOpen, setOpenQuestSuccess, communityId }) {
               {step === 3 && (
                 <>
                   <div className="space-y-1 text-center">
-                    <p className="font-[300] text-[#09032A]">
-                      Amount Deposited
-                    </p>
+                    <p className="font-[300] text-[#09032A]">Amount Deposited</p>
                     <p className="text-2xl font-bold text-[#050215]">
                       {step1Data.rewardMode === "Overall Reward" &&
                         `${step1Data.tokensPerWinner * step1Data.numberOfWinners} ${step1Data?.symbol}`}

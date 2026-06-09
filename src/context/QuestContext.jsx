@@ -20,19 +20,11 @@ export function QuestProvider({ children }) {
   );
 
   const stats = useMemo(() => {
-    const totalBudget = quests.reduce(
-      (sum, quest) => sum + Number(quest.budget || 0),
-      0,
-    );
+    const totalBudget = quests.reduce((sum, quest) => sum + Number(quest.budget || 0), 0);
 
-    const totalApplicants = quests.reduce(
-      (sum, quest) => sum + Number(quest.applicants || 0),
-      0,
-    );
+    const totalApplicants = quests.reduce((sum, quest) => sum + Number(quest.applicants || 0), 0);
 
-    const acceptedApplications = applications.filter(
-      (item) => item.decision === "Accepted",
-    ).length;
+    const acceptedApplications = applications.filter((item) => item.decision === "Accepted").length;
 
     return {
       openQuests: quests.length,
@@ -121,9 +113,7 @@ export function QuestProvider({ children }) {
     setApplications((current) => [newApplication, ...current]);
     setQuests((current) =>
       current.map((quest) =>
-        quest.id === questId
-          ? { ...quest, applicants: Number(quest.applicants || 0) + 1 }
-          : quest,
+        quest.id === questId ? { ...quest, applicants: Number(quest.applicants || 0) + 1 } : quest,
       ),
     );
 
@@ -143,9 +133,7 @@ export function QuestProvider({ children }) {
     applyToQuest,
   };
 
-  return (
-    <QuestContext.Provider value={value}>{children}</QuestContext.Provider>
-  );
+  return <QuestContext.Provider value={value}>{children}</QuestContext.Provider>;
 }
 
 export function useQuests() {

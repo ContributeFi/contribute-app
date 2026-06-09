@@ -21,11 +21,7 @@ function formatPlatformLabel(platform) {
 
 function getTimeLeftLabel(burst) {
   const endSource =
-    burst?.endDate ||
-    burst?.endAt ||
-    burst?.expiresAt ||
-    burst?.deadline ||
-    burst?.closingDate;
+    burst?.endDate || burst?.endAt || burst?.expiresAt || burst?.deadline || burst?.closingDate;
 
   if (!endSource) return "No end date";
 
@@ -117,9 +113,7 @@ function BurstCard({ burst, tag }) {
                 Reward
               </span>
             </div>
-            <p className="text-sm font-semibold text-[#09032A]">
-              {rewardLabel}
-            </p>
+            <p className="text-sm font-semibold text-[#09032A]">{rewardLabel}</p>
           </div>
 
           <div className="rounded-xl bg-[#F8FAFC] p-3">
@@ -129,9 +123,7 @@ function BurstCard({ burst, tag }) {
                 Participants
               </span>
             </div>
-            <p className="text-sm font-semibold text-[#09032A]">
-              {participantCount}
-            </p>
+            <p className="text-sm font-semibold text-[#09032A]">{participantCount}</p>
           </div>
         </div>
 

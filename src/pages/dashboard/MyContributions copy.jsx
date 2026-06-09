@@ -83,10 +83,7 @@ function normalizeQuest(quest) {
 
 function normalizeQuestContribution(quest) {
   const submissionStatus =
-    quest.submissionStatus ||
-    quest.mySubmission?.status ||
-    quest.submission?.status ||
-    "Submitted";
+    quest.submissionStatus || quest.mySubmission?.status || quest.submission?.status || "Submitted";
 
   const rewarded =
     quest.rewardClaimed ||
@@ -99,10 +96,7 @@ function normalizeQuestContribution(quest) {
     sourceId: quest.id || quest._id,
     type: "Quest",
     title: quest.title || "Untitled quest",
-    company:
-      quest.createdBy?.displayName ||
-      quest.createdBy?.username ||
-      "Contribute.fi",
+    company: quest.createdBy?.displayName || quest.createdBy?.username || "Contribute.fi",
     category: "X Quest",
     status: rewarded ? "Rewarded" : submissionStatus,
     rewardStatus: rewarded ? "Rewarded" : "Pending reward",
@@ -114,32 +108,22 @@ function normalizeQuestContribution(quest) {
       quest.submittedAt ||
       quest.updatedAt ||
       quest.createdAt,
-    note:
-      quest.mySubmission?.note ||
-      quest.submission?.note ||
-      "You participated in this quest.",
+    note: quest.mySubmission?.note || quest.submission?.note || "You participated in this quest.",
     href: `/quests/${quest.id || quest._id}`,
     source: quest,
   };
 }
 
 function buildSummary(contributions) {
-  const rewarded = contributions.filter(
-    (item) => item.rewardStatus === "Rewarded",
-  );
+  const rewarded = contributions.filter((item) => item.rewardStatus === "Rewarded");
 
   return {
     total: contributions.length,
     quests: contributions.filter((item) => item.type === "Quest").length,
     tasks: contributions.filter((item) => item.type === "Task").length,
     rewarded: rewarded.length,
-    pendingReward: contributions.filter(
-      (item) => item.rewardStatus === "Pending reward",
-    ).length,
-    totalRewards: rewarded.reduce(
-      (sum, item) => sum + (Number(item.reward) || 0),
-      0,
-    ),
+    pendingReward: contributions.filter((item) => item.rewardStatus === "Pending reward").length,
+    totalRewards: rewarded.reduce((sum, item) => sum + (Number(item.reward) || 0), 0),
   };
 }
 
@@ -149,9 +133,7 @@ function MetricCard({ icon: Icon, label, value, helper }) {
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-xs text-[#667085]">{label}</p>
-          <p className="mt-1 text-xl font-semibold tracking-tight text-[#101828]">
-            {value}
-          </p>
+          <p className="mt-1 text-xl font-semibold tracking-tight text-[#101828]">{value}</p>
           <p className="mt-1 text-xs text-[#98A2B3]">{helper}</p>
         </div>
 
@@ -201,14 +183,9 @@ function ContributionsHero({ summary, onBrowse }) {
 
       <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-4">
         {items.map(([label, value]) => (
-          <div
-            key={label}
-            className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-3 py-2"
-          >
+          <div key={label} className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-3 py-2">
             <p className="text-[11px] text-[#667085]">{label}</p>
-            <p className="mt-0.5 truncate text-sm font-semibold text-[#101828]">
-              {value}
-            </p>
+            <p className="mt-0.5 truncate text-sm font-semibold text-[#101828]">{value}</p>
           </div>
         ))}
       </div>
@@ -228,9 +205,7 @@ function ContributionCard({ contribution, layout, onOpen }) {
             <Badge tone={contribution.type === "Quest" ? "purple" : "blue"}>
               {contribution.type}
             </Badge>
-            <Badge tone={getStatusTone(contribution.status)}>
-              {contribution.status}
-            </Badge>
+            <Badge tone={getStatusTone(contribution.status)}>{contribution.status}</Badge>
           </div>
 
           <ArrowUpRight className="h-4 w-4 shrink-0 text-[#98A2B3] transition group-hover:text-[#2F0FD1]" />
@@ -244,9 +219,7 @@ function ContributionCard({ contribution, layout, onOpen }) {
           {contribution.company} • {formatDate(contribution.submittedAt)}
         </p>
 
-        <p className="mt-3 line-clamp-2 text-sm leading-6 text-[#667085]">
-          {contribution.note}
-        </p>
+        <p className="mt-3 line-clamp-2 text-sm leading-6 text-[#667085]">{contribution.note}</p>
 
         <div className="mt-4 grid grid-cols-2 gap-2">
           <div className="rounded-xl bg-[#F8FAFC] px-3 py-2">
@@ -279,9 +252,7 @@ function ContributionCard({ contribution, layout, onOpen }) {
               {contribution.type}
             </Badge>
             <Badge tone="default">{contribution.category}</Badge>
-            <Badge tone={getStatusTone(contribution.status)}>
-              {contribution.status}
-            </Badge>
+            <Badge tone={getStatusTone(contribution.status)}>{contribution.status}</Badge>
             <Badge tone={getStatusTone(contribution.rewardStatus)}>
               {contribution.rewardStatus}
             </Badge>
@@ -292,8 +263,8 @@ function ContributionCard({ contribution, layout, onOpen }) {
           </h3>
 
           <p className="mt-1 line-clamp-1 text-sm text-[#667085]">
-            {contribution.company} • Submitted{" "}
-            {formatDate(contribution.submittedAt)} • {contribution.note}
+            {contribution.company} • Submitted {formatDate(contribution.submittedAt)} •{" "}
+            {contribution.note}
           </p>
         </div>
 
@@ -307,9 +278,7 @@ function ContributionCard({ contribution, layout, onOpen }) {
 
           <div className="rounded-xl bg-[#F8FAFC] px-3 py-2">
             <p className="text-[11px] text-[#667085]">Type</p>
-            <p className="text-sm font-semibold text-[#101828]">
-              {contribution.type}
-            </p>
+            <p className="text-sm font-semibold text-[#101828]">{contribution.type}</p>
           </div>
 
           <div className="flex items-center justify-between rounded-xl bg-[#F8FAFC] px-3 py-2">
@@ -378,9 +347,7 @@ export default function MyContributions() {
       } catch (error) {
         if (isMounted) {
           setErrorMessage(
-            error instanceof Error
-              ? error.message
-              : "Failed to fetch contributions.",
+            error instanceof Error ? error.message : "Failed to fetch contributions.",
           );
         }
       } finally {
@@ -411,14 +378,11 @@ export default function MyContributions() {
         contribution.type.toLowerCase().includes(term) ||
         contribution.status.toLowerCase().includes(term);
 
-      const matchesType =
-        activeType === "All" || `${contribution.type}s` === activeType;
+      const matchesType = activeType === "All" || `${contribution.type}s` === activeType;
 
-      const matchesStatus =
-        activeStatus === "All" || contribution.status === activeStatus;
+      const matchesStatus = activeStatus === "All" || contribution.status === activeStatus;
 
-      const matchesReward =
-        activeReward === "All" || contribution.rewardStatus === activeReward;
+      const matchesReward = activeReward === "All" || contribution.rewardStatus === activeReward;
 
       return matchesSearch && matchesType && matchesStatus && matchesReward;
     });
@@ -433,10 +397,7 @@ export default function MyContributions() {
   return (
     <main className="min-h-screen">
       <div className="mx-auto space-y-3 px-2 py-2">
-        <ContributionsHero
-          summary={summary}
-          onBrowse={() => navigate("/tasks")}
-        />
+        <ContributionsHero summary={summary} onBrowse={() => navigate("/tasks")} />
 
         <section>
           <div className="sticky top-16 z-30 rounded-2xl border border-[#EAECF0] bg-white/95 p-3 shadow-sm backdrop-blur sm:p-4">
@@ -526,12 +487,8 @@ export default function MyContributions() {
             {loading ? (
               <div className="flex min-h-[280px] flex-col items-center justify-center rounded-2xl border border-[#EAECF0] bg-white px-6 py-10 text-center shadow-sm">
                 <Loader2 className="mb-4 h-9 w-9 animate-spin text-[#2F0FD1]" />
-                <h3 className="text-lg font-semibold text-[#101828]">
-                  Loading contributions
-                </h3>
-                <p className="mt-2 text-sm text-[#667085]">
-                  Fetching your participated quests...
-                </p>
+                <h3 className="text-lg font-semibold text-[#101828]">Loading contributions</h3>
+                <p className="mt-2 text-sm text-[#667085]">Fetching your participated quests...</p>
               </div>
             ) : errorMessage ? (
               <div className="flex min-h-[280px] flex-col items-center justify-center rounded-2xl border border-dashed border-[#D9E1F2] bg-white px-6 py-10 text-center">
@@ -539,9 +496,7 @@ export default function MyContributions() {
                 <h3 className="text-lg font-semibold text-[#101828]">
                   Could not load contributions
                 </h3>
-                <p className="mt-2 max-w-md text-sm leading-6 text-[#667085]">
-                  {errorMessage}
-                </p>
+                <p className="mt-2 max-w-md text-sm leading-6 text-[#667085]">{errorMessage}</p>
               </div>
             ) : filteredContributions.length > 0 ? (
               <div
@@ -563,12 +518,9 @@ export default function MyContributions() {
             ) : (
               <div className="flex min-h-[280px] flex-col items-center justify-center rounded-2xl border border-dashed border-[#D9E1F2] bg-white px-6 py-10 text-center">
                 <ShieldCheck className="mb-4 h-10 w-10 text-[#2F0FD1]" />
-                <h3 className="text-lg font-semibold text-[#101828]">
-                  No contributions found
-                </h3>
+                <h3 className="text-lg font-semibold text-[#101828]">No contributions found</h3>
                 <p className="mt-2 max-w-md text-sm leading-6 text-[#667085]">
-                  Contributions will appear here after you participate in quests
-                  or tasks.
+                  Contributions will appear here after you participate in quests or tasks.
                 </p>
 
                 <button

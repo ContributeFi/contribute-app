@@ -11,9 +11,8 @@ function Hero() {
             </h1>
 
             <p className="mx-auto max-w-[842px] font-light md:text-[20px]">
-              Contribute.fi connects projects with passionate contributors
-              through smart contracts, wallet-linked reputation, and transparent
-              rewards — built on Soroban & Stellar.
+              Contribute.fi connects projects with passionate contributors through smart contracts,
+              wallet-linked reputation, and transparent rewards — built on Soroban & Stellar.
             </p>
           </div>
 

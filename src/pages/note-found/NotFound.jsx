@@ -43,12 +43,9 @@ export default function NotFound() {
             </div>
 
             <div>
-              <p className="text-sm font-semibold text-[#101828]">
-                Looking for something?
-              </p>
+              <p className="text-sm font-semibold text-[#101828]">Looking for something?</p>
               <p className="mt-1 text-sm leading-6 text-[#667085]">
-                Browse tasks, explore quests, or return to your dashboard to
-                continue.
+                Browse tasks, explore quests, or return to your dashboard to continue.
               </p>
             </div>
           </div>

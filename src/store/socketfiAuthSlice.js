@@ -31,7 +31,6 @@ const socketfiAuthSlice = createSlice({
   },
 });
 
-export const { setSocketfiSession, clearSocketfiSession } =
-  socketfiAuthSlice.actions;
+export const { setSocketfiSession, clearSocketfiSession } = socketfiAuthSlice.actions;
 
 export default socketfiAuthSlice.reducer;

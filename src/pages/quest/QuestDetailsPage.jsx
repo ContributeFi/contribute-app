@@ -38,10 +38,7 @@ function formatDate(value, withTime = false) {
 
 function formatReward(quest) {
   const prizes = quest?.reward?.prizes || [];
-  const total = prizes.reduce(
-    (sum, prize) => sum + (Number(prize.amount) || 0),
-    0,
-  );
+  const total = prizes.reduce((sum, prize) => sum + (Number(prize.amount) || 0), 0);
 
   const asset = quest?.reward?.asset || "USDC";
 
@@ -92,8 +89,7 @@ function getCreatorInitials(quest) {
 }
 
 function getCreatorId(quest) {
-  const creator =
-    quest?.createdBy || quest?.creator || quest?.user || quest?.userId;
+  const creator = quest?.createdBy || quest?.creator || quest?.user || quest?.userId;
 
   if (typeof creator === "string") return creator;
 
@@ -120,9 +116,7 @@ function getRequirements(quest) {
   }
 
   if (quest?.eligibility?.minAccountAgeDays) {
-    rules.push(
-      `Account must be at least ${quest.eligibility.minAccountAgeDays} days old`,
-    );
+    rules.push(`Account must be at least ${quest.eligibility.minAccountAgeDays} days old`);
   }
 
   if (quest?.eligibility?.verifiedOnly) {
@@ -133,9 +127,7 @@ function getRequirements(quest) {
     rules.push("Public X account recommended for verification");
   }
 
-  return rules.length
-    ? rules
-    : ["Follow the quest instructions and submit a valid public X post."];
+  return rules.length ? rules : ["Follow the quest instructions and submit a valid public X post."];
 }
 
 function getDeliverables(quest) {
@@ -143,22 +135,16 @@ function getDeliverables(quest) {
 
   if (quest?.hashtags?.length) {
     deliverables.push(
-      `Include required hashtags: ${quest.hashtags
-        .map((tag) => `#${tag}`)
-        .join(", ")}`,
+      `Include required hashtags: ${quest.hashtags.map((tag) => `#${tag}`).join(", ")}`,
     );
   }
 
   if (quest?.requiredMentions?.length) {
-    deliverables.push(
-      `Mention: ${quest.requiredMentions.map((item) => `@${item}`).join(", ")}`,
-    );
+    deliverables.push(`Mention: ${quest.requiredMentions.map((item) => `@${item}`).join(", ")}`);
   }
 
   if (quest?.requiredLinks?.length) {
-    deliverables.push(
-      `Include required links: ${quest.requiredLinks.join(", ")}`,
-    );
+    deliverables.push(`Include required links: ${quest.requiredLinks.join(", ")}`);
   }
 
   deliverables.push("Submit the X post URL before the quest deadline.");
@@ -187,21 +173,13 @@ function InfoGrid({ quest, reward }) {
     <div className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
       {[
         ["Reward", reward],
-        [
-          "Timeline",
-          `${formatDate(quest.startAt)} - ${formatDate(quest.endAt)}`,
-        ],
+        ["Timeline", `${formatDate(quest.startAt)} - ${formatDate(quest.endAt)}`],
         ["Winners", quest.reward?.winnerCount || 1],
         ["Participants", quest.reward?.maxParticipants || "Open"],
       ].map(([label, value]) => (
-        <div
-          key={label}
-          className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-3 py-2"
-        >
+        <div key={label} className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-3 py-2">
           <p className="text-[11px] text-[#667085]">{label}</p>
-          <p className="mt-0.5 truncate text-sm font-semibold text-[#101828]">
-            {value}
-          </p>
+          <p className="mt-0.5 truncate text-sm font-semibold text-[#101828]">{value}</p>
         </div>
       ))}
     </div>
@@ -214,9 +192,7 @@ function EntriesList({ entries, loading }) {
       <div className="flex min-h-[220px] items-center justify-center rounded-2xl border border-[#EAECF0] bg-white p-8 shadow-sm">
         <div className="text-center">
           <Loader2 className="mx-auto mb-3 h-7 w-7 animate-spin text-[#2F0FD1]" />
-          <p className="text-sm font-medium text-[#344054]">
-            Loading entries...
-          </p>
+          <p className="text-sm font-medium text-[#344054]">Loading entries...</p>
         </div>
       </div>
     );
@@ -226,12 +202,9 @@ function EntriesList({ entries, loading }) {
     return (
       <div className="rounded-2xl border border-[#EAECF0] bg-white p-8 text-center shadow-sm">
         <Users className="mx-auto mb-4 h-9 w-9 text-[#2F0FD1]" />
-        <h3 className="text-base font-semibold text-[#101828]">
-          No entries yet
-        </h3>
+        <h3 className="text-base font-semibold text-[#101828]">No entries yet</h3>
         <p className="mt-2 text-sm text-[#667085]">
-          Participant submissions will appear here once users submit their X
-          post links.
+          Participant submissions will appear here once users submit their X post links.
         </p>
       </div>
     );
@@ -240,8 +213,7 @@ function EntriesList({ entries, loading }) {
   return (
     <div className="space-y-3">
       {entries.map((entry, index) => {
-        const participant =
-          entry.user || entry.participant || entry.profile || {};
+        const participant = entry.user || entry.participant || entry.profile || {};
 
         const name =
           participant.displayName ||
@@ -251,9 +223,7 @@ function EntriesList({ entries, loading }) {
           `Participant ${index + 1}`;
 
         const handle =
-          entry.preview?.author?.handle ||
-          participant.twitterUsername ||
-          participant.xUsername;
+          entry.preview?.author?.handle || participant.twitterUsername || participant.xUsername;
 
         return (
           <article
@@ -263,9 +233,7 @@ function EntriesList({ entries, loading }) {
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="text-sm font-semibold text-[#101828]">
-                    {name}
-                  </h3>
+                  <h3 className="text-sm font-semibold text-[#101828]">{name}</h3>
 
                   {handle ? <Badge2 tone="blue">@{handle}</Badge2> : null}
 
@@ -294,10 +262,7 @@ function EntriesList({ entries, loading }) {
               {[
                 ["Score", entry.score || "N/A"],
                 ["Tweet ID", entry.tweetId || entry.preview?.tweet_id || "N/A"],
-                [
-                  "Submitted",
-                  formatDate(entry.createdAt || entry.submittedAt, true),
-                ],
+                ["Submitted", formatDate(entry.createdAt || entry.submittedAt, true)],
                 ["Status", entry.status || "submitted"],
               ].map(([label, value]) => (
                 <div
@@ -305,9 +270,7 @@ function EntriesList({ entries, loading }) {
                   className="rounded-xl border border-[#F2F4F7] bg-[#FCFCFD] px-3 py-2"
                 >
                   <p className="text-[11px] text-[#667085]">{label}</p>
-                  <p className="mt-0.5 truncate text-sm font-semibold text-[#101828]">
-                    {value}
-                  </p>
+                  <p className="mt-0.5 truncate text-sm font-semibold text-[#101828]">{value}</p>
                 </div>
               ))}
             </div>
@@ -380,11 +343,7 @@ ${questUrl}`;
   function handleShareOnTwitter() {
     const text = encodeURIComponent(getShareMessage());
 
-    window.open(
-      `https://twitter.com/intent/tweet?text=${text}`,
-      "_blank",
-      "noopener,noreferrer",
-    );
+    window.open(`https://twitter.com/intent/tweet?text=${text}`, "_blank", "noopener,noreferrer");
   }
 
   function goToSubmit() {
@@ -409,9 +368,7 @@ ${questUrl}`;
 
         const res = await fetch(`${API_URL}/api/twitter-quests/${questId}`, {
           headers: {
-            Authorization: `Bearer ${
-              accessToken || localStorage.getItem("accessToken") || ""
-            }`,
+            Authorization: `Bearer ${accessToken || localStorage.getItem("accessToken") || ""}`,
           },
         });
 
@@ -424,15 +381,11 @@ ${questUrl}`;
         if (isMounted) {
           setQuest(data.quest);
           setServerIsCreator(Boolean(data.isCreator));
-          setAlreadySubmitted(
-            Boolean(data.hasSubmitted) || hasLocalSubmission(questId),
-          );
+          setAlreadySubmitted(Boolean(data.hasSubmitted) || hasLocalSubmission(questId));
         }
       } catch (error) {
         if (isMounted) {
-          setErrorMessage(
-            error instanceof Error ? error.message : "Failed to fetch quest.",
-          );
+          setErrorMessage(error instanceof Error ? error.message : "Failed to fetch quest.");
         }
       } finally {
         if (isMounted) {
@@ -457,16 +410,11 @@ ${questUrl}`;
       try {
         setEntriesLoading(true);
 
-        const res = await fetch(
-          `${API_URL}/api/twitter-quests/${questId}/submissions`,
-          {
-            headers: {
-              Authorization: `Bearer ${
-                accessToken || localStorage.getItem("accessToken") || ""
-              }`,
-            },
+        const res = await fetch(`${API_URL}/api/twitter-quests/${questId}/submissions`, {
+          headers: {
+            Authorization: `Bearer ${accessToken || localStorage.getItem("accessToken") || ""}`,
           },
-        );
+        });
 
         const data = await res.json();
 
@@ -498,9 +446,7 @@ ${questUrl}`;
         <div className="flex min-h-[360px] items-center justify-center rounded-2xl border border-[#EAECF0] bg-white p-8 shadow-sm">
           <div className="text-center">
             <Loader2 className="mx-auto mb-4 h-8 w-8 animate-spin text-[#2F0FD1]" />
-            <p className="text-sm font-medium text-[#344054]">
-              Loading quest...
-            </p>
+            <p className="text-sm font-medium text-[#344054]">Loading quest...</p>
           </div>
         </div>
       </main>
@@ -512,12 +458,9 @@ ${questUrl}`;
       <main className="min-h-screen bg-[#F8FAFC] px-3 py-4">
         <div className="rounded-2xl border border-[#EAECF0] bg-white p-8 text-center shadow-sm">
           <Compass className="mx-auto mb-4 h-9 w-9 text-[#2F0FD1]" />
-          <h1 className="text-lg font-semibold text-[#101828]">
-            Quest not found
-          </h1>
+          <h1 className="text-lg font-semibold text-[#101828]">Quest not found</h1>
           <p className="mt-2 text-sm text-[#667085]">
-            {errorMessage ||
-              "This quest may have been removed or the link may be incorrect."}
+            {errorMessage || "This quest may have been removed or the link may be incorrect."}
           </p>
 
           <button
@@ -550,14 +493,10 @@ ${questUrl}`;
               <div className="flex flex-wrap items-center gap-2">
                 <Badge2 tone="purple">X Quest</Badge2>
                 <Badge2 tone="green">{status}</Badge2>
-                <Badge2 tone="blue">
-                  {isCreator ? "Creator view" : "Participant view"}
-                </Badge2>
+                <Badge2 tone="blue">{isCreator ? "Creator view" : "Participant view"}</Badge2>
 
                 {quest.reward?.selectionType ? (
-                  <Badge2 tone="blue">
-                    {quest.reward.selectionType.replaceAll("_", " ")}
-                  </Badge2>
+                  <Badge2 tone="blue">{quest.reward.selectionType.replaceAll("_", " ")}</Badge2>
                 ) : null}
 
                 {alreadySubmitted && !isCreator ? (
@@ -621,9 +560,7 @@ ${questUrl}`;
                     className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#2F0FD1] px-4 text-sm font-medium text-white shadow-sm transition hover:bg-[#2409B8] disabled:cursor-not-allowed disabled:bg-[#D0D5DD]"
                   >
                     {alreadySubmitted ? "Entry received" : "Submit entry"}
-                    {!alreadySubmitted ? (
-                      <ArrowRight className="h-4 w-4" />
-                    ) : null}
+                    {!alreadySubmitted ? <ArrowRight className="h-4 w-4" /> : null}
                   </button>
                 </>
               ) : (
@@ -705,9 +642,7 @@ ${questUrl}`;
                           className="flex gap-3 rounded-xl border border-[#EAECF0] bg-[#F8FAFC] px-3 py-3"
                         >
                           <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#2F0FD1]" />
-                          <p className="text-sm leading-6 text-[#344054]">
-                            {item}
-                          </p>
+                          <p className="text-sm leading-6 text-[#344054]">{item}</p>
                         </div>
                       ))}
                     </div>
@@ -721,9 +656,7 @@ ${questUrl}`;
                           className="flex gap-3 rounded-xl border border-[#EAECF0] bg-[#F8FAFC] px-3 py-3"
                         >
                           <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#2F0FD1]" />
-                          <p className="text-sm leading-6 text-[#344054]">
-                            {item}
-                          </p>
+                          <p className="text-sm leading-6 text-[#344054]">{item}</p>
                         </div>
                       ))}
                     </div>
@@ -742,17 +675,13 @@ ${questUrl}`;
                   <p className="truncate text-sm font-semibold text-[#101828]">
                     {getCompanyName(quest)}
                   </p>
-                  <p className="truncate text-sm text-[#667085]">
-                    Creator dashboard
-                  </p>
+                  <p className="truncate text-sm text-[#667085]">Creator dashboard</p>
                 </div>
               </div>
 
               <div className="mt-5 rounded-xl border border-[#EAECF0] bg-[#F8FAFC] p-3">
                 <p className="text-xs font-medium text-[#667085]">Reward</p>
-                <p className="mt-1 text-xl font-semibold text-[#101828]">
-                  {reward}
-                </p>
+                <p className="mt-1 text-xl font-semibold text-[#101828]">{reward}</p>
               </div>
 
               <div className="mt-4 grid grid-cols-2 gap-2">
@@ -767,9 +696,7 @@ ${questUrl}`;
                 <div className="rounded-xl border border-[#EAECF0] bg-white p-3">
                   <Users className="mb-2 h-4 w-4 text-[#2F0FD1]" />
                   <p className="text-xs text-[#667085]">Entries</p>
-                  <p className="mt-1 text-sm font-semibold text-[#101828]">
-                    {entries.length}
-                  </p>
+                  <p className="mt-1 text-sm font-semibold text-[#101828]">{entries.length}</p>
                 </div>
               </div>
 
@@ -845,17 +772,13 @@ ${questUrl}`;
                   <p className="truncate text-sm font-semibold text-[#101828]">
                     {getCompanyName(quest)}
                   </p>
-                  <p className="truncate text-sm text-[#667085]">
-                    {getCreatorName(quest)}
-                  </p>
+                  <p className="truncate text-sm text-[#667085]">{getCreatorName(quest)}</p>
                 </div>
               </div>
 
               <div className="mt-5 rounded-xl border border-[#EAECF0] bg-[#F8FAFC] p-3">
                 <p className="text-xs font-medium text-[#667085]">Reward</p>
-                <p className="mt-1 text-xl font-semibold text-[#101828]">
-                  {reward}
-                </p>
+                <p className="mt-1 text-xl font-semibold text-[#101828]">{reward}</p>
               </div>
 
               <div className="mt-4 grid grid-cols-2 gap-2">

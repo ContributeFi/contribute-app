@@ -17,13 +17,10 @@ function ExploreTask() {
     <div className="bg-[#F7F9FD]">
       <div className="mx-auto w-full max-w-[1200px] space-y-8 px-5 py-10 md:py-[104px]">
         <div className="mx-auto max-w-[1200px] space-y-8 text-center text-[#050215]">
-          <h2 className="text-[32px] font-extrabold md:text-[44px]">
-            Explore Available Tasks
-          </h2>
+          <h2 className="text-[32px] font-extrabold md:text-[44px]">Explore Available Tasks</h2>
 
           <p className="mx-auto max-w-[800px] text-[18px] font-light md:text-[20px]">
-            Discover the most active opportunities from communities making real
-            impact
+            Discover the most active opportunities from communities making real impact
           </p>
         </div>
 

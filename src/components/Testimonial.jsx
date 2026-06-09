@@ -7,13 +7,11 @@ function Testimonial() {
       id="testimonials"
     >
       <div className="mx-auto max-w-[1200px] space-y-8 text-center text-[#050215]">
-        <h2 className="text-[32px] font-extrabold md:text-[44px]">
-          Testimonials
-        </h2>
+        <h2 className="text-[32px] font-extrabold md:text-[44px]">Testimonials</h2>
 
         <p className="mx-auto max-w-[800px] text-[18px] font-light md:text-[20px]">
-          Stories from people who have built reputations, earned rewards, and
-          grown with Contribute.fi.
+          Stories from people who have built reputations, earned rewards, and grown with
+          Contribute.fi.
         </p>
       </div>
 
@@ -31,12 +29,8 @@ function Testimonial() {
             <p className="font-normal text-[#636366]">{testimonial.message}</p>
 
             <div className="space-y-2">
-              <p className="text-[20px] font-semibold text-[#050215]">
-                {testimonial.name}
-              </p>
-              <p className="text-[18px] font-medium text-[#2F0FD1]">
-                {testimonial.designation}
-              </p>
+              <p className="text-[20px] font-semibold text-[#050215]">{testimonial.name}</p>
+              <p className="text-[18px] font-medium text-[#2F0FD1]">{testimonial.designation}</p>
             </div>
           </div>
         ))}

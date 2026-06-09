@@ -81,8 +81,7 @@ function BindEmail() {
         </h2>
 
         <p className="mt-2 text-sm leading-6 text-[#667085] md:text-base">
-          Use an email you can access. We’ll send a verification code to confirm
-          it belongs to you.
+          Use an email you can access. We’ll send a verification code to confirm it belongs to you.
         </p>
       </div>
 
