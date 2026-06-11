@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 
-const API_URL = "http://localhost:4000";
+const API_URL = import.meta.env.VITE_BASE_URL || "http://localhost:4000";
 const CONTRIBUTIONS_LAYOUT_KEY = "contribute_mvp_contributions_layout";
 
 const typeFilters = ["All", "Quests", "Tasks"];

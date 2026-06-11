@@ -8,7 +8,7 @@ import QuestListItem from "@/components/quests/QuestListItem";
 import { getSavedLayout, saveLayout } from "@/lib/questUtils";
 import { useAuth } from "@/hooks/useAuth";
 
-const API_URL = "http://localhost:4000";
+const API_URL = import.meta.env.VITE_BASE_URL || "http://localhost:4000";
 
 const DEFAULT_STATS = {
   openQuests: 0,

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Loader2, X } from "lucide-react";
 import { BsTwitterX } from "react-icons/bs";
 
-const API_URL = "http://localhost:4000";
+const API_URL = import.meta.env.VITE_BASE_URL || "http://localhost:4000";
 
 function SigninWithTwitterModal2({ open, onClose }) {
   const [isLoading, setIsLoading] = useState(false);

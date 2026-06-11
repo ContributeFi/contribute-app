@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-const API_URL = "http://localhost:4000";
+const API_URL = import.meta.env.VITE_BASE_URL || "http://localhost:4000";
 
 export function useTwitterAuthCallback() {
   const hasRun = useRef(false);

@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { BsTwitterX } from "react-icons/bs";
 
 function SigninWithTwitter() {
-  const API_URL = "http://localhost:4000";
+  const API_URL = import.meta.env.VITE_BASE_URL || "http://localhost:4000";
 
   async function handleTwitterLogin() {
     const res = await fetch(`${API_URL}/auth/twitter/init`, {

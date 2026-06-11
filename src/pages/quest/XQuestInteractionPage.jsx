@@ -24,7 +24,7 @@ import Badge2 from "@/components/ui/Badge2";
 import { BsTwitterX } from "react-icons/bs";
 import { useAuth } from "@/hooks/useAuth";
 
-const API_URL = "http://localhost:4000";
+const API_URL = import.meta.env.VITE_BASE_URL || "http://localhost:4000";
 
 const inputClass =
   "h-11 w-full rounded-xl border bg-white px-3.5 text-sm text-[#101828] outline-none transition placeholder:text-[#98A2B3] focus:ring-4";

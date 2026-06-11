@@ -23,7 +23,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { toast } from "react-toastify";
 import { BsTwitterX } from "react-icons/bs";
 
-const API_URL = "http://localhost:4000";
+const API_URL = import.meta.env.VITE_BASE_URL || "http://localhost:4000";
 
 function formatDate(value, withTime = false) {
   if (!value) return "Not set";

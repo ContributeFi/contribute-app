@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "@/hooks/useAuth";
 import { setItemInSessionStorage } from "@/lib/utils";
 
-const API_URL = "http://localhost:4000";
+const API_URL = import.meta.env.VITE_BASE_URL || "http://localhost:4000";
 
 function SigninWithPasskeyModal() {
   const { passkeyModalIsOpen, setPasskeyModalIsOpen, login } = useAuth();
@@ -25,6 +25,8 @@ function SigninWithPasskeyModal() {
       setIsLoading(true);
 
       const session = await socketfi.authenticate();
+
+      console.log("the session is", session);
 
       const socketfiAccessToken =
         session?.session?.socketfiAccessToken || session?.socketfiAccessToken;

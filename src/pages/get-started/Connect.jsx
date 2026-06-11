@@ -20,7 +20,7 @@ import {
 } from "@/lib/utils";
 import { linkedAccount, uploadProfilePicture, completeOnboarding } from "@/services";
 
-const API_URL = "http://localhost:4000";
+const API_URL = import.meta.env.VITE_BASE_URL || "http://localhost:4000";
 
 const ACCOUNTS_TO_LINK = [
   {

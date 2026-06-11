@@ -26,7 +26,7 @@ export default class WalletKitServiceClass {
 
   constructor() {
     this.walletKit = new StellarWalletsKit({
-      network: Networks.TESTNET,
+      network: Networks.PUBLIC,
       modules: [
         new FreighterModule(),
         new HotWalletModule(),

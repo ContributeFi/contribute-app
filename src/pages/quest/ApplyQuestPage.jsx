@@ -17,7 +17,7 @@ import Badge2 from "@/components/ui/Badge2";
 import { BsTwitterX } from "react-icons/bs";
 import { useAuth } from "@/hooks/useAuth";
 
-const API_URL = "http://localhost:4000";
+const API_URL = import.meta.env.VITE_BASE_URL || "http://localhost:4000";
 
 const PLACEHOLDER_REFERENCE_TWEET_URL = "https://x.com/Socket_Fi/status/2050208626569069018?s=20";
 

@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { store } from "@/store";
 import { login as reduxLogin } from "@/store/authSlice";
 
-const API_URL = "http://localhost:4000";
+const API_URL = import.meta.env.VITE_BASE_URL || "http://localhost:4000";
 
 export const AuthContext = createContext(null);
 

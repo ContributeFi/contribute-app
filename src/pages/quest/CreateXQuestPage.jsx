@@ -234,6 +234,8 @@ export default function CreateXQuestPage() {
   const isBusy = savingDraft || processingPayment || submitting;
   const socketfi = useSocketFi();
 
+  const [nativeFee, setNativeFee] = useState("");
+
   const parsedHashtags = useMemo(
     () =>
       hashtags
@@ -274,8 +276,8 @@ export default function CreateXQuestPage() {
   }, [totalRewardAmount]);
 
   const totalAmountDue = useMemo(() => {
-    return totalRewardAmount + platformFeeAmount;
-  }, [totalRewardAmount, platformFeeAmount]);
+    return totalRewardAmount + Number(nativeFee || 0);
+  }, [totalRewardAmount, nativeFee]);
 
   function markDraftChanged() {
     if (!paymentConfirmed) return;
@@ -294,6 +296,21 @@ export default function CreateXQuestPage() {
     );
   }
 
+  function nativeToDecimal(value, decimals = 7) {
+    const raw = BigInt(value);
+
+    const divisor = BigInt(10) ** BigInt(decimals);
+
+    const whole = raw / divisor;
+    const fraction = raw % divisor;
+
+    if (fraction === 0n) {
+      return whole.toString();
+    }
+
+    return `${whole}.${fraction.toString().padStart(decimals, "0").replace(/0+$/, "")}`;
+  }
+
   useEffect(() => {
     async function fetchFee() {
       console.log("the ran fee 1");
@@ -302,7 +319,7 @@ export default function CreateXQuestPage() {
         method: "POST",
         token: accessToken || localStorage.getItem("accessToken"),
         body: {
-          contractId: escrowContract,
+          // contractId: escrowContract,
           callFunction: {
             name: "get_fee",
             inputs: [{ value: asset.contract, type: "scSpecTypeAddress" }],
@@ -311,6 +328,11 @@ export default function CreateXQuestPage() {
       });
 
       setQuestFee(data?.result?.i128);
+      const nativeFee = nativeToDecimal(data?.result?.i128);
+
+      setNativeFee(nativeFee);
+
+      console.log("the actual fee is", nativeFee);
     }
 
     fetchFee();
@@ -384,6 +406,10 @@ export default function CreateXQuestPage() {
       setSelectionType("random_multiple");
     }
 
+    if (selectionType === "judged_single") {
+      setSelectionType("judged_multiple");
+    }
+
     markDraftChanged();
   }
 
@@ -402,7 +428,10 @@ export default function CreateXQuestPage() {
 
     if (end <= start) return "End date must be after start date.";
 
-    if (selectionType === "random_single" && normalizedWinnerCount !== 1) {
+    if (
+      (selectionType === "random_single" || selectionType === "judged_single") &&
+      normalizedWinnerCount !== 1
+    ) {
       return "Single winner quests must have exactly one winner.";
     }
 
@@ -479,7 +508,7 @@ export default function CreateXQuestPage() {
         payment: {
           platformFeePercent: PLATFORM_FEE_PERCENT,
           totalRewardAmount,
-          platformFeeAmount,
+          platformFeeAmount: nativeFee,
           totalAmountDue,
         },
       },
@@ -595,7 +624,7 @@ export default function CreateXQuestPage() {
           token,
           body: {
             pubKey: publicKey,
-            contractId: escrowContract,
+            // contractId: escrowContract,
             functionName: "deposit_reward_escrow",
             argsXdr,
           },
@@ -621,7 +650,7 @@ export default function CreateXQuestPage() {
             nativeToScVal(questId, { type: "string" }),
             nativeToScVal(user?._id, { type: "string" }),
             nativeToScVal("x", { type: "string" }),
-            nativeToScVal(userProfile?.address?.TESTNET, { type: "address" }),
+            nativeToScVal(userProfile?.address?.PUBLIC, { type: "address" }),
             nativeToScVal(asset?.contract, { type: "address" }),
             nativeToScVal(String(Math.round(totalRewardAmount * 1e7)), {
               type: "i128",
@@ -642,7 +671,7 @@ export default function CreateXQuestPage() {
               new xdr.ScMapEntry({
                 key: xdr.ScVal.scvString("args"),
                 val: xdr.ScVal.scvVec([
-                  nativeToScVal(userProfile?.address?.TESTNET, {
+                  nativeToScVal(userProfile?.address?.PUBLIC, {
                     type: "address",
                   }),
                   nativeToScVal(escrowContract, { type: "address" }),
@@ -676,7 +705,7 @@ export default function CreateXQuestPage() {
         // const argsXdr = vecScVal.toXDR("base64");
 
         submitResponse = await socketfi.requestTransaction({
-          contractId: userProfile?.address?.TESTNET,
+          contractId: userProfile?.address?.PUBLIC,
           callFunction: { name: "dapp_invoker" },
           argsXdr: argsXdr,
           accessToken: socketfiAccessToken,
@@ -851,7 +880,7 @@ export default function CreateXQuestPage() {
   const socketfiAccessToken = useSelector((state) => state.socketfiAuth.accessToken);
   const userProfile = useSelector((state) => state.socketfiAuth.userProfile);
 
-  // console.log("the user profile is", userProfile?.address?.TESTNET);
+ 
 
   const walletIsConnected = !!publicKey || socketfiAccessToken;
 
@@ -1000,9 +1029,9 @@ export default function CreateXQuestPage() {
                   </div>
 
                   <div className="flex justify-between text-sm">
-                    <span className="text-[#667085]">Platform fee ({PLATFORM_FEE_PERCENT}%)</span>
+                    <span className="text-[#667085]">Contribute fee</span>
                     <span className="font-semibold text-[#101828]">
-                      {platformFeeAmount.toLocaleString()} {asset?.code}
+                      {nativeFee || 0} {asset?.code}
                     </span>
                   </div>
 
@@ -1380,11 +1409,14 @@ export default function CreateXQuestPage() {
 
                         setSelectionType(value);
 
-                        if (value === "random_single") {
+                        if (value === "random_single" || value === "judged_single") {
                           syncPrizeCount(1);
                         }
 
-                        if (value === "random_multiple" && normalizedWinnerCount < 2) {
+                        if (
+                          (value === "random_multiple" || value === "judged_multiple") &&
+                          normalizedWinnerCount < 2
+                        ) {
                           syncPrizeCount(2);
                         }
                       }}
@@ -1392,6 +1424,8 @@ export default function CreateXQuestPage() {
                     >
                       <option value="random_single">Random single winner</option>
                       <option value="random_multiple">Random multiple winners</option>
+                      <option value="judged_single">Judged single winner</option>
+                      <option value="judged_multiple">Judged multiple winners</option>
                       <option value="first_come_first_serve">First come, first serve</option>
                     </select>
                   </div>
@@ -1401,9 +1435,17 @@ export default function CreateXQuestPage() {
                     <input
                       // disabled={rewardConfigLocked}
                       type="number"
-                      min={selectionType === "random_multiple" ? 2 : 1}
+                      min={
+                        selectionType === "random_multiple" || selectionType === "judged_multiple"
+                          ? 2
+                          : 1
+                      }
                       value={winnerCount}
-                      disabled={selectionType === "random_single" || rewardConfigLocked}
+                      disabled={
+                        selectionType === "random_single" ||
+                        selectionType === "judged_single" ||
+                        rewardConfigLocked
+                      }
                       onChange={(e) => handleWinnerCountChange(e.target.value)}
                       onBlur={handleWinnerCountBlur}
                       className={`${inputClass} mt-2 disabled:bg-[#F9FAFB] disabled:text-[#98A2B3]`}
@@ -1433,7 +1475,11 @@ export default function CreateXQuestPage() {
                     <button
                       type="button"
                       onClick={addPrize}
-                      disabled={selectionType === "random_single" || rewardConfigLocked}
+                      disabled={
+                        selectionType === "random_single" ||
+                        selectionType === "judged_single" ||
+                        rewardConfigLocked
+                      }
                       className="inline-flex h-9 items-center gap-2 rounded-xl border border-[#EAECF0] bg-white px-3 text-xs font-medium text-[#344054] shadow-sm transition hover:bg-[#F9FAFB] disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       <Plus className="h-3.5 w-3.5" />
@@ -1467,7 +1513,8 @@ export default function CreateXQuestPage() {
                         disabled={
                           rewardConfigLocked ||
                           prizes.length === 1 ||
-                          selectionType === "random_single"
+                          selectionType === "random_single" ||
+                          selectionType === "judged_single"
                         }
                         className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#EAECF0] bg-white text-[#667085] transition hover:bg-[#F9FAFB] disabled:cursor-not-allowed disabled:opacity-40"
                       >
