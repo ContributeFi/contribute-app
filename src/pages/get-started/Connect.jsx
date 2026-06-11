@@ -24,24 +24,28 @@ const API_URL = import.meta.env.VITE_BASE_URL || "http://localhost:4000";
 
 const ACCOUNTS_TO_LINK = [
   {
+    title: "X Account",
+    key: "twitter",
+    icon: <FaSquareXTwitter className="text-[24px]" />,
+    isLive: true,
+  },
+  {
     title: "Github",
     key: "github",
     icon: <PiGithubLogoFill className="text-[24px]" />,
+    isLive: true,
   },
   {
     title: "Discord",
     key: "discord",
     icon: <FaDiscord className="text-[24px] text-[#5865F2]" />,
-  },
-  {
-    title: "X Account",
-    key: "twitter",
-    icon: <FaSquareXTwitter className="text-[24px]" />,
+    isLive: false,
   },
   {
     title: "Telegram",
     key: "telegram",
     icon: <FaTelegram className="text-[24px] text-[#23B7EC]" />,
+    isLive: false,
   },
 ];
 
@@ -403,14 +407,14 @@ function Connect() {
                     <FaUserLarge className="text-[26px] text-[#B2B9C7]" />
                   )}
 
-                  <Input
-                    onChange={handleImageSelect}
+                  {/* <Input
+                    // onChange={handleImageSelect}
                     type="file"
                     id="image"
                     accept="image/*"
                     className="hidden"
                     disabled={uploading}
-                  />
+                  /> */}
 
                   <span className="absolute -right-2 -bottom-2 flex h-7 w-7 items-center justify-center rounded-xl border border-[#EAECF0] bg-white text-[#2F0FD1] shadow-sm">
                     {uploading ? (
@@ -465,7 +469,7 @@ function Connect() {
                   return (
                     <div
                       key={account.key}
-                      className="rounded-xl border border-[#EAECF0] bg-[#F8FAFC] px-3 py-2.5 transition hover:bg-white"
+                      className={`rounded-xl ${!account?.isLive && "opacity-70"} border border-[#EAECF0] px-3 py-2.5 transition hover:bg-white`}
                     >
                       <div className="flex items-center justify-between gap-3">
                         <div className="flex min-w-0 items-center gap-2.5">
@@ -492,6 +496,7 @@ function Connect() {
                         ) : (
                           <button
                             type="button"
+                            disabled={!account?.isLive}
                             onClick={() => handleLinkAccount(account.key)}
                             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white text-[#2F0FD1] shadow-sm transition hover:bg-[#EEF2FF]"
                           >
@@ -508,11 +513,7 @@ function Connect() {
             <div className="sticky bottom-0 -mx-1 bg-white/95 pt-2 pb-1 backdrop-blur">
               <Button
                 className="h-11 w-full rounded-xl bg-[#2F0FD1] text-sm font-medium text-white shadow-sm transition hover:bg-[#2409B8] disabled:cursor-not-allowed disabled:bg-[#D0D5DD]"
-                disabled={
-                  uploading ||
-                  saving ||
-                  (!imageUrl && bio.trim().length === 0 && linkedAccounts.length === 0)
-                }
+                disabled={uploading || saving || (!imageUrl && linkedAccounts.length === 0)}
                 type="submit"
               >
                 {saving ? "Saving..." : "Continue"}
