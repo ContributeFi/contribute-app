@@ -105,7 +105,10 @@ function DashboardNavigation({ setSheetIsOpen, platform = "desktop" }) {
           </Link>
         ) : (
           <button
-            onClick={() => setPasskeyModalIsOpen(true)}
+            onClick={() => {
+              setPasskeyModalIsOpen(true);
+              handleClose();
+            }}
             className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium text-[#667085] transition hover:bg-[#F8FAFC] hover:text-[#2F0FD1]"
           >
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[#F8FAFC]">
