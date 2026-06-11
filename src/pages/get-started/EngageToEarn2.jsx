@@ -36,7 +36,7 @@ const initialCampaigns = [
     submissions: 47,
     category: "Product launch",
     hashtags: ["SocketFi", "Stellar", "Web3UX"],
-    targetUrl: "https://x.com/socketfi",
+    targetUrl: "https://x.com/contributefi",
     brief:
       "Create a thoughtful X post explaining how SocketFi helps users access Web3 with passkeys, smart wallets, and simpler onboarding.",
     rules: [

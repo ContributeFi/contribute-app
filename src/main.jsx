@@ -27,7 +27,7 @@ export default function AppProviders() {
             <SocketFiProvider
               config={{
                 clientId: import.meta.env.VITE_SOCKETFI_CLIENT_ID,
-                // network: import.meta.env.VITE_SOCKETFI_NETWORK || "TESTNET",
+
                 network: "PUBLIC",
                 brand: {
                   appName: "Contribute",

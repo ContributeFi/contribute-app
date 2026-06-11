@@ -19,7 +19,7 @@ import { useAuth } from "@/hooks/useAuth";
 
 const API_URL = import.meta.env.VITE_BASE_URL || "http://localhost:4000";
 
-const PLACEHOLDER_REFERENCE_TWEET_URL = "https://x.com/Socket_Fi/status/2050208626569069018?s=20";
+const PLACEHOLDER_REFERENCE_TWEET_URL = "https://x.com/ContributeFi/status/2065045310263480759?s=20";
 
 const inputClass =
   "h-11 w-full rounded-xl border bg-white px-3.5 text-sm text-[#101828] outline-none transition placeholder:text-[#98A2B3] focus:ring-4";
