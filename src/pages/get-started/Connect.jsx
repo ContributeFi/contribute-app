@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router";
+import { useLocation, useNavigate, useSearchParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,11 +14,13 @@ import { toast } from "react-toastify";
 import Modal from "@/components/Modal";
 import { useAuth } from "@/hooks/useAuth";
 import {
+  getItemFromLocalStorage,
   getItemFromSessionStorage,
   removeItemFromSessionStorage,
   setItemInSessionStorage,
 } from "@/lib/utils";
 import { linkedAccount, uploadProfilePicture, completeOnboarding } from "@/services";
+import { setUser } from "@/store/authSlice";
 
 const API_URL = import.meta.env.VITE_BASE_URL || "http://localhost:4000";
 
@@ -84,7 +86,7 @@ function Connect() {
 
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [user] = useState(() => getItemFromSessionStorage("user"));
+  const [user] = useState(() => getItemFromLocalStorage("userProfile"));
 
   const [imageUrl, setImageUrl] = useState(() => getItemFromSessionStorage("imageUrl") || null);
 
@@ -149,12 +151,19 @@ function Connect() {
 
         const data = await res.json();
 
+        console.log({ data });
+
         if (!data.success) {
           toast.error("Failed to complete account linking.");
           return;
         }
 
-        login({ token: data.token, user: data.user });
+        setUser({
+          ...data.user,
+          authAccounts: data.authAccounts,
+          platformProfiles: data.platformProfiles,
+        });
+        localStorage.setItem("userProfile", JSON.stringify(data));
         toast.success(`${bind} account linked successfully!`);
       } catch {
         toast.error("Failed to complete account linking.");
@@ -178,21 +187,22 @@ function Connect() {
   }
 
   function finishAccountSetup({ includeBio = false } = {}) {
-    login({
-      token,
-      email: null,
-      user: {
-        ...user,
-        ...(imageUrl && { profileImageUrl: imageUrl }),
-        ...(includeBio && bio.trim() && { bio: bio.trim() }),
-      },
-      otp: null,
-      username: null,
-    });
+    // login({
+    //   token,
+    //   user,
+    // });
 
     clearOnboardingStorage();
     navigate("/", { replace: true });
   }
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.platform) {
+      toast(`Connect your ${location.state.platform} account to continue`);
+    }
+  }, []);
 
   async function handleLinkAccount(accountType) {
     if (accountType !== "telegram" && !token) {

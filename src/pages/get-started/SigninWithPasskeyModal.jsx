@@ -48,11 +48,15 @@ function SigninWithPasskeyModal() {
 
       const data = await res.json();
 
+      console.log({ data });
+
       if (!res.ok) {
         throw new Error(data?.message || `Authentication failed (${res.status})`);
       }
 
-      const { token: appAccessToken, user: appUser } = data;
+      const { token: appAccessToken, user: appUser, authAccounts, platformProfiles } = data;
+
+      console.log({ appAccessToken, appUser, authAccounts, platformProfiles });
 
       if (!appAccessToken) {
         throw new Error(data?.message || "Authentication verification failed");
@@ -72,7 +76,7 @@ function SigninWithPasskeyModal() {
       }
 
       // Update AuthContext with the proper app-level token and user
-      login({ token: appAccessToken, user: appUser });
+      login({ token: appAccessToken, user: { ...appUser, authAccounts, platformProfiles } });
 
       // Set user in local component state for setup flow
       const sessionUser =
