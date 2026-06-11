@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
   BriefcaseBusiness,
   CheckCircle2,
   Compass,
-  MessageCircle,
-  Send,
+  Megaphone,
+  Search,
   Sparkles,
   Trophy,
   Users,
@@ -21,9 +21,7 @@ function MetricCard({ label, value, helper, icon: Icon }) {
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-xs text-[#667085]">{label}</p>
-
           <p className="mt-1 text-xl font-semibold tracking-tight text-[#101828]">{value}</p>
-
           <p className="mt-1 text-xs text-[#98A2B3]">{helper}</p>
         </div>
 
@@ -37,43 +35,75 @@ function MetricCard({ label, value, helper, icon: Icon }) {
   );
 }
 
-function ActionCard({ icon: Icon, title, description, label, meta, status = "active", onClick }) {
-  const isComingSoon = status === "soon";
-
+function CategoryPill({ active, label, count, onClick }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="group rounded-2xl border border-[#EAECF0] bg-white p-4 text-left transition hover:border-[#D6D9E6] hover:shadow-sm"
+      className={`inline-flex h-10 items-center gap-2 rounded-xl border px-4 text-sm font-medium transition ${
+        active
+          ? "border-[#2F0FD1] bg-[#EEF2FF] text-[#2F0FD1]"
+          : "border-[#EAECF0] bg-white text-[#667085] hover:border-[#D6D9E6] hover:text-[#101828]"
+      }`}
+    >
+      {label}
+      {count ? (
+        <span
+          className={`rounded-full px-2 py-0.5 text-xs ${
+            active ? "bg-white text-[#2F0FD1]" : "bg-[#F2F4F7] text-[#667085]"
+          }`}
+        >
+          {count}
+        </span>
+      ) : null}
+    </button>
+  );
+}
+
+function OpportunityCard({
+  category,
+  type,
+  title,
+  description,
+  reward,
+  meta,
+  icon: Icon,
+  onClick,
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="group rounded-2xl border border-[#EAECF0] bg-white p-4 text-left shadow-sm transition hover:border-[#D6D9E6] hover:shadow-md"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#EEF2FF] text-[#2F0FD1]">
           <Icon className="h-5 w-5" />
         </div>
 
-        <span
-          className={`rounded-full px-2.5 py-1 text-xs font-medium ${
-            isComingSoon ? "bg-[#F2F4F7] text-[#667085]" : "bg-[#ECFDF3] text-[#027A48]"
-          }`}
-        >
-          {meta}
+        <span className="rounded-full bg-[#F8FAFC] px-2.5 py-1 text-xs font-medium text-[#667085]">
+          {type}
         </span>
       </div>
 
-      <h3 className="mt-4 text-sm font-semibold text-[#101828]">{title}</h3>
+      <div className="mt-4 flex items-center gap-2">
+        <span className="text-xs font-semibold tracking-wide text-[#2F0FD1] uppercase">
+          {category}
+        </span>
+        <span className="h-1 w-1 rounded-full bg-[#D0D5DD]" />
+        <span className="text-xs text-[#98A2B3]">{meta}</span>
+      </div>
+
+      <h3 className="mt-2 text-sm font-semibold text-[#101828]">{title}</h3>
 
       <p className="mt-1 text-sm leading-6 text-[#667085]">{description}</p>
 
       <div className="mt-4 flex items-center justify-between gap-3 border-t border-[#F2F4F7] pt-3">
-        <span className="text-xs font-medium text-[#98A2B3]">
-          {isComingSoon ? "Launching soon" : "Available now"}
-        </span>
+        <span className="text-sm font-semibold text-[#101828]">{reward}</span>
 
         <span className="inline-flex items-center gap-2 text-sm font-medium text-[#2F0FD1]">
-          {label}
-          {!isComingSoon ? (
-            <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-          ) : null}
+          View
+          <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
         </span>
       </div>
     </button>
@@ -86,6 +116,7 @@ function StatusItem({ icon: Icon, title, description }) {
       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white text-[#2F0FD1] shadow-sm">
         <Icon className="h-4 w-4" />
       </div>
+
       <div>
         <p className="text-sm font-semibold text-[#101828]">{title}</p>
         <p className="mt-1 text-sm text-[#667085]">{description}</p>
@@ -96,6 +127,8 @@ function StatusItem({ icon: Icon, title, description }) {
 
 export default function DashboardHome() {
   const navigate = useNavigate();
+
+  const [activeCategory, setActiveCategory] = useState("All");
 
   const [dashboardStats, setDashboardStats] = useState({
     openOpportunities: 0,
@@ -154,13 +187,13 @@ export default function DashboardHome() {
     {
       label: "Open opportunities",
       value: loadingStats ? "--" : dashboardStats.openOpportunities.toLocaleString(),
-      helper: "Across active quests",
+      helper: "Across tasks, quests, and programs",
       icon: BriefcaseBusiness,
     },
     {
       label: "Active contributors",
       value: loadingStats ? "--" : dashboardStats.activeContributors.toLocaleString(),
-      helper: "Based on quest submissions",
+      helper: "Building contributor profiles",
       icon: Users,
     },
     {
@@ -170,16 +203,94 @@ export default function DashboardHome() {
         : `$${dashboardStats.rewardsAvailableUsd.toLocaleString(undefined, {
             maximumFractionDigits: 2,
           })}`,
-      helper: "Estimated USD value",
+      helper: "Estimated reward pool",
       icon: WalletCards,
     },
     {
       label: "Completed work",
       value: loadingStats ? "--" : dashboardStats.completedWork.toLocaleString(),
-      helper: "Verified submissions",
+      helper: "Approved contributions",
       icon: CheckCircle2,
     },
   ];
+
+  const categories = [
+    {
+      label: "All",
+      count: loadingStats ? "--" : dashboardStats.openOpportunities.toLocaleString(),
+    },
+    {
+      label: "Build",
+      count: loadingStats ? "--" : dashboardStats.openTasks.toLocaleString(),
+    },
+    {
+      label: "Growth",
+      count: loadingStats ? "--" : dashboardStats.activeQuests.toLocaleString(),
+    },
+    {
+      label: "Community",
+      count: "Soon",
+    },
+    {
+      label: "Expertise",
+      count: "Soon",
+    },
+  ];
+
+  const opportunities = [
+    {
+      category: "Build",
+      type: "Task",
+      title: "Build products and integrations",
+      description:
+        "Ship features, fix issues, design interfaces, write documentation, or support technical delivery.",
+      reward: "Open rewards",
+      meta: "Technical work",
+      icon: BriefcaseBusiness,
+      route: "/quests?category=build",
+    },
+    {
+      category: "Growth",
+      type: "Quest",
+      title: "Drive product adoption",
+      description:
+        "Create content, run campaigns, share product stories, and help projects reach the right users.",
+      reward: "Campaign rewards",
+      meta: "Content and reach",
+      icon: Megaphone,
+      route: "/quests?category=growth",
+    },
+    {
+      category: "Community",
+      type: "Program",
+      title: "Support project communities",
+      description:
+        "Help with onboarding, moderation, events, user support, ambassador work, and community operations.",
+      reward: "Coming soon",
+      meta: "Community work",
+      icon: Users,
+      route: "/quests?category=community",
+    },
+    {
+      category: "Expertise",
+      type: "Review",
+      title: "Contribute specialized insight",
+      description:
+        "Provide testing, research, audits, reviews, product feedback, and expert recommendations.",
+      reward: "Coming soon",
+      meta: "Research and review",
+      icon: CheckCircle2,
+      route: "/quests?category=expertise",
+    },
+  ];
+
+  const filteredOpportunities = useMemo(() => {
+    if (activeCategory === "All") {
+      return opportunities;
+    }
+
+    return opportunities.filter((opportunity) => opportunity.category === activeCategory);
+  }, [activeCategory]);
 
   return (
     <main className="min-h-screen">
@@ -190,27 +301,22 @@ export default function DashboardHome() {
 
             <div className="relative flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-3xl">
-                <div className="inline-flex h-7 items-center gap-2 rounded-full border border-[#E0E7FF] bg-[#F4F7FF] px-2.5 text-xs font-medium text-[#2F0FD1]">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  Contribute
-                </div>
-
                 <h1 className="mt-4 text-3xl font-semibold tracking-tight text-[#101828] sm:text-4xl">
-                  Discover work and complete quests
+                  Discover opportunities. Complete contributions. Earn rewards.
                 </h1>
 
                 <p className="mt-3 max-w-2xl text-sm leading-6 text-[#667085] sm:text-base">
-                  Find opportunities from ecosystem projects, submit work, and build a verifiable
-                  contributor profile.
+                  Browse tasks, quests, hackathons, and contribution programs from projects across
+                  the ecosystem.
                 </p>
               </div>
 
               <button
                 type="button"
-                onClick={() => navigate("/tasks")}
+                onClick={() => navigate("/quests")}
                 className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#2F0FD1] px-5 text-sm font-medium text-white shadow-sm transition hover:bg-[#2409B8]"
               >
-                Explore opportunities
+                Browse opportunities
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>
@@ -229,92 +335,56 @@ export default function DashboardHome() {
           </div>
         </section>
 
-        <section className="grid gap-3 xl:grid-cols-[1fr_340px]">
-          <div className="space-y-3 sm:space-y-0">
-            <section className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
-              <h2 className="text-base font-semibold text-[#101828]">Start contributing</h2>
-              <p className="mt-1 text-sm text-[#667085]">Choose how you want to participate.</p>
+        <section className="space-y-3">
+          <section className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
+            <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <h2 className="text-base font-semibold text-[#101828]">Explore opportunities</h2>
 
-              <div className="mt-4 grid gap-3 md:grid-cols-2">
-                <ActionCard
-                  icon={BriefcaseBusiness}
-                  title="Tasks"
-                  description="Apply to structured work from ecosystem projects."
-                  label="Browse tasks"
-                  meta={loadingStats ? "--" : `${dashboardStats.openTasks.toLocaleString()} open`}
-                  onClick={() => navigate("/tasks")}
-                />
-
-                <ActionCard
-                  icon={Compass}
-                  title="X Quests"
-                  description="Create campaign posts and submit your post link."
-                  label="Browse X Quests"
-                  meta={
-                    loadingStats ? "--" : `${dashboardStats.activeQuests.toLocaleString()} active`
-                  }
-                  onClick={() => navigate("/quests")}
-                />
-
-                <ActionCard
-                  icon={MessageCircle}
-                  title="Discord Quests"
-                  description="Community engagement campaigns."
-                  label="Coming soon"
-                  meta="Soon"
-                  status="soon"
-                  onClick={() => navigate("/quests")}
-                />
-
-                <ActionCard
-                  icon={Send}
-                  title="Telegram Quests"
-                  description="Lightweight participation and submissions."
-                  label="Coming soon"
-                  meta="Soon"
-                  status="soon"
-                  onClick={() => navigate("/quests")}
-                />
+                <p className="mt-1 text-sm text-[#667085]">
+                  Browse by contribution type or jump into featured opportunities.
+                </p>
               </div>
-            </section>
-          </div>
-
-          <aside className="space-y-3">
-            <section className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
-              <h3 className="text-sm font-semibold text-[#101828]">Contributor overview</h3>
-
-              <div className="mt-4 space-y-3">
-                <StatusItem
-                  icon={WalletCards}
-                  title="Rewards"
-                  description="Earn from approved work."
-                />
-                <StatusItem icon={Users} title="Profile" description="Track your activity." />
-                <StatusItem
-                  icon={CheckCircle2}
-                  title="Contributions"
-                  description="Monitor submissions and outcomes."
-                />
-              </div>
-            </section>
-
-            <section className="rounded-2xl bg-[#101828] p-5 text-white shadow-sm">
-              <h3 className="text-sm font-semibold">Ready to start contributing?</h3>
-              <p className="mt-2 text-sm text-white/70">
-                Explore available opportunities and begin building your profile.
-              </p>
 
               <button
                 type="button"
-                onClick={() => navigate("/quests")}
-                className="mt-5 h-10 w-full rounded-xl bg-white px-4 text-sm font-medium text-[#101828] transition hover:bg-[#F2F4F7]"
+                onClick={() => navigate("/opportunities")}
+                className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-[#EAECF0] bg-white px-4 text-sm font-medium text-[#101828] transition hover:bg-[#F9FAFB]"
               >
-                View opportunities
+                <Search className="h-4 w-4" />
+                View all
               </button>
-            </section>
-          </aside>
-        </section>
+            </div>
 
+            <div className="mt-4 flex flex-wrap gap-2">
+              {categories.map((category) => (
+                <CategoryPill
+                  key={category.label}
+                  label={category.label}
+                  count={category.count}
+                  active={activeCategory === category.label}
+                  onClick={() => setActiveCategory(category.label)}
+                />
+              ))}
+            </div>
+          </section>
+
+          <section className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {filteredOpportunities.map((opportunity) => (
+              <OpportunityCard
+                key={opportunity.title}
+                category={opportunity.category}
+                type={opportunity.type}
+                title={opportunity.title}
+                description={opportunity.description}
+                reward={opportunity.reward}
+                meta={opportunity.meta}
+                icon={opportunity.icon}
+                onClick={() => navigate(opportunity.route)}
+              />
+            ))}
+          </section>
+        </section>
         <section className="rounded-2xl border border-[#EAECF0] bg-white p-4 shadow-sm">
           <div className="flex flex-col gap-1">
             <h2 className="text-base font-semibold text-[#101828]">How Contribute works</h2>
@@ -327,25 +397,25 @@ export default function DashboardHome() {
             <StatusItem
               icon={Compass}
               title="Discover"
-              description="Browse open tasks and quests from ecosystem projects."
+              description="Browse tasks, quests, programs, and challenges from active projects."
             />
 
             <StatusItem
               icon={CheckCircle2}
               title="Contribute"
-              description="Apply for work, complete tasks, or submit quest entries."
+              description="Apply, complete work, submit entries, or participate in opportunities."
             />
 
             <StatusItem
               icon={Trophy}
-              title="Grow"
-              description="Build a trusted profile through completed contributions."
+              title="Build reputation"
+              description="Grow a trusted profile through verified contributions."
             />
 
             <StatusItem
               icon={WalletCards}
               title="Earn"
-              description="Receive rewards for approved work and accepted submissions."
+              description="Receive rewards when your work is approved or selected."
             />
           </div>
         </section>
