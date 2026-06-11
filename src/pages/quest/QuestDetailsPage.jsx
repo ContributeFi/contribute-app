@@ -289,6 +289,8 @@ export default function QuestDetailsPage() {
   const [quest, setQuest] = useState(null);
   const [entries, setEntries] = useState([]);
 
+  console.log({ quest });
+
   const [loading, setLoading] = useState(true);
   const [entriesLoading, setEntriesLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -347,6 +349,17 @@ ${questUrl}`;
   }
 
   function goToSubmit() {
+    const hasMatchingProfile = user.platformProfiles.some(
+      (profile) => profile.provider === quest.platform,
+    );
+
+    if (!hasMatchingProfile) {
+      navigate("/auth/connect", {
+        state: { platform: quest.platform },
+      });
+      return;
+    }
+
     if (!alreadySubmitted && !isCreator) {
       navigate(`/quests/${questIdValue}/submit`);
     }

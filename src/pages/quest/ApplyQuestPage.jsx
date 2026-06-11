@@ -652,7 +652,7 @@ export default function ApplyQuestPage() {
       <div className="space-y-4 px-3 py-4">
         <button
           type="button"
-          onClick={() => navigate(`/twitter-quests/${quest._id || questId}`)}
+          onClick={() => navigate(`/quests/${quest._id || questId}`)}
           className="inline-flex h-10 items-center gap-2 rounded-xl border border-[#EAECF0] bg-white px-4 text-sm font-medium text-[#344054] shadow-sm transition hover:bg-[#F9FAFB]"
         >
           <ArrowLeft className="h-4 w-4" />

@@ -286,6 +286,8 @@ function DashboardLayout() {
   const { user, isAuthenticated, setUser, token, logout } = useAuth();
   const { publicKey } = useWallet();
 
+  console.log({ user });
+
   const [sheetIsOpen, setSheetIsOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [uploading, setUploading] = useState(false);

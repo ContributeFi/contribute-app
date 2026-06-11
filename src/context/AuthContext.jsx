@@ -38,8 +38,12 @@ export function AuthProvider({ children }) {
 
         if (!data.success) throw new Error(data.message);
 
-        setUser(data.user);
-        localStorage.setItem("userProfile", JSON.stringify(data.user));
+        setUser({
+          ...data.user,
+          authAccounts: data.authAccounts,
+          platformProfiles: data.platformProfiles,
+        });
+        localStorage.setItem("userProfile", JSON.stringify(data));
       } catch (err) {
         console.error("Auth fetch failed:", err.message);
 
